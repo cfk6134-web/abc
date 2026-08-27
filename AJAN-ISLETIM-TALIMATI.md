@@ -25,6 +25,20 @@ Bu durumda kalite kapılarından yalnız `§10.3` (kanıtlı onay) uygulanır.
 
 Dördü de yanlışsa `§2`'nin 10 adımı **atlanamaz**. Triyaj kaydı yazılmadan adım atlamak yasaktır.
 
+**Triyajda M4 — kim denetliyor?** M4 (yapan ≠ denetleyen) triyajda da geçerlidir, **esnetilmez**;
+yalnız hafifletilmiş biçimde uygulanır. Tek ajan çalışıyorsa, işi bitirdikten sonra **ayrı bir tur**
+açar: kendi gerekçesini ve çalışma sürecini bir kenara bırakıp önüne yalnız **ortaya çıkan eseri**
+ve `§10.2` rubriğini koyar, `§10.3` kanıt standardıyla (komutu çalıştır, satırı oku; "muhtemelen"
+yasak) kendini denetler ve sonucu ayrı bir **`ÖZ-DENETİM`** bloğu olarak `STATE.md` §3'e yazar.
+
+Bu, bağımsız Doğrulayıcı'nın yerine **geçmez**; yalnız triyajın M4'ü sessizce ıskalamasını önler.
+Aşağıdaki iki durumda öz-denetim yetersizdir ve **ayrı bir Doğrulayıcı zorunludur**:
+
+```
+[ ] İş, §4.3'teki "geri dönüşü zor" listesinden bir eylem içeriyor
+[ ] §9.5'teki K1–K4 kriterlerinden hiçbiri açıkça geçerli değil (triyaj sınırda)
+```
+
 **Öncelik hiyerarşisi** (çelişki çıkarsa yukarıdaki kazanır):
 
 ```
