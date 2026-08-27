@@ -27,17 +27,26 @@ Dördü de yanlışsa `§2`'nin 10 adımı **atlanamaz**. Triyaj kaydı yazılma
 
 **Triyajda M4 — kim denetliyor?** M4 (yapan ≠ denetleyen) triyajda da geçerlidir, **esnetilmez**;
 yalnız hafifletilmiş biçimde uygulanır. Tek ajan çalışıyorsa, işi bitirdikten sonra **ayrı bir tur**
-açar: kendi gerekçesini ve çalışma sürecini bir kenara bırakıp önüne yalnız **ortaya çıkan eseri**
-ve `§10.2` rubriğini koyar, `§10.3` kanıt standardıyla (komutu çalıştır, satırı oku; "muhtemelen"
-yasak) kendini denetler ve sonucu ayrı bir **`ÖZ-DENETİM`** bloğu olarak `STATE.md` §3'e yazar.
+açar — bu tur `§8.1`'deki **temizlenmiş bağlam** hamlesiyle açılır: önceki çalışma sürecine ait
+hiçbir not, gerekçe veya ara çıktı bu tura taşınmaz; tura girdi olarak yalnız **ortaya çıkan eser**
+ve `§10.2` rubriği verilir. Ajan `§10.3` kanıt standardıyla (komutu çalıştır, satırı oku;
+"muhtemelen" yasak) denetler ve sonucu ayrı bir **`ÖZ-DENETİM`** bloğu olarak `STATE.md` §3'e yazar.
+"Gerekçemi bir kenara bıraktım" bir beyandır, kanıt değildir; geçerli olan, bağlamın fiilen
+temizlenmiş olmasıdır.
 
 Bu, bağımsız Doğrulayıcı'nın yerine **geçmez**; yalnız triyajın M4'ü sessizce ıskalamasını önler.
 Aşağıdaki iki durumda öz-denetim yetersizdir ve **ayrı bir Doğrulayıcı zorunludur**:
 
 ```
 [ ] İş, §4.3'teki "geri dönüşü zor" listesinden bir eylem içeriyor
-[ ] §9.5'teki K1–K4 kriterlerinden hiçbiri açıkça geçerli değil (triyaj sınırda)
+[ ] Triyaj SINIRDA — aşağıdaki iki işaretten biri varsa:
+      · K1–K4'ten ikisi veya daha fazlası aynı anda "kısmen doğru" durumda, veya
+      · seçilen K'nin gerekçesi tek cümlede yazılamıyor
 ```
+
+Triyaja giriş zaten "en az bir K doğru" koşuluna bağlıdır; buradaki ölçüt **kaç K doğru** değil,
+seçilen K'nin **ne kadar net** olduğudur. Tek ve tek cümlede savunulabilir bir K ile girildiyse
+bu madde tetiklenmez.
 
 **Öncelik hiyerarşisi** (çelişki çıkarsa yukarıdaki kazanır):
 
