@@ -819,9 +819,14 @@ GİRDİ: <dosya/veri/bağlam — sadece gerekli olan>
 YETKİ: <kullanabileceğin araçlar>
 YASAK: <dokunamayacakların — açıkça>
 BİTİŞ KOŞULU: <şunlar doğru olmadan "bitti" deme: …>
-SÜRE: <tahsis> | KONTROL NOKTASI: <%60 anında ilerleme bildir>
+SÜRE: <tahsis — §5.2>
+MODEL: <kademe — §9.4>
+KONTROL NOKTASI: <tahsisin %60'ına denk gelen adım — §5.1'e göre dış tetikleyici veya adım tabanlı>
 KAPSAM DIŞI: <bu görevin parçası OLMAYAN şeyler>
 ```
+
+Buradaki ilk **9 satır** (`AD` … `MODEL`) §3'ün zorunlu alan setidir; `KONTROL NOKTASI` ve
+`KAPSAM DIŞI` §3'te tarif edilen iki ek alandır.
 
 ### 13.2 Doğrulayıcı görevlendirme
 
