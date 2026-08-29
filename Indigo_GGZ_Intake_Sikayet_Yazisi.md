@@ -28,7 +28,7 @@ Ayrıca belirtmek isterim: mülteci geçmişimin, dilimin ve kültürel bağlam�
 
 ## 1. Kısa Arka Plan
 
-Türkiye'den Hollanda'ya politik nedenlerle göç ettim. Göç sonrasında Hollanda'da da defalarca tehdide ve rahatsız edilmeye maruz kaldım. Bu süreçler içinde, farklı gün ve saatlerde belediyedeki uitkering (sosyal yardım) almam nedeniyle belediye memurlarıyla temasım sırasında yaşananlar öne çıkmaktadır:
+Türkiye'de maruz kaldığım baskı ve işkence nedeniyle Hollanda'ya sığındım; bu geçmiş, Türkiye İnsan Hakları Vakfı (TİHV) tarafından hazırlanmış bağımsız bir uzman raporuyla belgelenmiştir (talep edilirse sunulabilir). Göç sonrasında Hollanda'da da defalarca tehdide ve rahatsız edilmeye maruz kaldım. Bu süreçler içinde, farklı gün ve saatlerde belediyedeki uitkering (sosyal yardım) almam nedeniyle belediye memurlarıyla temasım sırasında yaşananlar öne çıkmaktadır:
 
 * Belediyedeki memurların farklı gün ve saatlerde tarafıma yönelik davranış, hal, hareket, söz ve tutumları,
 * Bunun zirvesinde yaşandığını düşündüğüm belediyedeki tehdit olayı — hem fiziksel hem de mahrem/kişisel sınırlarımın ihlali dahil,
@@ -54,6 +54,10 @@ Yaşadığım sürecin ve mevcut tablonun anlaşılabilmesi için, belediye ve d
 * Güncel psikolojik etkiler
 
 Bu süreçlerin önemli bir kısmı, aşağıda detaylı olarak aktaracağım belirtilerin başlangıç noktası veya ağırlaşma faktörü olmuştur. Özellikle belediyedeki memurların — belirtmek isterim ki özellikle **Emre Sertkaya** ve **Karlijn Oirbans** isimli memurlar ve bunların yanı sıra diğerleri — farklı gün ve saatlerde sistematik olarak tarafıma yaşatmış olduğu davranış, hareket ve tavırlar ile bunların zirvesi olarak değerlendirdiğim tehdit olayı; hem psikolojik hem bedensel tablomda belirleyici bir kırılma noktası oluşturmuştur.
+
+Zirve noktası olarak değerlendirdiğim tehdit olayı, küçük, loş ışıklı ve kapalı bir odada geçmiştir; görüşme sırasında yumrukla tehdit edilircesine bir tavırla ve öfkeli bir bakışla karşılaştığımı, bunu sözlü olarak rahatsız edici bulduğumu belirtmeme rağmen bu tutumun değişmediğini belirtmek isterim. O anda kapı fiziksel olarak kilitli olmasa da, mevcut otorite dengesizliği, o andaki kırılgan psikolojik durumum ve ortamın kapalı/dar yapısı nedeniyle kendimi güvenli şekilde ortamdan uzaklaştırabilecek durumda hissetmedim.
+
+Ayrıca, belediye ile olan temaslarım sırasında, mülteci geçmişim ve sosyal yardım (uitkering) almam nedeniyle dışlayıcı veya ayrımcı bulduğum bazı söylem ve tutumlara maruz kaldığımı düşünüyorum; bunun kasıtlı olup olmadığından bağımsız olarak, bu yaklaşımın bende dışlanmışlık, değersizleştirilme ve güvensizlik hissi yarattığını belirtmek isterim. Bu boyutun da değerlendirmede dikkate alınmasını rica ediyorum.
 
 Bu bölümde adı geçen memurların bana yaşatmış olduğu şeylerin, hal, hareket ve tavırlarının sağlığım ve günlük hayatımdaki geçmiş, bugünkü ve gelecekteki etkilerinin tam ve detaylı biçimde değerlendirilmesini talep ediyorum (bkz. Bölüm 8).
 
@@ -102,6 +106,8 @@ Uzun süredir devam eden, birbiriyle bağlantılı çoklu fiziksel ve psikolojik
 * Tanımadığım insanlara güvenememe, herkesi potansiyel tehdit olarak görme
 * Türklerle neredeyse hiç konuşmama, Hollandalılara da mesafeli durma — toplumdan ve insanlardan sosyal kaçınma
 * Topluma katılma, çalışma, okula başlama veya yeni bir şey yapma konusunda korku: "olumsuzluk yaşarım, rahatsız edilirim, beni istemezler, bana zarar gelir" düşünceleri; bu durum eğitim, çalışma ve sosyal yaşama katılımı zorlaştırmaktadır
+
+**Önemli not — güvenlik/risk değerlendirmesi:** Belediye ile yaşadığım baskı sürecine bağlı olarak, tedavi kayıtlarıma geçmiş dönemlerde intihar düşünceleri yaşadığım not edilmiştir. Bu konunun intake sürecinde açıkça sorulmasını ve güncel risk durumumun da ayrıca ve dikkatle değerlendirilmesini rica ediyorum.
 
 ### 5.2. Zihinsel Ruminasyon ve Kendini Suçlama
 
@@ -152,7 +158,7 @@ Bu tablo (dikkatsizlik, odaklanma güçlüğü, aşırı hareketlilik ve dürtü
 * Korkudan dolayı el bileklerimi, diz altımı ve özellikle ayak bileklerimi hissetme ve hafif titreme; gece uyanınca gözlerimi açmadan önce el bileklerimi, diz altımı, boynumu ve baş ağrımı hissetme
 * Sabah yorgun ve ağızda acı/safra tadıyla uyanma — tehdit olayından sonra arttı
 * Uyku saatlerinin düzensizleşmesi — bazen çok erken, bazen çok geç uyuma; gece farklı saatlerde uyanıp yemek yeme veya bir süre ayakta kalıp tekrar uyuma; gün ortasına kadar uyuma eğilimi, bazı dönemlerde ise çok erken kalkıp tekrar uyuyamama
-* Gece nefessiz kalma hissi — bu tehdit olayından önce yoktu, sonra ortaya çıktı. Uyku apnesi (slaapapneu) şüphesiyle KBB ve göğüs hastalıkları uzman doktorları tarafından muayene edildim; sonuçta yok denecek kadar düşük seviyede uyku apnesi çıktı, ancak bu kapsamda tedavi önerilmedi
+* Gece nefessiz kalma hissi — bu tehdit olayından önce yoktu, sonra ortaya çıktı. KBB ve göğüs hastalıkları uzman doktorları tarafından yapılan ilk değerlendirmede düşük seviyede bir bulguya rastlandı; bunun üzerine huisartsim tarafından uyku kliniğine sevk edildim ve ilk klinik bulguda uyku sırasında zaman zaman nefesimin durduğu tespit edildi. Kesin tanı, tedavi planı ve değerlendirme süreci hâlâ devam etmekte olup şu an bekleme/değerlendirme aşamasındayım
 * Geceleyin belediyedeki görevlilerin bana yaşatmış olduğu söz ve hareketler üzerine korkarak uyanma
 * Uyanır uyanmaz, gözlerimi açmadan belediyede yaşananların ve "o an ne yapmalıydım?" sorgusunun zihnime hücum etmesi; o anlarda nasıl önlem almalıydım, kendimi nasıl korumalıydım diye zihinsel olarak yeniden yaşama hali
 * Bazı geceler nefessiz kalma, sıkışmışlık ve köşeye sıkıştırılmış gibi hissetme; bu durum hem uyku kalitesini hem sabahki fiziksel ve zihinsel durumu olumsuz etkilemektedir
@@ -280,7 +286,7 @@ Yukarıda paylaştığım belirtiler ve yaşantılar, özellikle çoğunlukla be
 
 Özellikle stres, tehdit algısı, geçmiş travmatik yaşantılar, belediye ile ilgili süreçleri hatırlatan durumlar, uyku bozukluğu ve bedensel gerginlik şikâyetlerimi belirgin şekilde artırmaktadır. Ayrıca çok sayıda ilaç/supplement kullanmam, birçok farklı sağlık uzmanından destek almam, randevu ve ulaşım yükü, günlük yaşamda sınırlı yüklenebilirlik, ekonomik zorluklar ve sosyal/işlevsel katılımda yaşadığım güçlüklerin de değerlendirmeye dahil edilmesini önemli görüyorum.
 
-Günlük hayatımın sürdürülebilirliğini sağlamak, topluma katılmak, eğitime ve daha sonra iş hayatına katılmak istiyorum; bu kapsamda bana yardımcı olunmasını talep ediyorum.
+Türkiye'de Adalet Bakanlığı'nda hukuk alanında görev yapmış biri olarak, Hollanda'da hukuk, bilişim ve matematik alt yapımla örtüşen dijital adli bilişim (digital forensics) alanında kariyer yapmayı hedefliyorum; bu amaçla Utrecht'te iki yıllık HBO Cybersecurity eğitimine kabul edilmiştim, ancak bu eğitime başlamam sağlık nedenleriyle ertelenmek zorunda kalmıştır. Günlük hayatımın sürdürülebilirliğini sağlamak, topluma katılmak, eğitime ve daha sonra iş hayatına katılmak istiyorum; bu kapsamda bana yardımcı olunmasını talep ediyorum.
 
 Tek bir belirtiye veya tek bir tanıya odaklanan bir yaklaşımın benim için yeterli olmayacağını deneyimlerimle öğrenmiş bulunmaktayım.
 
@@ -302,6 +308,7 @@ BSN: 316034964
 * Zenmo GGZ – 29 december 2025 tarihli intake sonrası mektup (huisarts'a yazılan)
 * Huisarts ve diğer uzmanların güncel raporları (talep edilirse)
 * Kullandığım ilaç/supplement listesi (talep edilirse)
+* TİHV (Türkiye İnsan Hakları Vakfı) tarafından düzenlenmiş bağımsız uzman raporu (talep edilirse)
 
 ---
 
