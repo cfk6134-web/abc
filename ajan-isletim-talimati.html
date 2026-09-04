@@ -291,7 +291,7 @@ html{scroll-behavior:smooth}
     </div>
   </nav>
   <main>
-<blockquote><strong>Bu belge ne?</strong> Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak <strong>tek işletim talimatı</strong>. <strong>Kime yazıldı?</strong> Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır. <strong>Nasıl kullanılır?</strong> Projenin köküne koy, oturum başında oku, <code>CLAUDE.md</code> veya skill içinden referans ver.</blockquote>
+<blockquote><strong>Bu belge ne?</strong> Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak <strong>tek işletim talimatı</strong>.<br><strong>Kime yazıldı?</strong> Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.<br><strong>Nasıl kullanılır?</strong> Projenin köküne koy, oturum başında oku, <code>CLAUDE.md</code> veya skill içinden referans ver.</blockquote>
 <h2 id="s0" class="hd"><span class="num">0</span><span class="lbl">OKUMA PROTOKOLÜ (ilk adım — herhangi bir çıktı üretmeden önce)</span></h2>
 <p>Bu belgeyi gören ajan, başka hiçbir şey yapmadan sırasıyla:</p>
 <ol><li><code>§1 Değişmez İlkeler</code>i oku — bunlar tartışılmaz.</li><li><code>STATE.md</code> dosyasını oku (yoksa <code>§6.2</code> şablonuyla oluştur).</li><li>Görevi <code>§2 Ana Akış</code>ın hangi adımında olduğunu tespit et.</li><li><strong>TRİYAJ yap (§0.1)</strong> — iş küçükse ağır makineyi kurma.</li><li>Eksik bilgi varsa <strong>varsayım üretme</strong> → <code>§13.6 Soru Şablonu</code> ile sor.</li><li>Çalışmaya başla.</li></ol>
@@ -544,7 +544,7 @@ Kalibrasyon notu (sonraki koşu için): …</code></pre>
 <p>Dördü de "evet" değilse, <strong>hangi test düştüyse ona göre</strong> karar ver:</p>
 <div class="tw"><table><thead><tr><th>Düşen test</th><th>Karar</th></tr></thead><tbody><tr><td>ÇIKTI veya DOKUNMA</td><td><strong>Daha küçük parçala</strong> — iş birden fazla sonuç/alan içeriyor</td></tr><tr><td>BAĞLAM</td><td><strong>Birleştir</strong> — tek başına bitirilemiyor, ihtiyaç duyduğu bağlamın sahibiyle aynı ajana ver</td></tr><tr><td>Yalnız TEK CÜMLE</td><td><strong>Önce daha küçük parçala</strong>; parçalardan sonra hâlâ tek cümlede yazılamıyorsa görev tanımı yanlıştır, baştan yaz</td></tr><tr><td>Birden fazla test aynı anda</td><td>BAĞLAM düştüyse birleştir; düşmediyse parçala</td></tr></tbody></table></div>
 <h3 id="s7-2" class="hd"><span class="num">7.2</span><span class="lbl">Bölme ölçütü: rol değil, <strong>bağlam</strong></span></h3>
-<blockquote>Yanlış bölme: planlayıcı → uygulayıcı → testçi. Bu, her devirde bilginin bozulduğu bir kulaktan kulağa oyunudur.</blockquote>
+<blockquote>Yanlış bölme: planlayıcı → uygulayıcı → testçi.<br>Bu, her devirde bilginin bozulduğu bir kulaktan kulağa oyunudur.</blockquote>
 <p><strong>Doğru soru:</strong> "Bu alt görev hangi bağlama ihtiyaç duyuyor?"</p>
 <div class="tw"><table><thead><tr><th>Durum</th><th>Karar</th></tr></thead><tbody><tr><td>İki alt görev derin <strong>örtüşen</strong> bilgiye ihtiyaç duyuyor</td><td><strong>Aynı ajana</strong> ver</td></tr><tr><td>İki alt görev gerçekten <strong>izole</strong> bilgiyle çalışabiliyor</td><td><strong>Ayır</strong></td></tr><tr><td>Bir özelliği yazan ajan var, testini başkası yazacak</td><td><strong>Ayırma</strong> — yazan testini de yazar</td></tr></tbody></table></div>
 <h3 id="s7-3" class="hd"><span class="num">7.3</span><span class="lbl">Boyut kuralları</span></h3>
