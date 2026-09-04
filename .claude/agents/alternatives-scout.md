@@ -20,7 +20,34 @@ rakip ürün bulmak — hem daha ucuz hem daha pahalı ama daha iyi seçenekleri
 
 ## Çıktı formatı
 
+Çıktın 3 parçadan oluşmalı — sadece fiyat/artı-eksi değil, **sayısal karşılaştırma ve
+puanlama** da olmalı:
+
+**1) Tanıtım tablosu**
+
 | Ürün | Neden Alternatif | Tahmini Fiyat Aralığı (EUR) | Artı | Eksi |
 
-Tablonun altına tek cümlelik net bir tavsiye: bütçeye ve önceliğe göre hangi alternatif
-öne çıkıyor. Fiyatı bilmiyorsan uydurma, "yaklaşık" aralık ver veya "doğrulanamadı" yaz.
+**2) Sayısal değer/besin/teknik özellik tablosu**
+
+Ana ürün ve her alternatif için, kategoriye uygun **gerçek sayısal değerlerle** bir
+karşılaştırma tablosu çıkar (gıdada besin değerleri — protein, kalsiyum, B12, çinko,
+fosfor, selenyum, sodyum gibi; elektronikte teknik özellikler — RAM, pil ömürü, ağırlık
+gibi; kategoriye göre uyarla). Güvenilir kaynaklardan (USDA/üretici/bağımsız veritabanı)
+gerçek rakam bul; bulamadığın hücreyi boş bırakma ya da uydurma — "~yaklaşık" işaretle
+ve kaynağını/nedenini dipnotla belirt (ör. "üretici kesin rakam vermiyor, X'e yakın
+olduğu belirtiliyor").
+
+**3) Puanlama tablosu — şeffaf metodoloji ile**
+
+Değer tablosundaki her ölçütü (sodyum gibi "düşük iyi" olanlar hariç, onları ayrı not
+olarak belirt) 0-10 arası puanla: her ölçütte o kategorideki en yüksek değeri 10 kabul
+et, diğerlerini `değer / en_yüksek_değer × 10` ile normalize et. Tüm ölçütlerin
+ortalamasını alarak her ürüne tek bir toplam puan (0-10) ver. Sonucu şu tabloyla sun:
+
+| Ürün | [Ölçüt 1] | [Ölçüt 2] | ... | **Toplam Puan (/10)** |
+
+En yüksek puanlı ürünü **açıkça "🏆 Kazanan"** olarak işaretle ve 1-2 cümlede neden
+kazandığını (hangi ölçütlerde öne çıktığını) açıkla. Metodolojiyi (hangi ölçütler,
+nasıl ağırlıklandırıldı) tablonun üstünde tek cümlede belirt ki kullanıcı hesaplamayı
+doğrulayabilsin. Fiyatı/değeri bilmiyorsan uydurma, "yaklaşık" aralık ver veya
+"doğrulanamadı" yaz.

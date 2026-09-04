@@ -45,7 +45,9 @@ Tüm sonuçlar elindeyken:
   tutarsızlık varsa tek bir kur/tarih varsayımında birleştir ve raporda belirt).
 - Üç pazardaki (NL / AB / Dünya) en iyi seçenekleri karşılaştıran özet bir tablo çıkar
   (toplam gerçek maliyet — Dünya için gümrük+BTW+kargo dahil).
-- Güvenilirlik ve alternatif ürün bulgularını ilgili bölümlere yerleştir.
+- Güvenilirlik ve alternatif ürün bulgularını ilgili bölümlere yerleştir — `alternatives-scout`'un
+  ürettiği sayısal değer/besin/teknik özellik tablosunu ve puanlama tablosunu (kazanan işaretli)
+  olduğu gibi rapora taşı, özetleyip atlama.
 - Net bir **nihai tavsiye** oluştur: hangi pazardan, hangi satıcıdan, ne fiyata almalı ve
   neden — tek paragrafta gerekçelendir. Belirsizlik varsa (ör. hız mı ucuzluk mu öncelikli)
   iki seçenekli tavsiye ver ("en hızlı/güvenli seçenek X, en ucuz seçenek Y").
@@ -62,7 +64,9 @@ içermeli:
 4. Avrupa Pazarı
 5. Dünya Pazarı + İthalat Maliyeti
 6. Güvenilirlik & Kullanıcı Yorumları
-7. Alternatif Ürünler
+7. Alternatif Ürünler — hem tanıtım tablosu, hem **sayısal değer/besin/teknik özellik
+   tablosu**, hem de **puanlama tablosu** (her ürün 0-10 puanlanmış, en yüksek puanlı
+   ürün "🏆 Kazanan" olarak açıkça işaretli, metodoloji tek cümlede belirtilmiş)
 8. Genel Karşılaştırma Tablosu & Sonuç
 9. Kaynaklar
 10. Uyarı: "Fiyatlar araştırma anındaki taramaya dayanır, satın almadan önce güncel fiyatı
