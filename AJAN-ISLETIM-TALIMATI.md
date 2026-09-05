@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.1
+# AJAN İŞLETİM TALİMATI — v1.2
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -20,51 +20,77 @@ Bu belgeyi gören ajan, başka hiçbir şey yapmadan sırasıyla:
 6. Eksik bilgi varsa **varsayım üretme** → `§13.6 Soru Şablonu` ile sor.
 7. Çalışmaya başla.
 
-### 0.1 TRİYAJ — ağır makineyi ne zaman kurma
+### 0.1 KADEME SEÇİMİ — işe uygun ağırlık
 
-`§9.5`'teki dört kriterden **en az biri** doğruysa: kurul toplama, zaman dağıtma, ayrıştırma yapma.
-`STATE.md` §7'ye tek satır yaz — `triyaj: küçük iş, §9.5-K<n>` — ve doğrudan yürütmeye geç.
-Bu durumda kalite kapılarından yalnız `§10.3` (kanıtlı onay) uygulanır.
+Bu belgenin en pahalı hatası ikili düşünmekti: ya hiçbir denetim ya tam konsey. Arada bir şey
+olmayınca her orta boy iş, ağır makineden kaçmak için en hafif kademeye sığındı ve denetimsiz
+kaldı. Üç kademe bunu keser.
 
-Dördü de yanlışsa `§2`'nin 11 adımı **atlanamaz**. Triyaj kaydı yazılmadan adım atlamak yasaktır.
-
-**Triyajda M4 — kim denetliyor?** M4 (yapan ≠ denetleyen) triyajda da geçerlidir, **esnetilmez**;
-yalnız hafifletilmiş biçimde uygulanır. Tek ajan çalışıyorsa, işi bitirdikten sonra **ayrı bir tur**
-açar — bu tur `§8.1`'deki **temizlenmiş bağlam** hamlesiyle açılır: önceki çalışma sürecine ait
-hiçbir not, gerekçe veya ara çıktı bu tura taşınmaz; tura girdi olarak yalnız **ortaya çıkan eser**
-ve `§10.2` rubriği verilir. Ajan `§10.3` kanıt standardıyla (komutu çalıştır, satırı oku;
-"muhtemelen" yasak) denetler ve sonucu ayrı bir **`ÖZ-DENETİM`** bloğu olarak `STATE.md` §3'e yazar.
-"Gerekçemi bir kenara bıraktım" bir beyandır, kanıt değildir; geçerli olan, bağlamın fiilen
-temizlenmiş olmasıdır.
-
-Bu, bağımsız Doğrulayıcı'nın yerine **geçmez**; yalnız triyajın M4'ü sessizce ıskalamasını önler.
-**Öz-denetim ancak gerçek bir temiz bağlam varsa geçerlidir.** "Ayrı tur", aynı konuşma içinde
-devam etmek değildir: yeni bir alt-ajan çağrısı ya da temizlenmiş oturum gerekir (§8.2). Ortamda
-böyle bir çağrı aracı yoksa öz-denetim **geçersizdir** ve iş doğrudan aşağıdaki listeye girer.
-
-Aşağıdaki durumlarda öz-denetim yetersizdir ve **ayrı bir Doğrulayıcı zorunludur**:
+**Kademeyi işe başlamadan seç ve `STATE.md` §7'ye tek satır yaz:** `kademe: S<n>, gerekçe: <…>`
 
 ```
-[ ] İş, §4.3'teki "geri dönüşü zor" listesinden bir eylem içeriyor
-[ ] Triyaj SINIRDA — aşağıdaki iki işaretten biri varsa:
-      · K1–K4'ten ikisi veya daha fazlası aynı anda "kısmen doğru" durumda, veya
-      · seçilen K'nin gerekçesi tek cümlede yazılamıyor
+SEVİYE 3 — BİRLEŞİK KONSEY     şunlardan biri doğruysa:
+  [ ] Birden fazla ajan aynı anda koşacak (paralel dalga)
+  [ ] İş, §4.3'teki "geri dönüşü zor" listesinden bir eylem içeriyor
+  [ ] Kullanıcı tam denetim istedi
+  [ ] Seviye 2 denendi ve Doğrulayıcı RET verdi
+
+SEVİYE 1 — ÇEKİRDEK AKIŞ       yukarıdakilerin hiçbiri yok VE:
+  [ ] §9.5'teki K1–K4'ten biri AÇIKÇA doğru
+      ("açıkça" = gerekçesi tek cümlede yazılabiliyor; iki K aynı anda "kısmen doğru"ysa
+       bu koşul sağlanmaz — sınırda kalan iş Seviye 2'dir)
+
+SEVİYE 2 — STANDART DALGA      diğer her durum. ← VARSAYILAN BUDUR
 ```
 
-Triyaja giriş zaten "en az bir K doğru" koşuluna bağlıdır; buradaki ölçüt **kaç K doğru** değil,
-seçilen K'nin **ne kadar net** olduğudur. Tek ve tek cümlede savunulabilir bir K ile girildiyse
-bu madde tetiklenmez. **"Kısmen doğru"** = K'nin alt koşullarından biri sağlanıp diğeri
-sağlanmıyorsa (ör. K1'de tamamlanma durumu yazılı ama tek bağlam penceresinde bitmiyorsa).
+> Emin değilsen Seviye 2. Varsayılanın Seviye 3 olması, insanları Seviye 1'e kaçmaya iter;
+> varsayılanın Seviye 1 olması denetimi tümden kaldırır. Ortada durmak doğru olandır.
 
-**Triyajda M16 — süre ne olacak?** M16 (bütçesiz ajan çalıştırılmaz) triyajda da geçerlidir,
-esnetilmez. Zaman Dağıtıcı çalıştırılmaz ama süre verilmişse tek ajana **tamamı tek dilim
-olarak** tahsis edilir ve `STATE.md` §6'ya tek satır yazılır: `triyaj: T_toplam tek ajana`.
-Süre verilmemişse `§5.5` kapsam sınırı konur. Bütçesiz koşmak triyajda da yasaktır.
+**Kademeler ne yapar:**
 
-**Triyajda M20 — oy birliği ne olacak?** M20 triyajda **uygulanmaz**; öz-denetim onun yerine
-geçmez. Bunun bedeli kullanıcıdan gizlenemez: triyajlı işin teslim notunda şu satır zorunludur —
-`Bu iş triyajla yürütüldü (§0.1); Final Kurulu toplanmadı, yalnız öz-denetim yapıldı.`
-Kullanıcı bu satırı görüp tam denetim isteyebilir.
+| | **S1 · Çekirdek Akış** | **S2 · Standart Dalga** | **S3 · Birleşik Konsey** |
+|---|---|---|---|
+| Kim çalışır | Tek ajan | 1 yapan + 1 bağımsız Doğrulayıcı | Beyin + işçiler + tüm kurullar |
+| Ayrıştırma (§7) | Yok | Kaba liste | Tam, 4 testli |
+| Paralellik Kurulu (§4.1) | Yok, N=1 | Yok, N=1 | **Var** |
+| Zaman (§5) | T_toplam tek dilim, ya da §5.5 kapsam sınırı | Tek dilim + doğrulama payı ayrılır | **Zaman Dağıtıcı tam tablo** |
+| Doğrulama (§10) | Temiz bağlamda öz-denetim | **Ayrı Doğrulayıcı**, rubrikle | Tam zincir + Meta + Nihai Testçi |
+| Final Kurulu (§4.4) | Yok | Yok — Doğrulayıcı ONAY'ı yeterli | **Var, 3/3 kör oy** |
+| Boşluk taraması (§4.5) | Yok | Yok | **Var** |
+| `STATE.md` | §7 tek satır | §3 + §7 | Tam §6.3 protokolü |
+
+**Değişmez İlkeler kademeye göre nasıl karşılanır** (hiçbiri atlanmaz, karşılanma biçimi değişir):
+
+| İlke | S1 | S2 | S3 |
+|---|---|---|---|
+| **M4** yapan ≠ denetleyen | Temiz bağlamda öz-denetim (aşağıda) | Ayrı Doğrulayıcı | Tam zincir |
+| **M5** denetleyeni denetleyen | — | — | Meta-Doğrulayıcı |
+| **M7** nihai test | Öz-denetimde rubrik | Doğrulayıcı testi çalıştırır | Ayrı Nihai Testçi |
+| **M15** paralellik kurul kararı | N=1 (kurul gereksiz) | N=1 (kurul gereksiz) | Paralellik Kurulu toplanır |
+| **M16** bütçesiz ajan yok | Tek dilim veya kapsam sınırı | Tek dilim + doğrulama payı | Tam tahsis tablosu |
+| **M17** asgari süre denetimi | Ham kayıt yeter | Kayıt + KO | Tam §5.4 raporu |
+| **M20** oy birliği | Uygulanmaz | Doğrulayıcı ONAY'ı yerine geçer | Final Kurulu 3/3 |
+
+**Teslim beyanı zorunludur** — hangi kademede çalışıldığı kullanıcıdan gizlenemez:
+
+```
+S1 → "Seviye 1'de yürütüldü: bağımsız doğrulayıcı yok, yalnız öz-denetim yapıldı."
+S2 → "Seviye 2'de yürütüldü: bağımsız doğrulayıcı onayladı, Final Kurulu toplanmadı."
+S3 → beyan gerekmez (tam akış).
+```
+
+Kullanıcı bu satırı görüp bir üst kademeyi isteyebilir. Kademe yükseltmek her zaman serbesttir;
+düşürmek yalnız yukarıdaki koşullar sağlanıyorsa.
+
+**Seviye 1'de M4 nasıl korunur — öz-denetim.** Ajan işi bitirdikten sonra **ayrı bir tur** açar;
+bu tur `§8.2`'deki **temizlenmiş bağlam** hamlesiyle açılır: önceki çalışma sürecine ait hiçbir
+not, gerekçe veya ara çıktı bu tura taşınmaz. Tura girdi olarak yalnız **ortaya çıkan eser** ve
+`§10.2` rubriği verilir. Ajan `§10.3` kanıt standardıyla denetler ("muhtemelen" yasak) ve sonucu
+ayrı bir **`ÖZ-DENETİM`** bloğu olarak `STATE.md` §3'e yazar.
+
+"Gerekçemi bir kenara bıraktım" bir beyandır, kanıt değildir; geçerli olan, bağlamın **fiilen**
+temizlenmiş olmasıdır. Ortamda yeni alt-ajan veya temiz oturum açacak bir araç yoksa öz-denetim
+**geçersizdir** ve iş otomatik olarak **Seviye 2'ye** yükselir — bağımsız Doğrulayıcı zorunlu olur.
 
 **Öncelik hiyerarşisi** (çelişki çıkarsa yukarıdaki kazanır):
 
@@ -116,8 +142,9 @@ Her mekanizma bu maddelerden **en az birini** gerçeklemek zorundadır. Gerçekl
 
 ## 2. ANA AKIŞ — baştan sona 10 adım
 
-Her proje bu sırayla yürür. Adım atlanmaz; gereksizse "atlandı, gerekçe: …" diye `STATE.md`ye yazılır.
-Triyajlı işlerde (§0.1) bu 11 adımın yerine tek satırlık triyaj kaydı geçer.
+Aşağıdaki 11 adım **Seviye 3'ün** tam akışıdır. Seviye 1 ve 2'de hangi adımların düştüğü
+`§0.1` tablosunda yazılıdır — atlanan adım keyfî değil, kademenin tanımı gereğidir.
+Seviye 3'te adım atlanmaz; gereksizse "atlandı, gerekçe: …" diye `STATE.md`ye yazılır.
 
 ```
 [1] HEDEF NETLEŞTİRME     → Tamamlanma durumu yaz (§2.1). Belirsizlik varsa sor.
@@ -153,7 +180,7 @@ Her ajan tanımı aşağıdaki **9 alanı eksiksiz** içerir. Eksik alanla ajan 
 
 `§13.1` şablonundaki `KAPSAM DIŞI` ve `KONTROL NOKTASI` alanları bu 9'a **ek**tir:
 paralel dalgada koşan veya süre tahsisi almış her ajan için **zorunlu**, tek başına koşan
-triyajlı kısa görevlerde isteğe bağlıdır.
+Seviye 1'deki tek ajanlı kısa görevlerde isteğe bağlıdır.
 
 ```
 AD          : <tek kelimelik rol adı>
@@ -244,8 +271,8 @@ Kurul = geçici, karar üretmek için toplanan ajan grubu. Kurul **rapor + karar
 
 ### 4.1 PARALELLİK KURULU (M15) — kaç ajan aynı anda çalışacak?
 
-**Ne zaman toplanır:** Ayrıştırma (adım 2) bittikten hemen sonra — **triyajlı işler hariç (§0.1)**.
-Triyaj kaydı yoksa zorunludur.
+**Ne zaman toplanır:** Yalnız **Seviye 3'te**, ayrıştırma (adım 2) bittikten hemen sonra.
+Seviye 1 ve 2'de N=1 olduğu için kurul gereksizdir (§0.1). Seviye 3'te zorunludur.
 
 **Üyeler (3):**
 
@@ -869,7 +896,9 @@ Her adımı en pahalı kademede koşturmak fatura patlatır. Göreve göre yönl
 
 ### 9.5 Ne zaman KURMA (aşırı mühendislik freni)
 
-Aşağıdakilerden biri doğruysa çok-ajanlı yapı **kurma**, tek ajanla yap:
+Aşağıdaki dört kriter `§0.1`'de **Seviye 1** seçiminin ölçütüdür. Biri **açıkça** doğruysa
+çok-ajanlı yapı kurma, tek ajanla yap. Hiçbiri açıkça doğru değilse varsayılan Seviye 2'dir —
+"çok-ajan kurma" ile "denetimsiz çalış" aynı şey değildir:
 
 ```
 [ ] K1  İş §2.1 formatında yazılmış bir tamamlanma durumuna sahip, §7.1 TEK CÜMLE
@@ -881,13 +910,15 @@ Aşağıdakilerden biri doğruysa çok-ajanlı yapı **kurma**, tek ajanla yap:
 [ ] K4  Tek prompt, §10.2 rubriğinin tüm zorunlu maddelerini tek geçişte karşılıyor
 ```
 
-Bu kriter numaraları `§0.1` triyaj kaydında kullanılır (`triyaj: küçük iş, §9.5-K1`).
+Bu kriter numaraları `§0.1` kademe kaydında kullanılır (`kademe: S1, gerekçe: §9.5-K1`).
 
-**Sıra uyarısı:** Triyaj (§0.1), ayrıştırma ve rubrik yazımından **önce** yapılır; oysa K2
-devir/üretim adım oranını, K4 ise rubriği gerektirir. Bu veriler triyaj anında yoksa K2 ve K4
-**"değerlendirilemez"** sayılır ve karar yalnız K1/K3 üzerinden verilir. Sonradan ayrıştırma
-veya rubrik ortaya çıktığında K2/K4 geriye dönük bakılır; triyaj kararı yanlışsa `STATE.md` §5'e
-not düşülüp tam akışa geçilir. Var olmayan veriyi zihinde canlandırıp kriteri "doğru" saymak yasaktır.
+**Sıra uyarısı:** Kademe seçimi (§0.1), ayrıştırma ve rubrik yazımından **önce** yapılır; oysa K2
+devir/üretim adım oranını, K4 ise rubriği gerektirir. Bu veriler seçim anında yoksa K2 ve K4
+**"değerlendirilemez"** sayılır ve karar yalnız K1/K3 üzerinden verilir. Değerlendirilemeyen bir
+kriter "açıkça doğru" sayılamayacağı için iş varsayılana, yani **Seviye 2'ye** düşer. Sonradan
+ayrıştırma veya rubrik ortaya çıktığında K2/K4 geriye dönük bakılır; kademe yanlışsa `STATE.md`
+§5'e not düşülüp bir üst kademeye geçilir. Var olmayan veriyi zihinde canlandırıp kriteri
+"doğru" saymak yasaktır.
 
 > **Altın kural:** Tek ajanla başla. Kırıldığı yeri bul. O kırılma noktası tam olarak neyi eklemen gerektiğini söyler. Karmaşıklığı yalnız **ölçülmüş** bir problemi çözdüğü yerde ekle.
 
@@ -1249,7 +1280,7 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 [ ] Her ajanın 9 alanlı tanımı eksiksiz (§3)
 [ ] Belirsizlikler soruldu, varsayım üretilmedi
 [ ] KURALLAR.md okundu (§0 adım 3)
-[ ] Triyaj kararı verildi ve kaydedildi (§0.1)
+[ ] Kademe seçildi ve gerekçesiyle kaydedildi (§0.1) — emin değilsen S2
 ```
 
 ### 14.2 Yürütme sırasında
@@ -1280,7 +1311,7 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 [ ] Boşluk taraması yapıldı, sahipsiz iş kalmadı (§4.5)
 [ ] Final Kurulu kör ve eşzamanlı oyladı (§4.4)
 [ ] Kullanıcıya sunulan çıktıda ne yapıldı / ne yapılmadı açıkça yazıldı
-[ ] Triyajlı işse teslim notunda "Final Kurulu toplanmadı" satırı var (§0.1)
+[ ] S1/S2 ise teslim notunda kademe beyanı var (§0.1)
 ```
 
 ---
@@ -1318,6 +1349,7 @@ sistem, her ürüne uyguladığı standardı kendisine uygulamamış olur.
 |---|---|---|
 | v1.0 | İlk sürüm — kaynak yol haritasından damıtıldı | Kullanıcının 7 çekirdek talimatı + Anayasa M1–M14 |
 | v1.1 | 47 doğrulanmış bulgu uygulandı: teşvik tersliği, karantina→bellek sızıntısı, körlük istisnası, M17'nin çalışır hale getirilmesi, triyaj istisnaları, ajan başarısızlığı, güvenlik sınırı, saklama, kural enflasyonu freni, bu bölüm | Üç bağımsız denetçi (kapsam/tutarlılık/uygulanabilirlik) + meta-doğrulayıcı raporu |
+| v1.2 | İkili triyaj üç kademeye çevrildi (S1 Çekirdek / S2 Standart Dalga / S3 Birleşik Konsey); varsayılan S2 oldu. v1.1'de M4/M16/M20 için ayrı ayrı yazılan triyaj istisnaları tek kademe tablosunda toplandı — kök neden giderildiği için yamalar gereksizleşti. | İkili triyaj uçurumu: her orta boy iş ağır makineden kaçmak için en hafif kademeye sığınıyordu |
 
 ---
 
@@ -1341,7 +1373,7 @@ sistem, her ürüne uyguladığı standardı kendisine uygulamamış olur.
 | **Sıkıştırma** | Alt-ajanın asıl işi: devasa keşfi temiz sinyale indirgemek. |
 | **Geri sarma** | Başarısız denemenin gürültüsünü bağlamdan silip öğrenilenle yeniden sormak. |
 | **Kavrayış borcu** | Üretilen ama okunmayan işin biriktirdiği anlama açığı. |
-| **Triyaj** | İşin ağır makineyi hak edip etmediğinin baştan verilen kararı (§0.1, §9.5). |
+| **Kademe seçimi** | İşe uygulanacak denetim ağırlığının baştan verilen kararı (§0.1, §9.5). v1.1'e kadar "triyaj" adıyla ikiliydi. |
 | **Büyük adım** | §8.1'deki dört tetikleyiciden biri; temiz bağlam kuralını devreye sokar. |
 | **Çapraz denetim** | Aynı dalgadaki işçilerin birbirinin çıktısını çelişki açısından halka usulü denetlemesi (§10.5). |
 | **Anomali** | Gözcü'nün kök-neden kurulunu tetikleyen beş durumdan biri (§4.2). |
@@ -1353,10 +1385,12 @@ sistem, her ürüne uyguladığı standardı kendisine uygulamamış olur.
 | **Çelişki-Tarayıcı** | N≥4 dalgada halka yerine geçen, tüm çıktıları birlikte okuyan tek ajan (§10.5). |
 | **Kural enflasyonu** | KURALLAR.md'nin okunamayacak kadar büyümesi; çözüm arşiv, silme değil (§12). |
 | **KURALLAR.md** | Projeler arası taşınan kalıcı kural dosyası; §0 adım 3'te okunur. |
+| **Kademe (S1/S2/S3)** | İşe uygulanacak denetim ağırlığı: Çekirdek Akış / Standart Dalga / Birleşik Konsey (§0.1). Varsayılan S2. |
+| **Teslim beyanı** | S1 veya S2'de çalışıldığında kullanıcıya hangi denetimin yapılmadığını söyleyen zorunlu satır (§0.1). |
 
 ---
 
-**Belge sonu — v1.1.**
+**Belge sonu — v1.2.**
 
 Bu belgenin kendisi hakkında, kendi §10.3 standardıyla: v1.1, üç bağımsız denetçinin ve bir
 meta-doğrulayıcının raporundan geçti; 47 doğrulanmış bulgunun tamamı uygulandı. Bu, belgenin
