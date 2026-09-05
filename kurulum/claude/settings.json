@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf %s \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"SessionStart\\\",\\\"additionalContext\\\":\\\"[TELEMETRİ] Oturum başlangıcı: $(date -u '+%Y-%m-%dT%H:%M:%SZ') · Kademe seçimi (S1/S2/S3) zorunlu · STATE.md ve ~/.claude/KURALLAR.md okunmadan çalışmaya başlama.\\\"}}\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s alt-ajan-bitti\\n' \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\" >> \"$HOME/.claude/ajan-telemetri.log\" 2>/dev/null || true",
+            "timeout": 5,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f STATE.md ] && [ -n \"$(find STATE.md -mmin +30 2>/dev/null)\" ] && printf %s \"{\\\"systemMessage\\\":\\\"STATE.md 30+ dakikadır güncellenmedi — §6.1: uzaklaşmadan önce yaz.\\\"}\"; exit 0",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

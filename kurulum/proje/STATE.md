@@ -1,0 +1,36 @@
+# STATE.md — <proje adı>
+
+Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum sonunda yazılır.
+Çelişki çıkarsa bu dosya kazanır.
+
+## 1. Doğrulanmış gerçekler
+<!-- Kontrol edilmiş, artık tahmin edilmeyecek bilgiler.
+     Her satırda NASIL doğrulandığı, NE ZAMAN ve KAYNAĞIN GÜVENİLİRLİĞİ yazar.
+     TAZELİK: dayandığı şey değiştiyse veya kayıt 10 koşudan eskiyse, kullanmadan önce yenile. -->
+- …  (doğrulama: …, tarih: …, kaynak: güvenilir | KARANTİNALI)
+
+## 2. Genel kurallar
+<!-- Yeniden türetmeden önce buraya bak. Projeler arası geçerliyse ~/.claude/KURALLAR.md'ye taşı. -->
+- …
+
+## 3. Açık başarısızlıklar
+<!-- Henüz çözülmemiş. Yeniden üretim adımı zorunlu. ÖZ-DENETİM blokları da buraya. -->
+- …  (hipotez: …, yeniden üretim: …)
+
+## 4. Öğrenilen dersler
+<!-- Kök-neden kurullarından damıtılmış kalıcı kurallar. -->
+- …
+
+## 5. Kararlar ve gerekçeleri
+<!-- "Neden böyle yaptık" sorusunun tek cevabı.
+     DİKKAT: Doğrulayıcı ve Final Kurulu üyelerine bu bölüm VERİLMEZ (§6.1 körlük istisnası). -->
+- …
+
+## 6. Zaman kayıtları
+<!-- Ham ölçüm: ajanlar kendi zaman damgasını/tur sayısını yazar.
+     Hüküm ve kalibrasyon: yalnız Zaman Denetçisi yazar. -->
+- görev tipi: … | tahsis: … | gerçekleşen: … | öneri: …
+
+## 7. Son oturum
+<!-- Devam et, yeniden başlama. Kademe kaydı da buraya. -->
+- <tarih> · kademe: S<n>, gerekçe: … · yapılanlar: … · sıradaki adım: …
