@@ -141,7 +141,7 @@ Her mekanizma bu maddelerden **en az birini** gerçeklemek zorundadır. Gerçekl
 
 ---
 
-## 2. ANA AKIŞ — baştan sona 10 adım
+## 2. ANA AKIŞ — baştan sona 11 adım
 
 Aşağıdaki 11 adım **Seviye 3'ün** tam akışıdır. Seviye 1 ve 2'de hangi adımların düştüğü
 `§0.1` tablosunda yazılıdır — atlanan adım keyfî değil, kademenin tanımı gereğidir.
@@ -317,6 +317,7 @@ KADEME DİZİSİ (veto sonrası "bir kademe düşür" bu diziye göredir):
 ```
 
 **Karar usulü:** Üç üye kendi sayısını + tek cümlelik gerekçesini verir. Beyin `N_FİNAL`i hesaplar. Bir üye `N_FİNAL`e **veto** koyarsa (gerekçe: "bu sayıda çakışma/aşım kesin"), sayı bir kademe düşürülür ve tekrar oylanır.
+`N_FİNAL` kademe dizisinde yoksa **bir küçük komşusuna** inilir (`N_yeni` = dizideki `N_FİNAL`'den küçük en büyük değer; 4→3, 6→5, 7→5). Keyfî yuvarlama yasaktır (M15).
 
 **Veto sınırı:** En fazla **2 veto turu**. İkinci turdan sonra veya `N=1`'de veto sürerse Beyin nihai kararı verir ve gerekçesini `STATE.md` §5'e yazar. Kurul üçüncü kez toplanmaz.
 
@@ -367,13 +368,23 @@ PARALELLİK KURULU KARARI
 2. Her hipotez, Doğrulayıcı ve Çürütücü'nün önüne ayrı ayrı çıkar.
 3. Tek hipotez sağ kalana kadar döngü — EN FAZLA 3 TUR (§11.2: sınırsız döngü yasak).
    3. turda hâlâ birden fazla hipotez ayaktaysa Beyin en yüksek kanıt ağırlıklısını seçer
-   ve STATE.md §1'e "doğrulanmamış varsayım" etiketiyle yazar.
+   ve STATE.md **§3'e** `[VARSAYIM]` etiketiyle yazar — **§1'e YAZILMAZ.**
+   (§1 kör denetçilere verilen tek kaynaktır; oraya giren varsayım üç kurul üyesini
+   birden aynı kirli kaynağa çapalar. §1'e ancak bağımsız bir kanıtla doğrulandıktan
+   sonra taşınır.)
    Hiçbiri ayakta kalmadıysa yeni kanıt kaynağı eklenir ve sayaç sıfırlanır (en fazla 1 kez).
+   İkinci turdan sonra da hiçbiri ayakta kalmadıysa kurul **"kök neden bulunamadı"**
+   hükmüyle dağılır: bu bir kapatma değil kayıttır — STATE.md §3'e yeniden üretim
+   adımları ve çürütülen hipotez listesiyle yazılır, §4.5'e "kanıt kaynağı boşluğu"
+   olarak devredilir, aynı hata üçüncü kez tekrarlarsa kullanıcıya çıkılır.
 4. Öğretmen dersi damıtır → kalıcı kurala yazar (§12).
 5. Ders, ilgili ajanın görev tanımına eklenir (M6: "ilgili ajanlara öğretir").
 ```
 
 **Yasak:** "Muhtemelen geçici bir sorundu" ile kapatmak. Kök neden yazılmadan kurul dağılmaz.
+("Kök neden bulunamadı" hükmü bu yasağın istisnası değil, yukarıdaki üçüncü daldır: gerekçesi ve çürütülen hipotezler yazılır.)
+
+**Özyineleme sınırı:** Bir Kök-Neden Kurulu'nun **kendi üyelerinden** doğan anomaliler yeni bir kurul tetiklemez; doğrudan Beyin'e "kurul aşımı" olarak raporlanır. Bir koşuda en fazla **2** Kök-Neden Kurulu toplanır; üçüncü tetikleyicide koşu durur ve kullanıcıya çıkılır. Kurul rollerinin kaynağı üretim fazından değil rezervden karşılanır.
 
 ### 4.3 KARAR KURULU (M12–M14) — yol ayrımında
 
@@ -979,25 +990,6 @@ Beyin, bir alt-ajanı şu durumlarda durdurur:
 
 Durdurduktan sonra **iki seçenek**: (a) kaldığı yerden yeniden delege et, (b) 2–3 parçaya böl, dağıt.
 
-### 10.6 Ajan başarısızlığı — cevap yok, bozuk çıktı, görev reddi
-
-Alt-ajan her zaman düzgün bir sonuç döndürmez. Üç durum, üç işlem:
-
-| Durum | Tanım | İşlem |
-|---|---|---|
-| **Cevap yok** | Ajan sonuç döndürmedi veya boş döndü | **Bir kez** yeniden görevlendir (aynı tanımla). İkinci kez de boşsa görevi böl (M8) veya Beyin doğrudan üstlenir. |
-| **Bozuk format** | Çıktı, görev tanımındaki ÇIKTI formatına uymuyor | Doğrulamaya **sokulmaz** — formatı düzeltmesi için ajana geri döner. İkinci kez de bozuksa görev tanımı fazla karmaşıktır, parçala. |
-| **Görev reddi** | Ajan görevi yapamayacağını bildirdi | Beyin'e eskale. Gerekçe `STATE.md` §3'e yazılır — reddin nedeni çoğu zaman görev tanımındaki bir hatadır (M10). |
-
-**Yeniden görevlendirme sınırı:** Her durum için en fazla 1 tekrar. Sınırsız yeniden deneme,
-§11.2'nin sert bitiş koşulu kuralını ihlal eder.
-
-### 10.7 Format kapısı — doğrulamadan önce ucuz kontrol
-
-Belge beş yerde "zorunlu format" diyor (§4.1, §5.2, §5.4, §13.2, §13.7). Formatı tutmayan çıktı
-**doğrulayıcıya girmeden** geri döner: doğrulayıcının zamanını biçim hatasına harcamak israftır
-ve doğrulama fazının bütçesini yer. Kontrol mekaniktir — zorunlu alanlar var mı, yok mu.
-
 ### 10.5 Çapraz denetim (M1) — ajanlar birbirini denetler
 
 §10.1'deki zincir **dikeydir** (yapan → doğrulayıcı → meta → testçi). M1 ayrıca **yatay**
@@ -1032,6 +1024,25 @@ denetim yetkisinin sınırıdır.
 (§9.3). Bu adım, o varsayımları birleştirme anından *önce* yüzeye çıkarır.
 
 ---
+
+### 10.6 Ajan başarısızlığı — cevap yok, bozuk çıktı, görev reddi
+
+Alt-ajan her zaman düzgün bir sonuç döndürmez. Üç durum, üç işlem:
+
+| Durum | Tanım | İşlem |
+|---|---|---|
+| **Cevap yok** | Ajan sonuç döndürmedi veya boş döndü | **Bir kez** yeniden görevlendir (aynı tanımla). İkinci kez de boşsa görevi böl (M8) veya Beyin doğrudan üstlenir. |
+| **Bozuk format** | Çıktı, görev tanımındaki ÇIKTI formatına uymuyor | Doğrulamaya **sokulmaz** — formatı düzeltmesi için ajana geri döner. İkinci kez de bozuksa görev tanımı fazla karmaşıktır, parçala. |
+| **Görev reddi** | Ajan görevi yapamayacağını bildirdi | Beyin'e eskale. Gerekçe `STATE.md` §3'e yazılır — reddin nedeni çoğu zaman görev tanımındaki bir hatadır (M10). |
+
+**Yeniden görevlendirme sınırı:** Her durum için en fazla 1 tekrar. Sınırsız yeniden deneme,
+§11.2'nin sert bitiş koşulu kuralını ihlal eder.
+
+### 10.7 Format kapısı — doğrulamadan önce ucuz kontrol
+
+Belge beş yerde "zorunlu format" diyor (§4.1, §5.2, §5.4, §13.2, §13.7). Formatı tutmayan çıktı
+**doğrulayıcıya girmeden** geri döner: doğrulayıcının zamanını biçim hatasına harcamak israftır
+ve doğrulama fazının bütçesini yer. Kontrol mekaniktir — zorunlu alanlar var mı, yok mu.
 
 ## 11. GÜVENLİK VE SINIRLAR
 
