@@ -41,8 +41,20 @@ olduğu belirtiliyor").
 
 Değer tablosundaki her ölçütü (sodyum gibi "düşük iyi" olanlar hariç, onları ayrı not
 olarak belirt) 0-10 arası puanla: her ölçütte o kategorideki en yüksek değeri 10 kabul
-et, diğerlerini `değer / en_yüksek_değer × 10` ile normalize et. Tüm ölçütlerin
-ortalamasını alarak her ürüne tek bir toplam puan (0-10) ver. Sonucu şu tabloyla sun:
+et, diğerlerini `değer / en_yüksek_değer × 10` ile normalize et.
+
+**Ağırlıklandırma:** Görev metninde kullanıcının bir önceliği belirtilmişse (ör. "fiyat
+en önemli", "performans öncelikli", ya da spesifik bir ölçüt — "besin yoğunluğu",
+"pil ömrü") o ölçüte/gruba daha yüksek ağırlık ver (ör. %50 öncelikli ölçüt + kalan
+%50 diğerleri arasında eşit); fiyat kullanıcının önceliğiyse fiyatı da (düşük fiyat =
+yüksek puan şeklinde ters normalize ederek) puanlama tablosuna bir sütun olarak dahil
+et. Öncelik belirtilmemişse tüm ölçütleri eşit ağırlıklandır. Kullandığın ağırlıkları
+tabloların üstünde açıkça yaz (ör. "besin yoğunluğu ölçütleri %70, fiyat %30").
+
+Tüm ölçütlerin ağırlıklı ortalamasını alarak her ürüne tek bir toplam puan (0-10) ver.
+Bir hücre "~yaklaşık" veya tek kaynaktan geliyorsa, o kaynağın puanlamayı çarpıtabileceğini
+unutma — güvenilirliği düşük tek-kaynaklı değerleri toplam puanın yanında küçük bir
+"⚠ tek kaynak" notuyla işaretle. Sonucu şu tabloyla sun:
 
 | Ürün | [Ölçüt 1] | [Ölçüt 2] | ... | **Toplam Puan (/10)** |
 

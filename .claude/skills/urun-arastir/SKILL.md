@@ -17,7 +17,26 @@ Kullanıcının mesajından araştırılacak ürünü çıkar (marka + model + v
 - Kullanıcı bütçe/özel gereksinim belirtmişse (ör. "600 euro altı", "16GB RAM olsun") bunu
   not al, tüm subagent'lara ileteceğin görev metnine dahil et.
 
+## 0.5. Kriter bazlı ürün seçimi (gerekirse)
+
+Kullanıcı somut bir marka/model değil, bir **seçim kriteri** verdiyse (ör. "en yüksek
+besin değerine sahip peynir", "en dayanıklı akıllı saat", "en sessiz bulaşık makinesi")
+subagent'ları başlatmadan önce bu kriteri tek bir somut ürüne indirger:
+
+- Kriter birden fazla makul yorumla açılabiliyorsa (ör. "besin değeri" protein mi,
+  genel yoğunluk mu?) `AskUserQuestion` ile **tek bir** netleştirme sorusu sor.
+- Netleştikten sonra kendi bilgin + gerekirse kısa bir web araştırmasıyla kriteri en
+  iyi karşılayan somut ürünü/markayı belirle ve bunu gerekçesiyle (hangi verilere göre
+  seçildi) tek paragrafta not al — bu paragraf rapora "Varsayımlar" bölümünde girecek.
+- Bu adım sadece kriter belirsizliği varsa çalışır; kullanıcı zaten spesifik bir
+  marka/model verdiyse atla.
+
 ## 1. Araştırmayı paralel başlat
+
+Kur/veri tutarlılığı için: Dünya pazarı EUR dışı bir para birimi gerektiriyorsa
+(USD/GBP/vb.) **önce sen tek bir güncel kur ve tarih belirle**, sonra bunu ilgili
+`market-scout` (Dünya) ve `import-advisor` çağrılarının prompt'una aynen yaz — her
+subagent'ın kendi kurunu bulmasına izin verme, tutarsız rakamlara yol açar.
 
 Tek bir mesajda, aşağıdaki 5 Agent çağrısını **paralel** (arka planda) başlat:
 
@@ -30,6 +49,13 @@ Tek bir mesajda, aşağıdaki 5 Agent çağrısını **paralel** (arka planda) b
 Her çağrının prompt'una ürün adını, varsa bütçe/gereksinim notunu ve tam olarak hangi
 pazar kapsamına baktığını yaz. Beşi de bağımsızdır, aynı anda çalışabilirler — hızlı olması
 için hepsini tek mesajda fan-out et, sonuçları bekle.
+
+**Hata durumunda:** bir subagent API hatası/rate-limit yüzünden başarısız olursa (ör.
+"session limit", 429), kullanıcıya hemen "tamamen başarısız oldu" deme — **aynı görevle
+bir kez daha başlat** ve sonucunu bekle. İkinci denemede de aynı subagent başarısız
+olursa, o pazar/bölüm için "bu veri alınamadı, tekrar denenebilir" notuyla devam et,
+diğer subagent'ların sonuçlarıyla raporu yine de tamamla — tek bir subagent'ın hatası
+tüm araştırmayı durdurmasın.
 
 ## 2. İthalat maliyetini hesapla (bağımlı adım)
 
@@ -59,7 +85,8 @@ görselleştirmesi için **dataviz** skill'ini de yükle). Rapor şu bölümleri
 içermeli:
 
 1. Başlık + tek paragraflık nihai tavsiye özeti (en üstte, göze çarpan bir kutuda)
-2. Varsayımlar (kullanılan kur/tarih, kullanıcı bütçe/gereksinim notu, araştırma tarihi)
+2. Varsayımlar (kullanılan kur/tarih, kullanıcı bütçe/gereksinim notu, araştırma tarihi,
+   varsa 0.5. adımdaki kriter bazlı ürün seçimi gerekçesi)
 3. Hollanda Pazarı
 4. Avrupa Pazarı
 5. Dünya Pazarı + İthalat Maliyeti
