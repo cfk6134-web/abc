@@ -28,15 +28,28 @@ cp kurulum/claude/CLAUDE.md                      ~/.claude/CLAUDE.md
 cp kurulum/claude/AJAN-ISLETIM-TALIMATI.md       ~/.claude/
 cp kurulum/claude/KURALLAR.md                    ~/.claude/
 cp -r kurulum/claude/skills/ajan-isletim         ~/.claude/skills/
+cp -r kurulum/claude/agents                      ~/.claude/
 ```
+
+`agents/` klasörü **rollerin yetki sınırlarını gerçekten uygular.** Bu dosyalar olmadan
+belgedeki her `YETKİ` ve `YASAK` satırı yalnız bir ricadır: alt-ajan varsayılan olarak
+`Write`, `Edit` ve `Bash` dahil tam araç setiyle doğar. Yani "salt-okur Doğrulayıcı" ve
+"yüksek yetkili eylem alamaz Karantina Okuyucu", eli klavyede duran bir ajana yazılmış
+nazik cümleler olur. Bu klasör o cümleleri kurala çevirir.
 
 > `~/.claude/CLAUDE.md` zaten varsa **üzerine yazma** — dosyayı aç ve içeriği kendi notlarının
 > yanına ekle.
 
 ### 2. Hook'ları ekle
 
-`kurulum/claude/settings.json` içindeki `hooks` bloğunu `~/.claude/settings.json` dosyanla
-**birleştir**. Dosya zaten varsa üzerine yazma; `hooks` anahtarını mevcut ayarlarının yanına ekle.
+`kurulum/claude/settings.json` içindeki `hooks` **ve** `permissions` bloklarını
+`~/.claude/settings.json` dosyanla **birleştir**. Dosya zaten varsa üzerine yazma;
+iki anahtarı mevcut ayarlarının yanına ekle.
+
+`permissions.deny` sır dosyalarının okunmasını engeller (`.env`, `~/.ssh`, anahtarlar);
+`permissions.ask` ise geri dönüşü zor eylemleri (force push, `reset --hard`, dal silme,
+kalıcı kural dosyasına yazma) onaya bağlar. Deny kuralları allow'dan **önce** değerlendirilir
+ve katmanlar arasında birleşir — proje ayarların bunları gevşetemez.
 
 Doğrula:
 
@@ -60,26 +73,32 @@ Adını doldur. Bu dosya projeye özgüdür ve projeyle kalır; `KURALLAR.md` is
 | Hook | Ne zaman | Ne yapar | Maliyet |
 |---|---|---|---|
 | `SessionStart` | Oturum açılışı | Zaman damgası basar (§5.1'in ihtiyaç duyduğu ölçüm çıpası) ve kademe seçimini hatırlatır | 0 token |
-| `SubagentStop` | Her alt-ajan bitişi | `~/.claude/ajan-telemetri.log`'a satır ekler | 0 token, arka planda |
-| `Stop` | Oturum sonu | `STATE.md` 30+ dakikadır güncellenmediyse uyarır | 0 token |
+| `SubagentStop` | Her alt-ajan bitişi | `~/.claude/ajan-telemetri.log`'a JSON satır ekler: zaman + oturum kimliği + ajan rolü | 0 token |
+| `Stop` | Oturum sonu | `STATE.md` varsa ve 30+ dakikadır güncellenmediyse turu **engeller** (modele gider, ekrana değil) | 0 token |
 
 Üçü de deterministik kabuk komutu — model çalıştırmaz, hiçbir şey silmez, yalnız okur ve
 log'a satır ekler. Bu, Gözcü'nün (§3.2) "ucuz filtre" katmanının pratik karşılığıdır:
 sürekli bir LLM koşturmak yerine sayılabilir sinyalleri bedava yakalar.
 
-`SubagentStop` telemetrisi zamanla birikir; Zaman Denetçisi'nin (§5.4) kalibrasyon verisi
-oradan gelir:
+`SubagentStop` telemetrisi zamanla birikir:
 
 ```bash
-wc -l ~/.claude/ajan-telemetri.log     # toplam alt-ajan koşusu
+wc -l ~/.claude/ajan-telemetri.log                    # toplam alt-ajan koşusu
+python3 -c "import json,sys,collections;print(collections.Counter(json.loads(l)['a'] for l in open('$HOME/.claude/ajan-telemetri.log')))"
 ```
+
+> **Bu log ne VERMEZ:** başlangıç damgası yok, tur sayısı yok, token yok. Yani buradan
+> **süre hesaplanamaz.** Log yalnız "hangi rol kaç kez koştu" sorusunu yanıtlar.
+> Bir alt-ajanın ne kadar sürdüğü bu ortamda hiçbir yere akmaz; bunu süre ölçüyormuş gibi
+> kullanan her kural, ölçtüğünü sandığı şeyi ölçmez.
 
 ## Çalıştığını doğrula
 
 1. Yeni bir Claude Code oturumu aç. Açılışta telemetri satırı bağlama girmeli.
 2. Çok adımlı bir iş iste ("şu modülü refactor et ve testlerini yaz"). Ajan kademe seçmeli
    (muhtemelen S2) ve bunu söylemeli.
-3. `/skills` listesinde `ajan-isletim` görünmeli.
+3. `/skills` listesinde `ajan-isletim` görünmeli; `/agents` listesinde 10 rol görünmeli.
+   Görünmüyorlarsa frontmatter bozuktur — geçersiz alan **sessizce düşürülür**, hata vermez.
 4. Küçük bir iş iste ("şu yazım hatasını düzelt"). Ajan S1'de kalmalı, kurul kurmamalı.
    Kurul kuruyorsa çekirdek yanlış okunuyor demektir.
 
@@ -87,7 +106,7 @@ wc -l ~/.claude/ajan-telemetri.log     # toplam alt-ajan koşusu
 
 ```bash
 rm ~/.claude/CLAUDE.md ~/.claude/AJAN-ISLETIM-TALIMATI.md
-rm -rf ~/.claude/skills/ajan-isletim
+rm -rf ~/.claude/skills/ajan-isletim ~/.claude/agents
 ```
 `~/.claude/settings.json` içindeki `hooks` bloğunu elle çıkar. `KURALLAR.md`'yi silme —
 birikmiş dersler orada.

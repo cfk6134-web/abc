@@ -1,4 +1,8 @@
-# İşletim çekirdeği
+# İşletim çekirdeği — v1.4
+
+<!-- Sürüm damgası ZORUNLU: bu satır ~/.claude/AJAN-ISLETIM-TALIMATI.md'nin
+     başlığındaki sürümle aynı olmalı. Farklıysa iki yüzey ayrışmıştır (§15.2 adım 6);
+     tam metin kazanır ve bu dosya güncellenir. -->
 
 Bu blok her oturumda yüklenir. Tam protokol `~/.claude/AJAN-ISLETIM-TALIMATI.md`'dedir —
 oraya yalnız gerektiğinde bak (`ajan-isletim` skill'i açar). Buradaki kurallar her işte geçerlidir.
@@ -7,9 +11,9 @@ oraya yalnız gerektiğinde bak (`ajan-isletim` skill'i açar). Buradaki kuralla
 
 | | Ne zaman | Nasıl çalışılır |
 |---|---|---|
-| **S1** | Tek adımlık, sonucu tek cümlede savunulabilen iş | Tek ajan + temiz bağlamda öz-denetim |
+| **S1** | Dördü birden: tek bağlam penceresi · en fazla 2 dosya · tek komutla geri alınabilir · güvenilmeyen kaynak okumuyor | Tek ajan + temiz bağlamda öz-denetim |
 | **S2** | **Varsayılan — emin değilsen bu** | 1 yapan + 1 bağımsız doğrulayıcı |
-| **S3** | Paralel iş, geri dönüşü zor eylem, kullanıcı tam denetim istedi, ya da S2'de RET geldi | Tam akış: kurullar + meta-doğrulama |
+| **S3** | Paralel iş · geri dönüşü zor eylem · güvenilmeyen kaynak okuma · kullanıcı tam denetim istedi · S2'de aynı maddede ikinci RET | Tam akış: kurullar + meta-doğrulama |
 
 Kademeyi `STATE.md` §7'ye tek satır yaz: `kademe: S<n>, gerekçe: <…>`
 S1 veya S2'de çalıştıysan **teslim notunda hangi denetimin yapılmadığını yaz.**

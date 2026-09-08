@@ -1,4 +1,28 @@
 {
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/.env)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(**/id_rsa)",
+      "Read(**/*.pem)",
+      "Read(**/credentials)"
+    ],
+    "ask": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(git branch -D *)",
+      "Bash(rm -rf *)",
+      "Write(~/.claude/settings.json)",
+      "Write(~/.claude/KURALLAR.md)",
+      "Edit(~/.claude/KURALLAR.md)",
+      "Write(~/.claude/skills/**)",
+      "Edit(~/.claude/skills/**)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -16,9 +40,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '%s alt-ajan-bitti\\n' \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\" >> \"$HOME/.claude/ajan-telemetri.log\" 2>/dev/null || true",
-            "timeout": 5,
-            "async": true
+            "command": "mkdir -p \"$HOME/.claude\" 2>/dev/null; python3 -c \"import sys,json,datetime;d=json.load(sys.stdin);print(json.dumps({'t':datetime.datetime.now(datetime.timezone.utc).isoformat(),'s':d.get('session_id'),'a':(d.get('tool_input') or {}).get('subagent_type','genel')}))\" >> \"$HOME/.claude/ajan-telemetri.log\" 2>/dev/null || true",
+            "timeout": 5
           }
         ]
       }
@@ -28,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ -f STATE.md ] && [ -n \"$(find STATE.md -mmin +30 2>/dev/null)\" ] && printf %s \"{\\\"systemMessage\\\":\\\"STATE.md 30+ dakikadır güncellenmedi — §6.1: uzaklaşmadan önce yaz.\\\"}\"; exit 0",
+            "command": "i=$(cat); case \"$i\" in *'\"stop_hook_active\":true'*) exit 0;; esac; f=\"${CLAUDE_PROJECT_DIR:-.}/STATE.md\"; if [ -f \"$f\" ] && [ -n \"$(find \"$f\" -mmin +30 2>/dev/null)\" ]; then printf %s '{\"decision\":\"block\",\"reason\":\"STATE.md 30+ dakikadır güncellenmedi — §6.1: uzaklaşmadan önce yaz. Yazdıysan veya bu iş kalıcı kayıt üretmiyorsa bunu tek cümleyle belirt ve bitir.\"}'; fi; exit 0",
             "timeout": 5
           }
         ]
