@@ -50,12 +50,22 @@ Her çağrının prompt'una ürün adını, varsa bütçe/gereksinim notunu ve t
 pazar kapsamına baktığını yaz. Beşi de bağımsızdır, aynı anda çalışabilirler — hızlı olması
 için hepsini tek mesajda fan-out et, sonuçları bekle.
 
-**Hata durumunda:** bir subagent API hatası/rate-limit yüzünden başarısız olursa (ör.
-"session limit", 429), kullanıcıya hemen "tamamen başarısız oldu" deme — **aynı görevle
-bir kez daha başlat** ve sonucunu bekle. İkinci denemede de aynı subagent başarısız
-olursa, o pazar/bölüm için "bu veri alınamadı, tekrar denenebilir" notuyla devam et,
-diğer subagent'ların sonuçlarıyla raporu yine de tamamla — tek bir subagent'ın hatası
-tüm araştırmayı durdurmasın.
+Bu 5 çağrıyı başlatmadan hemen önce kullanıcıya **tek satırlık bir durum mesajı** gönder
+(ör. "Hollanda, Avrupa, Dünya pazarlarını + güvenilirlik ve alternatifleri tarıyorum, bu
+birkaç dakika sürebilir") — birkaç dakikalık sessiz bekleme kullanıcıda sistemin takıldığı
+hissini yaratmasın.
+
+**Hata durumunda:** bir subagent API hatası/rate-limit (429/"session limit") yüzünden
+başarısız olursa, kullanıcıya hemen "tamamen başarısız oldu" deme:
+- **429/rate-limit ise**: kısa bir bekleme sonrası, başarısız olan agent'ı **tek başına**
+  (yeni bir paralel patlama içine sokmadan, diğerlerinden ayrı) yeniden başlat — aynı anda
+  birden fazla agent'ı yeniden denemek aynı limite ikinci kez çarpma riski taşır.
+- **429 dışı bir hata ise**: hemen aynı görevle bir kez daha başlat.
+- İkinci denemede de aynı subagent başarısız olursa, o pazar/bölüm için "bu veri alınamadı,
+  tekrar denenebilir" notuyla devam et ve bunu **adım 5'teki sözlü özete de mutlaka dahil et**
+  (ör. "Dünya pazarı verisi iki denemeden sonra da alınamadı, rapor bu eksikle üretildi") —
+  sessizce yutma. Diğer subagent'ların sonuçlarıyla raporu yine de tamamla; tek bir
+  subagent'ın hatası tüm araştırmayı durdurmasın.
 
 ## 2. İthalat maliyetini hesapla (bağımlı adım)
 
@@ -77,6 +87,9 @@ Tüm sonuçlar elindeyken:
 - Net bir **nihai tavsiye** oluştur: hangi pazardan, hangi satıcıdan, ne fiyata almalı ve
   neden — tek paragrafta gerekçelendir. Belirsizlik varsa (ör. hız mı ucuzluk mu öncelikli)
   iki seçenekli tavsiye ver ("en hızlı/güvenli seçenek X, en ucuz seçenek Y").
+- **Tüm subagent çıktılarındaki ⚠ notlarını (tek kaynak, tutarsız kaynak, veri alınamadı,
+  retry gerekti) topla** — bunları ilgili detay tablosunda bırakmakla yetinme, aşağıdaki
+  "Veri tamlığı" göstergesi için ayrıca listele.
 
 ## 4. Raporu Artifact olarak yayınla
 
@@ -84,7 +97,11 @@ Yayınlamadan önce **artifact-design** skill'ini yükle (ve karşılaştırma t
 görselleştirmesi için **dataviz** skill'ini de yükle). Rapor şu bölümleri sabit sırayla
 içermeli:
 
-1. Başlık + tek paragraflık nihai tavsiye özeti (en üstte, göze çarpan bir kutuda)
+1. Başlık + tek paragraflık nihai tavsiye özeti (en üstte, göze çarpan bir kutuda) —
+   **hemen altına, her zaman görünür (asla katlanmış/gizli bir bölüme girmez), bir
+   "Veri tamlığı & belirsizlikler" satırı ekle**: kaç/N alt-araştırmanın sorunsuz
+   tamamlandığı ve hangi ⚠ notlarının (tek kaynak, tutarsız kaynak, veri alınamadı,
+   retry gerekti) olduğu tek yerde özetlensin.
 2. Varsayımlar (kullanılan kur/tarih, kullanıcı bütçe/gereksinim notu, araştırma tarihi,
    varsa 0.5. adımdaki kriter bazlı ürün seçimi gerekçesi)
 3. Hollanda Pazarı
@@ -96,8 +113,16 @@ içermeli:
    ürün "🏆 Kazanan" olarak açıkça işaretli, metodoloji tek cümlede belirtilmiş)
 8. Genel Karşılaştırma Tablosu & Sonuç
 9. Kaynaklar
-10. Uyarı: "Fiyatlar araştırma anındaki taramaya dayanır, satın almadan önce güncel fiyatı
-    doğrulayın."
+10. Uyarı/sorumluluk reddi (her zaman tam görünür, katlanmaz): "Bu rapor otomatik web
+    taramasına dayanır; resmi gümrük/vergi/hukuki danışmanlık değildir. Fiyatları, gümrük
+    vergisi/BTW oranlarını ve ithalat kısıtlamalarını satın almadan/kargo göndermeden önce
+    Hollanda Gümrüğü (Douane) veya yetkili bir gümrük müşaviriyle doğrulayın; bu rapora
+    dayanarak alınan kararların sorumluluğu kullanıcıya aittir."
+
+**Görsel sunum:** Bölüm 3-9, sayfa ilk açıldığında varsayılan olarak **daraltılmış/sekmeli**
+(accordion veya tab) gösterilsin — sadece bölüm 1 (nihai tavsiye + veri tamlığı) ve bölüm 2
+(varsayımlar) tam açık başlasın. Bölüm 10 (uyarı) bu daraltmanın DIŞINDA tutulur, her zaman
+tam görünür kalır — hiçbir koşulda katlanmış bir bölümün içine gömülmez.
 
 Rapor dili Türkçe, tüm fiyatlar EUR (yerel fiyat parantezde). Artifact başlığı ürün adı
 olsun (jenerik "Rapor" değil).

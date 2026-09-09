@@ -22,8 +22,12 @@ güvenebilir miyim, uzun vadede memnun kalır mıyım" sorusuna cevap vermek.
 
 Aşağıdaki başlıklarla kısa ve net bir Markdown özeti döndür:
 
-**Genel güvenilirlik puanı:** X/10 (bulduğun puanların ortalaması/senin değerlendirmen, nasıl
-hesapladığını 1 cümleyle açıkla)
+**Genel güvenilirlik puanı:** X/10 — bu puanı en az 2 bağımsız kaynaktan (ör. Trustpilot +
+Tweakers/Reddit/uzman inceleme sitesi) türet, nasıl hesapladığını 1 cümleyle açıkla.
+Kaynaklar puan/yorum eğiliminde belirgin şekilde ayrışıyorsa (>3/10 fark) tek bir sayı
+yazma — bir aralık ver (ör. "6-9/10") ve "⚠ kaynaklar arası tutarsız" notu düş. Sadece
+tek bir kaynak bulabildiysen "⚠ tek kaynak" ile ayrıca işaretle — "tutarsız" ve "tek kaynak"
+farklı güvenilirlik sorunlarıdır, karıştırma.
 
 **En çok övülen 3 özellik:** ...
 

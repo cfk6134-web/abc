@@ -18,6 +18,12 @@ rakip ürün bulmak — hem daha ucuz hem daha pahalı ama daha iyi seçenekleri
 - Uzman inceleme sitelerinde (Tweakers, RTINGS, Wirecutter vb.) "X yerine bunu da düşünün"
   şeklinde önerilen ürünlere özellikle bak.
 
+## Arama bütçesi
+
+Toplamda en fazla ~10-12 web araması/fetch çağrısı yap. 3-5 güvenilir alternatif/kaynak
+bulduğunda ve tabloları doldurabilecek veriye ulaştığında daha fazla arama yapma —
+elindeki veriyle raporu tamamla.
+
 ## Çıktı formatı
 
 Çıktın 3 parçadan oluşmalı — sadece fiyat/artı-eksi değil, **sayısal karşılaştırma ve

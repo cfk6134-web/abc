@@ -40,6 +40,13 @@ ayrıca hesaplanacak" notu düş. Ayrıca bu satıcının Hollanda'ya fiilen kar
 (checkout/shipping SSS'sinden) kontrol et — yapmıyorsa bunu açıkça belirt, `import-advisor`
 için kritik bir girdi.
 
+## Arama bütçesi
+
+Toplamda en fazla ~10-12 web araması/fetch çağrısı yap. 3-5 güvenilir satıcı bulduğunda
+ve tabloyu doldurabilecek veriye ulaştığında daha fazla arama yapma — elindeki veriyle
+raporu tamamla. Bu, "uydurma yapma" kuralıyla çelişmez, sadece marjinal ekstra aramayı
+durdurur.
+
 ## Çıktı formatı
 
 Bulduğun her satıcı için bir satır olacak şekilde bir Markdown tablosu döndür:

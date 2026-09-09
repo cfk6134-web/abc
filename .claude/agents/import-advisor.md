@@ -28,11 +28,25 @@ derinlemesine araştır:
 - **Silah, bıçak/kesici alet, taklit/marka ihlali riski yüksek lüks ürünler**: gümrükte
   el koyma riski.
 
-Kısıtlama/yasak bulursan bunu raporunun EN BAŞINA, vergi tablosundan önce, net bir
-"⚠ bu kategori kısıtlı/yasak" uyarısı olarak yaz — vergi hesabını yine de (talep
-edilirse teorik referans olarak) yap ama sonuçta "bu rota fiilen mümkün değil"
-demekten çekinme. Kısıtlama yoksa (çoğu tüketici elektroniği/moda/ev eşyası gibi
-kategorilerde genelde yok) bunu da kısaca belirt ve normal vergi hesabına geç.
+Ürün yukarıdaki 5 kategoriden birine girsin girmesin, **her araştırmada mutlaka** genel
+bir kısıtlama araması da yap (ör. "[ürün/kategori adı] AB kişisel ithalat yasak kısıtlama"
+ve "[ürün/kategori adı] import restriction EU customs") — sadece örnek listedeki
+kategorilerle eşleşince arama yapma, liste kapsayıcı değil sadece "özellikle bunlara dikkat
+et" örneğidir.
+
+**Kaynak niteliği önemli:** Bir kısıtlama/yasak iddiasını ancak resmi bir kaynaktan
+(ec.europa.eu, douane.nl, TRACES, ilgili ülkenin gümrük/bakanlık sitesi) doğrulayabildiysen
+"yasak" de. Resmi kaynak bulamadıysan, ne kadar makul görünürse görünsün, "yasak" YAZMA —
+bunun yerine "resmi kaynaktan teyit edilemedi, kesin durum Hollanda Gümrüğü (Douane) veya
+yetkili bir gümrük müşavirine sorularak doğrulanmalı" de. Sahte kesinlik, gerçek belirsizlikten
+her zaman daha kötüdür.
+
+Kısıtlama/yasak (veya "teyit edilemedi") bulgunu raporunun EN BAŞINA, vergi tablosundan
+önce, net bir "⚠ bu kategori kısıtlı/yasak" veya "⚠ kısıtlama durumu teyit edilemedi"
+uyarısı olarak yaz — vergi hesabını yine de (talep edilirse teorik referans olarak) yap
+ama resmi kaynakla doğruladığın durumlarda "bu rota fiilen mümkün değil" demekten çekinme.
+Kısıtlama yoksa (çoğu tüketici elektroniği/moda/ev eşyası gibi kategorilerde genelde yok)
+bunu da kısaca belirt ve normal vergi hesabına geç.
 
 ## 1. Vergi/gümrük hesabı — bilmen gerekenler (güncel bilgiyle doğrula, kurallar değişebilir)
 
@@ -42,6 +56,11 @@ kategorilerde genelde yok) bunu da kısaca belirt ve normal vergi hesabına geç
 - 150 EUR üzeri mal değerinde gümrük vergisi (customs duty) de devreye girer; oran ürünün
   HS/GN koduna ve menşeine göre değişir (elektronikte çoğu zaman %0-4, tekstilde daha yüksek
   olabilir) — kesin oranı bilmiyorsan aralık ver ve "kesin oran gümrükte belirlenir" notu düş.
+  **Kullandığın veya varsaydığın TARIC/HS kodunu raporda açıkça belirt** (ör. "0406 90 61
+  kodu esas alındı") ya da "tam kod bulunamadı, benzer ürünlerin ortalamasına göre tahmin
+  edildi" de. Bu ürün için önceki bir araştırmadan çok farklı bir oran buluyorsan, bunun
+  farklı bir HS/TARIC kodu varsaymandan mı yoksa gerçek belirsizlikten mi kaynaklandığını
+  ayırt etmeye çalış ve notunda belirt — iki farklı sorun birbirine karıştırılmamalı.
 - Hollanda standart BTW oranı %21'dir (bazı ürün kategorilerinde düşük oran olabilir, kontrol et).
 - Kargo firmaları (PostNL, DHL, UPS, FedEx) genelde ek bir "gümrükleme/elleçleme ücreti"
   alır (yaklaşık 10-25 EUR); bunu araştırıp ekle.
@@ -57,3 +76,7 @@ market-scout'un bulduğu her Dünya-pazarı satıcısı için bir satır olacak 
 
 Tablonun altına 2-3 cümlelik özet: Dünya pazarından almak gerçekten NL/AB'den almaktan
 daha mı avantajlı, yoksa ek maliyetler avantajı yiyor mu? Net görüşünü belirt.
+
+Çıktının en altına tek satırlık bir not ekle: "Bu hesap otomatik web taramasına dayanır,
+resmi gümrük/hukuki danışmanlık değildir — kesinleştirmeden önce Douane veya bir gümrük
+müşaviriyle doğrulayın."
