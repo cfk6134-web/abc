@@ -1,0 +1,2744 @@
+<title>Tutarlılık Denetim Rehberi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ink:#1E2A22;
+    --ink-soft:#57655C;
+    --paper:#EDEFE7;
+    --surface:#FBFCF8;
+    --rule:#D3D7C8;
+    --rule-strong:#B7BDA8;
+    --accent-flag:#AB3527;
+    --accent-flag-bg:#F7E8E5;
+    --accent-confirm:#3C6B4E;
+    --accent-confirm-bg:#E6EFE7;
+    --accent-ref:#435C7A;
+    --accent-ref-bg:#E7ECF1;
+    --shadow:0 1px 2px rgba(30,42,34,.07);
+
+    --font-display:'Fraunces','Iowan Old Style','Georgia',serif;
+    --font-body:'Public Sans',-apple-system,'Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#E7EBE2;
+      --ink-soft:#A9B29E;
+      --paper:#15190F;
+      --surface:#1E241A;
+      --rule:#333B2C;
+      --rule-strong:#47513C;
+      --accent-flag:#E2685A;
+      --accent-flag-bg:rgba(226,104,90,.14);
+      --accent-confirm:#74A886;
+      --accent-confirm-bg:rgba(116,168,134,.14);
+      --accent-ref:#8AA0C2;
+      --accent-ref-bg:rgba(138,160,194,.14);
+      --shadow:0 1px 2px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#E7EBE2;
+    --ink-soft:#A9B29E;
+    --paper:#15190F;
+    --surface:#1E241A;
+    --rule:#333B2C;
+    --rule-strong:#47513C;
+    --accent-flag:#E2685A;
+    --accent-flag-bg:rgba(226,104,90,.14);
+    --accent-confirm:#74A886;
+    --accent-confirm-bg:rgba(116,168,134,.14);
+    --accent-ref:#8AA0C2;
+    --accent-ref-bg:rgba(138,160,194,.14);
+    --shadow:0 1px 2px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 2.05rem,
+      var(--rule) 2.05rem,
+      var(--rule) calc(2.05rem + 1px)
+    );
+    background-attachment:local;
+    color:var(--ink);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-ref-bg);}
+  section[id]{scroll-margin-top:1.25rem;}
+
+  .page{
+    max-width:44rem;
+    margin:0 auto;
+    padding:4.5rem 1.5rem 6rem;
+  }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent-ref);
+    margin:0 0 .9rem;
+  }
+
+  /* ---- Cover ---- */
+  .cover{
+    background:var(--surface);
+    border:1px solid var(--rule-strong);
+    border-radius:2px;
+    box-shadow:var(--shadow);
+    padding:2.75rem 2.5rem 2.25rem;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.9rem,4.4vw,2.6rem);
+    line-height:1.12;
+    letter-spacing:-.01em;
+    text-wrap:balance;
+    margin:0 0 1rem;
+  }
+  .lede{
+    font-size:1.05rem;
+    line-height:1.65;
+    color:var(--ink-soft);
+    max-width:38rem;
+    margin:0 0 2rem;
+  }
+  .meta{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1.5rem;
+    margin:0;
+    padding-top:1.5rem;
+    border-top:1px solid var(--rule);
+  }
+  .meta dt{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:.35rem;
+  }
+  .meta dd{
+    margin:0;
+    font-size:.92rem;
+    font-weight:500;
+  }
+
+  /* ---- Table of contents ---- */
+  .toc{
+    margin:1.4rem 0 0;
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:1.3rem 1.6rem 1.4rem;
+  }
+  .toc h2{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 .9rem;
+  }
+  .toc ol{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:.15rem 1.6rem;
+  }
+  .toc a{
+    display:flex;
+    gap:.65rem;
+    align-items:baseline;
+    color:var(--ink);
+    text-decoration:none;
+    font-size:.9rem;
+    padding:.3rem 0;
+    border-bottom:1px solid transparent;
+  }
+  .toc a:hover{color:var(--accent-ref);border-bottom-color:var(--accent-ref);}
+  .toc a:focus-visible{outline:2px solid var(--accent-ref);outline-offset:3px;border-radius:1px;}
+  .toc-no{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    font-variant-numeric:tabular-nums;
+    color:var(--ink-soft);
+    flex:none;
+  }
+
+  /* ---- Shared section heading ---- */
+  .section-head{margin:0 0 1.5rem;}
+  .section-head h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.5rem;
+    margin:0 0 .5rem;
+    text-wrap:balance;
+  }
+  .section-head p{
+    font-size:.96rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:40rem;
+    margin:0;
+  }
+
+  /* ---- Panels (pre-flight, madde) ---- */
+  .madde, .panel{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:1.9rem 2rem 2.1rem;
+    box-shadow:var(--shadow);
+  }
+  .preflight-section{margin:3.5rem 0;}
+
+  /* ---- Method / why-two-stage ---- */
+  .method-section{margin:4rem 0;}
+  .fail-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.1rem;
+    margin-bottom:1.8rem;
+  }
+  .pipeline{
+    display:flex;
+    flex-direction:column;
+    max-width:30rem;
+    margin:0 auto;
+  }
+  .pipeline-stage{
+    background:var(--surface);
+    border:1px solid var(--rule-strong);
+    border-radius:2px;
+    padding:1.1rem 1.4rem;
+    box-shadow:var(--shadow);
+  }
+  .pipeline-stage .stage-eyebrow{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-ref);
+    margin:0 0 .4rem;
+  }
+  .pipeline-stage p{margin:0;font-size:.9rem;line-height:1.55;color:var(--ink-soft);}
+  .pipeline-connector{
+    display:flex;
+    justify-content:center;
+    padding:.35rem 0;
+    color:var(--accent-ref);
+    font-family:var(--font-mono);
+    font-size:1.05rem;
+    line-height:1;
+  }
+  .pipeline-output{
+    background:var(--accent-confirm-bg);
+    border:1px solid var(--accent-confirm);
+    border-radius:2px;
+    padding:.9rem 1.4rem;
+    text-align:center;
+    font-family:var(--font-mono);
+    font-size:.78rem;
+    font-weight:600;
+    color:var(--accent-confirm);
+  }
+
+  /* ---- Madde list ---- */
+  .madde-section{margin:4rem 0;}
+  .madde-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:1.4rem;
+  }
+  .madde-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    margin:0 0 .4rem;
+  }
+  .madde-no{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .risk-badge{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:.64rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:.22rem .6rem;
+    border-radius:999px;
+    border:1px solid;
+    white-space:nowrap;
+  }
+  .risk-badge.high{color:var(--accent-flag);border-color:var(--accent-flag);background:var(--accent-flag-bg);}
+  .risk-badge.med{color:var(--ink-soft);border-color:var(--rule-strong);background:var(--paper);}
+  .risk-badge.low{color:var(--accent-confirm);border-color:var(--accent-confirm);background:var(--accent-confirm-bg);}
+
+  .madde h3, .panel h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.28rem;
+    margin:0 0 .7rem;
+    text-wrap:balance;
+  }
+  .why{
+    font-size:.94rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin:0 0 1.2rem;
+  }
+  .checks{
+    list-style:none;
+    margin:0 0 1.1rem;
+    padding:0;
+  }
+  .checks li{
+    display:flex;
+    gap:.75rem;
+    align-items:flex-start;
+    padding:.5rem 0;
+    border-top:1px solid var(--rule);
+    font-size:.94rem;
+    line-height:1.5;
+  }
+  .checks li:first-child{border-top:none;padding-top:0;}
+  .tick{
+    flex:none;
+    width:.72em;
+    height:.72em;
+    margin-top:.3em;
+    border:1.5px solid var(--accent-confirm);
+    border-radius:2px;
+  }
+  .technique{
+    display:flex;
+    gap:.85rem;
+    align-items:flex-start;
+    background:var(--accent-ref-bg);
+    border-radius:2px;
+    padding:.85rem 1.1rem;
+    margin:0 0 1.1rem;
+  }
+  .technique:last-child{margin-bottom:0;}
+  .technique-glyph{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:.95rem;
+    font-weight:600;
+    color:var(--accent-ref);
+    line-height:1.5;
+  }
+  .technique-label{
+    font-family:var(--font-mono);
+    font-size:.66rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-ref);
+    display:block;
+    margin:0 0 .3rem;
+  }
+  .technique p{
+    margin:0;
+    font-size:.92rem;
+    line-height:1.55;
+    color:var(--ink);
+  }
+  .evidence{
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+  }
+  .flag, .fix{
+    display:flex;
+    gap:.85rem;
+    align-items:flex-start;
+    padding:.95rem 1.1rem;
+    border-radius:2px;
+  }
+  .flag{background:var(--accent-flag-bg);border-left:3px solid var(--accent-flag);}
+  .fix{background:var(--accent-confirm-bg);border-left:3px solid var(--accent-confirm);}
+  .flag-glyph, .fix-glyph{
+    flex:none;
+    font-family:var(--font-mono);
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.4;
+  }
+  .flag-glyph{color:var(--accent-flag);}
+  .fix-glyph{color:var(--accent-confirm);}
+  .flag-label, .fix-label{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin:0 0 .3rem;
+  }
+  .flag-label{color:var(--accent-flag);}
+  .fix-label{color:var(--accent-confirm);}
+  .flag p, .fix p{
+    margin:0;
+    font-size:.92rem;
+    line-height:1.55;
+    color:var(--ink);
+  }
+
+  /* ---- Technique grid ---- */
+  .tech-section{margin:4rem 0;}
+  .tech-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+  }
+  .tech-card{
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:1.3rem 1.4rem;
+    box-shadow:var(--shadow);
+  }
+  .tech-grid .tech-card:last-child{grid-column:1 / -1;}
+  .tech-card .tech-no{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--accent-ref);
+    margin:0 0 .4rem;
+  }
+  .tech-card h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.08rem;
+    margin:0 0 .5rem;
+    text-wrap:balance;
+  }
+  .tech-card p{
+    margin:0;
+    font-size:.9rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+  }
+
+  /* ---- Spec list (QA / operations) ---- */
+  .spec-section{margin:4rem 0;}
+  .spec-list{display:flex;flex-direction:column;}
+  .spec-item{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:0 1.2rem;
+    padding:1.15rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .spec-item:first-child{border-top:none;padding-top:.2rem;}
+  .spec-num{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    color:var(--accent-ref);
+    padding-top:.3rem;
+    font-variant-numeric:tabular-nums;
+  }
+  .spec-body h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.08rem;
+    margin:0 0 .4rem;
+    text-wrap:balance;
+  }
+  .spec-body p{
+    margin:0;
+    font-size:.93rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+  }
+  .spec-body p + p{margin-top:.5rem;}
+  .spec-body code{
+    font-family:var(--font-mono);
+    font-size:.85em;
+    color:var(--ink);
+    background:var(--accent-ref-bg);
+    padding:.1em .35em;
+    border-radius:2px;
+  }
+
+  /* ---- Weighting table ---- */
+  .weight-section{margin:4rem 0;}
+  .weight-table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--rule-strong);
+    border-radius:2px;
+    background:var(--surface);
+    box-shadow:var(--shadow);
+  }
+  table.weight-table{
+    width:100%;
+    min-width:34rem;
+    border-collapse:collapse;
+    font-size:.88rem;
+  }
+  .weight-table th{
+    font-family:var(--font-mono);
+    font-size:.64rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    text-align:left;
+    padding:.85rem 1rem;
+    border-bottom:2px solid var(--rule-strong);
+    white-space:nowrap;
+  }
+  .weight-table td{
+    padding:.9rem 1rem;
+    border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  .weight-table tr:last-child td{border-bottom:none;}
+  .weight-table td.doc-type{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:.98rem;
+  }
+  .weight-table td.nums{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-size:.83rem;
+    color:var(--accent-flag);
+  }
+  .weight-table td.nums.secondary{color:var(--ink-soft);}
+
+  /* ---- Risk scale ---- */
+  .risk-section{margin:4rem 0;}
+  .risk-scale{display:flex;flex-direction:column;gap:.9rem;}
+  .risk-row{
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    padding:1rem 1.1rem;
+    border-left:3px solid;
+    border-radius:2px;
+  }
+  .risk-row.high{border-color:var(--accent-flag);background:var(--accent-flag-bg);}
+  .risk-row.med{border-color:var(--rule-strong);background:var(--surface);}
+  .risk-row.low{border-color:var(--accent-confirm);background:var(--accent-confirm-bg);}
+  .risk-row .risk-badge{flex:none;margin-top:.1rem;}
+  .risk-row p{margin:0;font-size:.92rem;line-height:1.55;color:var(--ink);}
+
+  /* ---- Annex ---- */
+  .annex{
+    margin-top:4rem;
+    background:var(--surface);
+    border:1px solid var(--rule-strong);
+    border-radius:2px;
+    padding:2.25rem 2.25rem 2.5rem;
+    box-shadow:var(--shadow);
+  }
+  .annex h2{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.4rem;
+    margin:0 0 .7rem;
+  }
+  .annex > p{
+    font-size:.96rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:38rem;
+    margin:0 0 1.4rem;
+  }
+  .prompt-block{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-size:.76rem;
+    line-height:1.7;
+    white-space:pre-wrap;
+    background:var(--paper);
+    border:1px dashed var(--rule-strong);
+    border-radius:2px;
+    padding:1.3rem 1.4rem;
+    margin:0;
+    overflow-x:auto;
+    color:var(--ink);
+  }
+  .prompt-block .stage{color:var(--accent-ref);font-weight:600;}
+
+  /* ---- Prompt library ---- */
+  .lib-section{margin:4rem 0;}
+  .prompt-lib{display:flex;flex-direction:column;}
+  .prompt-row{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:0 1.1rem;
+    padding:1rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .prompt-row:first-child{border-top:none;padding-top:.2rem;}
+  .pl-no{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    font-weight:600;
+    color:var(--accent-ref);
+    font-variant-numeric:tabular-nums;
+    padding-top:.25rem;
+  }
+  .pl-body h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1rem;
+    margin:0 0 .4rem;
+  }
+  .pl-body p{
+    margin:0;
+    font-family:var(--font-mono);
+    font-size:.79rem;
+    line-height:1.7;
+    color:var(--ink);
+    background:var(--paper);
+    border-left:2px solid var(--rule-strong);
+    padding:.6rem .85rem;
+    border-radius:2px;
+  }
+
+  /* ---- Finding card ---- */
+  .report-section{margin:4rem 0;}
+  .finding{
+    background:var(--surface);
+    border:1px solid var(--rule-strong);
+    border-radius:2px;
+    padding:1.5rem 1.7rem 1.7rem;
+    box-shadow:var(--shadow);
+    margin-top:1.4rem;
+  }
+  .finding-head{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    flex-wrap:wrap;
+    padding-bottom:.9rem;
+    margin-bottom:1.1rem;
+    border-bottom:1px solid var(--rule);
+  }
+  .finding-id{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0;
+    margin-right:auto;
+  }
+  .risk-badge.sure{color:var(--accent-ref);border-color:var(--accent-ref);background:var(--accent-ref-bg);}
+  .finding-grid{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:.75rem 1.3rem;
+    margin:0;
+  }
+  .finding-grid dt{
+    font-family:var(--font-mono);
+    font-size:.64rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding-top:.2rem;
+    white-space:nowrap;
+  }
+  .finding-grid dd{
+    margin:0;
+    font-size:.92rem;
+    line-height:1.55;
+    color:var(--ink);
+  }
+  .finding-quote{
+    border-left:2px solid var(--rule-strong);
+    padding-left:.8rem;
+    font-style:italic;
+  }
+  .finding-quote span{
+    display:block;
+    font-style:normal;
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    color:var(--ink-soft);
+    margin-top:.25rem;
+  }
+
+  footer{
+    margin-top:3rem;
+    padding-top:1.5rem;
+    border-top:1px solid var(--rule);
+    font-size:.85rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+
+  @media (max-width:680px){
+    .tech-grid, .fail-grid{grid-template-columns:1fr;}
+    .tech-grid .tech-card:last-child{grid-column:auto;}
+  }
+  @media (max-width:600px){
+    .page{padding:3rem 1.1rem 4rem;}
+    .cover{padding:2rem 1.4rem 1.8rem;}
+    .madde, .panel{padding:1.5rem 1.3rem 1.7rem;}
+    .annex{padding:1.6rem 1.3rem 1.9rem;}
+    .madde-head{flex-direction:column;align-items:flex-start;gap:.5rem;}
+    .spec-item, .prompt-row, .finding-grid{grid-template-columns:1fr;gap:.35rem;}
+    .spec-num, .pl-no{padding-top:0;}
+    .finding-grid dt{padding-top:.5rem;}
+    .finding{padding:1.3rem 1.3rem 1.5rem;}
+  }
+</style>
+
+<div class="page">
+
+  <header class="cover">
+    <p class="eyebrow">Denetim Rehberi</p>
+    <h1>Tutarlılık Denetim Rehberi</h1>
+    <p class="lede">Bir yapay zekâya belge incelemesi yaptırmak için yirmi altı maddelik çapraz kontrol matrisi — üç denetim katmanı, girdi ön-kontrolü, bulgu etiketleri, raporun kendi kalite güvencesi ve işletim protokolüyle birlikte.</p>
+    <dl class="meta">
+      <div><dt>Kapsam</dt><dd>26 denetim maddesi</dd></div>
+      <div><dt>Katman</dt><dd>İç tutarlılık · Eksiksizlik · Dış doğruluk</dd></div>
+      <div><dt>Akış</dt><dd>Ön-kontrol → Çıkarım → Çapraz kontrol</dd></div>
+      <div><dt>Odak</dt><dd>Sözleşme, resmi yazı, rapor, şartname</dd></div>
+    </dl>
+  </header>
+
+  <nav class="toc" aria-label="İçindekiler">
+    <h2>İçindekiler</h2>
+    <ol>
+      <li><a href="#katmanlar"><span class="toc-no">00</span> Üç Denetim Katmanı</a></li>
+      <li><a href="#modlar"><span class="toc-no">01</span> Denetim Modları</a></li>
+      <li><a href="#on-kontrol"><span class="toc-no">02</span> Girdi Ön-Kontrolü</a></li>
+      <li><a href="#yontem"><span class="toc-no">03</span> Neden Tek Geçiş Yetersiz</a></li>
+      <li><a href="#maddeler"><span class="toc-no">04</span> 26 Denetim Maddesi</a></li>
+      <li><a href="#sahiplik"><span class="toc-no">05</span> Madde Sahipliği ve Sıra</a></li>
+      <li><a href="#teknikler"><span class="toc-no">06</span> Doğrulama Teknikleri</a></li>
+      <li><a href="#etiketler"><span class="toc-no">07</span> Bulgu Etiketleri</a></li>
+      <li><a href="#kalite"><span class="toc-no">08</span> Rapor Kalite Güvencesi</a></li>
+      <li><a href="#isletim"><span class="toc-no">09</span> İşletim Protokolü</a></li>
+      <li><a href="#agirlik"><span class="toc-no">10</span> Tür Bazlı Ağırlıklandırma</a></li>
+      <li><a href="#risk"><span class="toc-no">11</span> Risk Derecelendirmesi</a></li>
+      <li><a href="#sablon"><span class="toc-no">12</span> Hazır Talimat Şablonu</a></li>
+      <li><a href="#alt-promptlar"><span class="toc-no">13</span> Madde Bazlı Alt-Promptlar</a></li>
+      <li><a href="#rapor"><span class="toc-no">14</span> Bulgu Raporu Şablonu</a></li>
+    </ol>
+  </nav>
+
+  <section class="method-section" id="katmanlar">
+    <div class="section-head">
+      <p class="eyebrow">Çerçeve</p>
+      <h2>Üç Denetim Katmanı</h2>
+      <p>"Metin tutarlı mı?" tek bir soru değildir. Birbirini tamamlayan üç ayrı sorudur ve bunları karıştırmak, denetimin en sık yapılan hatasıdır: bir bulgunun hangi katmana ait olduğu, nasıl çözüleceğini de belirler.</p>
+    </div>
+    <div class="fail-grid">
+      <div class="tech-card">
+        <p class="tech-no">Katman 1</p>
+        <h3>İç Tutarlılık</h3>
+        <p>Metin kendi içinde çelişiyor mu? Çözümü belge içindedir: iki hükümden biri düzeltilir. Maddelerin çoğu bu katmanda çalışır.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Katman 2</p>
+        <h3>Eksiksizlik ve Açıklık</h3>
+        <p>Metin gerekli bir şeyi atlıyor ya da ölçülemez mi bırakıyor? Çözümü ekleme veya tanımlamadır — çelişki değil, boşluktur (Madde 16, 19, 22, 24, 25).</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Katman 3</p>
+        <h3>Dış Doğruluk</h3>
+        <p>Metindeki bilgi dış kaynak, mevzuat veya veriyle uyuşuyor mu? Belge içinden çözülemez; dış teyit gerekir (Madde 12, 23).</p>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:1.8rem;">
+      <h3>Eksiklik, çelişki değildir</h3>
+      <p class="why">Bir bilginin belgede bulunmaması otomatik olarak çelişki sayılmaz. Aradaki fark, aynı konunun iki farklı yazımında görülür:</p>
+      <div class="evidence">
+        <div class="technique">
+          <span class="technique-glyph">≠</span>
+          <div>
+            <span class="technique-label">Çelişki değil — eksiklik</span>
+            <p>Bölüm 1: "Başvurular elektronik ortamda yapılır." · Bölüm 2: posta yoluyla başvuru hakkında hiçbir hüküm yok. Burada bir çelişki değil, <strong>kapsam belirsizliği</strong> vardır.</p>
+          </div>
+        </div>
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Gerçek iç çelişki</p>
+            <p>Bölüm 1: "Başvurular <strong>yalnızca</strong> elektronik ortamda yapılır." · Bölüm 2: "Başvurular posta yoluyla <strong>da</strong> kabul edilir." İki hüküm aynı evrende birbirini geçersiz kılıyor.</p>
+          </div>
+        </div>
+      </div>
+      <div class="technique" style="margin-top:1.1rem;">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Kesin çelişki tanımı</span>
+          <p>Bir bulgu ancak <strong>aynı özne, aynı eylem, aynı zaman, aynı kapsam ve aynı koşullar</strong> altında farklı sonuç söylüyorsa "kesin çelişki" olarak sınıflandırılır. Beş unsurdan biri bile farklıysa bulgu, çelişki değil belirsizlik veya kapsam farkıdır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="weight-section" id="modlar">
+    <div class="section-head">
+      <p class="eyebrow">Ölçekleme</p>
+      <h2>Denetim Modları</h2>
+      <p>Yirmi altı maddenin tamamı her belge için çalıştırılmaz. Üç sayfalık bir teklif ile iki yüz sayfalık bir ihale dosyası aynı derinliği hak etmez; mod seçmemek, pratikte hiç denetim yapmamaya dönüşür.</p>
+    </div>
+    <div class="weight-table-wrap">
+      <table class="weight-table">
+        <thead>
+          <tr>
+            <th>Mod</th>
+            <th>Ne zaman</th>
+            <th>Kapsam</th>
+            <th>Çıktı</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="doc-type">Hızlı Tarama</td>
+            <td>İmza öncesi son kontrol, kısa belge, ilk eleme</td>
+            <td class="nums">Aşama 0 + 01, 02, 04, 16, 17</td>
+            <td>Yalnızca yüksek riskli bulgular, tek sayfa liste</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Standart Denetim</td>
+            <td>Olağan iş akışı, iç onaya gidecek belge</td>
+            <td class="nums">Belge türünün öncelikli + ikincil maddeleri</td>
+            <td>Tam bulgu kartları + kapsama listesi</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Tam Denetim</td>
+            <td>Yüksek bedelli sözleşme, dava dosyası, yayına gidecek rapor</td>
+            <td class="nums">26 madde + rol ayrımı + ikinci koşu</td>
+            <td>Tam rapor + istatistik + kalibrasyon sonucu</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="technique" style="margin-top:1.2rem;">
+      <span class="technique-glyph">→</span>
+      <div>
+        <span class="technique-label">Kural</span>
+        <p>Seçilen mod raporun kapağına yazılır. Mod, kapsam sınırının bir parçasıdır: hızlı taramada bulunmayan bir çelişki için "belge temizdir" denemez — yalnızca "bu modda taranan maddelerde bulgu yoktur" denir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="preflight-section" id="on-kontrol">
+    <div class="section-head">
+      <p class="eyebrow">Aşama 0</p>
+      <h2>Girdi Ön-Kontrolü</h2>
+      <p>Denetim, metnin içindeki çelişkiyi arar; ama metnin kendisi eksik veya bozuk geldiyse her bulgu çürük zemine oturur. Bu kapı geçilmeden çapraz kontrole başlanmaz.</p>
+    </div>
+    <div class="panel">
+      <h3>Denetime başlamadan önce doğrulanacaklar</h3>
+      <ul class="checks">
+        <li><span class="tick"></span>Dosyada gerçek metin katmanı var mı, yoksa taranmış görüntü mü? OCR yapıldıysa Türkçe karakterler (ı, İ, ş, ğ, ç, ö, ü) doğru çıkmış mı?</li>
+        <li><span class="tick"></span>Sayfa numaraları kesintisiz mi — eksik, mükerrer veya sırası bozuk sayfa var mı?</li>
+        <li><span class="tick"></span>Metinde atıf yapılan tüm ekler dosyada fiilen mevcut mu (Ek-1…Ek-n tam mı)?</li>
+        <li><span class="tick"></span>Tablolar çıkarım sırasında satır/sütun kaymasına uğramış mı — bir hücre yanlış sütuna mı düşmüş?</li>
+        <li><span class="tick"></span>Karartılmış (maskelenmiş) alan var mı; hangi bilgi kategorisi gizlenmiş?</li>
+        <li><span class="tick"></span>Birleştirilmiş dosyada birden fazla belge mi var; belge sınırları doğru ayrılmış mı?</li>
+        <li><span class="tick"></span>İmza sayfası, kaşe ve el yazısı şerhler okunabiliyor mu?</li>
+        <li><span class="tick"></span>Belge türü belirlendi mi (sözleşme / rapor / şartname / resmi yazı / politika) ve ağırlıklandırma profili ile denetim modu seçildi mi?</li>
+        <li><span class="tick"></span>Hesaplama aracı kullanılabiliyor mu? Kullanılamıyorsa tüm sayısal bulgular <em>OLASI</em> olarak işaretlenir ve manuel doğrulamaya gider.</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Kural</span>
+          <p>Ön-kontrolden geçmeyen belge için denetim <strong>şartlı</strong> yapılır: raporun ilk satırında hangi sayfaların/eklerin okunamadığı ve bunun hangi maddeleri kapsam dışı bıraktığı açıkça yazılır. Okunamayan bir bölüm hakkında "tutarsızlık yok" denmez.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="method-section" id="yontem">
+    <div class="section-head">
+      <p class="eyebrow">Yöntem</p>
+      <h2>Neden Tek Geçiş Yetersiz Kalır</h2>
+      <p>Bir modele yüzlerce sayfalık metni verip tek seferde "tutarsızlıkları bul" demek, üç öngörülebilir hataya zemin hazırlar. Ayrık aşamalar bu üç hatanın da etkisini azaltır.</p>
+    </div>
+    <div class="fail-grid">
+      <div class="tech-card">
+        <p class="tech-no">Hata A</p>
+        <h3>Ajan Tembelliği</h3>
+        <p>Model, baştaki bariz birkaç hatayı bulduktan sonra işi zihnen "tamamlanmış" sayar ve derindeki yapısal çelişkileri atlar.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Hata B</p>
+        <h3>Kendi Çıkarımını Kayırma</h3>
+        <p>Metni okurken vardığı ilk yorumu sorgusuz doğru kabul eder; kendi kurduğu bağlantıyı sonradan denetleyemez.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Hata C</p>
+        <h3>Hedef Kayması</h3>
+        <p>Uzun metinlerde dikkat dağılır — 4. sayfadaki bir istisna, 65. sayfadaki ilgili hüküm incelenirken unutulur.</p>
+      </div>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-stage">
+        <p class="stage-eyebrow">Aşama 0 — Ön-Kontrol</p>
+        <p>Girdi bütünlüğü doğrulanır: metin katmanı, sayfa ve ek tamlığı, tablo bütünlüğü. Kapsam sınırı burada yazılır.</p>
+      </div>
+      <div class="pipeline-connector">↓</div>
+      <div class="pipeline-stage">
+        <p class="stage-eyebrow">Aşama 1 — Yapısal Çıkarım</p>
+        <p>Model metni okur, henüz çelişki aramaz. Tarihleri, sayıları, tarafları, atıfları ve şartları bağımsız tablolara döker.</p>
+      </div>
+      <div class="pipeline-connector">↓</div>
+      <div class="pipeline-stage">
+        <p class="stage-eyebrow">Aşama 2 — Çapraz Kontrol</p>
+        <p>Metin bir kenara bırakılır; yalnızca çıkarılan tablolar 21 madde üzerinden karşılaştırılır, her aday bulgu itiraz süzgecinden geçer.</p>
+      </div>
+      <div class="pipeline-connector">↓</div>
+      <div class="pipeline-output">Kanıtlı bulgu + Risk + Güven + Düzeltme önerisi</div>
+    </div>
+  </section>
+
+  <section class="madde-section" id="maddeler">
+    <div class="section-head">
+      <p class="eyebrow">Matris</p>
+      <h2>26 Denetim Maddesi</h2>
+      <p>Madde 01–15 "iki şey birbiriyle çelişiyor mu" sorusunu sorar (Katman 1). Madde 16–22 ve 24–26, olması gerekip de olmayanı, ölçülemez olanı ve kapsamı kayan hükmü arar (Katman 2). Madde 12 ve 23 ise belge dışına çıkmayı gerektirir (Katman 3).</p>
+    </div>
+  <ol class="madde-list">
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 01</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Tarihsel Tutarlılık</h3>
+      <p class="why">Tarih hataları en kolay fark edilen ama en sık gözden kaçan tutarsızlıktır; hukuki geçerliliği, zamanaşımı sürelerini ve sorumluluk zincirini doğrudan etkiler.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Olaylar arasındaki kronolojik sıra mantığa uygun mu (başlangıç &lt; bitiş, tebligat &lt; itiraz, imza &lt; yürürlük)?</li>
+        <li><span class="tick"></span>Belgenin düzenlenme tarihi, atıf yaptığı olaylardan sonra mı?</li>
+        <li><span class="tick"></span>Belirtilen gün adı, o takvim tarihine gerçekten denk geliyor mu?</li>
+        <li><span class="tick"></span>Süre ifadeleri ("3 ay", "45 gün") iki tarih arasındaki farkla örtüşüyor mu?</li>
+        <li><span class="tick"></span>Gün/ay sırası, saat dilimi ve takvim her yerde aynı mı — "03/04/2025" bir yerde 3 Nisan, başka yerde 4 Mart olarak mı okunuyor?</li>
+        <li><span class="tick"></span>Aynı veri bir yerde tek yıl, başka yerde dönem olarak mı veriliyor ("2025 yılı" ile "2024–2025 dönemi")?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Tüm tarihleri kronolojik bir olay tablosuna dökün; aralarındaki bağıntıyı bir zamansal kısıt çözücüsüyle (ör. Z3 SMT solver mantığıyla "bitiş − başlangıç = süre") doğrulayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Sözleşme "14.03.2024 tarihinde imzalanmıştır" diyor; ekler bölümündeki fatura ise 22.06.2024 tarihli olduğu hâlde "işbu sözleşme kapsamında düzenlenmiştir" ibaresini taşıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Olayların kronolojik sırası bir zaman çizgisine oturtulmalı; fatura tanzim tarihi ile sözleşme imza tarihi arasındaki illiyet bağı düzeltilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 02</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Sayısal ve Matematiksel Tutarlılık</h3>
+      <p class="why">Toplam ve alt kalemler arasındaki uyumsuzluk, mali ve istatistiksel raporların denetlenebilirliğini doğrudan zedeler.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Alt kalemlerin toplamı, belirtilen genel toplamla kuruşuna kadar eşleşiyor mu?</li>
+        <li><span class="tick"></span>Yüzde dağılımları toplamda %100'ü buluyor mu?</li>
+        <li><span class="tick"></span>Aynı veri farklı yerlerde tekrarlanıyorsa rakamlar birebir aynı mı?</li>
+        <li><span class="tick"></span>Ölçü ve para birimleri (TL/USD, kg/adet, net/brüt) boyunca tutarlı mı?</li>
+        <li><span class="tick"></span>Adet × birim fiyat = toplam tutar ilişkisi tutuyor mu; başlangıç + artış = sonuç değeri mi?</li>
+        <li><span class="tick"></span>"%20 artış" ile "20 puan artış" karıştırılmış mı; yüzde hangi payda üzerinden hesaplanmış, pay ve payda aynı evreni mi kullanıyor?</li>
+        <li><span class="tick"></span>"Milyon/bin" ölçekleri, ondalık ve binlik ayraçları ile yuvarlama hassasiyeti metin, tablo ve ekte aynı mı?</li>
+        <li><span class="tick"></span>Negatif değerler, eksi işaretleri ve parantezli muhasebe gösterimi doğru okunmuş mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Her toplam ifadesinin alt kalemlerini ayrı bir tabloya çıkarıp programatik olarak (küçük bir yuvarlama toleransıyla) yeniden toplayın — çapraz toplama.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Giriş bölümü "toplam 128 çalışan" derken, ek tablodaki departman satırlarının toplamı 121 çıkıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Departman tablosuna eksik personelin hangi birimde olduğu eklenmeli ya da genel toplam 121 olarak revize edilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 03</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Referans ve Çapraz Atıf Tutarlılığı</h3>
+      <p class="why">Kırık veya yanlış iç atıflar, okuyucuyu belgede var olmayan ya da alakasız bir hükme yönlendirir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>"Madde X'te belirtildiği üzere" gibi iç atıflar gerçek içerikle örtüşüyor mu?</li>
+        <li><span class="tick"></span>Ek, tablo, şekil referansları var olan bir öğeye işaret ediyor mu?</li>
+        <li><span class="tick"></span>Tanımlar bölümündeki terimler metin boyunca aynı anlamda mı kullanılmış?</li>
+        <li><span class="tick"></span>Kısaltmalar ilk geçtiği yerde açılmış ve sonrasında tutarlı mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Tüm "Madde X", "Ek Y", "bkz." ifadelerini bir referans listesine çıkarın; var olan bölüm indeksiyle küme farkını alarak hedefi olmayan atıfları bulun.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Metin "bkz. Ek-3" diyor; belgede yalnızca Ek-1 ve Ek-2 bulunuyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Atıf yapılan Ek-3 belgenin sonuna eklenmeli veya madde metni doğru ek numarasıyla güncellenmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 04</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Taraf ve Varlık Tutarlılığı</h3>
+      <p class="why">Taraf kimliğindeki belirsizlik, sözleşmenin ve resmi kararların hangi tüzel veya gerçek kişiyi bağladığını tartışmalı hâle getirir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Kişi/kurum adlarının yazımı belge boyunca birebir aynı mı?</li>
+        <li><span class="tick"></span>Taraf tanımları ("Alıcı", "Yüklenici", "İdare") tutarlı kullanılmış mı?</li>
+        <li><span class="tick"></span>Kimlik, vergi no, MERSİS ve tebligat adresi her geçtiği yerde aynı mı?</li>
+        <li><span class="tick"></span>Unvan ve sıfatlar birbiriyle çelişmiyor mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Varlık tanıma (NER) ile tüm isim varyasyonlarını listeleyin; unvan, sicil ve adres farklarını bir eşleştirme matrisinde karşılaştırın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Başlangıçta "ABC İletişim ve Ticaret Ltd. Şti." olarak tanımlanan taraf, madde 8'de "ABC A.Ş." olarak anılıyor — iştirak mi, unvan değişikliği mi, farklı bir şirket mi belirsiz.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Taraf tanımı ilk maddede nasıl yapıldıysa, metnin geri kalanında aynı tanımlanmış kısaltma kullanılmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 05</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Mantıksal ve Anlamsal Tutarlılık</h3>
+      <p class="why">Doğrudan çelişen ifadeler, belgenin bütünsel güvenilirliğini sarsar ve hangi hükmün geçerli olduğunu belirsizleştirir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Doğrudan birbirini yalanlayan iki ifade var mı?</li>
+        <li><span class="tick"></span>Şart ile sonuç arasındaki bağlantı tutarlı mı?</li>
+        <li><span class="tick"></span>Özet/giriş bölümü, detay bölümleriyle aynı sonuca mı varıyor?</li>
+        <li><span class="tick"></span>İş adımlarında birbirine bağımlı bir kilitlenme (döngüsel önkoşul) var mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>İddiaları tek cümlelik önermelere indirgeyin; çelişen önerme çiftlerini ve döngüsel bağımlılıkları bir bağımlılık grafiğinde (ör. NetworkX, çevrim tespiti) arayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Raporun giriş bölümü "talebin reddine karar verilmiştir" derken, hüküm bölümü "talebin kısmen kabulü ile 50.000 TL ödenmesine" şeklinde bitiyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Giriş ile sonuç arasındaki uyuşmazlık giderilmeli; karar tek bir yönde netleştirilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 06</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Sınıflandırma ve Gruplandırma Tutarlılığı</h3>
+      <p class="why">Aynı kritere göre kategorize edilmeyen veriler, karşılaştırma ve toplulaştırmaları anlamsız kılar.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Aynı kategorileme kriteri belge boyunca değişmeden uygulanmış mı?</li>
+        <li><span class="tick"></span>Bir öğe birbiriyle çelişen iki kategoriye birden atanmış mı?</li>
+        <li><span class="tick"></span>Hiyerarşideki üst-alt kategori ilişkisi bozuluyor mu?</li>
+        <li><span class="tick"></span>Kategoriler tüm evreni kapsıyor mu — hiçbir gruba girmeyen öğe kalıyor mu?</li>
+        <li><span class="tick"></span>Aynı öğe birden fazla grupta sayılarak toplamı şişiriyor mu (çift sayım)?</li>
+        <li><span class="tick"></span>Kategori ile kategori örneği, ya da bütün-parça ilişkisi ile tür-alt tür ilişkisi birbirine karıştırılmış mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Her öğeyi kategorisiyle birlikte bir tabloya dökün; aynı öğenin farklı yerlerde farklı kategoriye düşüp düşmediğini küme karşılaştırmasıyla kontrol edin.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Bir yazılım lisans bedeli girişte "operasyonel gider (OPEX)" sayılırken, mali tabloda "yatırım harcaması (CAPEX)" kalemine dahil ediliyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Kalemin muhasebe standardına göre doğru sınıfı teyit edilmeli ve metin genelinde tek bir sınıfa çekilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 07</p>
+        <span class="risk-badge low">Düşük risk</span>
+      </div>
+      <h3>Format ve Yazım Tutarlılığı</h3>
+      <p class="why">Format karışıklığı — özellikle tarih ve para birimlerinde — yanlış okumaya ve yanlış yorumlamaya yol açabilir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Tarih formatı boyunca sabit mi (GG.AA.YYYY / AA.GG.YYYY karışmıyor mu)?</li>
+        <li><span class="tick"></span>Ondalık ve binlik ayracı (nokta/virgül) standart mı?</li>
+        <li><span class="tick"></span>Madde/fıkra/bent numaralandırma hiyerarşisi tutarlı mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Aynı veri türünün (tarih, para, oran) tüm örneklerini yan yana dizip düzenli ifadelerle (regex) format varyansını tarayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Belgenin ilk yarısında tarihler "04.05.2024", ikinci yarısında "05/04/2024" biçiminde — 4 Mayıs mı 5 Nisan mı belirsizleşiyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Belgenin başında tek bir format standardı belirlenmeli ve tüm tarihler bu şablona dönüştürülmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 08</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Görsel-Metin Tutarlılığı</h3>
+      <p class="why">Grafik ile metin arasındaki uyumsuzluk, karar alıcıların yanlış sonuca varmasına neden olabilir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Tablo/grafik verileri, metinde anlatılan sayılarla örtüşüyor mu?</li>
+        <li><span class="tick"></span>Şekil/tablo başlıkları ve eksen etiketleri içerikle uyumlu mu?</li>
+        <li><span class="tick"></span>Görsele yapılan atıf, doğru trendi mi tarif ediyor?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Tablo/grafik verilerini yapısal bir forma (tablo farkında bir OCR ile) aktarıp, metindeki her sayısal iddiayla teker teker eşleştirin.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Metin "üçüncü çeyrekte pazar payı %15 arttı" diyor; yanındaki grafikte ilgili çeyrek sütunu bir önceki çeyreğe göre aşağı yönlü.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Grafiğin kaynak verisi ile metindeki yüzde ifadesi mutabık hale getirilmeli; yön göstergesi düzeltilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 09</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Hak ve Yükümlülük Tutarlılığı</h3>
+      <p class="why">Çelişen hak ve borçlar, sözleşmenin icrasını kilitler; taraflar arasında temerrüt ve tazminat uyuşmazlıkları doğurur.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Bir maddede tanınan hak, başka bir maddede zımnen iptal ediliyor mu?</li>
+        <li><span class="tick"></span>Zorunluluk bildiren ifadeler ile takdire bırakan ifadeler çakışıyor mu?</li>
+        <li><span class="tick"></span>Fesih, bildirim süresi, cezai şart ve teminat koşulları birbiriyle uyumlu mu?</li>
+        <li><span class="tick"></span>Yetki ve sorumluluk dağılımı tekil ve net mi?</li>
+        <li><span class="tick"></span>Bir bölümde öneri olan husus ("önerilir", "yapılabilir"), başka bölümde zorunluluğa mı dönüşmüş ("zorunludur", "yapmalıdır")?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Her tarafa yüklenen fiilleri ZORUNLU / SERBEST / YASAK olarak etiketleyin; birbirini geçersiz kılan hüküm çiftlerini arayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Madde 5 "taraflar 30 gün önceden yazılı bildirimle tek taraflı feshedebilir" derken, Madde 14 "sözleşme 3 yıllık süre dolmadan hiçbir surette feshedilemez" hükmünü taşıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Fesih hakkının genel kuralı ile süreli taahhüt arasındaki istisna ilişkisi ("Madde 14 hükümleri saklı kalmak kaydıyla…") açıkça kurulmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 10</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Versiyon ve Revizyon Tutarlılığı</h3>
+      <p class="why">Revizyon geçmişiyle uyumsuz içerik, hangi sürümün yürürlükte olduğu konusunda hukuki şüphe yaratır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>"Son güncelleme" tarihi, içerikteki en güncel değişiklikle uyumlu mu?</li>
+        <li><span class="tick"></span>Revizyon tablosunda "değiştirildi" denilen bölümler metne gerçekten yansımış mı?</li>
+        <li><span class="tick"></span>Sabit kalması gereken temel tanımlar yetkisizce değişmiş mi?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Revizyon tablosundaki her kaydı, belgenin ilgili bölümüyle metinsel bir karşılaştırmaya (diff) sokun.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Revizyon tablosunda "v2.1 — Ek-B birim fiyat listesi güncellendi" yazıyor; Ek-B'deki fiyatlar v1.0 taslağıyla kuruşu kuruşuna aynı.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Ya fiili fiyat listesi güncellenmeli ya da revizyon açıklaması gerçeğe uygun şekilde düzeltilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 11</p>
+        <span class="risk-badge low">Düşük risk</span>
+      </div>
+      <h3>Dilbilimsel ve Üslup Tutarlılığı</h3>
+      <p class="why">Zaman kipi, anlatıcı kişisi ve resmiyet düzeyindeki ani savrulmalar, belgenin farklı taslaklardan kontrolsüzce birleştirildiğinin işaretidir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Fiil kipleri (geçmiş/şimdi/gelecek) bağlamsal olarak tutarlı mı?</li>
+        <li><span class="tick"></span>Anlatım kişisi (biz / şirketimiz / taraflar) belge boyunca sabit mi?</li>
+        <li><span class="tick"></span>Resmiyet düzeyi homojen mi, gündelik dile kayan bölüm var mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Zamir ve fiil çekimlerini takip ederek üslup kaymalarının nerede başladığını işaretleyin — genellikle bölüm sınırlarında ortaya çıkar.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>İlk dört bölüm "Taraflar mutabakata varmışlardır" gibi resmi üçüncü kişiyle yazılmışken, beşinci bölüm "biz bu kararı verirken maliyetleri düşürmeyi hedefledik" diyerek birinci çoğul kişiye geçiyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Tüm anlatım, belgenin geri kalanıyla aynı resmi üçüncü kişi diline dönüştürülmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 12</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Dış Kaynak ve Mevzuat Atıf Tutarlılığı</h3>
+      <p class="why">Mülga, yanlış veya hatalı fıkra atıfları, belgenin dayandığı hukuki zemini ortadan kaldırabilir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Atıf yapılan kanun, yönetmelik veya tebliğ güncel ve yürürlükte mi?</li>
+        <li><span class="tick"></span>Alıntılanan hüküm, orijinal kaynaktaki ifadeyle birebir örtüşüyor mu?</li>
+        <li><span class="tick"></span>Aynı dış kaynağa belge içinde farklı madde numaralarıyla mı atıfta bulunulmuş?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Dış atıfları listeye çıkarıp her birinin yürürlük durumunu ve alıntı doğruluğunu orijinal mevzuat kaynağına karşı (bir doğrulama/RAG adımıyla) teyit edin.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Madde 4'te "6698 sayılı Kanun m.11 uyarınca" denirken, aynı veri işleme süreci için Madde 19'da "6698 sayılı Kanun'un 8. maddesi kapsamındaki haklar" şeklinde farklı bir madde zikrediliyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>İlgili kanun maddesi resmi mevzuattan kontrol edilerek doğru numara belge genelinde tek tip hale getirilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 13</p>
+        <span class="risk-badge low">Düşük risk</span>
+      </div>
+      <h3>Meta-veri ve Kapak Bilgisi Tutarlılığı</h3>
+      <p class="why">Kapak, üstbilgi/altbilgi ve dosya adı gibi üst verilerin gövdeyle çelişmesi, evrak kaydı ve arşivlemede karışıklığa yol açar.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Kapaktaki başlık, tarih, proje adı ve taraflar gövdedeki ilk maddelerle aynı mı?</li>
+        <li><span class="tick"></span>Üstbilgi/altbilgideki belge kodu ve revizyon no her sayfada tutarlı mı?</li>
+        <li><span class="tick"></span>Dosya adı/sürüm etiketi, belge içindeki sürüm bilgisiyle örtüşüyor mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Kapak, üstbilgi ve altbilgi alanlarını, gövdedeki karşılık gelen ilk geçiş noktalarıyla yan yana koyup karşılaştırın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Kapakta "Revizyon No: 4 — 15.08.2025" yazarken, sayfa altbilgilerinde hâlâ "REV-02 / 10.01.2025" görünüyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Şablonun altbilgisi kapak verisiyle senkronize edilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 14</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>İmza, Onay ve Yetki Tutarlılığı</h3>
+      <p class="why">İmzalayanın unvanı metinle veya imza sirkü ile çelişiyorsa, belgenin bağlayıcılığı yetkisiz temsil tartışmasına açılır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>İmza bloğundaki isim, unvan ve sıfat metinde yetkili olarak anılan kişiyle aynı mı?</li>
+        <li><span class="tick"></span>Onay zincirinde öngörülen çift imza / kurul kararı şartı karşılanmış mı?</li>
+        <li><span class="tick"></span>Vekâleten imzalarda vekâletname tarihi ve yetki kapsamı belirtilmiş mi?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>İmza bloklarını çıkarıp, metin içindeki temsil ve yetki ifadeleriyle bir yetki eşleştirme matrisinde karşılaştırın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Metinde imza yetkilisinin "Yönetim Kurulu Başkanı" olduğu belirtilirken, belgeyi "Genel Müdür Yardımcısı" tek başına imzalamış.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>İmza bloğu yetkili temsilcinin adıyla yenilenmeli veya geçerli bir yetkilendirme/vekâlet metni eklenmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 15</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>İstatistiksel ve Ortalama Tutarlılığı</h3>
+      <p class="why">Türetilmiş istatistikler (ortalama, oran, aralık) ham verilerle uyuşmuyorsa, okuyucu yanlış bir büyüklük algısına kapılır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Beyan edilen ortalama, sunulan veri setinden aritmetik olarak doğrulanabiliyor mu?</li>
+        <li><span class="tick"></span>Min-maks aralığı, listelenen tüm değerleri kapsıyor mu?</li>
+        <li><span class="tick"></span>Büyüme/azalış oranı, başlangıç ve bitiş değerleriyle tutarlı mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Türetilmiş her istatistiği, dayandığı ham veri noktalarından programatik olarak yeniden hesaplayıp beyan edilen değerle karşılaştırın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Rapor "çağrı merkezinin ortalama yanıt süresi 45 saniyedir" diyor; ekteki 7 günlük verinin ortalaması 68 saniye çıkıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Metindeki ortalama güncellenmeli veya hangi filtrelenmiş veriye dayandığı dipnotta açıklanmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 16</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Eksiklik ve Boşluk Denetimi</h3>
+      <p class="why">Bir belgede <em>olmayan</em> şey, olandan daha tehlikelidir: doldurulmamış bir tutar veya boş imza satırı, çapraz kontrolde en sık atlanan kusurdur — çünkü karşılaştırılacak ikinci bir pasaj yoktur.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Şablondan kalan doldurulmamış alanlar var mı ("………", "XX", "[•]", boş parantez, TBD)?</li>
+        <li><span class="tick"></span>Belge türü için zorunlu unsurlar tam mı (taraf, konu, bedel, süre, tarih, imza)?</li>
+        <li><span class="tick"></span>"Aşağıda belirtilen şartlar" denip liste hiç verilmemiş mi?</li>
+        <li><span class="tick"></span>Atıf yapılan ek veya form belgede fiilen mevcut mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Belge türü için zorunlu unsurlar listesini önceden çıkarıp her birini var/yok olarak işaretleyin; ayrıca doldurulmamış alan desenlerini (…, XX, [ ], TBD) düzenli ifadeyle tarayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Bedel maddesinde "toplam bedel ……… TL'dir" ifadesi imzalı nüshada boş bırakılmış; ödeme planı maddesi ise "bedelin %30'u peşin" diyerek var olmayan bir tutara atıf yapıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Boş alan doldurulmalı veya bedelin hangi ekte belirlendiği açık atıfla gösterilmelidir; imzadan önce hiçbir zorunlu alan boş bırakılmamalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 17</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Şablon Kalıntısı ve Kopya Artığı</h3>
+      <p class="why">Önceki bir belgeden kopyalanan metinde başka bir işin taraf adı, yetkili mahkemesi veya konusu geride kalır. Bu kalıntılar en tehlikeli çelişkilerdir: dil bilgisi açısından kusursuz göründükleri için okurken sırıtmazlar.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Metinde, tanımlanan taraflar dışında bir kurum/kişi adı geçiyor mu?</li>
+        <li><span class="tick"></span>Yetkili mahkeme/tahkim, uygulanacak hukuk veya para birimi maddesi belgenin bağlamına uygun mu?</li>
+        <li><span class="tick"></span>Başka bir sözleşme türüne ait madde başlıkları kalmış mı?</li>
+        <li><span class="tick"></span>Konu/hizmet tanımı bir maddede belgenin geri kalanından farklı mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Çıkarılan varlık tablosundaki tüm kurum/kişi adlarını, tanımlar bölümündeki taraf kümesiyle karşılaştırın: kümeye ait olmayan her ad bir kalıntı adayıdır.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Hizmet sözleşmesinin gizlilik maddesinde, taraflar arasında hiç geçmeyen "DEF Lojistik A.Ş." adı yer alıyor — madde başka bir sözleşmeden kopyalanmış.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Kalıntı ad doğru taraf tanımıyla değiştirilmeli ve o madde bütünüyle bu işin bağlamına göre yeniden okunmalıdır — kalıntı genelde tek kelime değil, tüm paragraftır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 18</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Koşul Kapsama ve Eşik Tutarlılığı</h3>
+      <p class="why">Şartlı hükümlerde açıkta kalan veya çakışan aralıklar, uygulamada hangi kuralın işleyeceğini belirsiz bırakır; eşikteki bir birimlik kayma doğrudan para veya hak kaybı doğurur.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Koşul dalları tüm olasılıkları kapsıyor mu (tam eşik değeri boşta mı kalmış)?</li>
+        <li><span class="tick"></span>Aralıklar birbiriyle çakışıyor mu (0–50 ve 50–100 gibi)?</li>
+        <li><span class="tick"></span>"Aksi hâlde / bunun dışındaki hâllerde" kapanış dalı tanımlanmış mı?</li>
+        <li><span class="tick"></span>Eşik değerler belge boyunca aynı mı (bir yerde 30 gün, başka yerde 1 ay)?</li>
+        <li><span class="tick"></span>Sınır dili doğru mu — "18 yaşından küçük" ile "18 yaş ve altı", "dâhil" ile "hariç" aynı sayılmış mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Tüm şartlı hükümleri bir karar tablosuna dökün (koşul → sonuç); aralıkların birleşimi tüm tanım kümesini kapsıyor mu, kesişimleri boş mu diye kontrol edin.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Ceza maddesi "gecikme 30 günden az ise günlük %0,1; 30 günden fazla ise %0,3" diyor — gecikmenin tam 30 gün olduğu hâl hiçbir dala girmiyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Eşikler kapsayıcı yazılmalı ("30 gün ve altında" / "30 günden fazla"), böylece her hâl tek ve yalnız bir dala düşmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 19</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Belirsiz ve Ölçülemez Terim Denetimi</h3>
+      <p class="why">"Makul süre", "derhal", "önemli ölçüde" gibi ifadeler tek başına çelişki değildir; ama aynı yükümlülük için bir yerde sayısal süre, başka yerde belirsiz süre varsa hangisinin geçerli olduğu tartışmaya açılır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Ölçülemez ifadeler (makul, derhal, uygun, mümkün olan en kısa sürede) sayısal bir karşılıkla tanımlanmış mı?</li>
+        <li><span class="tick"></span>Aynı yükümlülük için hem sayısal hem belirsiz süre mi kullanılmış?</li>
+        <li><span class="tick"></span>Kalite/performans ölçütleri (yeterli, tatmin edici) ölçülebilir bir kritere bağlanmış mı?</li>
+        <li><span class="tick"></span>"ve/veya" kullanımı: koşulların hepsi mi, biri mi, herhangi bir bileşimi mi gerekiyor?</li>
+        <li><span class="tick"></span>"-abilir" eki izin mi ("yapabilir" = serbesttir) yoksa olasılık mı bildiriyor — hüküm bir hak mı tanıyor, bir ihtimali mi anlatıyor?</li>
+        <li><span class="tick"></span>Zincirleme tamlamada bağlanma belirsiz mi ("şirketin yetkili temsilcisinin onayı" — onay şirkete mi temsilciye mi ait)?</li>
+        <li><span class="tick"></span>Listelerde gruplama belirsiz mi ("A ve B ile C" ifadesi (A ve B) ile C mi, A ve (B ile C) mi)?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Belirsiz terim sözlüğüyle metni tarayın; her bulgunun yanına aynı konuda sayısal bir hüküm olup olmadığını not edin — ikisinin birlikte bulunduğu yerler çelişki adayıdır.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Madde 6 "arıza bildirimi derhal yapılır" derken, Madde 12 aynı bildirim için "en geç 5 iş günü içinde" süresi öngörüyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Tek bir ölçülebilir süre benimsenmeli; "derhal" gibi ifadeler kullanılacaksa tanımlar bölümünde sayısal karşılığıyla tanımlanmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 20</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Çok Dillilik ve Çeviri Tutarlılığı</h3>
+      <p class="why">İki dilli belgelerde çeviri kayması, tarafların farklı yükümlülükler anladığı iki ayrı sözleşme yaratır; asıl metin kaydı yoksa uyuşmazlıkta hangi metnin esas alınacağı belirsizdir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Hangi dildeki metnin esas olduğu (asıl metin kaydı) belirtilmiş mi?</li>
+        <li><span class="tick"></span>Sayılar, tarihler, süreler ve tutarlar iki dilde birebir aynı mı?</li>
+        <li><span class="tick"></span>Hukuki terimler karşılık dilde aynı anlamı taşıyor mu (fesih / termination / rescission ayrımı)?</li>
+        <li><span class="tick"></span>Madde numaralandırması iki dilde örtüşüyor mu?</li>
+        <li><span class="tick"></span>Çeviride kip değişmiş mi ("may be used" → "kullanılmalıdır"); olumsuzluk veya istisna kaybolmuş mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>İki metni madde madde hizalayıp önce sayısal değerleri ve tarihleri, sonra yükümlülük fiillerini (zorunlu/serbest) karşılaştırın; sapmaları madde numarasıyla listeleyin.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Türkçe metin "yüklenici 30 gün içinde teslim eder" derken, İngilizce metin "within 30 business days" diyor — takvim günü ile iş günü farkı teslim tarihini haftalarca kaydırıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Sapma giderilmeli ve uyuşmazlık hâlinde hangi dildeki metnin esas alınacağı ayrı bir maddeyle açıkça belirlenmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 21</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Para Birimi, Vergi ve Kur Tutarlılığı</h3>
+      <p class="why">Aynı tutarın bir yerde KDV dahil, başka yerde hariç yazılması veya kur/endeksleme kuralının eksik tanımlanması, ödeme uyuşmazlıklarının en sık kaynağıdır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Tutarlar KDV dahil mi hariç mi — belge boyunca tutarlı biçimde belirtilmiş mi?</li>
+        <li><span class="tick"></span>Yabancı para kullanılıyorsa hangi kurun, hangi tarihte esas alınacağı tanımlı mı?</li>
+        <li><span class="tick"></span>Endeksleme/artış formülü hangi döneme ve hangi veri kaynağına bağlı, açıkça yazılmış mı?</li>
+        <li><span class="tick"></span>Rakamla ve yazıyla yazılan tutarlar birbiriyle aynı mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Tüm parasal ifadeleri birim, vergi durumu (dahil/hariç), kur kaydı ve tarih bilgisiyle tek tabloya çıkarın; aynı kalemin farklı satırlarını karşılaştırın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Bedel maddesi "120.000 TL (KDV hariç)" derken, ödeme planı toplamı "120.000 TL (KDV dahil)" olarak veriliyor — aradaki fark bir KDV tutarı kadar açık bırakıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Tüm tutarlar tek bir vergi esasına göre yeniden yazılmalı; KDV'nin ayrıca eklenip eklenmeyeceği bedel maddesinde tek cümlede netleştirilmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 22</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>Nicelik Belirteçleri ve Kapsam Evreni</h3>
+      <p class="why">"Tümü", "bazı", "yalnızca" gibi belirteçler bir hükmün hangi evrene uygulandığını belirler. Aynı hüküm iki bölümde farklı evrene uygulanıyorsa ortaya en zor fark edilen çelişki türü çıkar: cümleler tek tek doğrudur, birlikte değildir.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>"Tümü / bazı / yalnızca / en az biri / hiçbiri / ve-veya" ifadeleri birbiriyle mantıksal olarak uyumlu mu?</li>
+        <li><span class="tick"></span>Aynı hüküm farklı bölümlerde farklı kişi grubuna, birime, coğrafyaya veya döneme mi uygulanıyor?</li>
+        <li><span class="tick"></span>Bir hükmün kapsamı sonraki cümlelerde sessizce daraltılmış veya genişletilmiş mi?</li>
+        <li><span class="tick"></span>Bir yerde "yalnızca A ve B grupları" denip ileride C grubu da kapsama alınmış mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Her hüküm için "hangi evren" bilgisini ayrı bir sütun olarak çıkarın (kişi grubu, birim, coğrafya, dönem, sürüm) ve aynı konudaki hükümleri bu sütuna göre karşılaştırın — çelişki çoğu zaman hükümde değil, evrenlerin farkındadır.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Madde 3 "tüm personel yıllık eğitime katılır" derken, Ek-2'deki uygulama tablosu yalnızca merkez birimlerdeki personeli listeliyor; taşra personelinin yükümlü olup olmadığı iki okumaya açık.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Hükmün evreni tek yerde tanımlanmalı ("personel", tanımlar bölümünde kapsanan birimlerle birlikte tanımlanmalı) ve tüm bölümler bu tanıma atıf yapmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 23</p>
+        <span class="risk-badge high">Yüksek risk</span>
+      </div>
+      <h3>İddia–Kanıt ve Gerekçe–Sonuç Bağlantısı</h3>
+      <p class="why">Bir belgenin en kırılgan yeri, verinin desteklediğinden daha güçlü bir sonuç çıkarılan cümledir. Bu bir yazım hatası değil, karar hatasıdır — ve iç tutarlılık kontrolüyle yakalanmaz.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Her önemli sonuç, kendisinden önce sunulan veriyle gerçekten destekleniyor mu?</li>
+        <li><span class="tick"></span>Veriler yalnızca birliktelik gösterirken metin nedensellik mi kuruyor?</li>
+        <li><span class="tick"></span>Atıf yapılan kaynak, iddianın tamamını mı yoksa yalnızca bir kısmını mı destekliyor?</li>
+        <li><span class="tick"></span>Alıntının istisna içeren devamı kesilmiş, alıntı bağlamından koparılmış mı?</li>
+        <li><span class="tick"></span>Önerilen karar, tanımlanan problemden mantıksal olarak çıkıyor mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Her sonucu "iddia → dayanak → dayanağın gücü" üçlüsüne ayırın. Dayanak yoksa bulguyu <em>belgede belirtilmiyor</em>, dayanak zayıfsa <em>dış doğrulama gerekli</em> olarak etiketleyin — ikisini de çelişki saymayın.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek sorun</p>
+            <p>Rapor "müşteri memnuniyeti, eğitim programı sayesinde arttı" diyor; ekteki veri yalnızca aynı dönemde iki değerin birlikte yükseldiğini gösteriyor — nedenselliği destekleyen bir karşılaştırma yok.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Cümle veriye indirgenmeli ("aynı dönemde memnuniyet de artmıştır") veya nedensellik iddiasını taşıyacak bir kontrol/karşılaştırma verisi eklenmelidir.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 24</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>İzlenebilirlik: Amaç → Gereksinim → Ölçüt → Kanıt</h3>
+      <p class="why">Hiçbir maddeyle ilişkilendirilmemiş bir hedef ya da hiçbir ölçüte bağlanmamış bir gereksinim, çelişki üretmez — denetlenemezlik üretir. Belgenin uygulanabilir olup olmadığı bu zincirden anlaşılır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Her amaç en az bir gereksinim veya maddeyle ilişkilendirilmiş mi?</li>
+        <li><span class="tick"></span>Her gereksinim ölçülebilir bir kabul kriterine bağlanmış mı?</li>
+        <li><span class="tick"></span>Her kriter için kanıtı kimin, ne zaman, hangi yöntemle üreteceği belli mi?</li>
+        <li><span class="tick"></span>Hiçbir amaca hizmet etmeyen "yetim" madde var mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Amaç, madde, ölçüt ve kanıt sütunlarından oluşan bir izlenebilirlik matrisi kurun; boş kalan her hücre bir eksikliktir — çelişki olarak değil, eksiklik olarak raporlanır.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek eksiklik</p>
+            <p>Giriş bölümü "işlem süresinin kısaltılması" hedefini koyuyor; belgenin hiçbir maddesinde süreye ilişkin ölçüt, hedef değer veya ölçüm yöntemi yer almıyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Hedefe ölçülebilir bir kriter (ör. "ortalama işlem süresi ≤ 5 iş günü"), bir ölçüm yöntemi ve bir sorumlu eklenmeli; ya da hedef kapsam dışı olduğu belirtilerek çıkarılmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 25</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Durum Geçişleri ve Kenar Durumları</h3>
+      <p class="why">Süreçler genellikle yalnızca "her şey yolunda gittiğinde" anlatılır; ret, iptal, gecikme ve tekrar hâlleri tanımsız kalır. Uygulamadaki tıkanmaların çoğu tam burada doğar.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Durumlar (taslak, onayda, onaylandı, yürürlükte, iptal) doğru sırada mı; geri dönüş hâlleri tanımlı mı?</li>
+        <li><span class="tick"></span>İptal edilmiş veya süresi dolmuş bir belge hâlâ yürürlükteymiş gibi kullanılıyor mu?</li>
+        <li><span class="tick"></span>Sıfır, boş liste, tek öğe ve azami değer durumları ele alınmış mı?</li>
+        <li><span class="tick"></span>Gecikme, itiraz, tekrar başvuru ve hata hâllerinde ne olacağı yazılmış mı?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Süreci bir durum-geçiş tablosuna dökün (durum → olay → yeni durum). Hedefi olmayan bir olay ya da çıkışı olmayan bir durum kalıyorsa, orada bir kenar durumu boşluğu vardır.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek eksiklik</p>
+            <p>Süreç akışı "başvuru → inceleme → onay" olarak tanımlanmış; reddedilen başvurunun düzeltilip yeniden sunulup sunulamayacağı ve hangi süreye tabi olacağı hiçbir maddede yok.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Ret ve yeniden başvuru dalı eklenmeli; her durum için en az bir çıkış yolu, bir sorumlu ve bir süre tanımlanmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="madde">
+      <div class="madde-head">
+        <p class="madde-no">Madde 26</p>
+        <span class="risk-badge med">Orta risk</span>
+      </div>
+      <h3>Belge Mimarisi ve Özet–Gövde Uyumu</h3>
+      <p class="why">Yönetici özeti çoğu zaman tek okunan bölümdür. Kritik bir kısıt yalnızca eklerde duruyorsa belge teknik olarak doğru, pratikte yanıltıcıdır.</p>
+      <ul class="checks">
+        <li><span class="tick"></span>Yönetici özetindeki sonuçlar gövde ve eklerle aynı yönde mi?</li>
+        <li><span class="tick"></span>Gövdede veya eklerde bulunan kritik bir kısıt özette hiç geçmiyor mu?</li>
+        <li><span class="tick"></span>Başlıklar bölüm içeriğiyle örtüşüyor mu; içindekiler gerçek yapıyı yansıtıyor mu?</li>
+        <li><span class="tick"></span>Sonuç bölümü, giriş bölümünde kurulan soruyu gerçekten cevaplıyor mu?</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Nasıl tespit edilir</span>
+          <p>Özet, gövde ve ekleri ayrı ayrı "iddia listesi" olarak çıkarıp üç listeyi karşılaştırın: yalnızca tek listede görünen her kritik iddia bir mimari uyumsuzluktur.</p>
+        </div>
+      </div>
+      <div class="evidence">
+        <div class="flag">
+          <span class="flag-glyph">⊗</span>
+          <div>
+            <p class="flag-label">Örnek çelişki</p>
+            <p>Yönetici özeti projeyi koşulsuz öneriyor; Ek-4'teki "yalnızca bütçenin %30 artması hâlinde uygulanabilir" kaydı özette hiç geçmiyor.</p>
+          </div>
+        </div>
+        <div class="fix">
+          <span class="fix-glyph">✓</span>
+          <div>
+            <p class="fix-label">Düzeltme kuralı</p>
+            <p>Kısıt yönetici özetine taşınmalı veya özetteki öneri, ekteki koşula açık atıf yapacak biçimde yeniden yazılmalıdır.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  </ol>
+  </section>
+
+  <section class="weight-section" id="sahiplik">
+    <div class="section-head">
+      <p class="eyebrow">Disiplin</p>
+      <h2>Madde Sahipliği ve Çalışma Sırası</h2>
+      <p>Maddelerin sınırları örtüşür: "atıf yapılan Ek-3 belgede yok" hem Madde 03'e hem Madde 16'ya düşebilir. Sahiplik kuralı olmadan aynı bulgu iki kez raporlanır — yani sistem, Madde 06'da eleştirdiği çift sayımı kendi üretir.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Tek sahip kuralı</h3>
+      <p class="why">Bir bulgu yalnızca <strong>bir</strong> maddeye yazılır. Çakışma hâlinde aşağıdaki yönlendirme uygulanır; ikinci madde en fazla çapraz atıf olarak anılır.</p>
+      <dl class="finding-grid">
+        <dt>03 ↔ 16</dt><dd>Atıf var, hedefi yok → <strong>03</strong>. Belge türü için zorunlu unsur hiç yok → <strong>16</strong>.</dd>
+        <dt>05 ↔ 09</dt><dd>Çelişen hükümler taraf hak/yükümlülüğü ise → <strong>09</strong>. Değilse (olgu, sonuç, süreç) → <strong>05</strong>.</dd>
+        <dt>18 ↔ 22</dt><dd>Sorun eşik/aralık dalında ise → <strong>18</strong>. Hükmün uygulandığı kişi/birim evreni farklıysa → <strong>22</strong>.</dd>
+        <dt>19 ↔ 24</dt><dd>Ölçüt var ama ölçülemez ifade edilmiş → <strong>19</strong>. Ölçüt hiç yok → <strong>24</strong>.</dd>
+        <dt>02 ↔ 15</dt><dd>Doğrudan toplam/çarpım hatası → <strong>02</strong>. Türetilmiş istatistik (ortalama, oran) hatası → <strong>15</strong>.</dd>
+        <dt>02 ↔ 21</dt><dd>Salt aritmetik → <strong>02</strong>. Vergi, para birimi veya kur boyutu varsa → <strong>21</strong>.</dd>
+        <dt>04 ↔ 17</dt><dd>Tanımlı tarafın yazım/unvan farkı → <strong>04</strong>. Taraf listesinde hiç olmayan ad → <strong>17</strong>.</dd>
+        <dt>05 ↔ 26</dt><dd>İki hüküm doğrudan çelişiyor → <strong>05</strong>. Özet ile gövde arasında ağırlık/kısıt farkı → <strong>26</strong>.</dd>
+      </dl>
+    </div>
+
+    <div class="panel" style="margin-top:1.4rem;">
+      <h3>Çalışma sırası</h3>
+      <p class="why">Bazı maddeler diğerlerinin çıktısını girdi olarak kullanır. Sırayı bozmak bulguların hem tekrarlanmasına hem kaçırılmasına yol açar — örneğin varlık listesi çıkarılmadan şablon kalıntısı aranamaz.</p>
+      <dl class="finding-grid">
+        <dt>1. Tur</dt><dd><strong>Temel çıkarım:</strong> 04 (varlıklar) · 03 (referans haritası) · 01 (tarihler) · 02 (sayılar). Bu dördü diğer maddelerin girdisidir.</dd>
+        <dt>2. Tur</dt><dd><strong>Türetilen kontroller:</strong> 17 (04'e bağlı) · 15, 21, 08 (02'ye bağlı) · 10, 26 (03'e bağlı) · 13, 14 (04'e bağlı).</dd>
+        <dt>3. Tur</dt><dd><strong>Yorum gerektirenler:</strong> 05, 06, 07, 09, 11, 16, 18, 19, 20, 22, 24, 25.</dd>
+        <dt>4. Tur</dt><dd><strong>Belge dışına çıkanlar:</strong> 12 (mevzuat teyidi) · 23 (kanıt gücü). Bu tur bittiğinde iç bulgular kesinleşmiş olmalıdır.</dd>
+      </dl>
+      <div class="technique" style="margin-top:1.1rem;">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Kural</span>
+          <p>Bir maddeyi, girdisini üreten madde çalışmadan önce çalıştırmayın. 3. tur bulguları 1. tur tablolarına dayanmıyorsa, bulgu değil tahmindir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tech-section" id="teknikler">
+    <div class="section-head">
+      <p class="eyebrow">Uygulama</p>
+      <h2>Doğrulama Teknikleri</h2>
+      <p>Yirmi altı maddeyi tek tek "gözle okumak" yerine, aşağıdaki yedi teknik bulguların isabet oranını belirgin şekilde artırır.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <p class="tech-no">Teknik 01</p>
+        <h3>Varlık Çıkarım Tablosu</h3>
+        <p>Metin, serbest biçimde değil önce yapılandırılmış ve katı tipli bir şemaya dökülür. Karşılaştırma düz metin üzerinde değil, bu tablolar üzerinde yapılır.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 02</p>
+        <h3>Çapraz Referans Haritası</h3>
+        <p>Bölümler, ekler ve atıflar yönlü bir grafa oturtulur. Hedefi olmayan veya döngüsel atıflar, graf üzerinde otomatik olarak görünür hale gelir.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 03</p>
+        <h3>Rol Ayrımıyla Doğrulama</h3>
+        <p>Yapan ile denetleyen aynı geçiş olamaz. Bir rol çelişkiyi delillendirir, bağımsız bir ikinci rol metindeki özel istisnaları savunur, üçüncü bir rol nihai kararı verir — bu ayrım yanlış alarmları belirgin biçimde azaltır.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 04</p>
+        <h3>Parçala-Birleştir</h3>
+        <p>Uzun belgeler bölümlere ayrılır; her bölüm izole ve temiz bir bağlamda taranır, sonra tüm çıkarım tabloları birleştirilerek küresel tutarlılık denetlenir.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 05</p>
+        <h3>Güven ve Önem Etiketleme</h3>
+        <p>Her bulguya bir güven düzeyi (KESİN / OLASI) ile risk skalasından bir seviye eklenir; bu, düşük değerli bulguların raporun kalitesini boğmasını engeller.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 06</p>
+        <h3>İddia Matrisi</h3>
+        <p>Metin paragraf olarak değil, kayıt olarak okunur: her önemli cümle özne, eylem, nesne, zaman, kapsam, koşul ve kip alanlarına ayrılır. Ancak bu normalleştirmeden sonra iki cümlenin gerçekten aynı şeyi söyleyip söylemediği karşılaştırılabilir.</p>
+      </div>
+      <div class="tech-card">
+        <p class="tech-no">Teknik 07</p>
+        <h3>Üç Seviyeli Karşılaştırma</h3>
+        <p><strong>İkili:</strong> A ile B çelişiyor mu? · <strong>Çoklu:</strong> A, B ve C birlikte hangi sonucu üretiyor? · <strong>Global:</strong> Aynı kavram, sayı veya süreç belgenin bütününde nasıl kullanılıyor? Bazı çelişkiler yalnızca üçüncü seviyede görünür: "A, B'den önce", "B, C'den önce", "C, A'dan önce" — üç cümle tek tek makul, birlikte imkânsızdır.</p>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.4rem;">
+      <h3>İddia matrisi: kayıt şeması</h3>
+      <p class="why">Aşama 1'de çıkarılan her önemli cümle, aşağıdaki alanlarla tek satırlık bir kayda dönüştürülür. Aynı konudaki kayıtlar yan yana konduğunda çelişki, eksiklik ve kapsam farkı doğrudan görünür hale gelir.</p>
+      <dl class="finding-grid">
+        <dt>İddia ID</dt><dd>C-001, C-002 — benzersiz numara</dd>
+        <dt>Konum</dt><dd>Bölüm / madde / sayfa / paragraf</dd>
+        <dt>Özne</dt><dd>Kim veya ne?</dd>
+        <dt>Eylem</dt><dd>Ne yapıyor, hangi ilişki kuruluyor?</dd>
+        <dt>Nesne</dt><dd>Kimi veya neyi etkiliyor?</dd>
+        <dt>Zaman</dt><dd>Hangi tarih, dönem veya yürürlük anı?</dd>
+        <dt>Kapsam</dt><dd>Hangi grup, birim, coğrafya veya sürüm?</dd>
+        <dt>Nicelik</dt><dd>Sayı, oran, tutar veya aralık</dd>
+        <dt>Koşul</dt><dd>Hangi durumda geçerli?</dd>
+        <dt>İstisna</dt><dd>Hangi durumda geçerli değil?</dd>
+        <dt>Kip</dt><dd>Zorunlu, öneri, izin, yasak, olgu veya hedef</dd>
+        <dt>Kanıt</dt><dd>Kaynak cümle, tablo, dipnot veya dış referans</dd>
+        <dt>Durum</dt><dd>Uyumlu · Çelişkili · Belgede belirtilmiyor · Belirsiz · Dış doğrulama gerekli</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="spec-section" id="etiketler">
+    <div class="section-head">
+      <p class="eyebrow">Sınıflandırma</p>
+      <h2>Bulgu Etiketleri</h2>
+      <p>Her bulgu tek bir etiket taşır. Etiketleri karıştırmak — özellikle eksikliği çelişki saymak — raporun güvenilirliğini en hızlı bozan hatadır, çünkü her etiket farklı bir çözüm yolu gerektirir.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item">
+        <div class="spec-num">E-1</div>
+        <div class="spec-body">
+          <h3>Uyumlu</h3>
+          <p>İki veya daha fazla konum aynı şeyi söylüyor. Raporlanmaz, ancak kapsama listesinde "kontrol edildi" olarak işaretlenir.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-2</div>
+        <div class="spec-body">
+          <h3>Çelişkili</h3>
+          <p>Aynı özne, eylem, zaman, kapsam ve koşulda farklı sonuç. Beş unsurdan biri farklıysa bu etiket kullanılmaz. <strong>Çözüm:</strong> iki hükümden biri değişir.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-3</div>
+        <div class="spec-body">
+          <h3>Belgede belirtilmiyor (eksik)</h3>
+          <p>Gerekli bir aktör, süre, ölçüt, istisna, tanım veya kabul kriteri yok. <strong>Çözüm:</strong> ekleme. Bir bilginin bulunmaması asla tek başına çelişki sayılmaz.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-4</div>
+        <div class="spec-body">
+          <h3>Belirsiz / yoruma açık</h3>
+          <p>Hüküm var ama ölçülemez ya da birden fazla okumaya açık ("makul süre", "uygun görülen hâllerde"). <strong>Çözüm:</strong> tanımlama veya sayısallaştırma.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-5</div>
+        <div class="spec-body">
+          <h3>Mükerrer</h3>
+          <p>Aynı hüküm birden fazla yerde tekrarlanıyor. Tek başına hata değildir; ancak tekrarlar birbirinden ayrı güncellenirse gelecekteki çelişkinin kaynağıdır. <strong>Çözüm:</strong> tekile indirme veya atıfla bağlama.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-6</div>
+        <div class="spec-body">
+          <h3>Biçimsel hata</h3>
+          <p>Numaralandırma, format, yazım veya tablo düzeni hatası. İçeriği değiştirmez. <strong>Çözüm:</strong> editoryal düzeltme.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">E-7</div>
+        <div class="spec-body">
+          <h3>Dış doğrulama gerekli</h3>
+          <p>İddia belge içinde tutarlı, ancak doğruluğu ancak dış kaynakla (mevzuat, veri, sicil) teyit edilebilir. <strong>Çözüm:</strong> belge dışı kontrol — denetçi bunu kendi başına karara bağlamaz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-section" id="kalite">
+    <div class="section-head">
+      <p class="eyebrow">Kalite Güvencesi</p>
+      <h2>Raporun Kendisi Nasıl Denetlenir</h2>
+      <p>Yukarısı modele <em>ne arayacağını</em> söyler. Bu bölüm, çıkan raporun güvenilir olup olmadığını ölçer — bir denetim raporunun kendisi de denetlenebilir olmalıdır.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item">
+        <div class="spec-num">KG-1</div>
+        <div class="spec-body">
+          <h3>Kanıt kuralı ve alıntı doğrulaması</h3>
+          <p>Her bulgu, birbiriyle çeliştiği iddia edilen iki pasajın <strong>birebir alıntısını</strong> ve konumunu (sayfa/madde) taşımak zorundadır. Alıntı üretilemiyorsa bulgu rapora girmez.</p>
+          <p>Kural burada bitmez: <strong>her alıntı, kaynak metinde birebir aranarak doğrulanır</strong> (metinsel arama, göz kararı değil). Aranan dizge bulunamıyorsa alıntı uydurulmuş demektir ve bulgu, içeriği ne kadar makul görünürse görünsün düşürülür. Doğrulanmamış alıntı, kanıt kuralını kâğıt üzerinde bırakır.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-2</div>
+        <div class="spec-body">
+          <h3>Yanlış pozitif süzgeci</h3>
+          <p>Görünürdeki her çelişki hata değildir; bilinçli bir istisna olabilir. Bulguyu raporlamadan önce metinde şu ifadeleri arayın: <code>saklı kalmak kaydıyla</code>, <code>aksi kararlaştırılmadıkça</code>, <code>işbu maddeye rağmen</code>, <code>istisnaen</code>. Bu ifadelerden biri iki hükmü bağlıyorsa, çelişki değil kural-istisna ilişkisi vardır ve bulgu düşürülür.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-3</div>
+        <div class="spec-body">
+          <h3>Tohumlanmış hata testi: yakalama <em>ve</em> isabet</h3>
+          <p>Belgenin bir kopyasına bilerek 10 hata yerleştirip denetimi bu kopya üzerinde çalıştırın. İki oranı birlikte ölçün: <strong>yakalama</strong> (10 tohumun kaçı bulundu?) ve <strong>isabet</strong> (raporlanan bulguların kaçı gerçekten tohum ya da doğrulanmış gerçek hata, kaçı uydurma?). Yalnızca yakalamayı ölçmek, her cümleye çelişki diyen bir kurgunun mükemmel görünmesine yol açar.</p>
+          <p>Standart tohum listesi (tekrarlanabilirlik için sabit tutun): bir tarihi kaydırın · bir alt toplamı bozun · bir taraf adını değiştirin · bir eşiği açıkta bırakın (tam sınır değeri) · var olmayan bir eke atıf ekleyin · bir tutarı KDV esasında çelişkili yazın · bir yükümlülüğü öneriye çevirin · bir zorunlu alanı boşaltın · başka bir sözleşmeden kurum adı bırakın · özetteki bir kısıtı silin. Her tohum farklı bir maddeyi hedefler; bulunmayan tohum, o maddenin kurgusundaki zayıflığı adresler.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-4</div>
+        <div class="spec-body">
+          <h3>Durma kriteri</h3>
+          <p>Denetim, "model yeni bulgu üretmiyor" diye bitmez — bu, ajan tembelliğinin ta kendisidir. Denetim, <strong>kapsama listesi dolduğunda</strong> biter: her madde, ilgili olduğu her bölüm için işaretlenmiş olmalıdır. Kapsama listesi raporun eki olarak sunulur.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-5</div>
+        <div class="spec-body">
+          <h3>Kapsam sınırı beyanı</h3>
+          <p>Raporun ilk bölümü, <em>neyin denetlenmediğini</em> yazar: okunamayan sayfalar, dosyada bulunmayan ekler, dış kaynağa karşı teyit edilmemiş mevzuat atıfları, görsel içeriği çözülemeyen grafikler. Denetlenmemiş bir alan hakkında "tutarsızlık bulunmamıştır" cümlesi kurulmaz.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-6</div>
+        <div class="spec-body">
+          <h3>Tekrarlanabilirlik kontrolü</h3>
+          <p>Aynı belge, aynı talimatla iki kez denetlenir ve bulgu listeleri karşılaştırılır. Her iki koşuda da çıkan bulgular <code>KESİN</code>, yalnızca birinde çıkanlar <code>OLASI</code> etiketiyle raporlanır. Bu, modelin dalgalanmasını gizlemek yerine ölçülebilir hale getirir.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">KG-7</div>
+        <div class="spec-body">
+          <h3>Araçsız denetim kuralı</h3>
+          <p>Rehber yer yer hesaplama, metinsel arama veya dış kaynak sorgusu varsayar. Bu araçlar yoksa denetim durmaz, ama <strong>iddia seviyesi düşer</strong>: hesap aracı yoksa sayısal bulgular (02, 15, 21) <code>OLASI</code>; arama aracı yoksa alıntı doğrulaması yapılamadığı için tüm bulgular <code>DÜŞÜK GÜVEN</code>; dış kaynak erişimi yoksa 12 ve 23 <code>DIŞ DOĞRULAMA GEREKLİ</code> olarak işaretlenir ve raporun kapsam sınırına yazılır.</p>
+          <p>Hangi araçların kullanıldığı raporda listelenir. "Model kafadan hesapladı" ile "hesap makinesiyle doğrulandı" aynı güven düzeyini taşımaz; bunu gizlemek raporu güvenilmez kılar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec-section" id="isletim">
+    <div class="section-head">
+      <p class="eyebrow">İşletim</p>
+      <h2>Denetimi Yürütme Protokolü</h2>
+      <p>Rehberin pratiğe dökülmesi: kim neyi devreder, uzun belge nasıl bölünür, hangi bulgu insana gider, düzeltmeden sonra ne yeniden denetlenir.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item">
+        <div class="spec-num">İP-1</div>
+        <div class="spec-body">
+          <h3>Roller ve devir formatı</h3>
+          <p><strong>Çıkarıcı</strong> yalnızca tabloları üretir (yorum yok). <strong>Denetçi</strong> tablolardan aday bulguları kanıtlı biçimde çıkarır. <strong>İtirazcı</strong> her aday bulgu için metinde bir istisna/gerekçe arar ve düşürülmesini önerir. <strong>Karar verici</strong> ikisini karşılaştırıp bulguyu kabul, ret veya "insana götür" olarak işaretler.</p>
+          <p>Devirde yalnızca yapılandırılmış çıktı aktarılır — ham metin bir sonraki role yeniden verilmez; bu, önceki rolün yorumunun sonrakini yönlendirmesini engeller.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">İP-2</div>
+        <div class="spec-body">
+          <h3>Parçalama kuralları</h3>
+          <p>Bölme daima <strong>madde/bölüm sınırından</strong> yapılır, cümle ortasından değil. Her parçadan ayrı varlık tablosu çıkarılır; tablolar birleştirildikten sonra <em>parçalar arası</em> kontrol ayrıca çalıştırılır — kaçırılan çelişkilerin çoğu tam olarak burada, iki parçanın arasında oturur.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">İP-3</div>
+        <div class="spec-body">
+          <h3>İnsan devir noktası</h3>
+          <p>Yüksek riskli her bulgu (hak/yükümlülük, imza-yetki, mevzuat atfı, tutar) insan onayına gider. Yapay zekâ raporu bir <strong>karar değil, karar için hazırlıktır</strong>; hukuki sonuç doğuran hiçbir düzeltme onaysız uygulanmaz.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">İP-4</div>
+        <div class="spec-body">
+          <h3>Bulgu yaşam döngüsü</h3>
+          <p>Her bulgu bir durumla izlenir: <code>Açık</code> → <code>Doğrulandı</code> → <code>Düzeltildi</code> → <code>Kapatıldı</code>. Beşinci durum <code>Reddedildi</code>, yalnızca gerekçesiyle birlikte kaydedilir — reddedilen bulgular silinmez, çünkü bir sonraki denetimde aynı tartışma yeniden açılır.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">İP-5</div>
+        <div class="spec-body">
+          <h3>Düzeltme sonrası regresyon denetimi</h3>
+          <p>Düzeltmeler yeni çelişki doğurur: bir tarihi düzeltmek, ona atıf yapan üç maddeyi bozabilir. Bu yüzden düzeltilen her bölüm, <strong>ona atıf yapan tüm bölümlerle birlikte</strong> yeniden denetlenir. Çapraz referans haritası (Teknik 02) tam olarak bu listeyi verir.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">İP-6</div>
+        <div class="spec-body">
+          <h3>Kök neden gruplama</h3>
+          <p>Kırk bulgunun on ikisi tek bir kök hatadan geliyorsa — bir taraf adının baştan yanlış tanımlanması gibi — bunları ayrı ayrı raporlamak okuyucuyu boğar ve gerçek önceliği gizler. Aynı kökten doğan bulgular <strong>tek bir ana bulgu</strong> altında toplanır; alt bulgular "etkilenen konumlar" olarak listelenir.</p>
+          <p>Gruplama kuralı: iki bulgu, <em>aynı düzeltmeyle birlikte kapanıyorsa</em> aynı köktendir. Ayrı düzeltme gerektiriyorlarsa ayrı kalırlar. Rapor sayımında hem ana bulgu sayısı hem etkilenen konum sayısı verilir — biri önceliği, diğeri iş yükünü gösterir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="weight-section" id="agirlik">
+    <div class="section-head">
+      <p class="eyebrow">Önceliklendirme</p>
+      <h2>Doküman Türüne Göre Ağırlıklandırma</h2>
+      <p>Yirmi altı madde her belge türünde eşit ağırlıkta değildir. Süreniz kısıtlıysa, önce belge türünüzün öncelikli maddelerine odaklanın.</p>
+    </div>
+    <div class="weight-table-wrap">
+      <table class="weight-table">
+        <thead>
+          <tr>
+            <th>Doküman Türü</th>
+            <th>Öncelikli Maddeler</th>
+            <th>İkincil Maddeler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="doc-type">Hukuki Sözleşme &amp; Protokol</td>
+            <td class="nums">01, 04, 09, 14, 17, 18, 21, 22</td>
+            <td class="nums secondary">03, 05, 10, 12, 16, 19, 25</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Finansal / Faaliyet Raporu</td>
+            <td class="nums">02, 06, 08, 15, 16, 21, 23</td>
+            <td class="nums secondary">01, 05, 07, 10, 13, 22, 26</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Teknik Şartname</td>
+            <td class="nums">05, 16, 18, 19, 24, 25</td>
+            <td class="nums secondary">01, 02, 03, 07, 09, 22</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Resmi Yazışma / İdari Karar</td>
+            <td class="nums">12, 14, 04, 01, 16, 22</td>
+            <td class="nums secondary">03, 11, 13, 17, 25</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Politika / Strateji Belgesi</td>
+            <td class="nums">24, 23, 19, 22, 26</td>
+            <td class="nums secondary">01, 06, 09, 15, 16</td>
+          </tr>
+          <tr>
+            <td class="doc-type">Çok Dilli / Sınır Ötesi Sözleşme</td>
+            <td class="nums">20, 04, 09, 21, 12</td>
+            <td class="nums secondary">01, 07, 18, 19, 22</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="risk-section" id="risk">
+    <div class="section-head">
+      <p class="eyebrow">Önceliklendirme</p>
+      <h2>Risk Derecelendirmesi</h2>
+      <p>Her bulguyu raporlarken üç seviyeden birine yerleştirin; bu, okuyucunun önce hangi bulguya bakması gerektiğini netleştirir.</p>
+    </div>
+    <div class="risk-scale">
+      <div class="risk-row high">
+        <span class="risk-badge high">Yüksek</span>
+        <p>Hukuki, mali veya operasyonel sonucu doğrudan değiştirebilecek çelişkiler — tarih, tutar, taraf kimliği, hak/yükümlülük, mevzuat atfı, imza/yetki, boş bırakılmış zorunlu alan, şablon kalıntısı, açıkta kalan eşik.</p>
+      </div>
+      <div class="risk-row med">
+        <span class="risk-badge med">Orta</span>
+        <p>Okuyucuyu yanıltabilecek ama tek başına sonucu değiştirmeyen tutarsızlıklar — sınıflandırma, referans, görsel-metin, istatistik, versiyon, ölçülemez terim.</p>
+      </div>
+      <div class="risk-row low">
+        <span class="risk-badge low">Düşük</span>
+        <p>Kozmetik veya format düzeyinde tutarsızlıklar — yazım, üslup, meta-veri, tarih formatı.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="annex" id="sablon">
+    <p class="eyebrow">Ek</p>
+    <h2>Hazır Talimat Şablonu</h2>
+    <p>Bu şablonu, incelenecek metnin başına ekleyerek doğrudan bir AI oturumuna yapıştırabilirsiniz.</p>
+    <pre class="prompt-block">Sen bir doküman denetim ve çapraz kontrol uzmanısın. Aşağıdaki metni
+sırasıyla Aşama 0, 1 ve 2 olarak inceleyeceksin. Aşama atlamayacaksın.
+
+<span class="stage">AŞAMA 0 — ÖN-KONTROL</span>
+Denetime başlamadan önce girdiyi doğrula ve kısa bir not yaz:
+  • Metin okunabilir mi, bozuk/eksik karakter var mı?
+  • Sayfa akışı kesintisiz mi, eksik sayfa var mı?
+  • Metinde atıf yapılan tüm ekler elinde var mı?
+  • Okuyamadığın bölüm varsa, adını ve neden okunamadığını yaz.
+  • Belge türünü belirle (sözleşme / rapor / şartname / resmi yazı /
+    politika) ve denetim modunu seç: HIZLI · STANDART · TAM.
+  • Hangi araçları kullanabildiğini yaz (hesaplama, metin arama, dış
+    kaynak). Araç yoksa ilgili bulguların güven düzeyini düşür.
+Okunamayan bölüm hakkında "tutarsızlık yok" DEME; kapsam dışı yaz.
+
+<span class="stage">AŞAMA 1 — ÇIKARIM</span>
+Metni baştan sona oku, henüz çelişki yorumu yapmadan şu tabloları çıkar:
+  1. Tarihler ve süreler (olay, tarih, süre, geçtiği yer)
+  2. Sayısal değerler, alt kalemler, toplamlar ve ortalamalar
+  3. Taraf / kurum / kişi adları, unvanlar ve imza blokları
+  4. Tanımlanan terimler, kısaltmalar ve belirsiz terimler
+  5. İç referanslar ("Madde X", "Ek Y") ve dış mevzuat atıfları
+  6. Kapak / üstbilgi / altbilgi / revizyon meta verileri
+  7. Şartlı hükümler (koşul → sonuç) ve eşik değerleri
+  8. Parasal ifadeler (tutar, para birimi, KDV dahil/hariç, kur kaydı)
+  9. Doldurulmamış alanlar ve eksik zorunlu unsurlar
+ 10. İddia matrisi: her önemli cümle için özne, eylem, nesne, zaman,
+     kapsam, nicelik, koşul, istisna, kip ve kanıt alanları
+
+<span class="stage">AŞAMA 2 — ÇAPRAZ KONTROL</span>
+Tabloları karşılaştırarak şu 26 başlığa göre incele:
+
+  01. Tarihsel                 14. İmza / yetki
+  02. Sayısal                  15. İstatistiksel
+  03. Referans                 16. Eksiklik ve boşluk
+  04. Varlık / taraf           17. Şablon kalıntısı
+  05. Mantıksal                18. Koşul kapsama / eşik
+  06. Sınıflandırma            19. Belirsiz terim
+  07. Format                   20. Çok dillilik / çeviri
+  08. Görsel-metin             21. Para birimi / vergi / kur
+  09. Hak-yükümlülük           22. Nicelik belirteci / kapsam evreni
+  10. Versiyon                 23. İddia-kanıt bağlantısı
+  11. Dilbilimsel              24. İzlenebilirlik
+  12. Dış kaynak / mevzuat     25. Durum geçişi / kenar durumu
+  13. Meta-veri                26. Belge mimarisi
+
+Karşılaştırmayı üç seviyede yap: (a) ikili cümle, (b) üç ve daha
+fazla hükmün birlikte ürettiği sonuç, (c) belgenin bütününde aynı
+kavram/sayı/sürecin kullanımı.
+
+KURALLAR:
+  • Her bulguya TEK bir etiket ver:
+      UYUMLU · ÇELİŞKİLİ · BELGEDE BELİRTİLMİYOR · BELİRSİZ ·
+      MÜKERRER · BİÇİMSEL HATA · DIŞ DOĞRULAMA GEREKLİ
+  • "ÇELİŞKİLİ" etiketini yalnızca aynı özne, aynı eylem, aynı zaman,
+    aynı kapsam ve aynı koşulda farklı sonuç varsa kullan. Beş
+    unsurdan biri farklıysa bu çelişki değildir.
+  • Bir bilginin belgede bulunmamasını çelişki sayma; "BELGEDE
+    BELİRTİLMİYOR" olarak işaretle.
+  • İç çelişki ile dış gerçeklik hatasını ayır.
+  • Kanıtsız bulgu yazma: her bulguda iki konumu BİREBİR alıntıla,
+    kısa tut. Alıntı üretemiyorsan bulguyu yazma.
+  • Her alıntıyı kaynak metinde birebir ARA ve doğrula. Bulamadığın
+    alıntıyı içeren bulguyu, ne kadar makul görünürse görünsün düşür.
+  • Bir bulguyu YALNIZCA BİR maddeye yaz. Çakışan maddelerde:
+    hedefi olmayan atıf→03, hiç olmayan zorunlu unsur→16;
+    taraf yükümlülüğü→09, diğer çelişkiler→05; eşik/aralık→18,
+    farklı kişi-birim evreni→22; ölçülemez ölçüt→19, ölçüt yok→24.
+  • Aynı düzeltmeyle kapanan bulguları TEK ana bulguda topla; diğer
+    konumları "etkilenen konumlar" olarak listele.
+  • Bulguyu yazmadan önce "saklı kalmak kaydıyla / aksi
+    kararlaştırılmadıkça / işbu maddeye rağmen" gibi istisna
+    ifadelerini ara; varsa kural-istisna ilişkisi vardır, bulguyu düşür.
+  • Emin olmadığın bulguyu DÜŞÜK GÜVEN veya MANUEL DOĞRULAMA GEREKLİ
+    olarak işaretle. Belgeyi kendiliğinden değiştirme, yalnızca öner.
+
+Her bulgu için:
+  • Bulgu ID ve başlık          • Etiket (yukarıdaki yediden biri)
+  • Madde no (01–26)            • Risk (YÜKSEK / ORTA / DÜŞÜK)
+  • Güven (KESİN / OLASI)       • Konum 1 (alıntı + sayfa/madde)
+  • Konum 2 (alıntı + sayfa/madde)
+  • Normalleştirilmiş ifade (iki hükmün ortak yapısal anlamı)
+  • Sorunun gerekçesi
+  • Etki (hukuki / mali / operasyonel / teknik / editoryal)
+  • Gerekli ek bilgi (çözüm için neye ihtiyaç var?)
+  • Önerilen düzeltme seçenekleri
+
+ÇIKTI SIRASI:
+   1. Yönetici özeti            8. Süreç, rol ve sorumluluk
+   2. Kritik tutarlılık         9. Referans ve izlenebilirlik
+   3. Tarih ve zaman           10. Eksiklikler ve belirsizlikler
+   4. Sayı, oran, birim        11. Dış doğrulama gerekenler
+   5. Terim ve tanım           12. Önerilen düzeltme seçenekleri
+   6. Sınıflandırma            13. Manuel inceleme gerekenler
+   7. Mantık, koşul, istisna
+
+Raporun başına: kapsam sınırı (neyin denetlenmediği).
+Raporun sonuna: kapsama listesi (madde × bölüm) ve şu sayımlar —
+incelenen iddia / tarih / sayısal ifade / terim sayısı; etikete göre
+bulgu sayısı; dış doğrulama ve manuel inceleme gereken bulgu sayısı.
+Tek bir yüzdelik "tutarlılık skoru" verme.</pre>
+  </section>
+
+  <section class="lib-section" id="alt-promptlar">
+    <div class="section-head">
+      <p class="eyebrow">Ek</p>
+      <h2>Madde Bazlı Alt-Promptlar</h2>
+      <p>Tam denetim yerine tek bir maddeyi derinlemesine çalıştırmak istediğinizde — ya da bir bulguyu doğrulatmak istediğinizde — aşağıdaki talimatları doğrudan yapıştırabilirsiniz. Her biri kanıt kuralına tabidir: alıntısız bulgu geçersizdir.</p>
+    </div>
+    <div class="panel">
+      <div class="prompt-lib">
+
+        <div class="prompt-row">
+          <div class="pl-no">01</div>
+          <div class="pl-body">
+            <h3>Tarihsel</h3>
+            <p>Metindeki tüm tarih ve süreleri kronolojik bir tabloya çıkar. Her tarih çiftini kontrol et: başlangıç bitişten önce mi, belge tarihi atıf yaptığı olaylardan sonra mı, belirtilen süre iki tarih arasındaki farkla eşleşiyor mu? Uyuşmayan her çifti birebir alıntıyla listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">02</div>
+          <div class="pl-body">
+            <h3>Sayısal</h3>
+            <p>Her toplam ifadesini ve bağlı olduğu alt kalemleri tabloya çıkarıp toplamları yeniden hesapla. Ayrıca aynı verinin farklı yerlerdeki tekrarlarını karşılaştır. Tutmayan her hesabı, iki pasajı da alıntılayarak göster.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">03</div>
+          <div class="pl-body">
+            <h3>Referans</h3>
+            <p>Tüm iç atıfları (Madde X, Ek Y, bkz., şekil/tablo no) listele. Her birinin işaret ettiği öğe belgede var mı, içeriği atıfla uyuşuyor mu? Hedefi olmayan ve içeriği uyuşmayan atıfları ayrı ayrı grupla.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">04</div>
+          <div class="pl-body">
+            <h3>Varlık / taraf</h3>
+            <p>Metinde geçen tüm kişi ve kurum adlarını unvanlarıyla ve geçtikleri yerle listele; aynı varlığın farklı yazımlarını grupla. Tanımlar bölümündeki taraf tanımıyla çelişen her kullanımı işaretle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">05</div>
+          <div class="pl-body">
+            <h3>Mantıksal</h3>
+            <p>Ana hükümleri tek cümlelik önermelere indir. Birbirini yalanlayan önerme çiftlerini ve döngüsel önkoşulları bul; her biri için iki pasajı alıntıla. İstisna kaydı olup olmadığını da kontrol et.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">06</div>
+          <div class="pl-body">
+            <h3>Sınıflandırma</h3>
+            <p>Sınıflandırılan tüm öğeleri atandıkları kategoriyle listele. Aynı öğenin farklı yerde farklı kategoriye atandığı durumları ve kategori kriterinin değiştiği noktaları göster.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">07</div>
+          <div class="pl-body">
+            <h3>Format</h3>
+            <p>Tüm tarih, tutar ve oran ifadelerini biçimleriyle listele. Birden fazla biçim kullanılmışsa hangi ifadenin hangi biçimde olduğunu ve doğabilecek yanlış okumayı belirt.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">08</div>
+          <div class="pl-body">
+            <h3>Görsel-metin</h3>
+            <p>Her tablo ve grafiğin verilerini çıkar; metinde o görsele atıf yapan her cümleyi bul ve sayı, yön ve dönem açısından karşılaştır. Uyuşmayanları alıntıyla göster.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">09</div>
+          <div class="pl-body">
+            <h3>Hak-yükümlülük</h3>
+            <p>Her tarafa yüklenen fiilleri ZORUNLU / SERBEST / YASAK olarak etiketleyip tabloya çıkar. Aynı konuda birbirini geçersiz kılan hüküm çiftlerini listele; "saklı kalmak kaydıyla" türü istisna kaydı varsa bunu ayrıca belirt.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">10</div>
+          <div class="pl-body">
+            <h3>Versiyon</h3>
+            <p>Revizyon tablosundaki her kaydı belge içindeki ilgili bölümle karşılaştır: kayıtta belirtilen değişiklik metne gerçekten yansımış mı? Yansımayanları ve kayıtsız değişmiş görünen bölümleri listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">11</div>
+          <div class="pl-body">
+            <h3>Dilbilimsel</h3>
+            <p>Metni bölüm bölüm tarayarak anlatım kişisi, fiil zamanı ve resmiyet düzeyindeki değişimleri işaretle; kaymanın başladığı cümleyi alıntıla ve hangi bölüm sınırına denk geldiğini yaz.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">12</div>
+          <div class="pl-body">
+            <h3>Mevzuat / dış kaynak</h3>
+            <p>Tüm dış atıfları (kanun, yönetmelik, standart, önceki sözleşme) madde numarasıyla listele. Aynı kaynağa yapılan atıflar arasında numara veya ifade farkı varsa göster; güncellik teyidi gerekenleri ayrıca işaretle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">13</div>
+          <div class="pl-body">
+            <h3>Meta-veri</h3>
+            <p>Kapak, üstbilgi, altbilgi ve revizyon bilgilerini çıkar; gövde metninde bu bilgilerin geçtiği ilk yerlerle karşılaştır ve farkları listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">14</div>
+          <div class="pl-body">
+            <h3>İmza / yetki</h3>
+            <p>İmza bloklarındaki isim, unvan ve sıfatları çıkar; metinde bu kişilere yapılan tüm atıfları ve yetki hükümlerini karşılaştır. Unvan veya yetki uyuşmazlıklarını, eksik imzaları ve vekâlet referansı olmayan vekâleten imzaları göster.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">15</div>
+          <div class="pl-body">
+            <h3>İstatistiksel</h3>
+            <p>Her türetilmiş istatistiği (ortalama, oran, artış yüzdesi, aralık) ve dayandığı ham veriyi çıkar; her birini yeniden hesaplayıp beyan edilen değerle karşılaştır. Farkı sayısal olarak yaz.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">16</div>
+          <div class="pl-body">
+            <h3>Eksiklik ve boşluk</h3>
+            <p>Doldurulmamış alanları (…, XX, [ ], TBD, boş parantez) ve bu belge türü için zorunlu olup bulunmayan unsurları listele. "Aşağıda belirtilen" denip verilmeyen listeleri ve atıf yapılıp belgede olmayan ekleri de ekle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">17</div>
+          <div class="pl-body">
+            <h3>Şablon kalıntısı</h3>
+            <p>Metinde geçen tüm kurum ve kişi adlarını, tanımlar bölümündeki taraf listesiyle karşılaştır. Listede olmayan her adı, geçtiği paragrafla birlikte kalıntı adayı olarak raporla. Yetkili mahkeme, uygulanacak hukuk ve para birimi maddelerini bağlam uygunluğu açısından ayrıca kontrol et.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">18</div>
+          <div class="pl-body">
+            <h3>Koşul kapsama / eşik</h3>
+            <p>Tüm şartlı hükümleri koşul → sonuç tablosuna dök. Her eşik için kontrol et: tam eşik değeri hangi dala düşüyor, aralıklar çakışıyor mu, hiçbir dala girmeyen hâl var mı, kapanış dalı ("aksi hâlde") tanımlı mı?</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">19</div>
+          <div class="pl-body">
+            <h3>Belirsiz terim</h3>
+            <p>Ölçülemez ifadeleri (makul, derhal, uygun, en kısa sürede, önemli ölçüde) listele. Her biri için aynı konuda sayısal bir hüküm olup olmadığını kontrol et; ikisi birlikte varsa çelişki olarak raporla, yoksa "tanımsız yükümlülük" olarak işaretle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">20</div>
+          <div class="pl-body">
+            <h3>Çok dillilik</h3>
+            <p>İki dildeki metinleri madde madde hizala. Önce sayı, tarih, süre ve tutarları, sonra yükümlülük fiillerini karşılaştır. Asıl metin kaydının bulunup bulunmadığını belirt; sapmaları madde numarasıyla listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">21</div>
+          <div class="pl-body">
+            <h3>Para birimi / vergi / kur</h3>
+            <p>Tüm parasal ifadeleri tutar, para birimi, KDV durumu (dahil/hariç), kur kaydı ve tarihle tabloya çıkar. Aynı kalemin farklı satırlarını karşılaştır; rakamla ve yazıyla yazılmış tutarları da eşleştir.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">22</div>
+          <div class="pl-body">
+            <h3>Nicelik / kapsam evreni</h3>
+            <p>Her hükmü "hangi evrene uygulanıyor" bilgisiyle birlikte tabloya çıkar (kişi grubu, birim, coğrafya, dönem, sürüm). Aynı konudaki hükümleri evren sütununa göre karşılaştır; "tümü / bazı / yalnızca / en az / hariç" belirteçlerinin kapsamı değiştirdiği yerleri işaretle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">23</div>
+          <div class="pl-body">
+            <h3>İddia-kanıt</h3>
+            <p>Metindeki her önemli sonucu "iddia → dayanak → dayanağın gücü" üçlüsüne ayır. Dayanağın iddianın tamamını mı bir kısmını mı desteklediğini yaz. Korelasyondan nedensellik çıkarılan yerleri ayrıca işaretle. Dayanaksız sonuçları çelişki değil, "belgede belirtilmiyor" olarak etiketle.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">24</div>
+          <div class="pl-body">
+            <h3>İzlenebilirlik</h3>
+            <p>Amaç, gereksinim/madde, ölçüt ve kanıt sütunlarından bir izlenebilirlik matrisi kur. Hiçbir maddeye bağlanmayan amaçları, ölçütü olmayan gereksinimleri ve hiçbir amaca hizmet etmeyen yetim maddeleri ayrı ayrı listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">25</div>
+          <div class="pl-body">
+            <h3>Durum geçişi / kenar durumu</h3>
+            <p>Süreci durum → olay → yeni durum tablosuna dök. Çıkışı olmayan durumları, hedefi olmayan olayları ve ele alınmamış kenar durumlarını (sıfır, boş liste, tek öğe, azami değer, ret, iptal, gecikme, tekrar) listele.</p>
+          </div>
+        </div>
+
+        <div class="prompt-row">
+          <div class="pl-no">26</div>
+          <div class="pl-body">
+            <h3>Belge mimarisi</h3>
+            <p>Yönetici özeti, gövde ve ekleri ayrı ayrı iddia listesi olarak çıkar ve üç listeyi karşılaştır. Yalnızca tek listede görünen kritik iddiaları, özellikle özette geçmeyen kısıt ve koşulları raporla.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="report-section" id="rapor">
+    <div class="section-head">
+      <p class="eyebrow">Ek</p>
+      <h2>Bulgu Raporu Şablonu</h2>
+      <p>Denetimin çıktısı bir liste değil, denetlenebilir bir belgedir. Rapor dört parçadan oluşur; her bulgu aşağıdaki örnekteki alanların tamamını taşır.</p>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item">
+        <div class="spec-num">R-1</div>
+        <div class="spec-body">
+          <h3>Kapak ve kapsam sınırı</h3>
+          <p>Denetlenen belge (ad, sürüm, sayfa sayısı), denetim tarihi, kullanılan rehber sürümü ve <strong>neyin denetlenmediği</strong>: okunamayan sayfalar, dosyada bulunmayan ekler, dış kaynağa karşı teyit edilmemiş atıflar.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">R-2</div>
+        <div class="spec-body">
+          <h3>Özet sayım</h3>
+          <p>Risk seviyesine göre bulgu sayısı (yüksek / orta / düşük) ve güven düzeyine göre kırılım (kesin / olası). Tek satırlık bir yönetici özeti: en kritik üç bulgu, cümleyle.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">R-3</div>
+        <div class="spec-body">
+          <h3>Bulgu kartları</h3>
+          <p>Her bulgu, aşağıdaki örnekteki dokuz alanı eksiksiz doldurur. Alan boş kalıyorsa bulgu raporlanmaya hazır değildir — özellikle iki alıntı alanı zorunludur.</p>
+        </div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-num">R-4</div>
+        <div class="spec-body">
+          <h3>Kapsama listesi</h3>
+          <p>Madde × bölüm matrisi: hangi maddenin hangi bölümlerde kontrol edildiği. Denetimin bittiğini kanıtlayan tek şey budur; boş hücre kalmışsa denetim devam ediyor demektir.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="finding-head">
+        <p class="finding-id">Bulgu 03 — Örnek</p>
+        <span class="risk-badge high">Yüksek risk</span>
+        <span class="risk-badge sure">Kesin</span>
+      </div>
+      <dl class="finding-grid">
+        <dt>Etiket</dt>
+        <dd>E-2 · Çelişkili (Katman 1 — iç tutarlılık)</dd>
+
+        <dt>Madde</dt>
+        <dd>09 — Hak ve Yükümlülük Tutarlılığı</dd>
+
+        <dt>Pasaj 1</dt>
+        <dd class="finding-quote">"Taraflar, otuz (30) gün önceden yazılı bildirimde bulunmak kaydıyla işbu sözleşmeyi tek taraflı olarak feshedebilir."<span>Madde 5/2 — s. 4</span></dd>
+
+        <dt>Pasaj 2</dt>
+        <dd class="finding-quote">"İşbu sözleşme, üç (3) yıllık asgari süre dolmadan hiçbir surette feshedilemez."<span>Madde 14/1 — s. 9</span></dd>
+
+        <dt>Normalleştirilmiş</dt>
+        <dd>Özne: taraflar · Eylem: tek taraflı fesih · Zaman: sözleşme süresi içinde · Kapsam: tüm taraflar · Koşul: 30 gün bildirim → <strong>Pasaj 1: mümkün · Pasaj 2: yasak.</strong> Beş unsur da aynı; bu nedenle kesin çelişki.</dd>
+
+        <dt>Neden</dt>
+        <dd>İki hüküm aynı konuyu düzenliyor ve biri diğerini geçersiz kılıyor. Metinde bu iki maddeyi bağlayan bir istisna kaydı ("saklı kalmak kaydıyla", "aksi kararlaştırılmadıkça") bulunmuyor — kural-istisna ilişkisi değil, doğrudan çelişki.</dd>
+
+        <dt>Etki</dt>
+        <dd>Hukuki ve mali. Fesih bildirimi hâlinde hangi hükmün uygulanacağı tartışmalı; taraflardan biri fesih hakkını kullanırsa uyuşmazlık ve tazminat talebi riski doğar.</dd>
+
+        <dt>Gerekli bilgi</dt>
+        <dd>Tarafların asıl iradesi: süreli bağlılık mı, serbest fesih mi esas alınacak? Bu soru cevaplanmadan hangi hükmün korunacağı belirlenemez.</dd>
+
+        <dt>Düzeltme</dt>
+        <dd><strong>Seçenek A:</strong> Madde 5/2'nin başına istisna kaydı — <em>"Madde 14 hükümleri saklı kalmak kaydıyla, taraflar otuz (30) gün önceden…"</em> · <strong>Seçenek B:</strong> Madde 14'e haklı fesih hâllerinin istisna olduğunun eklenmesi.</dd>
+
+        <dt>Durum</dt>
+        <dd>Açık — yüksek riskli olduğu için insan onayına gönderildi (İP-3).</dd>
+      </dl>
+    </div>
+
+    <div class="panel" style="margin-top:1.4rem;">
+      <h3>Rapor sonu istatistikleri</h3>
+      <p class="why">Raporun sonunda tek bir "tutarlılık skoru" verilmez — skor, hangi kontrollerin yapıldığını ve nelerin kontrol dışı kaldığını gizler. Bunun yerine sayım verilir:</p>
+      <ul class="checks">
+        <li><span class="tick"></span>İncelenen iddia sayısı · incelenen tarih sayısı · incelenen sayısal ifade sayısı · incelenen terim ve kavram sayısı</li>
+        <li><span class="tick"></span>Etikete göre bulgu sayısı: kesin çelişki · eksiklik · belirsizlik · mükerrer · biçimsel hata</li>
+        <li><span class="tick"></span>Dış doğrulama gereken iddia sayısı ve manuel inceleme gereken yüksek riskli bulgu sayısı</li>
+        <li><span class="tick"></span>Kontrol dışı kalan alanlar: okunamayan bölümler, teyit edilmeyen atıflar, denetlenmeyen ekler</li>
+      </ul>
+      <div class="technique">
+        <span class="technique-glyph">→</span>
+        <div>
+          <span class="technique-label">Doğru ifade biçimi</span>
+          <p>"Belge %92 tutarlıdır" <strong>demeyin</strong>. Şöyle deyin: <em>"İncelenen 148 iddia içinde 6 yüksek, 13 orta ve 21 düşük öncelikli sorun tespit edilmiştir; 17 iddia dış doğrulama beklemektedir; 4 sayfa OCR nedeniyle denetlenememiştir."</em> Ölçümün kapsamı ve sınırı, sonucun kendisi kadar bilgi taşır.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:1.4rem;">
+      <h3>Makine-okunabilir bulgu şeması</h3>
+      <p class="why">Bulgular bir takip sistemine, tabloya veya bir sonraki denetime aktarılacaksa kart biçimi yetmez. Her bulgu aşağıdaki alanlarla tek satırlık bir kayda dönüşür — bu, İP-4 yaşam döngüsünün taşıyıcısıdır.</p>
+      <pre class="prompt-block">bulgu_id        : "IC-003"
+madde_no        : 9
+etiket          : "CELISKILI"        // 7 etiketten biri
+katman          : 1                  // 1 iç · 2 eksiklik · 3 dış
+risk            : "YUKSEK"           // YUKSEK | ORTA | DUSUK
+guven           : "KESIN"            // KESIN | OLASI | DUSUK
+kok_bulgu_id    : null               // grup başıysa null, değilse ana bulgu
+konumlar        : [
+                    {"ref":"Madde 5/2","sayfa":4,"alinti":"…feshedebilir."},
+                    {"ref":"Madde 14/1","sayfa":9,"alinti":"…feshedilemez."}
+                  ]
+alinti_dogrulandi: true              // metinde birebir arandı mı?
+normallestirilmis: "ozne=taraflar; eylem=fesih; kapsam=tum; sonuc=CAKISMA"
+etki            : ["hukuki","mali"]
+gerekli_bilgi   : "Tarafların süreli bağlılık iradesi"
+oneri           : ["A: Madde 5/2'ye istisna kaydı","B: Madde 14'e istisna"]
+durum           : "ACIK"             // ACIK|DOGRULANDI|DUZELTILDI|KAPATILDI|REDDEDILDI
+insan_onayi     : true               // İP-3 gereği
+araclar         : ["metin_arama"]    // KG-7: hangi araçlarla doğrulandı</pre>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin:0 0 .9rem;">Yirmi altı madde, ağırlıklandırma tablosu ve risk skalası belge türüne göre uyarlanabilir bir başlangıç noktasıdır. Kalite güvencesi bölümü ise türden bağımsızdır: kanıt kuralı, istisna süzgeci, etiket ayrımı ve kapsam sınırı beyanı olmadan üretilen bir denetim raporu, denetlenmiş sayılmaz.</p>
+    <p style="margin:0;">Kavramsal dayanaklar: normatif kip ayrımı için RFC 2119'un zorunluluk/tavsiye/izin kademesi; ölçümün kapsamının ve kontrol dışı kalan alanların raporlanması için ISO 8000 veri kalitesi yaklaşımı; zaman ilişkileri için OWL-Time'ın önce/sonra/örtüşür ilişki modeli; kavram hiyerarşisi için SKOS'un tercih edilen ad, alternatif ad ve daha geniş/dar kavram yapısı; kaynak izlenebilirliği için PROV provenans modeli; açıklık, eksiksizlik, çelişkisizlik ve doğrulanabilirliğin ayrı kalite ölçütleri olarak ele alınması için NASA'nın gereksinim kalitesi ölçütleri.</p>
+  </footer>
+
+</div>
