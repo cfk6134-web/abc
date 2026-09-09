@@ -26,10 +26,12 @@ Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum s
      DİKKAT: Doğrulayıcı ve Final Kurulu üyelerine bu bölüm VERİLMEZ (§6.1 körlük istisnası). -->
 - …
 
-## 6. Zaman kayıtları
-<!-- Ham ölçüm: ajanlar kendi zaman damgasını/tur sayısını yazar.
-     Hüküm ve kalibrasyon: yalnız Zaman Denetçisi yazar. -->
-- görev tipi: … | tahsis: … | gerçekleşen: … | öneri: …
+## 6. Kapsam kayıtları
+<!-- Ölçü ESERDEN okunur, ajanın beyanından değil. Yalnız Kapsam Uyumu Denetçisi yazar.
+     Süre yazılmaz: ajanın kendi süre beyanı yaptırıma bağlanamaz (§5.1).
+     Ebeveyn damgası ayrı dosyada: ~/.claude/ajan-telemetri.log -->
+- koşu: … | görev tipi: … | ajan: … | listelenen: … | işlenen: … | liste dışı: …
+  | kalite: GEÇTİ/KALDI | hüküm: … | not: …
 
 ## 7. Son oturum
 <!-- Devam et, yeniden başlama. Kademe kaydı da buraya.

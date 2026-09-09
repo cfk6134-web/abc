@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.4
+# AJAN İŞLETİM TALİMATI — v1.5
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -64,7 +64,7 @@ SEVİYE 2 — STANDART DALGA      diğer her durum. ← VARSAYILAN BUDUR
 | Kim çalışır | Tek ajan | 1 yapan + 1 bağımsız Doğrulayıcı | Beyin + işçiler + tüm kurullar |
 | Ayrıştırma (§7) | Yok | Kaba liste | Tam, 4 testli |
 | Paralellik Kurulu (§4.1) | Yok, N=1 | Yok, N=1 | **Var** |
-| Zaman (§5) | T_toplam tek dilim, ya da §5.5 kapsam sınırı | Tek dilim + doğrulama payı ayrılır | **Zaman Dağıtıcı tam tablo** |
+| Sınır (§5) | Tek kapalı liste | Kapalı liste + doğrulama kapısı | **Kapsam Belirleyici tam plan (§5.2)** |
 | Doğrulama (§10) | Temiz bağlamda öz-denetim | **Ayrı Doğrulayıcı**, rubrikle | Tam zincir + Meta + Nihai Testçi |
 | Final Kurulu (§4.4) | Yok | Yok — Doğrulayıcı ONAY'ı yeterli | **Var, 3/3 kör oy** |
 | Boşluk taraması (§4.5) | Yok | Yok | **Var** |
@@ -78,8 +78,8 @@ SEVİYE 2 — STANDART DALGA      diğer her durum. ← VARSAYILAN BUDUR
 | **M5** denetleyeni denetleyen | — | — | Meta-Doğrulayıcı |
 | **M7** nihai test | Öz-denetimde rubrik | Doğrulayıcı testi çalıştırır | Ayrı Nihai Testçi |
 | **M15** paralellik kurul kararı | N=1 (kurul gereksiz) | N=1 (kurul gereksiz) | Paralellik Kurulu toplanır |
-| **M16** bütçesiz ajan yok | Tek dilim veya kapsam sınırı | Tek dilim + doğrulama payı | Tam tahsis tablosu |
-| **M17** asgari süre denetimi | Ham kayıt yeter | Kayıt + KO | Tam §5.4 raporu |
+| **M16** sınırsız ajan yok | Kapsam sınırı (tek liste) | Kapsam sınırı + doğrulama kapısı | Tam kapsam planı (§5.2) |
+| **M17** kapsam uyumu denetimi | Öz-denetim: liste bitti mi | Doğrulayıcı kapsam oranını da bakar | Tam §5.4 kapsam uyum raporu |
 | **M20** oy birliği | Uygulanmaz | Doğrulayıcı ONAY'ı yerine geçer | Final Kurulu 3/3 |
 
 **Teslim beyanı zorunludur** — hangi kademede çalışıldığı kullanıcıdan gizlenemez:
@@ -142,8 +142,8 @@ Her mekanizma bu maddelerden **en az birini** gerçeklemek zorundadır. Gerçekl
 | **M13** | Karar protokolü #2 — üç perspektif | Üç ajan, üç farklı bakış açısından aynı soruna bakar; doğru çözüm takım halinde bulunur. |
 | **M14** | Karar protokolü #3 — ileri simülasyon | Test öncesi akış ileri doğru çalıştırılır, muhtemel hatalar listelenir (pre-mortem). |
 | **M15** | Paralellik kurul kararıdır | Kaç ajanın aynı anda çalışacağına **Paralellik Kurulu** karar verir; keyfî sayı yasaktır. (§4.1) |
-| **M16** | Zaman tahsisi zorunludur | Toplam süre verilmişse **Zaman Dağıtıcı** onu alt-ajanlara böler; bütçesiz ajan çalıştırılmaz. (§5) |
-| **M17** | Asgari süre denetimi | **Zaman Denetçisi**, her ajanın tahsis edilen süreyi asgari düzeyde kullandığını doğrular. (§5.4) |
+| **M16** | Sınırsız ajan yok | Her ajan **kapalı bir iş listesi** (kapsam sınırı) alır; ölçülebiliyorsa bütçe tavanı eklenir. Sınırsız ajan çalıştırılmaz. (§5) |
+| **M17** | Kapsam uyumu denetimi | **Kapsam Uyumu Denetçisi** iki yönlü bakar: ajan listenin dışına çıktı mı (israf) **ve** listeyi bitirmeden bıraktı mı (eksik teslim). Ölçü eserden okunur, beyandan değil. (§5.4) |
 | **M18** | Tek doğruluk kaynağı | `STATE.md` sistemin omurgasıdır; çelişki çıkarsa STATE.md kazanır. (§6) |
 | **M19** | Temiz bağlam | Her yeni **büyük adım** (tanım: §8.1), yeni alt-ajan veya temizlenmiş bağlamla başlar. (§8) |
 | **M20** | Oy birliğiyle teslim | Nihai ürün, Final Kurulu'nun **oy birliği** olmadan kullanıcıya sunulmaz. (§4.4) |
@@ -161,13 +161,13 @@ Seviye 3'te adım atlanmaz; gereksizse "atlandı, gerekçe: …" diye `STATE.md`
 [1] HEDEF NETLEŞTİRME     → Tamamlanma durumu yaz (§2.1). Belirsizlik varsa sor.
 [2] AYRIŞTIRMA            → Büyük hedefi izole alt görevlere böl (§7).
 [3] PARALELLİK KURULU     → Kaç ajan aynı anda? (§4.1) → N sayısı çıkar.
-[4] ZAMAN DAĞITIMI        → Toplam süreyi adımlara ve ajanlara böl (§5.2).
+[4] KAPSAM DAĞITIMI       → Her ajana kapalı bir iş listesi yaz (§5.2).
 [5] GÖREVLENDİRME         → Her alt görevi ilgili uzman alt-ajana ver (§3, §13.1).
 [6] YÜRÜTME               → Dinamik (paralel) + statik (sıralı) karma (§9).
 [7] DOĞRULAMA             → Yapan ≠ denetleyen. Doğrulayıcı + meta-doğrulayıcı (§10).
 [8] KURUL / DÜZELTME      → Sorun varsa kök-neden kurulu, ders çıkar, kurala yaz (§4.2, §12).
 [9] BOŞLUK TARAMASI       → Boşluk-Planlayıcı: sahipsiz kalan iş var mı? (§4.5)
-[10] NİHAİ TEST + ZAMAN DENETİMİ → Bağımsız testçi (M7) + Zaman Denetçisi (M17).
+[10] NİHAİ TEST + KAPSAM DENETİMİ → Bağımsız testçi (M7) + Kapsam Uyumu Denetçisi (M17).
 [11] FİNAL OYLAMA         → Oy birliği → teslim + STATE.md güncelle (§4.4, §6.3).
 ```
 
@@ -208,7 +208,7 @@ alıntının ayrı bir dosyası verilir), ve bu koruma tek bir `Read` çağrıs�
 Körlüğü "yapısal" sayan her cümle bu sınırla birlikte okunmalıdır.
 
 `§13.1` şablonundaki `KAPSAM DIŞI` ve `KONTROL NOKTASI` alanları bu 9'a **ek**tir:
-paralel dalgada koşan veya süre tahsisi almış her ajan için **zorunlu**, tek başına koşan
+paralel dalgada koşan veya kapsam sınırı almış her ajan için **zorunlu**, tek başına koşan
 Seviye 1'deki tek ajanlı kısa görevlerde isteğe bağlıdır.
 
 ```
@@ -219,7 +219,7 @@ GİRDİ       : <hangi dosya/veri/bağlam verilecek>
 YETKİ       : <yapabilecekleri — araç listesi>
 YASAK       : <yapamayacakları — açık sınır>
 BİTİŞ       : <hangi koşulda "tamam" der>
-SÜRE        : <Zaman Dağıtıcı'nın verdiği dilim>
+KAPSAM      : <Kapsam Belirleyici'nin yazdığı kapalı liste — §5.2>
 MODEL       : <kademe — §9.4>
 ```
 
@@ -235,26 +235,26 @@ MODEL       : <kademe — §9.4>
 | **Nihai Testçi** | Zincirin sonunda bağımsız tam test (M7) | Tam test paketi | "Geçti" demeden işi kapatamaz |
 | **Gözcü (Shadow)** | Filoyu izler, anomali yakalar, alarm verir | İzleme + rapor + komutla müdahale talebi | **Asla kendi başına ajan sonlandırmaz** — önce raporlar |
 | **Öğretmen** | Hatadan ders çıkarır, dersi kalıcı kurala yazar (M2, M6) | Skill/kural dosyası yazma | Ürüne dokunmaz |
-| **Zaman Dağıtıcı** | Toplam süreyi ajanlara böler (M16) | Bütçe tahsisi | İçerik üretmez |
-| **Zaman Denetçisi** | Sürenin asgari kullanıldığını doğrular (M17) | Ölçüm + rapor + reddetme | Süre uzatma kararı veremez (Beyin verir) |
+| **Kapsam Belirleyici** | Her ajana kapalı iş listesi yazar (M16) | Kapsam ve bütçe tavanı belirleme | İçerik üretmez; listeyi işi yapan ajan yazamaz |
+| **Kapsam Uyumu Denetçisi** | Listenin dışına çıkıldı mı VE bitirilmeden bırakıldı mı (M17) | Eserden ölçüm + rapor + reddetme | Sınırı genişletemez/daraltamaz (Beyin karar verir) |
 | **Karantina Okuyucu** | Güvenilmeyen içeriği okur, özetler | Salt-okur, izole | Hiçbir yüksek yetkili eylem alamaz (§11.1) |
 | **Hipotez Üretici** (n adet) | Tek bir kanıt kaynağından (log / dosya / veri) bağımsız hipotez üretir (§4.2) | Kendi kanıt kaynağını okuma | Başka kaynağa bakmaz; düzeltme yazmaz; kendi hipotezini kendi doğrulamaz |
 | **Çürütücü** | Bir hipotezi yanlışlamaya çalışır (§4.2) | Salt-okur + test çalıştırma | Hipotez üretmez; ürüne dokunmaz |
 
 **Aynı rollerin çıktı ve bitiş tanımları** (§3'teki 9 alanın kalan dördü):
 
-| Rol | ÇIKTI | BİTİŞ koşulu | SÜRE kaynağı | MODEL kademesi |
+| Rol | ÇIKTI | BİTİŞ koşulu | KAPSAM kaynağı | MODEL kademesi |
 |---|---|---|---|---|
-| **Beyin (Orkestratör)** | Plan + delegasyon listesi + sentez | Final Kurulu 3/3 ONAY verdi (§4.4) | Faz payı: plan + sentez (§5.2) | En üst |
+| **Beyin (Orkestratör)** | Plan + delegasyon listesi + sentez | Final Kurulu 3/3 ONAY verdi (§4.4) | Kendi belirler | En üst |
 | **Boşluk-Planlayıcı** | Boşluk listesi + yeni ajan tanımları + görev dağılımı | Her boşluğa bir sahip ajan atandı | Plan fazından | Üst |
-| **Uzman İşçi** (n adet) | Görev tanımındaki ÇIKTI formatı | Tamamlanma durumu (§2.1) doğru | `T_i` (§5.2) | Orta |
+| **Uzman İşçi** (n adet) | Görev tanımındaki ÇIKTI formatı | Tamamlanma durumu (§2.1) doğru | Kapalı liste (§5.2) | Orta |
 | **Doğrulayıcı** | Rubrik maddesi başına DURUM + KANIT (§13.2) | Rubriğin her maddesi kanıtla işaretlendi | Doğrulama fazından | **Göreve göre:** rubrik kontrolü → hızlı/ucuz; hipotez çürütme veya kök-neden (§4.2) → üst |
 | **Meta-Doğrulayıcı** | Doğrulayıcı başına kaynak/yöntem hükmü | Her ONAY'ın kanıtı denetlendi | Doğrulama fazından | Orta |
 | **Nihai Testçi** | Test raporu (geçen/kalan + komut çıktısı) | Tam paket sıfır hatayla geçti | Doğrulama fazından | Orta |
-| **Gözcü (Shadow)** | Anomali raporu (§4.2 anomali tanımı) | Koşu bitti veya anomali raporlandı | Koşu boyunca, tahsis dışı | Hızlı/ucuz |
+| **Gözcü (Shadow)** | Anomali raporu (§4.2 anomali tanımı) | Dalga bitti veya anomali raporlandı | Dalga sınırlarında — koşu boyunca DEĞİL (§3.2) | Hızlı/ucuz |
 | **Öğretmen** | Damıtılmış kural metni + yazılacağı yer (§12) | Ders `STATE.md` §4 veya kalıcı kural dosyasında | Sentez fazından | Üst |
-| **Zaman Dağıtıcı** | §5.2 zorunlu tablosu | Her ajanın dilimi ve kontrol noktası yazıldı | Plan fazından | Hızlı/ucuz |
-| **Zaman Denetçisi** | §5.4 zorunlu tablosu + kalibrasyon notu | Her ajan için hüküm verildi | Sentez fazından | Hızlı/ucuz |
+| **Kapsam Belirleyici** | §5.2 zorunlu kapsam planı | Her ajanın kapalı listesi yazıldı, sahipsiz iş yok | Plan aşamasında | Üst |
+| **Kapsam Uyumu Denetçisi** | §5.4 kapsam uyum raporu | Her ajan için iki yönlü hüküm verildi | Sentez aşamasında | Orta |
 | **Karantina Okuyucu** | Şemalı olgu özeti — serbest metin değil (§11.1) | Şema dolduruldu | Görev tanımından | **Orta — en ucuz kademeye atanamaz** |
 | **Hipotez Üretici** | Hipotez + dayandığı kanıt satırı | Kaynağından çıkan hipotezler listelendi | Kök-neden turundan | Orta |
 | **Çürütücü** | Hipotez başına ÇÜRÜTÜLDÜ / AYAKTA + kanıt | Her hipoteze hüküm verildi | Kök-neden turundan | **Üst** — hipotez adjudikasyonu ucuz kademede yapılmaz |
@@ -266,7 +266,7 @@ Gözcü rolü tanımlı olmadan da yazılabilir ama **nasıl izlediği** yazılm
 **Sinyal kaynağı** (bunun dışında bir izleme kanalı varsayılmaz):
 ```
 [ ] STATE.md §3 ve §6'ya düşen kayıtlar
-[ ] Ajanların kontrol noktası raporları (§5.2 Adım 3)
+[ ] Dalga sınırında dönen alt-ajan çıktıları — koşarken DEĞİL (§5.2 harness kaydı)
 [ ] Alt-ajanların dönüş sonuçları ve format uygunluğu (§10.7)
 ```
 
@@ -332,7 +332,12 @@ N_ÖNERİ    = min(N_görev, N_kaynak, N_çakışma, N_inceleme)
 N_FİNAL    = clamp(N_ÖNERİ, 1, 8)
 
 İLK KOŞU: STATE.md §6'da bu görev tipi için kayıt yoksa
-          ajan_başına_beklenen_maliyet = T_asgari karşılığı bütçe (§5.2)
+          ajan_başına_beklenen_maliyet = ajan başına beklenen araç çağrısı tavanı
+          (§5.2 bütçe tavanı). Ölçülemiyorsa N_kaynak "değerlendirilemez" sayılır ve
+          N_ÖNERİ diğer üç sayıdan alınır — uydurma sayı üretilmez.
+GÖZLEM:   Eşzamanlılık limiti ajana okutulamaz. Dalgayı başlat; bir Agent çağrısı
+          REDDEDİLEREK dönerse bir kademe in (8→5→3→2→1) ve kalanı yeniden başlat.
+          Reddedilme gözlenebilir; limitin değeri gözlenemez.
           ve bu varsayım STATE.md §5'e "ölçülmedi, varsayıldı" diye yazılır.
 
 TAVAN 8'İN GEREKÇESİ: keyfî değil — N_inceleme'nin üst sınırıdır (§4.1).
@@ -382,8 +387,11 @@ PARALELLİK KURULU KARARI
 
 ```
 [ ] Aynı hatanın 2. tekrarı
-[ ] Art arda 2 kontrol noktasında ilerleme artmadı veya geriledi
-[ ] Bir ajan tahsisinin %120'sini aştı (KO > 1.2) — ilk seferde bile tetikler
+[ ] Art arda 2 dalga sınırında ilerleme artmadı veya geriledi
+[ ] Bir ajan kapsam listesinin DIŞINA çıktı (§5.4 `liste_dışı` boş değil) — ilk seferde tetikler
+[ ] Bir ajan listeyi gerekçesiz eksik bıraktı (§5.4 eksik teslim) — ilk seferde tetikler
+[ ] Kademenin gerektirdiği zorunlu bir adım, STATE.md'de ne çıktısı ne de
+    "atlandı, gerekçe: …" kaydı olmadan geçildi
 [ ] Bir ajan görev tanımının dışına çıktı (M1/M10 ihlali)
 [ ] Bir ajan, doğrulanmamış bir varsayımın üstüne 2+ adım inşa etti
 ```
@@ -510,198 +518,208 @@ Boşluk bulunmazsa çıktı tek satırdır: `boşluk yok`. Bu adım atlanamaz �
 
 ---
 
-## 5. ZAMAN YÖNETİMİ (M16, M17)
+## 5. KAPSAM VE SINIR YÖNETİMİ (M16, M17)
+
+> **KULLANICI KURALI 6–7 — UYGULAMA DEĞİŞİKLİĞİ (v1.5).** Bu bölüm, sistemin doğduğu yedi
+> talimatın 6. ve 7.'sinin karşılığıdır: *"süreyi ajanlar arasında akıllıca dağıtan bir ajan"*
+> ve *"sürenin asgari kullanıldığını doğrulayan ayrı bir alt-ajan"*. Kurallar **kaldırılmadı;
+> ölçüm birimi değişti.** Neden: bir alt-ajan koşarken kendi geçen süresini göremez, turları
+> hiçbir yere akmaz, ve v1.4'e kadar `T_kullanılan` için tek kaynak **denetlenen ajanın kendi
+> beyanıydı** — yani ölçen ile ölçülen aynı kişiydi ve süre şişirmek en kârlı davranıştı.
+> Ölçülemeyen bir büyüklüğün aritmetiğini düzeltmek onu ölçülebilir yapmaz. Bu yüzden dağıtım
+> **süreden kapsama** taşındı.
+>
+> **Açıkça kaydedilen kayıp:** "Bu iş 2 saatte bitsin" talebi artık ancak **dış bir
+> tetikleyiciyle** (zamanlayıcı, ayrı yoklama koşusu, insanın sorması) karşılanabilir. Sistem
+> sana süre garantisi değil, **kapsam garantisi** verir. Bu kaybı kabul etmiyorsan dış
+> tetikleyici kolu ayrıca tasarlanmalıdır — sahte bir saat göstergesi bırakmak seçenek değildi.
+>
+> Karar usulü: dört üyeli kurul, ayrı bağlamlarda, kör ve eşzamanlı; oy birliği. §15.1 gereği
+> M16 ve M17 metni değiştiği için kullanıcının açık onayı alındı.
 
 ### 5.1 Temel kural
 
-> Bütçesiz ajan çalıştırılmaz. Süre verilmediyse Beyin bir süre **varsayar**, varsayımı yazar ve öyle dağıtır.
+> **Sınırsız ajan çalıştırılmaz.** Her ajan, işe başlamadan önce **kapalı bir iş listesi** alır.
+> Liste bitince durur; kendiliğinden genişletmez.
 
-**Önce ölçüm birimini seç.** Bir ajan kendi içinde akan süreyi *sayamaz*; ölçüm ancak iki
-gözlem arasındaki farktan gelir. Bu yüzden birim, ajanın elindeki araca göre seçilir:
+Sınır üç biçimde konur. Sırayla dene, ilk uygulanabilir olanı kullan:
 
-| Ajanın elinde ne var? | Kullanılacak birim | Nasıl ölçülür |
+| Ajanın elinde ne var? | Sınır biçimi | Nasıl doğrulanır |
 |---|---|---|
-| Sistem saatini okuyabiliyor (bir araç çağrısıyla) | **Duvar saati** (dakika/saat) | Görev başında ve bitişinde damga al, farkı `STATE.md` §6'ya yaz |
-| Saat yok ama turlar/araç çağrıları sayılabiliyor | **Bütçe** (tur, araç çağrısı, token) | Sayaç görev tanımında verilir, ajan her turda azaltır |
-| İkisi de yok | **Zaman tahsisi kapatılır** | Yerine kapsam sınırı konur (§5.5) |
+| Her durumda | **Kapsam sınırı** (varsayılan) | Liste görevlendirmede sabitlenir; uyum eserden/diff'ten okunur |
+| Tur veya araç çağrısı sayılabiliyor | Kapsam **+ bütçe tavanı** ("en fazla N komut") | Ajan sayar; tavan aşımı dönüş metninde beyan edilir |
+| Dış tetikleyici var (zamanlayıcı, yoklama koşusu, insan) | Kapsam + **duvar saati** | Yalnız dış tetikleyici ölçer; ajanın kendi beyanı değildir |
 
-**Kontrol noktaları da aynı kısıta tabidir.** "Şu dakikada durum bildir" bir ajanın kendi
-kendine yapamayacağı şeydir. Kontrol noktası ya **dış tetikleyiciyle** (zamanlayıcı, ayrı
-yoklama koşusu, orkestratörün sorması) ya da **adım tabanlı** olarak kurulur:
-"planlanan alt adımların yarısı bittiğinde durum bildir". Dış tetikleyici yoksa **adım tabanlı
-kontrol noktası zorunludur**; duvar-saati kontrol noktası kullanılmaz.
+**Ajanın kendi beyanına dayanan hiçbir sayı yaptırıma bağlanamaz.** Beyan kaydedilebilir, rapor
+edilebilir; ama onunla iş reddedilemez, ajan durdurulamaz, sınır daraltılamaz. Yaptırım yalnız
+**eserden okunabilen** bir gözleme dayanır (§5.4).
 
-### 5.2 ZAMAN DAĞITICI AJAN — toplam süreyi böler
+**Ebeveyn damgası — tek bağımsız süre ölçüsü.** Ebeveyn, bir alt-ajan koşarken bloklanır;
+dolayısıyla çağrının duvar-saati süresi **ebeveynin kendi iki damgası** arasındaki farktır ve
+denetlenenden tamamen bağımsızdır. Bu ölçü tutulabilir — ama yalnız **kayıt olarak**, ayrı bir
+append-only dosyaya (`~/.claude/ajan-telemetri.log`), **hiçbir yaptırıma bağlanmadan**. Ne sınır
+belirler, ne ret gerekçesi olur. Süre bilgisinin bu belgede meşru tek kullanımı budur.
 
-**Girdi:** `T_toplam`, alt görev listesi, `N_FİNAL` (Paralellik Kurulu'ndan).
+### 5.2 KAPSAM BELİRLEYİCİ — işi bölen ajan (M16)
 
-**Adım 1 — Faz ayırma (sabit oranlar):**
+**Girdi:** hedef, alt görev listesi, `N_FİNAL` (§4.1).
 
-| Faz | Pay | Neden |
-|---|---|---|
-| Planlama + kurullar | %10 | Kısa tutulur; plan uzarsa iş kısalır |
-| Üretim (uzman işçiler) | %50 | Asıl iş |
-| Doğrulama (M4+M5+M7) | %20 | **Taban %15** — bu sınırın altına indirilemez, kalite kapısı çöker |
-| Sentez + entegrasyon | %10 | Parçaları birleştirme |
-| **Rezerv** | %10 | Sürprizler; harcanmazsa iade edilir |
-
-> Bu oranlar varsayılandır. Değiştirilirse gerekçesi `STATE.md`ye yazılır. **Doğrulama payı %15'in altına indirilemez.**
-
-**Adım 2 — Ajan başına dilim:**
+Her ajana **kapalı bir liste** yazılır. Liste, ajanın göreve başlamadan önce göreceği son sözdür:
 
 ```
-ağırlık_i = karmaşıklık_i (1-5)  ×  kritiklik_i (1-3)
-
-T_i = T_üretim × ( ağırlık_i / Σ ağırlık )
-
-Sınırlar:
-  - T_i ≤ %40 × T_üretim          (tek ajan üretimi domine edemez)
-      İSTİSNA: N_FİNAL = 1 ise bu tavan uygulanmaz; T_i = T_üretim.
-      (Tavanın gerekçesi "tek ajan domine etmesin"dir; tek ajan varken gerekçe düşer.)
-  - T_i ≥ T_asgari (varsayılan 3 dk / 5k token)
-
-BİRİM AYRIMI — yukarıdaki bölme BÜTÇE birimi içindir (tur/araç çağrısı/token).
-  DUVAR SAATİNDE bölme yapılmaz: paralel dalgadaki ajanlar aynı pencereyi PAYLAŞMAZ,
-  hepsi aynı anda akar. Her ajan dalga penceresinin tamamını alır:
-      T_i(duvar saati) = T_dalga
-      dalga süresi     = max(T_i), toplam değil
-  Bölme yalnız SIRALI zincirde (statik ajanlar) yapılır.
+KAPSAM SINIRI
+- İşlenecekler (kapalı liste): <dosya / madde / kaynak — tek tek sayılır>
+- Liste dışına çıkma. Yeni bir şey gerekiyorsa DUR ve Beyin'e bildir.
+- Beklenen çıktı: <format + zorunlu alanlar>
+- Bütçe tavanı (ölçülebiliyorsa): en fazla <n> komut / araç çağrısı
+- Liste bitince DUR ve raporla — kendiliğinden genişletme.
 ```
 
-**Adım 3 — Kontrol noktası:** Her ajan için, tahsisinin `%60`ına denk gelen noktada ilerleme
-sorulur. Bu nokta **§5.1'e göre** ya dış tetikleyiciyle ya da adım tabanlı olarak tanımlanır
-(ör. "planlanan 5 alt adımdan 3'ü bitince bildir"). Kontrol noktasını ajanın kendisi saymaz.
+**Bölme ölçütü.** İş, bağlam sınırına göre bölünür (§7.2), ağırlık formülüne göre değil.
+v1.4'e kadar kullanılan `ağırlık = karmaşıklık × kritiklik` çarpımı ölçütsüz iki sezgiyi
+sahte-kesin bir sayıya çeviriyordu; kritiklik ayrıca süreyi değil **doğrulama derinliğini** ve
+**model kademesini** (§9.4) belirler. Kritiklik artık oraya bağlıdır.
 
-**İlerleme nasıl ölçülür** (öznel tahmin geçersizdir):
+**Doğrulama bir yüzde değil, KAPIDIR.** v1.4'e kadar doğrulamaya bütçenin %15–20'si ayrılıyordu;
+kapsam dilinde bunun karşılığı sayısal pay değil, geçilmesi zorunlu bir kapıdır:
+**doğrulanmamış hiçbir madde "bitti" sayılmaz** (§10.1). Sıkışıldığında ilk kesilen şeyin
+doğrulama olmasını engelleyen sipariş budur; yüzdeden zayıf değil, uygulanabilir olduğu için
+fiilen daha güçlüdür.
+
+**Kontrol noktası — adım tabanlı, saat tabanlı değil.** Her ajan için, **listenin yarısı
+bittiğinde** durum bildirimi istenir:
 
 ```
-ilerleme = tamamlanan alt adım / görev tanımında ÖNCEDEN listelenmiş toplam alt adım
+ilerleme = tamamlanan liste maddesi / listedeki toplam madde
 ```
 
-Alt adıma bölünemeyen açık uçlu işte: karşılanan rubrik maddesi / toplam zorunlu rubrik maddesi.
-İkisi de yoksa bu kontrol noktası **atlanır** ve yerine yalnız §5.3 aşım protokolü çalışır —
-ölçülemeyen bir eşiğe dayanarak müdahale kararı verilmez.
+Bu ölçü listeden okunur, ajanın tahmininden değil. Liste tek maddelik veya bölünemezse kontrol
+noktası **atlanır** ve yerine yalnız §5.3 çalışır — ölçülemeyen bir eşiğe dayanarak müdahale
+kararı verilmez.
 
-- İlerleme < %50 → **Beyin müdahalesi (M8)**: durdur → ya kaldığı yerden yeniden delege et, ya 2–3 parçaya böl.
-- İlerleme ≥ %50 → devam.
+- İlerleme < yarı **ve** bütçe tavanının çoğu harcandı → **Beyin müdahalesi (M8)**: durdur, daralt veya böl.
+- Aksi halde → devam.
+
+> **Harness kaydı:** Alt-ajan koşarken ebeveyn bloklanır; ona soru sorulamaz ve ara rapor
+> gönderemez (§8.4). Bu yüzden "kontrol noktası" ajan-içi bir olay DEĞİL, **dalga sınırıdır**:
+> gerçek müdahale anı, görevi iki ardışık çağrıya bölüp aradaki dönüşü okumaktır. Tek çağrılık
+> bir görevde kontrol noktası yoktur; bunu varmış gibi yazmak sahte kayıttır (§10.4).
 
 **Çıktı formatı (zorunlu):**
 
 ```
-ZAMAN PLANI  (T_toplam = …)
-Faz: plan …  | üretim …  | doğrulama …  | sentez …  | rezerv …
-┌────────────────┬────────────┬──────────┬───────────┬──────────────┐
-│ Ajan           │ Karmaşıklık│ Kritiklik│ Tahsis    │ Kontrol nok. │
-├────────────────┼────────────┼──────────┼───────────┼──────────────┤
-│ …              │ 1-5        │ 1-3      │ …         │ …            │
-└────────────────┴────────────┴──────────┴───────────┴──────────────┘
-Rezerv kullanım kuralı: yalnız Beyin onayıyla, tek seferde en fazla %50'si.
-Kullanılmayan rezerv: koşu sonunda STATE.md §6'ya "artan kapasite: <miktar>" olarak
-yazılır ve sonraki tahsis kalibrasyonuna girdi olur. Başka bir işleme tabi değildir.
+KAPSAM PLANI
+┌────────────────┬──────────────────────────┬───────────┬────────────────┐
+│ Ajan           │ Kapalı liste (madde)     │ Bütçe tav.│ Kontrol noktası│
+├────────────────┼──────────────────────────┼───────────┼────────────────┤
+│ …              │ …                        │ … / yok   │ … / yok        │
+└────────────────┴──────────────────────────┴───────────┴────────────────┘
+Sahipsiz kalan iş: <yok | …>   ← boş bırakılamaz (§4.5)
 ```
 
-### 5.3 Aşım protokolü
+### 5.3 Tıkanma ve durma protokolü
 
-Bir ajan `T_i`yi aşarsa:
+Kapsam sınırı madde **sayısını** bağlar, madde **başına çabayı** bağlamaz. Açık uçlu tek bir
+maddede sınırsız çaba yakılabilir; bunu kesen tek mekanizma budur ve atlanamaz.
+
 ```
-1. DUR. Kendiliğinden devam etme.
-2. Beyin'e bildir: ne bitti, ne kaldı, ne kadar daha lazım, neden.
+TIKANMA: Aynı maddede 2 deneme sonuç vermediyse
+1. DUR. Üçüncü kez deneme.
+2. Beyin'e bildir: ne denendi, ne oldu, engel ne.
 3. Beyin üç seçenekten birini seçer:
-   a) Rezervden ek süre ver (sınır için bkz. §5.2 "Rezerv kullanım kuralı"),
-   b) Kapsamı daralt ve elindekiyle bitir,
-   c) Görevi böl, 2 ajana dağıt (M8).
-4. Karar STATE.md'ye yazılır.
+   a) Maddeyi daralt (daha küçük bir hedefle bitir),
+   b) Maddeyi böl ve 2 ajana dağıt (M8),
+   c) Kullanıcıya sor — engel bilgi eksikliğiyse varsayım üretme (§13.6).
+4. Karar STATE.md §5'e yazılır.
+
+KAPSAM AŞIMI: Ajan listede olmayan bir şeye ihtiyaç duyarsa
+1. DUR. Kendiliğinden genişletme — kapsam aşımı §5.4'te RET gerekçesidir.
+2. Beyin'e bildir: ne gerekiyor, neden.
+3. Beyin listeyi genişletir (yazılı olarak) veya işi daraltır.
 ```
 
-### 5.4 ZAMAN DENETÇİSİ AJAN (M17) — asgari kullanım kontrolü
+### 5.4 KAPSAM UYUMU DENETÇİSİ (M17) — iki yönlü denetim
 
-**Amaç:** Her ajanın tahsis edilen süreyi **asgari** düzeyde kullandığını doğrulamak. Yani: ne boşa harcadı, ne de "bitti" deyip işi yarım bıraktı.
+**Amaç:** Her ajanın verilen sınıra uyduğunu doğrulamak — **iki yönlü**. Ne dışına çıktı
+(israf), ne de bitirmeden bıraktı (eksik teslim). v1.4'e kadar bu denetim tek yönlüydü: yalnız
+aşımı arıyordu, "10 dosyalık listede 2 dosya işleyip rapor yazan" ajan geçiyordu.
 
-**Ölçüm:**
+**Ölçüm — hepsi eserden okunur, beyandan değil:**
 
 ```
-KO (Kullanım Oranı)     = T_kullanılan / T_tahsis
-VT (Verimli Tur Oranı)  = ürüne katkı yapan tur / toplam tur
+kapsam_oranı = işlenen madde / listelenen madde     ← eserden/diff'ten sayılır
+liste_dışı   = eserde dokunulmuş ama listede olmayan madde kümesi
 ```
-
-**"Katkı yapan tur"** = çıktısı nihai eserde iz bırakan tur: bir dosyaya yazılmış, bir sonraki
-turda girdi olarak kullanılmış veya bir rubrik maddesini kapatmış. İz sürülemiyorsa VT için de
-`T_kullanılan` ile aynı standart uygulanır: **"ÖLÇÜLEMEDİ"** yazılır, tahmin üretilmez.
-
-`T_kullanılan` **hesaplanmaz, okunur**: §5.1'de seçilen birime göre ya iki zaman damgasının
-farkı ya da harcanan tur/araç çağrısı/token sayısıdır. Ajanların `STATE.md` §6'ya yazdığı
-kayıtlar tek kaynaktır; kayıt yoksa Denetçi o ajan için **"ÖLÇÜLEMEDİ"** yazar ve bunu
-Beyin'e bir süreç ihlali olarak raporlar — tahmin üretmez.
 
 **Karar tablosu:**
 
-**"Kalite kapısı geçti" ne demek** (bu sütun bir hükme dayanır, izlenime değil):
-§10.1 doğrulama zincirinin **tamamı** ONAY vermiş **ve** varsa §10.5 çapraz denetiminde çelişki
-çıkmamışsa geçmiştir. Zincirin herhangi bir halkası RET verdiyse kalmıştır.
+| Durum | Hüküm | Aksiyon |
+|---|---|---|
+| `liste_dışı` boş değil | ❌ Kapsam aşımı | **RET** — genişletme yazılı onay almadıysa (§5.3) |
+| `kapsam_oranı` = 1, kalite kapısı geçti | ✅ Uyumlu | Kayıt |
+| `kapsam_oranı` < 1, her atlanan madde **gerekçeli** | ⚠️ Kısmi — gerekçe denetlenir | Gerekçe geçerliyse kabul; değilse RET |
+| `kapsam_oranı` < 1, **gerekçesiz** atlama var | ❌ Eksik teslim | **RET** — atlanan maddeler için yeniden koştur |
+| `kapsam_oranı` = 1, kalite kapısı kaldı | ❌ Yüzeysel kapatma | §10.2 rubriğine göre işlenir; kapsam sorunu değildir |
 
-| KO | Kalite kapısı | Hüküm | Aksiyon |
-|---|---|---|---|
-| ≤ 0.4 | **Geçti** | ✅ İdeal — tahsis fazlaydı | Tahsis kalibrasyonu STATE.md §6'ya yazılır |
-| ≤ 0.4 | **Kaldı** | ❌ Erken bitirme (ajan tembelliği) | **Reddet**, tamamlanma durumu netleştirilerek yeniden koştur — **en fazla 2 kez**; 2. kez de aynı sonuç çıkarsa Beyin görev tanımını baştan yazar (§11.2: sınırsız döngü yasak) |
-| 0.4 – 0.9 | Geçti | ✅ Normal bant | Kayıt |
-| 0.9 – 1.0 | Geçti | ⚠️ Sınırda | Sonraki koşuda tahsisi %20 artır |
-| 1.0 – 1.2 | — | ❌ Aşım | §5.3 aşım protokolü; kök-neden kurulu **2. kez tekrarlarsa** |
-| > 1.2 | — | ❌ Ağır aşım | §5.3 + kök-neden kurulu **ilk seferde** (§4.2 anomali listesiyle aynı eşik) |
+> **Bu denetimin görmediği şey — dürüst kayıt.** Kapsam uyumu yalnız **yazma tarafını** görür.
+> Okunan dosya, denenip atılan yol, listedışı bir kaynağa bakılması eserde iz bırakmaz; yani
+> "liste dışına çıkmadı" iddiası tam olarak doğrulanamaz. Ayrıca bir maddeyi biçimsel olarak
+> kapatmak (dosyaya tek satır dokunmak) kapsam uyumunu geçirir: bu denetim *kapsandı mı* sorusunu
+> ölçer, *iyi kapsandı mı* sorusunu değil — o §10.2 rubriklerinin işidir. Ve listeyi yazan ölçütü
+> de elinde tutar: dar tutulmuş bir liste "%100 uyum" verir. Bu yüzden liste, işi yapan ajan
+> tarafından yazılmaz (§10.2, "rubriği yapan yazamaz" kuralının kapsam karşılığı).
+>
+> Buna rağmen bu ölçü, yerini aldığı KO/VT ikilisinden **daha azını ama gerçekten** ölçer:
+> KO'nun tek kaynağı denetlenenin beyanıydı, kapsam oranının kaynağı dosya sisteminin durumudur.
 
-**Ek denetimler (israf avı):**
+**Ek denetimler (israf avı — yalnız gözlenebilir olanlar):**
 
 | Belirti | Hüküm |
 |---|---|
-| Aynı dosya 2+ kez baştan okundu | İsraf — bağlam yönetimi hatası (§8) |
-| Kullanılmayan çıktı üretildi | İsraf — görev tanımı geniş (M10) |
-| Doğrulayıcı test çalıştırmadan "geçti" dedi | **Sahte pozitif — RET** (§10.3) |
-| Aynı sonuca 3+ turda ulaşıldı | İsraf — desen seçimi yanlış (§9) |
-| VT < 0.5 | İsraf — Beyin'e rapor |
-| Tahsisi doldurmak için tur üretildi / iş uzatıldı | **İhlal** — §5.4 teşvik kuralının açık ihlali, Beyin'e rapor |
+| Liste dışı dosyaya yazıldı | Kapsam aşımı — RET (§5.3) |
+| Gerekçesiz atlanan madde var | Eksik teslim — RET |
+| Doğrulayıcı test çalıştırmadan "geçti" dedi | **Sahte pozitif — RET** (§10.3). Denetçi komutu **kendisi yeniden çalıştırır**; sahte pozitifi yakalayan tek yöntem budur. |
+| Aynı dosya, aradan **hiçbir değişiklik geçmeden** 2+ kez baştan okundu | İsraf — bağlam yönetimi hatası (§8) |
 
-**Kalibrasyon bir yaptırım değildir — teşvik tersine çevrilemez.** Erken ve doğru bitirmek
-hiçbir koşulda ajanın gelecekteki kapasitesini daraltmaz:
+> v1.4'ün israf tablosundaki dört satır (tur sayısı, "aynı sonuca 3+ turda ulaşıldı",
+> `VT < 0.5`, "tahsisi doldurmak için tur üretildi") **silindi**: hepsi transkript verisi
+> gerektiriyordu ve transkript hiçbir yere akmıyor. Gözlenemeyen bir belirtiyi tabloda tutmak,
+> denetimin yapıldığı yanılsaması üretir.
 
-```
-[ ] Tahsis kısma, o görev tipinin GERÇEK ihtiyacını yansıtan bir ölçü düzeltmesidir; ceza değildir.
-[ ] Kısılan tahsiste kalite kapısı bir kez düşerse tahsis DERHAL eski değerine döner.
-[ ] Tahsisi doldurmak için tur üretmek, iş uzatmak veya bitmiş işi "cilalamak" AÇIK İHLALDİR
-    (aşağıdaki israf tablosuna bakılır) — hızlı bitiren ajan ödüllendirilir, yavaşlatan değil.
-```
-
-Bu kural olmadan tablo tersine çalışır: hızlı biteni kısıp sınırda gezineni ödüllendirir ve
-M17'nin amacını (asgari kullanım) baş aşağı çevirir.
-
-**Yetki sınırı:** Zaman Denetçisi **süre uzatamaz, kısaltamaz**. Yalnız ölçer, hüküm verir, rapor eder. Kararı Beyin uygular.
+**Yetki sınırı:** Kapsam Uyumu Denetçisi sınırı **genişletemez, daraltamaz**. Yalnız ölçer, hüküm
+verir, rapor eder. Kararı Beyin uygular.
 
 **Çıktı formatı:**
 ```
-ZAMAN DENETİM RAPORU
-┌──────────┬──────────┬────────────┬──────┬──────┬─────────┬──────────┐
-│ Ajan     │ Tahsis   │ Kullanılan │ KO   │ VT   │ Kalite  │ Hüküm    │
-├──────────┼──────────┼────────────┼──────┼──────┼─────────┼──────────┤
-│ …        │ …        │ …          │ …    │ …    │ Geçti   │ ✅/⚠️/❌ │
-└──────────┴──────────┴────────────┴──────┴──────┴─────────┴──────────┘
-Toplam: tahsis … / kullanılan … / rezerv kalan …
-Kalibrasyon notu (sonraki koşu için): …
+KAPSAM UYUM RAPORU
+┌──────────┬────────────┬──────────┬───────────┬─────────┬──────────┐
+│ Ajan     │ Listelenen │ İşlenen  │ Liste dışı│ Kalite  │ Hüküm    │
+├──────────┼────────────┼──────────┼───────────┼─────────┼──────────┤
+│ …        │ …          │ …        │ yok / …   │ Geçti   │ ✅/⚠️/❌ │
+└──────────┴────────────┴──────────┴───────────┴─────────┴──────────┘
+Atlanan maddeler ve gerekçeleri: …   ← gerekçesiz atlama RET'tir
 ```
 
-### 5.5 Zaman hiç ölçülemiyorsa — kapsam sınırı
+**"Kalite kapısı geçti" ne demek** (bu sütun bir hükme dayanır, izlenime değil):
+§10.1 doğrulama zincirinin **Nihai Testçi'ye kadarki kısmı** (M4+M5+M7) ONAY vermişse geçmiştir.
+**Final Kurulu bu sütunun girdisi DEĞİLDİR** — kurul adım [11]'de oy verir, bu denetim [10]'da
+koşar; kurulu beklemek kilitlenme, tahmin etmek §10.3'ün yasakladığı "muhtemelen doğru" onayıdır.
+Final Kurulu RET verirse rapor [11]'den sonra bir kez güncellenir; bu yeni bir koşu değildir.
 
-Ajan ne saat okuyabiliyor ne tur sayabiliyorsa zaman tahsisi kapatılır ve yerine
-**kapsam sınırı** konur. Kapsam sınırı, işin büyüklüğünü baştan sabitler:
+### 5.5 Kapsam listesi yazılamıyorsa
+
+İş, önceden kapalı bir listeye dökülemiyorsa (keşif işi: "bu hatanın sebebi ne", "bu kütüphane
+uygun mu") bitiş koşulu yerine **durma koşulu** yazılır:
 
 ```
-KAPSAM SINIRI
-- En fazla <n> dosya/madde/kaynak işlenecek
-- En fazla <n> alt adım atılacak
-- Şu liste dışına çıkılmayacak: <…>
-- Liste bitince DUR ve raporla — kendiliğinden genişletme
+DURMA KOŞULU  (keşif işi)
+- Son <n> kaynak yeni bilgi getirmediyse DUR (doyum), VEYA
+- Bütçe tavanı doldu, VEYA
+- Sorulan soru cevaplandı — cevap tek cümlede yazılabiliyor
 ```
 
-Kapsam sınırı da bir bitiş koşuludur; §11.2'nin "sert bitiş koşulu olmayan döngü
-başlatılmaz" kuralını karşılar. Zaman Denetçisi bu durumda KO yerine
-**kapsam uyumu**nu denetler: verilen liste dışına çıkıldı mı, çıkıldıysa RET.
+Keşif bitince **üretim işi için normal kapsam sınırı yazılır.** Keşif → üretim geçişi bir
+kapıdır, atlanamaz: keşfin çıktısı üretimin kapalı listesidir.
 
 ---
 
@@ -758,8 +776,11 @@ kör değildir. Bu yüzden:
 - …
 
 ## 6. Zaman kayıtları
-<!-- Zaman Denetçisi'nin kalibrasyon notları. Sonraki tahsisleri buradan yap. -->
-- görev tipi: … | tahsis: … | gerçekleşen: … | öneri: …
+<!-- Kapsam uyum kayıtları. Sonraki listeleri buradan boyutlandır.
+     Süre yazılmaz: ajanın kendi süre beyanı yaptırıma bağlanamaz (§5.1).
+     Ebeveyn damgası ayrı dosyada tutulur (~/.claude/ajan-telemetri.log). -->
+- koşu: … | görev tipi: … | ajan: … | listelenen: … | işlenen: … | liste dışı: …
+  | kalite: GEÇTİ/KALDI | hüküm: … | not: …
 
 ## 7. Son oturum
 <!-- Devam et, yeniden başlama. -->
@@ -785,11 +806,12 @@ kör değildir. Bu yüzden:
 | Boşluk-Planlayıcı | 4 veya 7 | Boşluk taraması bitince |
 | Öğretmen | 2, 4 · `KURALLAR.md` | Kök-neden kurulundan sonra |
 | Beyin | 5, 7 | Her karar ve oturum sonunda |
-| Zaman Denetçisi | 6 (hüküm ve kalibrasyon) | Her koşu sonunda |
+| Kapsam Uyumu Denetçisi | 6 (hüküm) | Her koşu sonunda |
 
-**§6 iki katmanlıdır:** ham ölçüm (ajanlar yazar) ve hüküm/kalibrasyon (yalnız Zaman Denetçisi
-yazar). Uzman İşçi ham damgasını yazamazsa Zaman Denetçisi her koşuda "ÖLÇÜLEMEDİ" demek zorunda
-kalır ve M17 fiilen işlemez — bu yüzden ham veri yazma yetkisi zorunludur.
+**§6 artık tek katmanlıdır.** Ölçü eserden okunur (listelenen/işlenen/liste dışı), ajanın
+beyanından değil; bu yüzden yalnız Kapsam Uyumu Denetçisi yazar. v1.4'e kadar işçiler buraya
+kendi ham zaman damgalarını yazıyordu ve M17'nin tek veri kaynağı buydu — yani ölçen ile
+ölçülen aynı kişiydi. O katman kaldırıldı.
 
 **STATE.md'ye yazmayan roller:** Karantina Okuyucu, Hipotez Üretici ve Çürütücü çıktılarını
 `STATE.md`'ye değil doğrudan kendilerini çağıran role döndürür (§6.1 kural 1'in istisnası).
@@ -1027,21 +1049,21 @@ RUBRİK
 
 - Doğrulayıcı **yalnız rubriği ve eseri** görür; kimin ürettiğini ve neden öyle yaptığını görmez.
 - "Muhtemelen doğru", "iyi görünüyor" **geçersiz onaydır**.
-- Testi çalıştırmadan "geçti" demek → **sahte pozitif**, Zaman Denetçisi bunu RET eder (§5.4).
+- Testi çalıştırmadan "geçti" demek → **sahte pozitif**. Kapsam Uyumu Denetçisi komutu **kendisi yeniden çalıştırarak** bunu yakalar ve RET eder (§5.4).
 - Her ONAY bir **kanıta** dayanır: çalıştırılan komut, okunan satır, karşılaştırılan kaynak.
 
 ### 10.4 Beyin müdahale eşiği (M8)
 
 **"Derhal" ne demek:** Ortamda gerçek zamanlı kesme aracı varsa anlık. Yoksa —ki alt-ajanlar
-genellikle görevi bitirip kontrolü geri verene kadar kesilemez— **bir sonraki kontrol noktasında
-(§5.2 Adım 3) veya alt-ajanın dönüşünde** anlamına gelir. Kesme aracı yokken "derhal durduruldu"
+genellikle görevi bitirip kontrolü geri verene kadar kesilemez— **bir sonraki dalga sınırında,
+yani alt-ajanın dönüşünde** (§5.2 harness kaydı) anlamına gelir. Kesme aracı yokken "derhal durduruldu"
 yazmak sahte kayıttır; gerçekte ne zaman durdurulduğu yazılır.
 
 Beyin, bir alt-ajanı şu durumlarda durdurur:
 
 ```
 [ ] Görev tanımının dışına çıktı
-[ ] Kontrol noktasında ilerleme < %50 (§5.2)
+[ ] Dalga sınırında kapsam listesinin yarısı bitmemiş (§5.2)
 [ ] Aynı hatayı 2 kez tekrarladı
 [ ] Başka ajanın alanına dokundu (M1 ihlali)
 [ ] Doğrulanmamış varsayım üstüne inşa etmeye başladı
@@ -1371,9 +1393,10 @@ GİRDİ: <dosya/veri/bağlam — sadece gerekli olan>
 YETKİ: <kullanabileceğin araçlar>
 YASAK: <dokunamayacakların — açıkça>
 BİTİŞ KOŞULU: <şunlar doğru olmadan "bitti" deme: …>
-SÜRE: <tahsis — §5.2>
+KAPSAM: <kapalı liste — §5.2. Bu listenin dışına çıkma; gerekirse DUR ve bildir>
+KAYNAK BEYANI: <okuduğun kaynaklar + her biri güvenilir/KARANTİNALI — §11.1>
 MODEL: <kademe — §9.4>
-KONTROL NOKTASI: <tahsisin %60'ına denk gelen adım — §5.1'e göre dış tetikleyici veya adım tabanlı>
+KONTROL NOKTASI: <listenin yarısı bitince bildir — adım tabanlı; tek çağrılık görevde "yok" yaz>
 KAPSAM DIŞI: <bu görevin parçası OLMAYAN şeyler>
 ```
 
@@ -1405,20 +1428,24 @@ Paralellik Kurulu topla. Alt görev listesi: <…>. Bütçe: <…>. İzolasyon d
 dalga planını çıkar. Veto varsa belirt.
 ```
 
-### 13.4 Zaman Dağıtıcı çağrısı
+### 13.4 Kapsam Belirleyici çağrısı
 
 ```
 Toplam süre: <T>. Alt görevler ve karmaşıklık/kritiklik puanları: <…>.
-§5.2'ye göre faz ayır, ajan başına dilim hesapla, kontrol noktalarını koy,
+§5.2'ye göre her ajana kapalı bir iş listesi yaz, bütçe tavanı ekle (ölçülebiliyorsa),
+kontrol noktalarını koy,
 zorunlu tablo formatında yaz. Doğrulama payını %15'in altına indirme.
 ```
 
-### 13.5 Zaman Denetçisi çağrısı
+### 13.5 Kapsam Uyumu Denetçisi çağrısı
 
 ```
-Koşu bitti. Her ajan için tahsis/kullanılan süreyi, KO ve VT'yi hesapla;
-§5.4 karar tablosuna göre hüküm ver; israf belirtilerini tara;
-sonraki koşu için kalibrasyon notu yaz. Süre uzatma/kısaltma kararı VERME — yalnız raporla.
+Koşu bitti. Her ajan için ESERDEN oku: listelenen madde, işlenen madde, liste dışı
+dokunulan madde. Ajanın beyanını kullanma. §5.4 karar tablosuna göre iki yönlü hüküm ver
+(kapsam aşımı VE eksik teslim); gerekçesiz atlamayı RET et;
+sonraki koşuda listenin nasıl boyutlandırılacağına dair not yaz.
+Sınırı genişletme/daraltma kararı VERME — yalnız raporla; kararı Beyin verir.
+Doğrulayıcı "test geçti" demişse komutu KENDİN yeniden çalıştır (§10.3 sahte pozitif).
 ```
 
 ### 13.6 Belirsizlik sorusu (varsayım üretme, sor)
@@ -1459,7 +1486,7 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 [ ] Tamamlanma durumu yazıldı ve ölçülebilir (§2.1)
 [ ] Büyük hedef izole alt görevlere bölündü, 4 test geçti (§7.1)
 [ ] Paralellik Kurulu toplandı, N_FİNAL belli (§4.1)
-[ ] Zaman planı çıkarıldı, her ajanın dilimi var (§5.2)
+[ ] Kapsam planı çıkarıldı, her ajanın kapalı listesi var (§5.2)
 [ ] Her ajanın 9 alanlı tanımı eksiksiz (§3)
 [ ] Belirsizlikler soruldu, varsayım üretilmedi
 [ ] KURALLAR.md okundu (§0 adım 3)
@@ -1472,7 +1499,7 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 [ ] Bağımsız işler paralel, bağımlı işler sıralı (§9.2)
 [ ] Aynı dosyaya/STATE.md'ye paralel yazım yok (§9.3)
 [ ] Her büyük adım temiz bağlamda (§8)
-[ ] Kontrol noktalarında ilerleme sorgulandı (§5.2)
+[ ] Dalga sınırlarında ilerleme okundu (§5.2)
 [ ] Sapan ajan durduruldu, yeniden delege veya bölündü (§10.4)
 [ ] Paralel dalga bitiminde çapraz denetim yapıldı, çelişki yok (§10.5)
 [ ] Güvenilmeyen girdi karantinada (§11.1)
@@ -1487,7 +1514,7 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 [ ] Doğrulayıcı rubrikle çalıştı, her onayın kanıtı var (§10.3)
 [ ] Meta-doğrulayıcı doğrulayıcıyı denetledi (M5)
 [ ] Nihai testçi bağımsız test yaptı ve "geçti" dedi (M7)
-[ ] Zaman Denetçisi raporu çıktı, KO/VT hükümleri verildi (§5.4)
+[ ] Kapsam uyum raporu çıktı, iki yönlü hüküm verildi (§5.4)
 [ ] Hatalar kurala damıtıldı, doğru yere yazıldı (§12)
 [ ] STATE.md'nin **değişen** bölümleri güncellendi (§6.2) — değişmeyen bölüme dolgu yazılmaz
 [ ] Final Kurulu 3/3 ONAY verdi (§4.4)
@@ -1543,6 +1570,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | v1.2 | İkili triyaj üç kademeye çevrildi (S1 Çekirdek / S2 Standart Dalga / S3 Birleşik Konsey); varsayılan S2 oldu. v1.1'de M4/M16/M20 için ayrı ayrı yazılan triyaj istisnaları tek kademe tablosunda toplandı — kök neden giderildiği için yamalar gereksizleşti. | İkili triyaj uçurumu: her orta boy iş ağır makineden kaçmak için en hafif kademeye sığınıyordu |
 | v1.3 | `KURALLAR.md`'nin yeri `~/.claude/` olarak sabitlendi (proje kökü değil); global kurulum paketi eklendi. | Belge "projeyle ölmesin, seninle taşınsın" diyordu ama dosyayı proje köküne koyuyordu — kendi doktriniyle çelişiyordu |
 | v1.4 | Rollerin yetki sınırları düzyazıdan gerçek ajan tanım dosyalarına taşındı (`agents/*.md`); `permissions` ile sır okuma engellendi ve geri dönüşü zor eylemler onaya bağlandı; hook'lar gerçek senaryolara karşı sınandı ve düzeltildi; doğrulanmamış varsayım §1'den çıkarıldı; kilitlenmeler açıldı; belgenin kendi öz-tutarsızlıkları giderildi; üç yüzey arasına sürüm senkronu kuralı kondu. | Altı denetçi + meta-doğrulama: 88 bulgu → 12 kök neden (`DENETIM-v1.3.md`) |
+| v1.5 | **§5 zaman aritmetiğinden kapsam diline geçti** (M16/M17 metni değişti — §15.1 gereği kullanıcı onayı alındı). T_i/T_dalga/KO/VT/kalibrasyon tablosu/%40 tavanı silindi; yerine kapalı iş listesi + iki yönlü kapsam uyumu denetimi geldi. Kurtarılanlar: tıkanma protokolü (§5.3), adım tabanlı kontrol noktası, doğrulama artık yüzde değil kapı, §4.1 paydası bütçe tavanına çevrildi. Ebeveyn damgası tek bağımsız süre ölçüsü olarak kayıtta kaldı — yaptırımsız. | Dört üyeli karar kurulu (kullanıcı sadakati / ölçüm dürüstlüğü / günlük kullanım / sistem bütünlüğü), ayrı bağlamlarda kör ve eşzamanlı: **oy birliği**. Kök neden: ölçen ile ölçülen aynı kişiydi (R3); ölçülemeyen büyüklüğün aritmetiğini düzeltmek onu ölçülebilir yapmaz. |
 
 ---
 
@@ -1555,8 +1583,8 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | **Tek doğruluk kaynağı (SSOT)** | `STATE.md`. Çelişkide o kazanır. |
 | **Paralellik Kurulu** | Kaç ajanın aynı anda koşacağına karar veren 3 üyeli kurul (M15). |
 | **N_FİNAL** | Eşzamanlı ajan üst sınırı. Kota değil, tavan. |
-| **Zaman Dağıtıcı** | Toplam süreyi fazlara ve ajanlara bölen ajan (M16). |
-| **Zaman Denetçisi** | Sürenin asgari kullanıldığını ölçen ve hüküm veren ajan (M17). |
+| **Kapsam Belirleyici** | Her ajana kapalı bir iş listesi yazan ajan (M16). |
+| **Kapsam Uyumu Denetçisi** | Listenin dışına çıkılıp çıkılmadığını VE bitirilmeden bırakılıp bırakılmadığını eserden ölçen ajan (M17). |
 | **KO / VT** | Kullanım Oranı = kullanılan/tahsis. Verimli Tur Oranı = katkı yapan tur/toplam tur. |
 | **Çekişmeli doğrulama** | Yapanın gerekçesini görmeyen, yalnız rubrik + eser gören ayrı doğrulayıcının denetimi. |
 | **Meta-doğrulayıcı** | Doğrulayıcıyı denetleyen üst katman (M5). |
