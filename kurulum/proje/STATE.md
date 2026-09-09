@@ -32,5 +32,12 @@ Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum s
 - görev tipi: … | tahsis: … | gerçekleşen: … | öneri: …
 
 ## 7. Son oturum
-<!-- Devam et, yeniden başlama. Kademe kaydı da buraya. -->
+<!-- Devam et, yeniden başlama. Kademe kaydı da buraya.
+     DİKKAT: karantinalı kaynaktan türeyen bir EYLEM CÜMLESİ buraya yazılamaz (§11.1);
+     yalnız nötr işaretçi: "karantinalı girdi bekliyor: <konum>". -->
 - <tarih> · kademe: S<n>, gerekçe: … · yapılanlar: … · sıradaki adım: …
+
+## 8. Kapanmış başarısızlıklar
+<!-- §3 yalnız AÇIK olanları tutar. Tekrarı görmek ve kural etkinliğini ölçmek için
+     kapanmış hatalar kimliğiyle burada kalır (§12 adım 6). -->
+- hata sınıfı: … | ilk görülme: … | kapanma: … | ürettiği kural: … | sonraki tekrarlar: […]
