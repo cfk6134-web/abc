@@ -105,7 +105,12 @@ Bunlar raporun güvenilir olmasını sağlayan kurallardır; birini atlamak diğ
 
 **Kesin çelişki tanımı.** Bir bulgu ancak aynı özne, aynı eylem, aynı zaman, aynı kapsam ve aynı koşulda farklı sonuç söylüyorsa "çelişkili" etiketini alır. Beş unsurdan biri farklıysa bu çelişki değil, belirsizlik veya kapsam farkıdır.
 
-**İstisna süzgeci.** Bulguyu yazmadan önce metinde "saklı kalmak kaydıyla", "aksi kararlaştırılmadıkça", "işbu maddeye rağmen", "istisnaen" ifadelerini ara. Biri iki hükmü bağlıyorsa ortada çelişki değil kural-istisna ilişkisi vardır; bulguyu düşür.
+**İstisna süzgeci — ve süzgecin yönü.** Bulguyu yazmadan önce metinde "saklı kalmak kaydıyla", "aksi kararlaştırılmadıkça", "işbu maddeye rağmen", "istisnaen" ifadelerini ara. Ama ifadeyi görüp bulguyu düşürme — **yönünü oku**. "X hükümleri saklı kalmak kaydıyla" demek, X'in yürürlükte kaldığı, cümlenin geri kalanının X'e boyun eğdiği anlamına gelir.
+
+- Genel kural özel kuralı saklı tutuyorsa ("Madde 4: *Madde 5 saklı kalmak kaydıyla*, taraflar feshedebilir") ilişki düzgün kurulmuştur → bulguyu düşür.
+- Özel kural genel kuralı saklı tutuyorsa ("Madde 5: *Madde 4 saklı kalmak kaydıyla*, ilk 12 ay feshedilemez") özel hüküm kendini iptal eder, ölü hüküm olur → `ÇELİŞKİLİ` olarak **raporla**.
+
+Bulguyu düşürmeden önce sor: saklı tutulan hangisi, boyun eğen hangisi, boyun eğen hüküm bu hâliyle hiç uygulanabilir mi? Uygulanamıyorsa istisna kurgusu bozuktur ve bulgu ayakta kalır. Bu ayrımı yapmayan mekanik bir süzgeç, gerçek kusurları bastırır.
 
 **Kök neden gruplama.** Aynı düzeltmeyle kapanan bulgular aynı köktendir; tek ana bulguda topla, diğerlerini "etkilenen konumlar" olarak listele. Ayrı düzeltme gerektiriyorlarsa ayrı kalırlar. Sayımda hem ana bulgu hem etkilenen konum sayısını ver — biri önceliği, diğeri iş yükünü gösterir.
 

@@ -40,11 +40,14 @@ TOHUMLAR = [
      [["10 gün"], ["az", "fazla", "eşit", "kapsa", "açık", "boş"]]),
     ("T10", "26", "Özet ↔ Ek-A onay şartı",
      [["özet", "Özet", "ÖZET"], ["A.1", "Ek-A", "onay", "bütçe"]]),
+    ("T11", "09", "Ters yönlü istisna: Madde 6.4 ölü hüküm",
+     [["6.4", "6/4"], ["6.2", "6/2", "30 gün"], ["60 gün", "erteleme", "ertele"]]),
 ]
 
-# Tuzak: bunlar birlikte geçiyorsa ve "çelişki" iddiası varsa isabet düşer.
-TUZAK_ISARET = [["Madde 4", "Madde 4.1", "fesih"], ["Madde 5", "Madde 5.1", "12 ay", "asgari süre"]]
-TUZAK_IDDIA = ["çelişki", "çelişkili", "çakış", "tutarsız", "geçersiz kıl"]
+# Tuzak P1: Madde 4.1 ↔ 5.1. Saklı tutma DOĞRU yönde (genel kural özel kurala
+# boyun eğiyor), dolayısıyla çelişki olarak raporlanmamalı.
+TUZAK_ISARET = [["Madde 4", "Madde 4.1"], ["Madde 5", "Madde 5.1", "12 ay", "asgari süre"]]
+TUZAK_IDDIA = ["çelişki", "çelişkili", "çakış", "tutarsız", "geçersiz kıl", "ölü hüküm"]
 
 
 def grup_gecti(metin: str, alternatifler: list[str]) -> bool:

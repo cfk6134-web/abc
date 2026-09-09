@@ -9,8 +9,18 @@ Her bulgu, çeliştiği iddia edilen iki pasajın birebir alıntısını ve konu
 
 Kural burada bitmez: **her alıntı kaynak metinde birebir aranarak doğrulanır** — metinsel arama ile, göz kararıyla değil. Aranan dizge bulunamıyorsa alıntı uydurulmuş demektir ve bulgu, içeriği ne kadar makul görünürse görünsün düşer. Doğrulanmamış alıntı, kanıt kuralını kâğıt üzerinde bırakır.
 
-### KG-2 · Yanlış pozitif süzgeci
-Görünürdeki her çelişki hata değildir; bilinçli bir istisna olabilir. Bulguyu raporlamadan önce metinde şu ifadeleri ara: `saklı kalmak kaydıyla`, `aksi kararlaştırılmadıkça`, `işbu maddeye rağmen`, `istisnaen`, `bu hükmün istisnası olarak`. Bu ifadelerden biri iki hükmü bağlıyorsa çelişki değil kural-istisna ilişkisi vardır; bulgu düşürülür.
+### KG-2 · Yanlış pozitif süzgeci — ve süzgecin yönü
+Görünürdeki her çelişki hata değildir; bilinçli bir istisna olabilir. Bulguyu raporlamadan önce metinde şu ifadeleri ara: `saklı kalmak kaydıyla`, `aksi kararlaştırılmadıkça`, `işbu maddeye rağmen`, `istisnaen`, `bu hükmün istisnası olarak`.
+
+**Ancak ifadenin varlığı yetmez — yönünü de oku.** "X hükümleri saklı kalmak kaydıyla" demek, *X'in yürürlükte kaldığı, cümlenin geri kalanının X'e boyun eğdiği* anlamına gelir. Süzgeci mekanik uygularsan — ifadeyi görüp bulguyu düşürürsen — gerçek bir kusuru bastırırsın. Üç olasılığı ayır:
+
+| Kurgu | Anlam | Karar |
+|---|---|---|
+| Genel kural, özel kuralı saklı tutuyor ("Madde 4: *Madde 5 saklı kalmak kaydıyla*, taraflar feshedebilir") | Özel kural genel kuralı sınırlıyor | Kural-istisna ilişkisi kurulmuş → bulguyu **düşür** |
+| Özel kural, genel kuralı saklı tutuyor ("Madde 5: *Madde 4 saklı kalmak kaydıyla*, ilk 12 ay feshedilemez") | Genel kural korunuyor, özel kural kendini iptal ediyor | Özel hüküm **ölü hüküm** hâline geliyor → `ÇELİŞKİLİ` olarak **raporla** |
+| İki hüküm arasında hiçbir bağlayıcı ifade yok | Bağ kurulmamış | `ÇELİŞKİLİ` olarak raporla |
+
+İkinci satır gerçek bir kaleme alma kusurudur ve mekanik süzgeç tam olarak bunu kaçırır. Bulguyu düşürmeden önce sor: *saklı tutulan hüküm hangisi, boyun eğen hangisi, ve boyun eğen hüküm bu hâliyle hiç uygulanabilir mi?* Uygulanamıyorsa istisna kurgusu bozuktur, bulgu ayakta kalır.
 
 ### KG-3 · Tohumlanmış hata testi: yakalama ve isabet
 Belgenin bir kopyasına bilerek 10 hata yerleştirip denetimi bu kopya üzerinde çalıştır. **İki oranı birlikte ölç:**
@@ -34,6 +44,7 @@ Yalnızca yakalamayı ölçmek, her cümleye çelişki diyen bir kurgunun mükem
 | 8 | Başka bir sözleşmeden kurum adı bırak | 17 |
 | 9 | Bir eşiği açıkta bırak (tam sınır değeri) | 18 |
 | 10 | Özetteki bir kısıtı sil | 26 |
+| 11 | Ters yönlü istisna kaydı ekle: özel hüküm genel hükmü saklı tutsun | 09 + KG-2 |
 
 Bulunmayan tohum, o maddenin kurgusundaki zayıflığı adresler — oran düşükse sorun belgede değil, kurguda.
 

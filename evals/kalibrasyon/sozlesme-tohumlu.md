@@ -48,15 +48,15 @@ bir yıl uzar.
 
 ## MADDE 4 — FESİH
 
-**4.1** Taraflar, otuz (30) gün önceden yazılı bildirimde bulunmak kaydıyla işbu
-sözleşmeyi tek taraflı olarak feshedebilir.
+**4.1** Madde 5 hükümleri saklı kalmak kaydıyla, taraflar otuz (30) gün önceden
+yazılı bildirimde bulunmak kaydıyla işbu sözleşmeyi tek taraflı olarak feshedebilir.
 
 ---
 
 ## MADDE 5 — ASGARİ SÜRE
 
-**5.1** Madde 4 hükümleri saklı kalmak kaydıyla, işbu sözleşme yürürlük tarihinden
-itibaren ilk on iki (12) ay içinde haklı sebep bulunmaksızın feshedilemez.
+**5.1** İşbu sözleşme yürürlük tarihinden itibaren ilk on iki (12) ay içinde haklı
+sebep bulunmaksızın feshedilemez.
 
 ---
 
@@ -68,6 +68,9 @@ hariçtir. Bedelin kalem bazında dağılımı Ek-B'de gösterilmiştir.
 **6.2** Ödemeler, fatura tarihini izleyen 30 gün içinde yapılır.
 
 **6.3** Kesin teminat tutarı, Madde 10'da belirlenen oran üzerinden hesaplanır.
+
+**6.4** Madde 6.2 hükümleri saklı kalmak kaydıyla, Kurum nakit akışı gerekçesiyle
+ödemeleri altmış (60) güne kadar erteleyebilir.
 
 ---
 
