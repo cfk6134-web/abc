@@ -37,6 +37,13 @@ gerçek rakam bul; bulamadığın hücreyi boş bırakma ya da uydurma — "~yak
 ve kaynağını/nedenini dipnotla belirt (ör. "üretici kesin rakam vermiyor, X'e yakın
 olduğu belirtiliyor").
 
+**Veri tutarlılığı / çapraz doğrulama:** Kaynaklar arası çok değişen ölçütlerde (özellikle
+mikrobesinler — B12, selenyum, çinko gibi) mümkünse **en az 2 bağımsız kaynağı** karşılaştır.
+İki kaynak %20'den fazla farklılık gösteriyorsa tek bir nokta değer yazma — bir aralık ver
+(ör. "1,5-3,0") ve "⚠ kaynaklar arası tutarsız" notu düş. Tek kaynak bulabildiysen (ikinci
+bir doğrulama yapamadıysan) bunu da ayrıca "⚠ tek kaynak" ile işaretle — "tutarsız" ve
+"tek kaynak" farklı güvenilirlik sorunlarıdır, karıştırma.
+
 **3) Puanlama tablosu — şeffaf metodoloji ile**
 
 Değer tablosundaki her ölçütü (sodyum gibi "düşük iyi" olanlar hariç, onları ayrı not
@@ -52,14 +59,19 @@ et. Öncelik belirtilmemişse tüm ölçütleri eşit ağırlıklandır. Kulland
 tabloların üstünde açıkça yaz (ör. "besin yoğunluğu ölçütleri %70, fiyat %30").
 
 Tüm ölçütlerin ağırlıklı ortalamasını alarak her ürüne tek bir toplam puan (0-10) ver.
-Bir hücre "~yaklaşık" veya tek kaynaktan geliyorsa, o kaynağın puanlamayı çarpıtabileceğini
-unutma — güvenilirliği düşük tek-kaynaklı değerleri toplam puanın yanında küçük bir
-"⚠ tek kaynak" notuyla işaretle. Sonucu şu tabloyla sun:
+Bir hücre "~yaklaşık", aralık veya tek kaynaktan geliyorsa, o kaynağın puanlamayı
+çarpıtabileceğini unutma — güvenilirliği düşük değerleri toplam puanın yanında küçük bir
+"⚠" notuyla işaretle. Sonucu şu tabloyla sun:
 
 | Ürün | [Ölçüt 1] | [Ölçüt 2] | ... | **Toplam Puan (/10)** |
 
 En yüksek puanlı ürünü **açıkça "🏆 Kazanan"** olarak işaretle ve 1-2 cümlede neden
-kazandığını (hangi ölçütlerde öne çıktığını) açıkla. Metodolojiyi (hangi ölçütler,
-nasıl ağırlıklandırıldı) tablonun üstünde tek cümlede belirt ki kullanıcı hesaplamayı
+kazandığını (hangi ölçütlerde öne çıktığını) açıkla. **İki veya daha fazla ürünün puanı
+birbirine çok yakınsa (ör. aradaki fark 0,5 puandan az) VE bu fark büyük ölçüde ⚠ işaretli/
+belirsiz hücrelerden geliyorsa, tek bir "kesin" kazanan ilan etme — bunun yerine hepsini
+"istatistiksel olarak başa baş" ilan et ve kullanıcıya hangisinin gerçekten önde olduğunun
+mevcut veriyle güvenle söylenemeyeceğini açıkça belirt.** Yapay bir kesinlik göstermek,
+belirsizliği saklamaktan her zaman daha kötüdür. Metodolojiyi (hangi ölçütler, nasıl
+ağırlıklandırıldı) tablonun üstünde tek cümlede belirt ki kullanıcı hesaplamayı
 doğrulayabilsin. Fiyatı/değeri bilmiyorsan uydurma, "yaklaşık" aralık ver veya
 "doğrulanamadı" yaz.
