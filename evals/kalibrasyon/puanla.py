@@ -47,6 +47,11 @@ TOHUMLAR = [
 # Tuzak P1: Madde 4.1 ↔ 5.1. Saklı tutma DOĞRU yönde (genel kural özel kurala
 # boyun eğiyor), dolayısıyla çelişki olarak raporlanmamalı.
 TUZAK_ISARET = [["Madde 4", "Madde 4.1"], ["Madde 5", "Madde 5.1", "12 ay", "asgari süre"]]
+# Düşürme dili: bu ifadeler P1'in yakınında geçiyorsa aday doğru şekilde elenmiş demektir.
+TUZAK_DUSURME = [
+    "düşürül", "düşürdü", "reddedil", "bulgu değil", "raporlanma",
+    "kural-istisna", "kural–istisna", "sağlam", "doğru yönde", "uyumlu",
+]
 TUZAK_IDDIA = ["çelişki", "çelişkili", "çakış", "tutarsız", "geçersiz kıl", "ölü hüküm"]
 
 
@@ -63,10 +68,8 @@ def puanla(yol: Path) -> dict:
         else:
             kacan.append((kod, madde, aciklama))
 
-    # Tuzak: iki maddeye birlikte atıf + çelişki dili
-    tuzak_atif = all(grup_gecti(metin, g) for g in TUZAK_ISARET)
-    tuzak_iddia = grup_gecti(metin, TUZAK_IDDIA)
-    tuzak_riski = tuzak_atif and tuzak_iddia
+    # Tuzak: P1'in geçtiği paragrafları bul, düşürme mi iddia mı belirle.
+    tuzak_durum, tuzak_kanit = tuzak_degerlendir(metin)
 
     return {
         "dosya": yol.name,
@@ -74,9 +77,32 @@ def puanla(yol: Path) -> dict:
         "bulunan": bulunan,
         "kacan": kacan,
         "yakalama": len(bulunan) / len(TOHUMLAR),
-        "tuzak_riski": tuzak_riski,
+        "tuzak_durum": tuzak_durum,
+        "tuzak_kanit": tuzak_kanit,
         "uzunluk": len(metin),
     }
+
+
+def tuzak_degerlendir(metin: str) -> tuple[str, str]:
+    """P1'in nasıl ele alındığını sınıflandırır.
+
+    Raporu paragraflara böler, hem Madde 4 hem Madde 5 geçen paragraflara bakar:
+      - düşürme dili varsa       -> 'dusuruldu'  (doğru davranış)
+      - yalnızca çelişki dili    -> 'raporlandi' (yanlış pozitif)
+      - hiç geçmiyorsa           -> 'deginilmemis'
+    """
+    paragraflar = [p for p in re.split(r"\n\s*\n", metin) if p.strip()]
+    ilgili = [p for p in paragraflar if all(grup_gecti(p, g) for g in TUZAK_ISARET)]
+    if not ilgili:
+        return "deginilmemis", ""
+    for p in ilgili:
+        if grup_gecti(p, TUZAK_DUSURME):
+            ozet = " ".join(p.split())[:150]
+            return "dusuruldu", ozet
+    ilk = " ".join(ilgili[0].split())[:150]
+    if any(grup_gecti(p, TUZAK_IDDIA) for p in ilgili):
+        return "raporlandi", ilk
+    return "belirsiz", ilk
 
 
 def yazdir(s: dict) -> None:
@@ -93,12 +119,18 @@ def yazdir(s: dict) -> None:
         print("\n  Kaçan tohumlar:")
         for kod, madde, aciklama in s["kacan"]:
             print(f"    ✗ {kod} · madde {madde} · {aciklama}")
-    print(f"\n  Tuzak (P1 · Madde 4↔5 meşru istisna):")
-    if s["tuzak_riski"]:
-        print("    ⚠ Rapor bu ikiliye çelişki dilinde değiniyor — elle kontrol et,")
-        print("      çelişki olarak raporlandıysa isabet oranı düşer.")
+    print("\n  Tuzak (P1 · Madde 4↔5 — meşru kural-istisna, raporlanmamalı):")
+    durum = s["tuzak_durum"]
+    if durum == "dusuruldu":
+        print("    ✓ Aday değerlendirilmiş ve gerekçeyle düşürülmüş — doğru davranış.")
+    elif durum == "raporlandi":
+        print("    ✗ Çelişki olarak raporlanmış — YANLIŞ POZİTİF, isabet düşer.")
+    elif durum == "deginilmemis":
+        print("    ~ Hiç değinilmemiş. Süzgeç çalıştıysa kayıt bırakmalıydı (KG-2).")
     else:
-        print("    ✓ Çelişki olarak raporlanmış görünmüyor.")
+        print("    ? Değinilmiş ama sınıflandırılamadı — elle kontrol et.")
+    if s["tuzak_kanit"]:
+        print(f"      → \"{s['tuzak_kanit']}…\"")
 
 
 def main() -> int:
@@ -116,9 +148,15 @@ def main() -> int:
         yazdir(s)
     if len(sonuclar) > 1:
         print(f"\n{'=' * 64}\n  KARŞILAŞTIRMA\n{'=' * 64}")
+        etiket = {
+            "dusuruldu": "düşürüldü ✓",
+            "raporlandi": "raporlandı ✗",
+            "deginilmemis": "değinilmemiş ~",
+            "belirsiz": "belirsiz ?",
+        }
         for s in sonuclar:
-            tuzak = "riskli" if s["tuzak_riski"] else "temiz"
-            print(f"  {len(s['bulunan'])}/10  tuzak:{tuzak:7s}  {s['dosya']}")
+            t = etiket.get(s["tuzak_durum"], s["tuzak_durum"])
+            print(f"  {len(s['bulunan'])}/{len(TOHUMLAR)}  tuzak: {t:15s}  {s['yol']}")
     print()
     return 0
 
