@@ -59,12 +59,19 @@ Betik şunları verir: kaç tohum bulundu, hangileri kaçtı, ve tuzağın (P1) 
 
 Düzeltme: KG-2 artık istisna kaydının varlığını değil **yönünü** kontrol ediyor (bkz. `.claude/skills/belge-tutarlilik-denetimi/references/kalite-guvencesi.md`). Fixture'daki P1 tuzağı doğru yönle yeniden kuruldu ve ters yönü ölçen T11 tohumu eklendi.
 
-### 2. tur — düzeltilmiş KG-2, 11 tohum
+### 2. tur — düzeltilmiş KG-2 (odaklı test)
 
-**Henüz ölçülmedi.** Üç koşu denemesi de hesabın oturum limitine takıldı; hiçbiri rapor üretemedi. Beklenen sorular:
+Tam denetim koşuları üç kez oturum limitine takıldı. Bunun üzerine test, asıl bilinmeyene daraltıldı: her iki istisna kaydını da içeren Madde 4–6 aralığı denetletildi.
 
-1. Düzeltilmiş KG-2, T11'i yakalıyor mu? (1. turda bu tohum yoktu)
-2. P1'i hâlâ doğru şekilde düşürüyor mu, yoksa düzeltme aşırı mı düzeltti?
-3. İki koşu arasında bulgular tekrarlanıyor mu? (KG-6)
+**Bu test yakalama değil, sınıflandırma ölçer** — ajana hangi aralığa bakacağı söylendiği için "bulabildi mi" sorusunu yanıtlamaz. Yanıtladığı soru: kaydı gördüğünde yönüne göre doğru ayırabiliyor mu?
 
-1. tur sayıları 2. tur ile doğrudan karşılaştırılamaz: o koşular eski fixture'a karşı çalıştı ve 11. tohumu görmedi.
+| Kayıt | Yön | Beklenen | Sonuç |
+|---|---|---|---|
+| Madde 6.4 → 6.2'yi saklı tutuyor | Özel hüküm genel hükmü saklı tutuyor | `ÇELİŞKİLİ` | ✓ raporlandı |
+| Madde 4.1 → 5'i saklı tutuyor | Genel kural özel kurala boyun eğiyor | Düşürülmeli | ✓ düşürüldü |
+
+Ajanın yön okuması her iki hâlde de doğru gerekçeye dayandı: 6.4 için "boyun eğen hüküm uygulanabilir kalmıyor, tek işlevi 30 günden sapmaktı" → ölü hüküm; 4.1 için "boyun eğme daraltır ama boşaltmaz, iki alanda uygulanmaya devam eder" → kurgu sağlam.
+
+Aynı koşuda kendiliğinden uygulanan diğer kurallar: teminat boşluğu çelişki değil eksiklik sayılıp tek sahip kuralıyla madde 16'ya yönlendirildi; Ek-B toplam hatası kök nedene göre Ek-B'ye ait ana bulgu olarak işaretlendi (İP-6); kapsam sınırı beyan edildi (KG-5); kullanılan araçlar listelendi (KG-7); tek koşu olduğu için kesinlik iddia edilmedi (KG-6); alıntılar `grep -F` ile doğrulandı (KG-1).
+
+**Hâlâ ölçülmemiş olanlar:** tam denetimde 11 tohumun yakalama oranı, isabet oranı ve iki koşu arasındaki tekrarlanabilirlik. 1. tur sayıları 2. tur ile doğrudan karşılaştırılamaz — o koşular eski fixture'a karşı çalıştı ve 11. tohumu görmedi.
