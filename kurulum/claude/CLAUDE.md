@@ -1,4 +1,4 @@
-# İşletim çekirdeği — v1.5
+# İşletim çekirdeği — v1.6
 
 <!-- Sürüm damgası ZORUNLU: bu satır ~/.claude/AJAN-ISLETIM-TALIMATI.md'nin
      başlığındaki sürümle aynı olmalı. Farklıysa iki yüzey ayrışmıştır (§15.2 adım 6);

@@ -35,6 +35,13 @@ Bir kuralı yalnız "uzun süredir uyuluyor" diye emekli etme; ama "uzun süredi
 
 _(henüz kural yok — ilk ders geldiğinde §12 döngüsünden buraya yazılır)_
 
+## Yordamlar
+
+<!-- Bir ders 2 kez işe yaradığı ÖLÇÜLDÜĞÜNDE (§12 adım 6) yordama terfi eder.
+     Yordamlı iş S1'de koşabilir (§0.1) — sistem öğrendikçe hızlanır.
+     Biçim:
+     YORDAM: <iş tipi> — <adımlar> (2 başarılı koşu: <no>, <no>) -->
+
 ## Arşiv
 
 <!-- Koruduğu koşul ortadan kalkmış veya 20 koşudur tetiklenmemiş kurallar.

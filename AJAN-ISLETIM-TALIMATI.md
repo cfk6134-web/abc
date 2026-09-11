@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.5
+# AJAN İŞLETİM TALİMATI — v1.6
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -19,6 +19,8 @@ Bu belgeyi gören ajan, başka hiçbir şey yapmadan sırasıyla:
    projeler arası geçerli dersler buraya yazılır. Bu adım atlanırsa yazılan ders bir daha
    okunmaz ve M2 kâğıt üstünde kalır.
 4. Görevi `§2 Ana Akış`ın hangi adımında olduğunu tespit et.
+4b. **Uçuş kaydını kontrol et** (`.ajan-ucus.log`, §2.2). Kapanmamış kayıt varsa
+    ÖNCE kurtarma akışını koş — yarım işi bitmiş sanma.
 5. **TRİYAJ yap (§0.1)** — iş küçükse ağır makineyi kurma.
 6. Eksik bilgi varsa **varsayım üretme** → `§13.6 Soru Şablonu` ile sor.
 7. Çalışmaya başla.
@@ -52,6 +54,36 @@ SEVİYE 1 — ÇEKİRDEK AKIŞ       yukarıdakilerin hiçbiri yok VE dördü bi
   Dördü de karar anında bilinir; hiçbiri ayrıştırma veya rubrik gerektirmez.
 
 SEVİYE 2 — STANDART DALGA      diğer her durum. ← VARSAYILAN BUDUR
+
+**Yordamlı iş hızlı yoldan gider.** Bir iş tipi `KURALLAR.md`'de kayıtlı bir **yordamla**
+daha önce en az 2 kez sorunsuz yapıldıysa (kalite kapısı geçmiş, düzeltme gelmemiş), o iş
+S1'de koşabilir — dört ölçütten "tek bağlam" ve "geri alınabilirlik" yine aranır, ama
+"ilk kez yapılıyor" belirsizliği artık yoktur. Gerekçesi M16'dır: sistem öğrendikçe
+hızlanmalı; her seferinde aynı keşfi yeniden yapmak asgari kaynak ilkesinin ihlalidir.
+
+Bir ders, **2 kez işe yaradığı ölçüldüğünde** (§12 adım 6) yordama terfi eder. Terfi
+kaydı `KURALLAR.md`'de tutulur: `YORDAM: <iş tipi> — <adımlar> (2 başarılı koşu: <no>, <no>)`.
+Yordamlı iş de S1 kapısından geçer (aşağıda) — yordam, kapıyı kaldırmaz, kapıdan geçmeyi
+kolaylaştırır: kontrolöre yordam kaydı gösterilir.
+
+**S1 BİR KAPIDIR — seçen, denetlenen olamaz.** S1 seçimi tek satırla Doğrulayıcı'yı,
+Meta-Doğrulayıcı'yı, Nihai Testçi'yi, Final Kurulu'nu, boşluk taramasını ve Paralellik
+Kurulu'nu birden kaldırır; ve o satırı, hafif kademeden çıkarı olan ajanın kendisi yazar.
+Bu yüzden:
+
+```
+[ ] S1 seçimi, işi YAPMAYAN bir aktörün onayı olmadan geçerli değildir.
+    Onaylayan: kullanıcı, Beyin (kendi yapmadığı bir iş için), veya ucuz kademede
+    tek soruluk bir "Kademe Kontrolörü" alt-ajanı.
+[ ] Kontrolöre YALNIZ görev metni + §0.1'in dört S1 ölçütü verilir — eserin kendisi,
+    gerekçe veya kimin istediği verilmez.
+[ ] Kontrolör ONAY vermezse iş varsayılanda, yani S2'de yürür. Sessizce S1'de kalmaz.
+[ ] Onay kaydı STATE.md §5'e yazılır: `kademe onayı: S1, onaylayan: <kim>, tarih: <…>`
+```
+
+**S2 ve S3 kapı gerektirmez:** S2 varsayılandır ve zaten bağımsız bir Doğrulayıcı içerir;
+S3 daha ağır denetim demektir, ondan kaçmak için seçilmez. Kapı yalnız denetimin
+kaldırıldığı yöne konur — bu, sürtünmeyi işin risk yönüne odaklamaktır.
 ```
 
 > Emin değilsen Seviye 2. Varsayılanın Seviye 3 olması, insanları Seviye 1'e kaçmaya iter;
@@ -171,6 +203,32 @@ Seviye 3'te adım atlanmaz; gereksizse "atlandı, gerekçe: …" diye `STATE.md`
 [11] FİNAL OYLAMA         → Oy birliği → teslim + STATE.md güncelle (§4.4, §6.3).
 ```
 
+### 2.0 Kesinti ve kurtarma — yarım iş bitmiş sanılmaz
+
+Bir dalga koşarken oturum kopabilir, bağlam bitebilir, kullanıcı durdurabilir. O anda üç
+alt-ajandan ikisi bitmiş, biri yarım dosya bırakmış olabilir — ve `STATE.md` yalnız son
+yazıldığı ana kadar doğrudur. Kayıt olmadan yeni oturum ya sıfırdan başlar (yapılan iş çöpe
+gider, M16 ihlali) ya yarım işi bitmiş sanar (M4 ihlali).
+
+**Uçuş kaydı.** Beyin, her alt-ajan doğuşunda ve dönüşünde tek satır yazar — `STATE.md`'ye
+DEĞİL, ayrı bir **append-only** dosyaya (`.ajan-ucus.log`). Gerekçesi: `STATE.md`'ye yeni bir
+yazma yolu açmak §6.3'ün tek yazıcı kuralını ve §11.1'in karantina kapsamını büyütür.
+
+```
+<zaman> BAŞLADI  ajan=<rol> kapsam=<liste özeti> çıktı=<beklenen dosya>
+<zaman> BİTTİ    ajan=<rol> durum=<tamam|kısmi|hata>
+```
+
+**Kurtarma akışı** (yeni oturum, kapanmamış kayıt varsa):
+```
+1. "BAŞLADI" var, "BİTTİ" yok → o iş TAMAMLANMAMIŞ sayılır.
+2. Ürettiği çıktı KARANTİNAYA alınır: doğrulanmadan hiçbir şeyin girdisi olamaz —
+   yarım yazılmış bir dosya sessizce doğru sanılabilir.
+3. Kapsam listesi yeniden verilir; iş baştan değil, LİSTENİN KALANINDAN sürer (§5.4
+   kapsam oranı bunu zaten okuyabilir).
+4. Kurtarma kararı STATE.md §5'e yazılır.
+```
+
 ### 2.1 Görev değil, tamamlanma durumu tanımla
 
 Her göreve başlamadan önce **bitiş koşulunu** yaz. Bu, ajanın "bitti" deme yetkisinin tek dayanağıdır.
@@ -182,6 +240,27 @@ Her göreve başlamadan önce **bitiş koşulunu** yaz. Bu, ajanın "bitti" deme
 | "Belgeyi düzenle." | "Her bölüm numaralı, her rol için yetki sınırı yazılı, hiçbir madde iki yerde tekrar etmiyor olana kadar durma." |
 
 **Kural:** Tamamlanma durumu **ölçülebilir** olmalı. "İyi olsun", "güzel olsun", "kapsamlı olsun" geçersizdir — bunları bir rubriğe çevir (§10.2).
+
+---
+
+### 2.2 Kapsam değişikliği — akış ortasında hedef değişirse
+
+Kullanıcı yürütme sırasında "aslında X'i değil Y'yi istiyorum" derse, o ana kadarki plan
+geçersizdir: Paralellik Kurulu kararı, kapsam listeleri ve §2.1 tamamlanma durumu artık
+başka bir işe aittir. Belge bunu ilan etmezse ajan eski plana göre koşmaya devam eder ve
+Kapsam Uyumu Denetçisi eski listeye göre haksız RET verir.
+
+```
+[ ] Koşan dalga DURDURULUR. Yeni alt-ajan doğurulmaz.
+[ ] Biten iş çöpe atılmaz: STATE.md §1'e "eski kapsamdan devralınan" etiketiyle yazılır.
+[ ] Akış adım [1]'den yeniden başlar; kademe (§0.1) YENİDEN seçilir — yeni iş daha
+    riskli olabilir.
+[ ] Kapsam listeleri sıfırlanır. §5.4 denetimi ESKİ listeye göre yapılmaz.
+[ ] Karar ve gerekçesi STATE.md §5'e yazılır.
+```
+
+**Kapsam değişikliği bir hata değildir** ve §12 öğrenme döngüsüne girmez — kullanıcının
+fikrini değiştirmesi meşrudur. Döngüye giren tek şey, değişikliğin fark edilmemesidir.
 
 ---
 
@@ -512,9 +591,21 @@ Boşluk-Planlayıcı tek soruya cevap verir: **"Bu işin hangi parçası hiçbir
 ```
 
 **Çıktı:** boşluk listesi + her boşluk için ya yeni ajan tanımı (§3'ün 9 alanı) ya mevcut bir
-ajana ek görev. **Yetki sınırı:** planlar ve doğurur, işçi işi yapmaz; ürüne dokunmaz.
+ajana ek görev. **Yetki sınırı:** planlar ve ajan tanımını **YAZAR**; doğurmayı Beyin yapar
+(§8.4: alt-ajan alt-ajan doğuramaz — bu ortamda kurala değil, mekaniğe tabidir). İşçi işi
+yapmaz; ürüne dokunmaz.
 
-Boşluk bulunmazsa çıktı tek satırdır: `boşluk yok`. Bu adım atlanamaz — atlanırsa M11 ölü kural olur.
+Boşluk bulunmazsa çıktı **tek satır değil, sayılı bir satırdır:**
+
+```
+boşluk yok — taranan madde sayısı: <n>
+```
+
+`<n>` zorunludur ve `0` olamaz. Gerekçesi: hiçbir şey yapmadan `boşluk yok` yazmak, gerçekten
+tarayıp `boşluk yok` yazmakla **birebir aynı çıktıyı** veriyordu — yani atlamanın bedeli yoktu
+ve atlandığı hiçbir yerde görünmüyordu. Sayı, atlamayı ucuz ve deterministik biçimde görünür
+kılar (§10.7 format kapısı bunu mekanik olarak reddeder). Bu adım atlanamaz — atlanırsa M11
+ölü kural olur.
 
 ---
 
@@ -792,6 +883,13 @@ kör değildir. Bu yüzden:
      §12 adım 6'nın kural etkinlik ölçümü BU TABLOYA bakar; tutulmazsa ikisi de ölür. -->
 - hata sınıfı: <id> | ilk görülme: <koşu> | kapanma: <koşu> | ürettiği kural: <id>
   | sonraki tekrarlar: [<koşu no>, …]
+
+## 9. Koşu ölçüleri
+<!-- §14.4'ün DBO/ZKO/KEO'su buradan hesaplanır. Koşu başına tek satır; hepsi mevcut
+     çıktılardan doldurulur, ek ölçüm işi yoktur. -->
+- koşu: <no> | kademe: S<n> | 1. turda kalite kapısı: geçti/kaldı
+  | teslim sonrası kullanıcı düzeltmesi: var/yok | zincir kaçırma: evet/hayır
+  | final kurulu RET: <n> | N_FİNAL: <n> | çapraz denetim çelişkisi: <n>
 ```
 
 ### 6.3 Yazma protokolü
@@ -889,8 +987,10 @@ Dördü de "evet" değilse, **hangi test düştüyse ona göre** karar ver:
 [ ] Bağlam doluluğu — ölçülebilir bir sinyalle:
       · ortam doluluğu bildiriyorsa: %70'i geçtiğinde ZORUNLU, %40'ı geçtiğinde UYARI
         (ölçümler bozulmanın %30–40 civarında başladığını gösteriyor; %70 son sınırdır, ideal değil)
-      · ortam bildirmiyorsa vekil metrik kullan: okunan dosya + üretilen uzun çıktı sayısı
-        §5.5'teki kapsam sınırına benzer sabit bir eşiği aştığında
+      · ortam bildirmiyorsa vekil eşik (varsayılan — bu dal EN SIK kullanılandır,
+        boş bırakılamaz): **15 okunan dosya VEYA 5 uzun çıktı VEYA 40 araç çağrısı**,
+        hangisi önce dolarsa. Sayılar kesin değildir ama uygulanabilirdir;
+        kalibrasyonu STATE.md §6'ya yazılır ve projeye göre güncellenir
       · öznel "doluymuş gibi hissetme" tek başına tetikleyici DEĞİLDİR
 [ ] Bir yaklaşımın terk edilip başkasına geçilmesi
 ```
@@ -1035,7 +1135,12 @@ Final Kurulu → oy birliği (§4.4)
 
 ### 10.2 Rubrik zorunluluğu
 
-Doğrulayıcıya **rubriksiz** iş verilmez. Rubrik en az şunları içerir:
+Doğrulayıcıya **rubriksiz** iş verilmez. **Rubriği işi yapan ajan yazamaz** — yazarsa
+Doğrulayıcı, yapanın kendi belirlediği ölçütlerle denetim yapar ve M4'ün ("yapan ≠ denetleyen")
+içi boşalır. Rubrik doğrudan kullanıcının tamamlanma durumundan (§2.1) türetilir; S2'de
+Doğrulayıcı'ya rubrikle birlikte **kullanıcının özgün talebi de** verilir.
+
+Rubrik en az şunları içerir:
 
 ```
 RUBRİK
@@ -1044,6 +1149,47 @@ RUBRİK
 3. Otomatik RET koşulları:               …
 4. Kanıt talebi: her ONAY için hangi kanıt gösterilecek
 ```
+
+**Doldurulmuş örnek — kod işi** ("şu fonksiyona test yaz"):
+
+```
+RUBRİK
+1. Zorunlu maddeler (hepsi olmalı):
+   [ ] `parseDate` için en az 3 test var: geçerli girdi, boş girdi, hatalı biçim
+   [ ] Testler mevcut dosya düzenine uyuyor (tests/ altında, aynı adlandırma)
+   [ ] Üretim kodu DEĞİŞMEDİ — yalnız test dosyası eklendi/değişti
+2. Ölçülebilir eşikler:
+   `npm test` sıfır hatayla geçiyor · `npm run lint` sıfır uyarı
+   Yeni testler kaldırıldığında paket KIRILIYOR (test gerçekten bir şey sınıyor)
+3. Otomatik RET koşulları:
+   Test gövdesinde assertion yok · yalnız "çalışmıyor" diye skip edilmiş test var
+   Üretim kodunda değişiklik var · testler birbirine bağımlı (sıra değişince kırılıyor)
+4. Kanıt talebi:
+   Her ONAY için çalıştırılan komut + ham çıktısı. "Geçti" beyanı kanıt değildir;
+   Doğrulayıcı komutu KENDİ çalıştırır (§10.3).
+```
+
+**Doldurulmuş örnek — belge/metin işi** ("şu bölümü yeniden yaz"):
+
+```
+RUBRİK
+1. Zorunlu maddeler (hepsi olmalı):
+   [ ] Özgün metindeki her iddia korunmuş VEYA bilerek çıkarılmış olduğu not edilmiş
+   [ ] Her yeni iddia bir kaynağa/gerekçeye bağlı
+   [ ] Hiçbir madde belgenin başka bir yerinde tekrar etmiyor
+2. Ölçülebilir eşikler:
+   Bölüm içindeki atıfların %100'ü var olan bir bölüme işaret ediyor
+   Yeni uzunluk ≤ eskinin 1.3 katı (şişme freni)
+3. Otomatik RET koşulları:
+   Ölçütü olmayan sıfat karar noktası olarak kullanılmış ("yeterince", "önemli")
+   Kırık atıf var · aynı kural iki yerde farklı yazılmış
+4. Kanıt talebi:
+   Her ONAY için bölüm ve satır numarası. Çelişki iddiası için İKİ alıntı birden.
+```
+
+Bu iki örnek, rubriğin ne kadar somut olması gerektiğini gösterir: `Ölçülebilir eşikler` alanına
+"iyi olsun" yazılamaz, `Otomatik RET` alanına "kötüyse" yazılamaz. Eşik bulunamıyorsa madde
+`Zorunlu maddeler`e taşınır — boş bırakılmaz (§10.7 format kapısı boş alanı reddeder).
 
 ### 10.3 Doğrulayıcı için sert kurallar
 
@@ -1193,6 +1339,13 @@ giden açık bir yol bırakır.
   beklenenin birkaç katına şişer — bu, tahmin değil gözlenmiş bir eğilimdir.
 
 ### 11.3 Geri dönülemez eylemler
+
+**Geri sarma noktası — koşu başında.** Paralel bir dalga başlamadan veya birden çok dosyaya
+dokunmadan önce dönülebilir bir işaret bırakılır (commit, etiket, yedek). Gerekçesi: Final
+Kurulu RET verdiğinde veya iş teslimden sonra yanlış çıktığında, 6 dosyadaki 40 değişikliği
+**kısmen** düzeltmek yarısı eski yarısı yeni bir durum bırakır. RET'te önce geri sarılır,
+sonra yeniden planlanır — üstüne yama yapılmaz. İşaret bırakılamıyorsa bu teslim beyanına
+yazılır.
 
 **Tanım açık uçludur:** geri dönülemez eylem = sonucu **bu ajanın kendi yetkisiyle geri
 alınamayan** her eylem. Aşağıdaki liste tüketici değildir; listede olmayan bir eylemin geri
@@ -1481,16 +1634,22 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 
 ### 14.1 Başlarken
 
+Maddelerin başındaki etiket hangi kademede geçerli olduğunu söyler: `[hepsi]` her kademede,
+`[S2+]` Seviye 2 ve 3'te, `[S3]` yalnız Seviye 3'te. Etiketsiz liste kademe körüdür: S2'de
+koşan ajan karşılığı olmayan maddeleri görünce **listeyi tümden bırakır** — "önemli olanı da
+kaçırma" biçimindeki en yaygın terk kalıbı budur.
+
 ```
-[ ] STATE.md okundu
-[ ] Tamamlanma durumu yazıldı ve ölçülebilir (§2.1)
-[ ] Büyük hedef izole alt görevlere bölündü, 4 test geçti (§7.1)
-[ ] Paralellik Kurulu toplandı, N_FİNAL belli (§4.1)
-[ ] Kapsam planı çıkarıldı, her ajanın kapalı listesi var (§5.2)
-[ ] Her ajanın 9 alanlı tanımı eksiksiz (§3)
-[ ] Belirsizlikler soruldu, varsayım üretilmedi
-[ ] KURALLAR.md okundu (§0 adım 3)
-[ ] Kademe seçildi ve gerekçesiyle kaydedildi (§0.1) — emin değilsen S2
+[hepsi] [ ] STATE.md okundu
+[hepsi] [ ] Tamamlanma durumu yazıldı ve ölçülebilir (§2.1)
+[S2+]   [ ] Büyük hedef izole alt görevlere bölündü, 4 test geçti (§7.1)
+[S3]    [ ] Paralellik Kurulu toplandı, N_FİNAL belli (§4.1)
+[hepsi] [ ] Kapsam planı çıkarıldı, her ajanın kapalı listesi var (§5.2)
+[S2+]   [ ] Her ajanın 9 alanlı tanımı eksiksiz (§3)
+[hepsi] [ ] Belirsizlikler soruldu, varsayım üretilmedi
+[hepsi] [ ] KURALLAR.md okundu (§0 adım 3)
+[hepsi] [ ] Kademe seçildi ve gerekçesiyle kaydedildi (§0.1) — emin değilsen S2
+[hepsi] [ ] S1 seçildiyse işi yapmayan bir aktör onayladı (§0.1 kapı)
 ```
 
 ### 14.2 Yürütme sırasında
@@ -1511,18 +1670,73 @@ En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya s
 ### 14.3 Bitirirken
 
 ```
-[ ] Doğrulayıcı rubrikle çalıştı, her onayın kanıtı var (§10.3)
-[ ] Meta-doğrulayıcı doğrulayıcıyı denetledi (M5)
-[ ] Nihai testçi bağımsız test yaptı ve "geçti" dedi (M7)
-[ ] Kapsam uyum raporu çıktı, iki yönlü hüküm verildi (§5.4)
-[ ] Hatalar kurala damıtıldı, doğru yere yazıldı (§12)
-[ ] STATE.md'nin **değişen** bölümleri güncellendi (§6.2) — değişmeyen bölüme dolgu yazılmaz
-[ ] Final Kurulu 3/3 ONAY verdi (§4.4)
-[ ] Boşluk taraması yapıldı, sahipsiz iş kalmadı (§4.5)
-[ ] Final Kurulu kör ve eşzamanlı oyladı (§4.4)
-[ ] Kullanıcıya sunulan çıktıda ne yapıldı / ne yapılmadı açıkça yazıldı
-[ ] S1/S2 ise teslim notunda kademe beyanı var (§0.1)
+[S2+]   [ ] Doğrulayıcı rubrikle çalıştı, her onayın kanıtı var (§10.3)
+[S3]    [ ] Meta-doğrulayıcı doğrulayıcıyı denetledi (M5)
+[S3]    [ ] Nihai testçi bağımsız test yaptı ve "geçti" dedi (M7)
+[S2+]   [ ] Kapsam uyum raporu çıktı, iki yönlü hüküm verildi (§5.4)
+[hepsi] [ ] Hatalar kurala damıtıldı, doğru yere yazıldı (§12)
+[hepsi] [ ] STATE.md'nin **değişen** bölümleri güncellendi (§6.2) — değişmeyen bölüme dolgu yazılmaz
+[S3]    [ ] Final Kurulu 3/3 ONAY verdi (§4.4)
+[S3]    [ ] Boşluk taraması yapıldı, sahipsiz iş kalmadı (§4.5)
+[S3]    [ ] Final Kurulu kör ve eşzamanlı oyladı (§4.4)
+[hepsi] [ ] Kullanıcıya sunulan çıktıda ne yapıldı / ne yapılmadı açıkça yazıldı
+[S3]    [ ] Her faz sonunda kullanıcıya 3 satırlık durum verildi (§14.5)
+[hepsi] [ ] Koşu ölçüleri STATE.md §9'a yazıldı (§14.4)
+[hepsi] [ ] S1/S2 ise teslim notunda kademe beyanı var (§0.1)
 ```
+
+### 14.4 Sistem çalışıyor mu — tek rakam
+
+§14.1–14.3'ün kutularının **tamamı süreç kutusudur**: kurul toplandı mı, rubrik kullanıldı mı,
+rapor çıktı mı. Hepsi işaretliyken kötü bir eser teslim edilebilir ve bunu fark edecek tek bir
+sayı yoktu. Süreç uyumunu ölçen bir aygıtı sonucu ölçen aygıt sanmak, M4'ün sistem ölçeğindeki
+ihlalidir: sistem kendi kendini denetliyordu.
+
+```
+DBO — Düzeltmesiz Teslim Oranı   (kayan 10 koşuluk pencere)
+
+DBO = (1. turda kalite kapısını geçen VE teslimden sonraki oturumda
+       kullanıcı düzeltmesi almayan koşu) / (toplam teslim)
+
+Hedef: ≥ 0.7.  İki ölçümde üst üste düşerse DENETLENEN ŞEY KOŞU DEĞİL, SİSTEMDİR:
+§12 döngüsü ve §10.2 rubrikleri denetime alınır.
+```
+
+**Payın neden "kullanıcı düzeltmesi yokluğu" olduğuna dikkat.** "1. turda 3/3 ONAY" tek başına
+pay olsaydı hedef, kurulu yumuşamaya iterdi — §0.1'in zaten tespit ettiği "sınırdaki maddeyi
+ONAY'a yuvarlama" baskısını sistem ölçeğinde kurumsallaştırırdı. Kullanıcı düzeltmesi kurulun
+kontrol edemediği dış bir sinyaldir; §12 onu zaten "en yüksek değerli kanıt" ilan ediyor ve
+v1.5'e kadar hiçbir yerde **saymıyordu**.
+
+İki yardımcı ölçü (ikisi de mevcut çıktılardan bedava):
+
+| Ölçü | Tanım | Ne söyler |
+|---|---|---|
+| **ZKO** — zincir kaçırma | (alt zincir ONAY iken Final Kurulu'nun RET verdiği koşu) / toplam | Doğrulama kapısının karşılığını verip vermediği. ZKO ≈ 0 ise kapı hafifletilebilir; yükseliyorsa rubrikler yetersizdir. |
+| **KEO** — kural etkinliği | (yazıldıktan sonra hedef hata sınıfı bir daha tekrar etmemiş kural) / toplam kural | §12'nin öğrendiğini iddia ettiği şeyin tek kanıtı (§12 adım 6, STATE.md §8). |
+
+Üçü de `STATE.md` §9'a koşu başına tek satır olarak yazılır; ek ölçüm işi gerektirmez,
+yalnız kalıcı bir yazma yeri gerektirir.
+
+### 14.5 Uzun koşuda görünürlük — ara rapor
+
+S3'te bir koşu uzun sürer ve kullanıcı sonucu en sonda tek seferde görür. Yanlış yolda
+gidiliyorsa müdahale imkânı yoktur; §11.6 insanda üç sorumluluk bırakıyor ama insana karar
+verecek bilgi akmıyor.
+
+**Her faz sonunda (dalga sınırında) kullanıcıya üç satır:**
+```
+BİTEN   : <ne tamamlandı>
+KOŞAN   : <şu an ne yapılıyor>
+SAPMA   : <plandan ayrılan bir şey var mı — yoksa "yok">
+```
+
+Onay beklenmez; bu bir kapı değil, **görünürlüktür**. Kullanıcı okumasa da maliyeti üç
+satırdır; okursa yanlış yolu erken keser.
+
+**Tek yön kuralı:** Ara rapora gelen kullanıcı cevabı, §12'nin ayrıcalıklı "kullanıcı
+düzeltmesi" kanalına **kendiliğinden girmez** — o kanal §12'deki kimlik ve onay şartlarına
+tabidir. Ara rapor bilgi verir, kalıcı kural üretmez.
 
 ---
 
@@ -1571,6 +1785,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | v1.3 | `KURALLAR.md`'nin yeri `~/.claude/` olarak sabitlendi (proje kökü değil); global kurulum paketi eklendi. | Belge "projeyle ölmesin, seninle taşınsın" diyordu ama dosyayı proje köküne koyuyordu — kendi doktriniyle çelişiyordu |
 | v1.4 | Rollerin yetki sınırları düzyazıdan gerçek ajan tanım dosyalarına taşındı (`agents/*.md`); `permissions` ile sır okuma engellendi ve geri dönüşü zor eylemler onaya bağlandı; hook'lar gerçek senaryolara karşı sınandı ve düzeltildi; doğrulanmamış varsayım §1'den çıkarıldı; kilitlenmeler açıldı; belgenin kendi öz-tutarsızlıkları giderildi; üç yüzey arasına sürüm senkronu kuralı kondu. | Altı denetçi + meta-doğrulama: 88 bulgu → 12 kök neden (`DENETIM-v1.3.md`) |
 | v1.5 | **§5 zaman aritmetiğinden kapsam diline geçti** (M16/M17 metni değişti — §15.1 gereği kullanıcı onayı alındı). T_i/T_dalga/KO/VT/kalibrasyon tablosu/%40 tavanı silindi; yerine kapalı iş listesi + iki yönlü kapsam uyumu denetimi geldi. Kurtarılanlar: tıkanma protokolü (§5.3), adım tabanlı kontrol noktası, doğrulama artık yüzde değil kapı, §4.1 paydası bütçe tavanına çevrildi. Ebeveyn damgası tek bağımsız süre ölçüsü olarak kayıtta kaldı — yaptırımsız. | Dört üyeli karar kurulu (kullanıcı sadakati / ölçüm dürüstlüğü / günlük kullanım / sistem bütünlüğü), ayrı bağlamlarda kör ve eşzamanlı: **oy birliği**. Kök neden: ölçen ile ölçülen aynı kişiydi (R3); ölçülemeyen büyüklüğün aritmetiğini düzeltmek onu ölçülebilir yapmaz. |
+| v1.6 | Kalan yedi kök neden: **S1 kapısı** (denetimi kaldıran tek kararı işi yapmayan aktör onaylar) · **kesinti/kurtarma** (§2.0, uçuş kaydı ayrı dosyada) · **kapsam değişikliği** (§2.2) · **geri sarma noktası** · **yordamlı iş S1'de koşar** (sistem öğrendikçe hızlansın) · **ara rapor** (§14.5) · **DBO başarı ölçüsü** (§14.4) + STATE.md §9 · doldurulmuş rubrik örnekleri (§10.2) · §14 kademe etiketleri · vekil bağlam eşiği somutlaştı · `boşluk yok` artık sayı taşıyor. | Denetimin kalan bulguları: R7, R8, R11, R12. Ortak kusur: kuralın atlandığında iz bırakmaması ve sistemin kendi sonucunu ölçememesi. |
 
 ---
 
