@@ -6,7 +6,9 @@ Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum s
 ## 1. Doğrulanmış gerçekler
 <!-- Kontrol edilmiş, artık tahmin edilmeyecek bilgiler.
      Her satırda NASIL doğrulandığı, NE ZAMAN ve KAYNAĞIN GÜVENİLİRLİĞİ yazar.
-     TAZELİK: dayandığı şey değiştiyse veya kayıt 10 koşudan eskiyse, kullanmadan önce yenile. -->
+     TAZELİK: dayandığı şey değiştiyse veya kayıt 10 koşudan eskiyse, kullanmadan önce yenile.
+     Tazelenmemiş gerçek, "doğrulanmış" etiketi taşıdığı için tahminden daha tehlikelidir.
+     kaynak: KARANTİNALI ise §11.1'in ek doğrulama şartı uygulanmadan bu satır kullanılamaz. -->
 - …  (doğrulama: …, tarih: …, kaynak: güvenilir | KARANTİNALI)
 
 ## 2. Genel kurallar
@@ -28,6 +30,7 @@ Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum s
 
 ## 6. Kapsam kayıtları
 <!-- Ölçü ESERDEN okunur, ajanın beyanından değil. Yalnız Kapsam Uyumu Denetçisi yazar.
+     Sonraki listeleri buradan boyutlandır.
      Süre yazılmaz: ajanın kendi süre beyanı yaptırıma bağlanamaz (§5.1).
      Ebeveyn damgası ayrı dosyada: ~/.claude/ajan-telemetri.log -->
 - koşu: … | görev tipi: … | ajan: … | listelenen: … | işlenen: … | liste dışı: …
@@ -41,5 +44,14 @@ Bu dosya projenin tek doğruluk kaynağıdır. Oturum başında okunur, oturum s
 
 ## 8. Kapanmış başarısızlıklar
 <!-- §3 yalnız AÇIK olanları tutar. Tekrarı görmek ve kural etkinliğini ölçmek için
-     kapanmış hatalar kimliğiyle burada kalır (§12 adım 6). -->
+     kapanmış hatalar kimliğiyle burada kalır. §4.2 ve §10.4'ün "aynı hatanın 2. tekrarı"
+     tetikleyicisi ve §12 adım 6'nın kural etkinlik ölçümü BU TABLOYA bakar;
+     tutulmazsa ikisi de ölür. -->
 - hata sınıfı: … | ilk görülme: … | kapanma: … | ürettiği kural: … | sonraki tekrarlar: […]
+
+## 9. Koşu ölçüleri
+<!-- §14.4'ün DBO/ZKO/KEO'su buradan hesaplanır. Koşu başına tek satır; hepsi mevcut
+     çıktılardan doldurulur, ek ölçüm işi yoktur. -->
+- koşu: <no> | kademe: S<n> | 1. turda kalite kapısı: geçti/kaldı
+  | teslim sonrası kullanıcı düzeltmesi: var/yok | zincir kaçırma: evet/hayır
+  | final kurulu RET: <n> | N_FİNAL: <n> | çapraz denetim çelişkisi: <n>

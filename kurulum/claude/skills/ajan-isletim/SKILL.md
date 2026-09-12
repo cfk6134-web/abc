@@ -3,7 +3,7 @@ name: ajan-isletim
 description: Çok adımlı, çok ajanlı veya denetim gerektiren işler için tam işletim protokolünü açar — kademe seçimi (S1/S2/S3), paralellik kurulu, kapsam sınırı, doğrulama zinciri, kurullar, çapraz denetim, karantina ve öğrenme döngüsü. Şu durumlarda kullan: iş birden fazla alt göreve bölünüyorsa, birden fazla ajan paralel koşacaksa, geri dönüşü zor bir karar veya eylem varsa (veri silme, üretime çıkış, şema değişikliği), kullanıcı tam denetim veya oy birliği istediyse, bir doğrulayıcı RET verdiyse, ya da bir hatanın kök nedeni aranıyorsa. Kısa ve tek adımlık işlerde AÇMA — çekirdek kurallar CLAUDE.md'de zaten yüklü.
 ---
 
-# Ajan işletim protokolü — v1.6
+# Ajan işletim protokolü — v1.6.1
 
 Tam metin: `~/.claude/AJAN-ISLETIM-TALIMATI.md` (sürümü bu dosyanınkiyle aynı olmalı — §15.2 adım 6)
 
