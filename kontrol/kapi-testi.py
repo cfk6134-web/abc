@@ -25,6 +25,12 @@ DOSYALAR = [
 YEDEK = {f: (KOK / f).read_bytes() for f in DOSYALAR}
 TALIMATLAR = DOSYALAR[:2]
 
+# Sürüm sabit yazılmaz: her yamada testi bozar ve testin kendisi senkron
+# kusuruna düşer. Kanonik kaynak belgenin başlığıdır (kapı 1 ile aynı kaynak).
+SURUM = re.search(r"^#\s+AJAN İŞLETİM TALİMATI\s+—\s+(v\d+\.\d+(?:\.\d+)?)\s*$",
+                  (KOK / DOSYALAR[0]).read_text(encoding="utf-8"), re.M).group(1)
+ESKI_SURUM = "v0.9"  # kanonikten kesinlikle farklı, enjeksiyon için
+
 
 def geri():
     for f, b in YEDEK.items():
@@ -48,13 +54,14 @@ def degistir(dosyalar, eski, yeni):
 
 TESTLER = [
     ("1", "türev yüzey sürümü geride kaldı",
-     lambda: degistir(["kurulum/claude/CLAUDE.md"], "v1.6.1", "v1.5")),
+     lambda: degistir(["kurulum/claude/CLAUDE.md"], SURUM, ESKI_SURUM)),
     ("2", "iki talimat kopyası ayrıştı",
      lambda: degistir(["kurulum/claude/AJAN-ISLETIM-TALIMATI.md"], "# AJAN", "# ayrışma\n# AJAN")),
     ("3", "gömülü şablon ile tek dosya ayrıştı",
      lambda: degistir(["kurulum/proje/STATE.md"], "## 6. Kapsam kayıtları", "## 6. Zaman kayıtları")),
     ("4", "kapanış damgası bayat",
-     lambda: degistir(TALIMATLAR, "**Belge sonu — v1.6.1.**", "**Belge sonu — v1.3.**")),
+     lambda: degistir(TALIMATLAR, f"**Belge sonu — {SURUM}.**",
+                      f"**Belge sonu — {ESKI_SURUM}.**")),
     ("5", "kırık §-atfı",
      lambda: degistir(TALIMATLAR, "(§10.2,", "(§10.99,")),
     ("6", "başlık sayı iddiası içerikle tutmuyor",
@@ -63,6 +70,17 @@ TESTLER = [
     ("7", "sözlükte ölü terim",
      lambda: degistir(TALIMATLAR, "| **Kural enflasyonu**",
                       "| **KO / VT** | Kullanım Oranı = kullanılan/tahsis. |\n| **Kural enflasyonu**")),
+    ("8", "sözlük sayı iddiası gövdeyle uyuşmuyor",
+     lambda: degistir(TALIMATLAR, "tetikleyen yedi durumdan biri",
+                      "tetikleyen beş durumdan biri")),
+    ("9", "§13 şablonunda ölü mekanizma",
+     lambda: degistir(TALIMATLAR, "### 13.4 Kapsam Belirleyici çağrısı",
+                      "### 13.4 Kapsam Belirleyici çağrısı\n\nToplam süre: <T>.")),
+    ("10", "nöbetçi atıf yanlış bölüme gidiyor",
+     lambda: degistir(TALIMATLAR, "`.ajan-ucus.log`, §2.0", "`.ajan-ucus.log`, §2.2")),
+    ("11", "kataloğa girmemiş rol eklendi",
+     lambda: degistir(TALIMATLAR, "| **Çürütücü** |",
+                      "| **Kademe Kontrolörü** | S1 kapısını onaylar | — | — |\n| **Çürütücü** |")),
 ]
 
 print("KAPI TESTİ — her kapı yakalaması gerekeni yakalıyor mu?\n" + "=" * 54)

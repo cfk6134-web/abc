@@ -166,6 +166,143 @@ def _():
     return [f"sözlükte ölü terim tanımlı: {t}" for t in olu if t in sozluk]
 
 
+
+# ---------------------------------------------------------------------------
+# Kapı 8–11: ANLAMSAL senkron. v1.6.1 denetiminin hükmü: kapı 1–7 ucuz sınıfı
+# (sürüm damgası, birebir kopya, kırık atıf, ölü terim) kapatıyordu; bu belgeyi
+# üç sürüm üst üste ısıran sınıf ise anlamsaldı — çözülen ama yanlış hedefli
+# atıf, bölümüyle çelişen şablon, gövdesiyle uyuşmayan sayı, kataloğa girmemiş rol.
+# ---------------------------------------------------------------------------
+
+SAYI = {"bir": 1, "iki": 2, "üç": 3, "dört": 4, "beş": 5, "altı": 6, "yedi": 7,
+        "sekiz": 8, "dokuz": 9, "on": 10}
+
+
+def _blok(metin, bas, son):
+    i = metin.index(bas)
+    j = metin.index(son, i + len(bas))
+    return metin[i:j]
+
+
+@kapi("8. Sözlük sayı iddiası == gövdedeki liste uzunluğu")
+def _():
+    metin = oku(TALIMAT)
+    # (sözlük terimi, iddiayı çeken desen, sayılacak blok, madde deseni)
+    iddialar = [
+        ("Anomali", r"tetikleyen (\w+) durumdan biri",
+         ("Anomali tanımı", "**Üyeler:**"), r"^\[ \]"),
+        ("İzole alt görev", r"§7\.1'deki (\w+) testi",
+         ("### 7.1", "Dördü de \"evet\" değilse"), r"^\[ \]"),
+        ("Büyük adım", r"§8\.1'deki (\w+) tetikleyiciden",
+         ('"Büyük adım" tanımı', "Bunların hiçbiri yoksa"), r"^\[ \]"),
+    ]
+    h = []
+    for terim, desen, (bas, son), madde in iddialar:
+        satir = next((l for l in metin.split("\n")
+                      if l.startswith(f"| **{terim}**")), None)
+        if satir is None:
+            h.append(f"sözlükte '{terim}' bulunamadı — ayrıştırıcı bozuk")
+            continue
+        m = re.search(desen, satir)
+        if not m:
+            h.append(f"'{terim}' sözlük satırından sayı iddiası çıkarılamadı")
+            continue
+        ham = m.group(1)
+        iddia = SAYI.get(ham.lower(), int(ham) if ham.isdigit() else None)
+        if iddia is None:
+            h.append(f"'{terim}': '{ham}' sayıya çevrilemedi")
+            continue
+        gercek = len(re.findall(madde, _blok(metin, bas, son), re.M))
+        if gercek == 0:
+            h.append(f"'{terim}': sayılacak madde bulunamadı — sayaç bozuk")
+        elif gercek != iddia:
+            h.append(f"sözlük '{terim}' için {iddia} diyor, gövdede {gercek} madde var")
+    return h
+
+
+@kapi("9. §13 şablonlarında ölü mekanizma yok")
+def _():
+    metin = oku(TALIMAT)
+    sablonlar = _blok(metin, "## 13. ŞABLONLAR", "## 14. KONTROL LİSTELERİ")
+    # v1.4–v1.5'te sistemden çıkarılan mekanizmalar. §13 kopyala-yapıştır bölümüdür:
+    # buradaki metin ajana birebir gider, yani iki kopyadan OPERATİF olanıdır.
+    olu = ["Toplam süre", "karmaşıklık/kritiklik", "payını %", "T_dalga", "T_i ",
+           "kalibrasyon tablosu", "Kullanım Oranı", "Verimli Tur"]
+    return [f"§13 şablonunda ölü mekanizma: {m}" for m in olu if m in sablonlar]
+
+
+@kapi("10. Nöbetçi atıflar doğru bölüme gidiyor")
+def _():
+    metin = oku(TALIMAT)
+    # Çözülen ama YANLIŞ HEDEFLİ atıf, kapı 5'e görünmez. Yüksek trafikli
+    # olanlar burada kilitlenir: her biri bir denetim bulgusudur (B3, B7).
+    nobetci = [
+        (r"`\.ajan-ucus\.log`, §(\d+\.\d+)", "2.0",
+         "uçuş kaydı §2.0'da tanımlı; §2.2 kapsam değişikliğidir"),
+        (r"bölümleri güncellendi \(§(\d+\.\d+)\)", "6.3",
+         "§6.2 boş şablondur; yazma protokolü §6.3'tedir"),
+    ]
+    h = []
+    for desen, gereken, neden in nobetci:
+        m = re.search(desen, metin)
+        if not m:
+            h.append(f"nöbetçi atıf bulunamadı: {desen} — ayrıştırıcı bozuk")
+        elif m.group(1) != gereken:
+            h.append(f"§{m.group(1)} yerine §{gereken} olmalı — {neden}")
+    return h
+
+
+# Rol adı -> agents/ dosyası. Beyin orkestratördür (ana ajan), dosya gerekmez.
+ROL_DOSYA = {
+    "Beyin (Orkestratör)": None,
+    "Boşluk-Planlayıcı": "bosluk-planlayici.md",
+    "Uzman İşçi": "uzman-isci.md",
+    "Doğrulayıcı": "dogrulayici.md",
+    "Meta-Doğrulayıcı": "meta-dogrulayici.md",
+    "Nihai Testçi": "nihai-testci.md",
+    "Gözcü (Shadow)": "gozcu.md",
+    "Öğretmen": "ogretmen.md",
+    "Kapsam Belirleyici": "kapsam-belirleyici.md",
+    "Kapsam Uyumu Denetçisi": "kapsam-uyumu-denetcisi.md",
+    "Karantina Okuyucu": "karantina-okuyucu.md",
+    "Hipotez Üretici": "hipotez-uretici.md",
+    "Çürütücü": "curutucu.md",
+}
+# §3.1 dışında doğurulan, dosyası olan roller
+EK_DOSYA = {"kurul-uyesi.md"}
+
+# v1.6.1 denetiminin AÇIK bulguları (B1, B6). Bu küme YALNIZ KÜÇÜLEBİLİR:
+# yeni bir rol dosyasız kalırsa kapı KALDI verir. Tasarım işi bitince buradan silinir.
+ACIK_B1_B6 = {"gozcu.md", "kapsam-belirleyici.md", "kapsam-uyumu-denetcisi.md"}
+
+
+@kapi("11. Rol kataloğu == agents/ dosyaları (açık küme büyümüyor)")
+def _():
+    metin = oku(TALIMAT)
+    tablo = _blok(metin, "### 3.1", "**Aynı rollerin")
+    roller = [m.group(1) for m in re.finditer(r"^\| \*\*(.+?)\*\*", tablo, re.M)]
+    if len(roller) < 10:
+        return [f"yalnız {len(roller)} rol ayrıştırıldı — ayrıştırıcı bozuk"]
+    h = []
+    for r in roller:
+        if r not in ROL_DOSYA:
+            h.append(f"§3.1'de kataloglanmamış rol: {r} — ROL_DOSYA'ya eklenmeli")
+            continue
+        d = ROL_DOSYA[r]
+        if d is None:
+            continue
+        if not (KOK / "kurulum/claude/agents" / d).exists() and d not in ACIK_B1_B6:
+            h.append(f"'{r}' rolünün tanım dosyası yok ({d}) — §3: dosyasız rol "
+                     f"tam araç setiyle doğar, YASAK sütunu uygulanmaz")
+    beklenen = {d for d in ROL_DOSYA.values() if d} | EK_DOSYA
+    mevcut = {f.name for f in (KOK / "kurulum/claude/agents").glob("*.md")}
+    for f in sorted(mevcut - beklenen):
+        h.append(f"kataloğa bağlanmamış ajan dosyası: {f}")
+    for d in sorted(ACIK_B1_B6 & mevcut):
+        h.append(f"{d} artık var — ACIK_B1_B6'dan silin (küme yalnız küçülür)")
+    return h
+
+
 kalan = 0
 print("YÜZEY SENKRONU VE FORMAT KAPISI\n" + "=" * 46)
 for ad, hatalar in sonuclar:

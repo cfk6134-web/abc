@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.6.1
+# AJAN İŞLETİM TALİMATI — v1.6.2
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -19,7 +19,7 @@ Bu belgeyi gören ajan, başka hiçbir şey yapmadan sırasıyla:
    projeler arası geçerli dersler buraya yazılır. Bu adım atlanırsa yazılan ders bir daha
    okunmaz ve M2 kâğıt üstünde kalır.
 4. Görevi `§2 Ana Akış`ın hangi adımında olduğunu tespit et.
-4b. **Uçuş kaydını kontrol et** (`.ajan-ucus.log`, §2.2). Kapanmamış kayıt varsa
+4b. **Uçuş kaydını kontrol et** (`.ajan-ucus.log`, §2.0). Kapanmamış kayıt varsa
     ÖNCE kurtarma akışını koş — yarım işi bitmiş sanma.
 5. **TRİYAJ yap (§0.1)** — iş küçükse ağır makineyi kurma.
 6. Eksik bilgi varsa **varsayım üretme** → `§13.6 Soru Şablonu` ile sor.
@@ -1589,10 +1589,13 @@ dalga planını çıkar. Veto varsa belirt.
 ### 13.4 Kapsam Belirleyici çağrısı
 
 ```
-Toplam süre: <T>. Alt görevler ve karmaşıklık/kritiklik puanları: <…>.
-§5.2'ye göre her ajana kapalı bir iş listesi yaz, bütçe tavanı ekle (ölçülebiliyorsa),
-kontrol noktalarını koy,
-zorunlu tablo formatında yaz. Doğrulama payını %15'in altına indirme.
+Alt görevler: <…>. N_FİNAL: <§4.1'den>. İzolasyon durumu: <var/yok>.
+§5.2'ye göre her ajana KAPALI BİR İŞ LİSTESİ yaz — madde madde sayılabilir olsun.
+Bütçe tavanı ekle (yalnız tur/araç çağrısı sayılabiliyorsa). Kontrol noktasını
+listenin yarısına koy; liste tek maddelikse "yok" yaz (§5.2).
+Zorunlu tablo formatında yaz; "Sahipsiz kalan iş" satırını boş bırakma (§4.5).
+Sınır süreyle değil MADDE SAYISIYLA konur (§5.1). Doğrulama bir yüzde değil
+KAPIDIR: doğrulanmamış madde bitti sayılmaz (§5.2).
 ```
 
 ### 13.5 Kapsam Uyumu Denetçisi çağrısı
@@ -1680,7 +1683,7 @@ kaçırma" biçimindeki en yaygın terk kalıbı budur.
 [S3]    [ ] Nihai testçi bağımsız test yaptı ve "geçti" dedi (M7)
 [S2+]   [ ] Kapsam uyum raporu çıktı, iki yönlü hüküm verildi (§5.4)
 [hepsi] [ ] Hatalar kurala damıtıldı, doğru yere yazıldı (§12)
-[hepsi] [ ] STATE.md'nin **değişen** bölümleri güncellendi (§6.2) — değişmeyen bölüme dolgu yazılmaz
+[hepsi] [ ] STATE.md'nin **değişen** bölümleri güncellendi (§6.3) — değişmeyen bölüme dolgu yazılmaz
 [S3]    [ ] Final Kurulu 3/3 ONAY verdi (§4.4)
 [S3]    [ ] Boşluk taraması yapıldı, sahipsiz iş kalmadı (§4.5)
 [S3]    [ ] Final Kurulu kör ve eşzamanlı oyladı (§4.4)
@@ -1794,6 +1797,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | v1.5 | **§5 zaman aritmetiğinden kapsam diline geçti** (M16/M17 metni değişti — §15.1 gereği kullanıcı onayı alındı). T_i/T_dalga/KO/VT/kalibrasyon tablosu/%40 tavanı silindi; yerine kapalı iş listesi + iki yönlü kapsam uyumu denetimi geldi. Kurtarılanlar: tıkanma protokolü (§5.3), adım tabanlı kontrol noktası, doğrulama artık yüzde değil kapı, §4.1 paydası bütçe tavanına çevrildi. Ebeveyn damgası tek bağımsız süre ölçüsü olarak kayıtta kaldı — yaptırımsız. | Dört üyeli karar kurulu (kullanıcı sadakati / ölçüm dürüstlüğü / günlük kullanım / sistem bütünlüğü), ayrı bağlamlarda kör ve eşzamanlı: **oy birliği**. Kök neden: ölçen ile ölçülen aynı kişiydi (R3); ölçülemeyen büyüklüğün aritmetiğini düzeltmek onu ölçülebilir yapmaz. |
 | v1.6 | Kalan dört kök neden: **S1 kapısı** (denetimi kaldıran tek kararı işi yapmayan aktör onaylar) · **kesinti/kurtarma** (§2.0, uçuş kaydı ayrı dosyada) · **kapsam değişikliği** (§2.2) · **geri sarma noktası** · **yordamlı iş S1'de koşar** (sistem öğrendikçe hızlansın) · **ara rapor** (§14.5) · **DBO başarı ölçüsü** (§14.4) + STATE.md §9 · doldurulmuş rubrik örnekleri (§10.2) · §14 kademe etiketleri · vekil bağlam eşiği somutlaştı · `boşluk yok` artık sayı taşıyor. | Denetimin kalan bulguları: R7, R8, R11, R12. Ortak kusur: kuralın atlandığında iz bırakmaması ve sistemin kendi sonucunu ölçememesi. |
 | v1.6.1 | **Yama — v1.6'nın kendi kapılarından geçmeyen yerleri.** §6.2'deki gömülü `STATE.md` şablonu ile `kurulum/proje/STATE.md` **iki yönde birden** ayrışmıştı: gömülü kopya v1.5'in üç kuralını (yalnız Kapsam Uyumu Denetçisi yazar · §6.1 körlük uyarısı · §11.1 karantina yasağı) ve v1.3'ün `~/.claude/KURALLAR.md` konumunu taşımıyordu; tek dosya ise v1.6'nın §9 koşu ölçülerini taşımıyordu. İkisi birebir eşitlendi. Kapanış damgası `v1.3`'te, HTML altbilgisi `v1.0`'da kalmıştı. Sözlükteki ölü `KO / VT` tanımı silindi. v1.6 satırındaki "yedi kök neden" → "dört" (dayanak sütunu zaten R7, R8, R11, R12 diyordu). Kapanış paragrafı v1.1'in v1.4'te düzeltilmiş meşruiyet iddiasını hâlâ tekrar ediyordu; bırakıldı. | §15.2 adım 6 üç sürümdür düzyazı olarak duruyor ve üç sürümdür ihlal ediliyordu (M5-Y1). Kural `kontrol/yuzey-senkronu.py`'ye taşındı: yedi kapı, her biri mutasyon testiyle doğrulandı. R2'nin doktrini — uygulayıcısı olmayan kural, kural değildir. |
+| v1.6.2 | **v1.6.1 denetiminin mekanik yarısı** (`DENETIM-v1.6.1.md` — B2·B3·B4·B5·B7). **§13.4 şablonu v1.5 diline getirildi:** silinmiş üç mekanizmayı (süre tahsisi · `karmaşıklık/kritiklik` puanı · %15 doğrulama payı) ajana **birebir yapıştırılan** metinde hâlâ emrediyordu — §13.5 v1.5'te güncellenmiş, §13.4 atlanmıştı. §0 adım 4b uçuş kaydı için §2.2 yerine §2.0'ı gösteriyor (§2.2 kapsam değişikliğidir; belgenin en yüksek trafikli yolu yanlış bölüme gidiyordu). §14.3 §6.2 yerine §6.3'e — §6.2 boş şablon, yazma protokolü §6.3. Sözlükteki anomali sayısı beş → **yedi** (§4.2 listesi v1.5/v1.6'da iki madde büyümüştü). Künyedeki kurul sayısı 5 → **4**: §4.5 Boşluk Taraması belgede hiçbir yerde kurul diye anılmaz. | v1.6.1 denetimi. Sekiz bulgunun yedisi tek kök nedene iniyor: **değişiklik bir yüzeye iner, tüketicileri taranmaz** — v1.4 üç rolü, v1.5 §13.4'ü, v1.6 kataloğu ve sözlüğü atladı. v1.6.1'in senkron kapısı bu sınıfın yalnız **mekanik** yarısını görüyor. **Açık kalanlar:** B1 (Gözcü · Kapsam Belirleyici · Kapsam Uyumu Denetçisi tanım dosyasız — R2 kapandı ilan edilmişti), B6 (Kademe Kontrolörü ve Çelişki-Tarayıcı kataloğa girmemiş), B8 (künyedeki "Final Kurulu 3/3 onay" v1.1'den beri yeniden kazanılmadı). |
 
 ---
 
@@ -1819,7 +1823,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | **Kademe seçimi** | İşe uygulanacak denetim ağırlığının baştan verilen kararı (§0.1, §9.5). v1.1'e kadar "triyaj" adıyla ikiliydi. |
 | **Büyük adım** | §8.1'deki dört tetikleyiciden biri; temiz bağlam kuralını devreye sokar. |
 | **Çapraz denetim** | Aynı dalgadaki işçilerin birbirinin çıktısını çelişki açısından halka usulü denetlemesi (§10.5). |
-| **Anomali** | Gözcü'nün kök-neden kurulunu tetikleyen beş durumdan biri (§4.2). |
+| **Anomali** | Gözcü'nün kök-neden kurulunu tetikleyen yedi durumdan biri (§4.2). |
 | **Kapsam sınırı** | Zaman ölçülemediğinde onun yerine geçen sert bitiş koşulu (§5.5). |
 | **Kalite kapısı** | §10.1 zincirinin tamamının onayı + §10.5'te çelişki olmaması (§5.4). |
 | **Provenance** | Bir kaydın kaynağının güvenilirlik etiketi; karantinalı kayıtlar bunsuz kullanılamaz (§11.1). |
@@ -1833,7 +1837,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 
 ---
 
-**Belge sonu — v1.6.1.**
+**Belge sonu — v1.6.2.**
 
 Bu belgenin kendisi hakkında, kendi §10.3 standardıyla: v1.3 altı bağımsız denetçi ve bir
 meta-doğrulayıcı tarafından denetlendi (`DENETIM-v1.3.md`); 88 bulgunun indirgendiği 12 kök
