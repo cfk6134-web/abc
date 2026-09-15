@@ -306,6 +306,47 @@ def _():
     return h
 
 
+
+# §9.4 kademe adları -> agents/*.md model alanı. "En üst" ve "Üst" aynı kademeye
+# düşer: dosyalarda üç değer var (opus/sonnet/haiku), Beyin'in zaten dosyası yok.
+KADEME_MODEL = {"en üst": "opus", "üst": "opus", "orta": "sonnet", "hızlı/ucuz": "haiku"}
+
+
+@kapi("12. §3.1 MODEL sütunu == agents/*.md model alanı")
+def _():
+    metin = oku(TALIMAT)
+    blok = _blok(metin, "**Aynı rollerin", "### 3.2")
+    h, bakilan = [], 0
+    for satir in blok.split("\n"):
+        m = re.match(r"^\| \*\*(.+?)\*\*[^|]*\|(?:[^|]*\|){3}([^|]*)\|", satir)
+        if not m:
+            continue
+        rol, hucre = m.group(1), m.group(2).strip().replace("**", "")
+        dosya = ROL_DOSYA.get(rol)
+        if dosya is None:          # Beyin, veya kataloglanmamış rol (kapı 11'in işi)
+            continue
+        yol = KOK / "kurulum/claude/agents" / dosya
+        if not yol.exists():
+            continue               # kapı 11 zaten KALDI verir
+        # Hücre birden çok kademe adı taşıyabilir ("göreve göre: … → hızlı/ucuz; … → üst").
+        # O durumda hepsi meşrudur; belge iki kademeyi de açıkça izin veriyor.
+        bekle = {KADEME_MODEL[k] for k in KADEME_MODEL if k in hucre.lower()}
+        if not bekle:
+            h.append(f"'{rol}' MODEL hücresinden kademe okunamadı: {hucre!r}")
+            continue
+        mm = re.search(r"^model:\s*(\S+)", yol.read_text(encoding="utf-8"), re.M)
+        if not mm:
+            h.append(f"{dosya}: model alanı yok")
+            continue
+        bakilan += 1
+        if mm.group(1) not in bekle:
+            h.append(f"'{rol}': belge {'/'.join(sorted(bekle))} diyor, "
+                     f"{dosya} {mm.group(1)} diyor")
+    if bakilan < 10:
+        return [f"yalnız {bakilan} rol karşılaştırıldı — ayrıştırıcı bozuk"] + h
+    return h
+
+
 kalan = 0
 print("YÜZEY SENKRONU VE FORMAT KAPISI\n" + "=" * 46)
 for ad, hatalar in sonuclar:

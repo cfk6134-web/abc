@@ -91,6 +91,10 @@ TESTLER = [
     ("11", "kataloğa bağlanmamış ajan dosyası",
      lambda: (KOK / "kurulum/claude/agents/oksuz.md").write_text("---\nname: oksuz\n---\n",
                                                                  encoding="utf-8")),
+    ("12", "MODEL sütunu ile agents/*.md model alanı ayrıştı",
+     lambda: (KOK / "kurulum/claude/agents/nihai-testci.md").write_text(
+         (KOK / "kurulum/claude/agents/nihai-testci.md").read_text(encoding="utf-8")
+         .replace("model: sonnet", "model: haiku"), encoding="utf-8")),
 ]
 
 print("KAPI TESTİ — her kapı yakalaması gerekeni yakalıyor mu?\n" + "=" * 54)
