@@ -267,13 +267,16 @@ ROL_DOSYA = {
     "Karantina Okuyucu": "karantina-okuyucu.md",
     "Hipotez Üretici": "hipotez-uretici.md",
     "Çürütücü": "curutucu.md",
+    "Kademe Kontrolörü": "kademe-kontroloru.md",
+    "Çelişki-Tarayıcı": "celiski-tarayici.md",
 }
 # §3.1 dışında doğurulan, dosyası olan roller
 EK_DOSYA = {"kurul-uyesi.md"}
 
-# v1.6.1 denetiminin AÇIK bulguları (B1, B6). Bu küme YALNIZ KÜÇÜLEBİLİR:
-# yeni bir rol dosyasız kalırsa kapı KALDI verir. Tasarım işi bitince buradan silinir.
-ACIK_B1_B6 = {"gozcu.md", "kapsam-belirleyici.md", "kapsam-uyumu-denetcisi.md"}
+# v1.6.1 denetiminin B1 ve B6 bulguları v1.6.3'te kapandı: beş tanım dosyası yazıldı,
+# iki rol kataloğa girdi. Küme boş — YALNIZ KÜÇÜLEBİLİR, bir daha büyütülmez.
+# Dosyasız kalan yeni bir rol artık doğrudan KALDI verir.
+ACIK_B1_B6: set[str] = set()
 
 
 @kapi("11. Rol kataloğu == agents/ dosyaları (açık küme büyümüyor)")

@@ -21,7 +21,8 @@ DOSYALAR = [
     "kurulum/claude/CLAUDE.md",
     "kurulum/claude/skills/ajan-isletim/SKILL.md",
     "ajan-isletim-talimati.html",
-]
+] + [f"kurulum/claude/agents/{f.name}"
+     for f in sorted((KOK / "kurulum/claude/agents").glob("*.md"))]
 YEDEK = {f: (KOK / f).read_bytes() for f in DOSYALAR}
 TALIMATLAR = DOSYALAR[:2]
 
@@ -35,6 +36,10 @@ ESKI_SURUM = "v0.9"  # kanonikten kesinlikle farklı, enjeksiyon için
 def geri():
     for f, b in YEDEK.items():
         (KOK / f).write_bytes(b)
+    # test sırasında üretilmiş, yedekte olmayan dosyaları temizle
+    for f in (KOK / "kurulum/claude/agents").glob("*.md"):
+        if f"kurulum/claude/agents/{f.name}" not in YEDEK:
+            f.unlink()
 
 
 def calistir():
@@ -80,7 +85,12 @@ TESTLER = [
      lambda: degistir(TALIMATLAR, "`.ajan-ucus.log`, §2.0", "`.ajan-ucus.log`, §2.2")),
     ("11", "kataloğa girmemiş rol eklendi",
      lambda: degistir(TALIMATLAR, "| **Çürütücü** |",
-                      "| **Kademe Kontrolörü** | S1 kapısını onaylar | — | — |\n| **Çürütücü** |")),
+                      "| **Sahte Rol** | uydurma | — | — |\n| **Çürütücü** |")),
+    ("11", "kataloglanmış rolün tanım dosyası silindi",
+     lambda: (KOK / "kurulum/claude/agents/kapsam-uyumu-denetcisi.md").unlink()),
+    ("11", "kataloğa bağlanmamış ajan dosyası",
+     lambda: (KOK / "kurulum/claude/agents/oksuz.md").write_text("---\nname: oksuz\n---\n",
+                                                                 encoding="utf-8")),
 ]
 
 print("KAPI TESTİ — her kapı yakalaması gerekeni yakalıyor mu?\n" + "=" * 54)

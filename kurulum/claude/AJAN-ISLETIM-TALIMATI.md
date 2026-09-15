@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.6.2
+# AJAN İŞLETİM TALİMATI — v1.6.3
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -319,6 +319,8 @@ MODEL       : <kademe — §9.4>
 | **Karantina Okuyucu** | Güvenilmeyen içeriği okur, özetler | Salt-okur, izole | Hiçbir yüksek yetkili eylem alamaz (§11.1) |
 | **Hipotez Üretici** (n adet) | Tek bir kanıt kaynağından (log / dosya / veri) bağımsız hipotez üretir (§4.2) | Kendi kanıt kaynağını okuma | Başka kaynağa bakmaz; düzeltme yazmaz; kendi hipotezini kendi doğrulamaz |
 | **Çürütücü** | Bir hipotezi yanlışlamaya çalışır (§4.2) | Salt-okur + test çalıştırma | Hipotez üretmez; ürüne dokunmaz |
+| **Kademe Kontrolörü** | S1 seçimini onaylar veya reddeder — seçen denetlenen olamaz (§0.1) | Salt-okur; yalnız görev metni + dört S1 ölçütü | Esere, gerekçeye ve kimin istediğine bakamaz; ONAY vermezse iş S2'de yürür |
+| **Çelişki-Tarayıcı** | N≥4 dalgada halka yerine tüm çıktıları birlikte okur, çelişki arar (§10.5) | Salt-okur | Denetlediği çıktıyı düzeltemez, silemez, üstüne yazamaz (M1); kalite denetlemez |
 
 **Aynı rollerin çıktı ve bitiş tanımları** (§3'teki 9 alanın kalan dördü):
 
@@ -337,6 +339,8 @@ MODEL       : <kademe — §9.4>
 | **Karantina Okuyucu** | Şemalı olgu özeti — serbest metin değil (§11.1) | Şema dolduruldu | Görev tanımından | **Orta — en ucuz kademeye atanamaz** |
 | **Hipotez Üretici** | Hipotez + dayandığı kanıt satırı | Kaynağından çıkan hipotezler listelendi | Kök-neden turundan | Orta |
 | **Çürütücü** | Hipotez başına ÇÜRÜTÜLDÜ / AYAKTA + kanıt | Her hipoteze hüküm verildi | Kök-neden turundan | **Üst** — hipotez adjudikasyonu ucuz kademede yapılmaz |
+| **Kademe Kontrolörü** | `ONAY` veya `RET — gerekçe: <…>` — tek satır | Dört S1 ölçütü tek tek işaretlendi | §0.1'den | Hızlı/ucuz |
+| **Çelişki-Tarayıcı** | `ÇELİŞKİ YOK — karşılaştırılan çıktı sayısı: <n>` veya çelişki + iki alıntı | Dalgadaki tüm çıktılar birlikte okundu | Dalga sınırından | **Üst** — çelişki adjudikasyonu ucuz kademede yapılmaz |
 
 ### 3.2 Gözcü nasıl çalışır — sinyal, anomali, müdahale
 
@@ -1798,6 +1802,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | v1.6 | Kalan dört kök neden: **S1 kapısı** (denetimi kaldıran tek kararı işi yapmayan aktör onaylar) · **kesinti/kurtarma** (§2.0, uçuş kaydı ayrı dosyada) · **kapsam değişikliği** (§2.2) · **geri sarma noktası** · **yordamlı iş S1'de koşar** (sistem öğrendikçe hızlansın) · **ara rapor** (§14.5) · **DBO başarı ölçüsü** (§14.4) + STATE.md §9 · doldurulmuş rubrik örnekleri (§10.2) · §14 kademe etiketleri · vekil bağlam eşiği somutlaştı · `boşluk yok` artık sayı taşıyor. | Denetimin kalan bulguları: R7, R8, R11, R12. Ortak kusur: kuralın atlandığında iz bırakmaması ve sistemin kendi sonucunu ölçememesi. |
 | v1.6.1 | **Yama — v1.6'nın kendi kapılarından geçmeyen yerleri.** §6.2'deki gömülü `STATE.md` şablonu ile `kurulum/proje/STATE.md` **iki yönde birden** ayrışmıştı: gömülü kopya v1.5'in üç kuralını (yalnız Kapsam Uyumu Denetçisi yazar · §6.1 körlük uyarısı · §11.1 karantina yasağı) ve v1.3'ün `~/.claude/KURALLAR.md` konumunu taşımıyordu; tek dosya ise v1.6'nın §9 koşu ölçülerini taşımıyordu. İkisi birebir eşitlendi. Kapanış damgası `v1.3`'te, HTML altbilgisi `v1.0`'da kalmıştı. Sözlükteki ölü `KO / VT` tanımı silindi. v1.6 satırındaki "yedi kök neden" → "dört" (dayanak sütunu zaten R7, R8, R11, R12 diyordu). Kapanış paragrafı v1.1'in v1.4'te düzeltilmiş meşruiyet iddiasını hâlâ tekrar ediyordu; bırakıldı. | §15.2 adım 6 üç sürümdür düzyazı olarak duruyor ve üç sürümdür ihlal ediliyordu (M5-Y1). Kural `kontrol/yuzey-senkronu.py`'ye taşındı: yedi kapı, her biri mutasyon testiyle doğrulandı. R2'nin doktrini — uygulayıcısı olmayan kural, kural değildir. |
 | v1.6.2 | **v1.6.1 denetiminin mekanik yarısı** (`DENETIM-v1.6.1.md` — B2·B3·B4·B5·B7). **§13.4 şablonu v1.5 diline getirildi:** silinmiş üç mekanizmayı (süre tahsisi · `karmaşıklık/kritiklik` puanı · %15 doğrulama payı) ajana **birebir yapıştırılan** metinde hâlâ emrediyordu — §13.5 v1.5'te güncellenmiş, §13.4 atlanmıştı. §0 adım 4b uçuş kaydı için §2.2 yerine §2.0'ı gösteriyor (§2.2 kapsam değişikliğidir; belgenin en yüksek trafikli yolu yanlış bölüme gidiyordu). §14.3 §6.2 yerine §6.3'e — §6.2 boş şablon, yazma protokolü §6.3. Sözlükteki anomali sayısı beş → **yedi** (§4.2 listesi v1.5/v1.6'da iki madde büyümüştü). Künyedeki kurul sayısı 5 → **4**: §4.5 Boşluk Taraması belgede hiçbir yerde kurul diye anılmaz. | v1.6.1 denetimi. Sekiz bulgunun yedisi tek kök nedene iniyor: **değişiklik bir yüzeye iner, tüketicileri taranmaz** — v1.4 üç rolü, v1.5 §13.4'ü, v1.6 kataloğu ve sözlüğü atladı. v1.6.1'in senkron kapısı bu sınıfın yalnız **mekanik** yarısını görüyor. **Açık kalanlar:** B1 (Gözcü · Kapsam Belirleyici · Kapsam Uyumu Denetçisi tanım dosyasız — R2 kapandı ilan edilmişti), B6 (Kademe Kontrolörü ve Çelişki-Tarayıcı kataloğa girmemiş), B8 (künyedeki "Final Kurulu 3/3 onay" v1.1'den beri yeniden kazanılmadı). |
+| v1.6.3 | **Denetimin kalan yarısı — B1, B6, B8 kapandı.** Beş ajan tanım dosyası yazıldı: `gozcu` · `kapsam-belirleyici` · `kapsam-uyumu-denetcisi` · `kademe-kontroloru` · `celiski-tarayici`. En kritiği üçüncüsü: v1.5'in §5'i tümden yeniden yazma gerekçesi (R3 — ölçen ile ölçülen aynı kişi olamaz) o rolün **ölçtüğü esere yazamamasına** dayanıyordu, ama rol dosyasız olduğu için `Write`/`Edit`/`Bash` ile doğuyordu. **Kademe Kontrolörü** ve **Çelişki-Tarayıcı** §3.1 kataloğuna girdi: ikisi de doğuruluyordu, ikisi de katalogda yoktu (M10 ihlali) — birincisi S1 kapısının tek uygulayıcısıdır. Künyedeki **"Final Kurulu 3/3 onay"** kaldırıldı; v1.1'den beri yeniden kazanılmamıştı. Yerine §0.1'in zorunlu teslim beyanı kondu. | v1.6.1 denetimi B1, B6, B8. Kapı 11'in açık kümesi boşaldı ve **bir daha büyütülmez**: dosyasız kalan yeni bir rol artık doğrudan KALDI verir. Kapı testi üç dala genişledi — kataloğa girmemiş rol · dosyası silinen rol · kataloğa bağlanmamış dosya. |
 
 ---
 
@@ -1837,7 +1842,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 
 ---
 
-**Belge sonu — v1.6.2.**
+**Belge sonu — v1.6.3.**
 
 Bu belgenin kendisi hakkında, kendi §10.3 standardıyla: v1.3 altı bağımsız denetçi ve bir
 meta-doğrulayıcı tarafından denetlendi (`DENETIM-v1.3.md`); 88 bulgunun indirgendiği 12 kök
