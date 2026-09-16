@@ -347,6 +347,20 @@ def _():
     return h
 
 
+
+@kapi("13. CLAUDE.md tabloya S1 kapısını taşıyor (kapsam kapatma — B9)")
+def _():
+    # v1.6.1 denetiminin B1/B6'sıyla aynı sınıf: CLAUDE.md "her oturumda yüklenir" ve
+    # kademe kararı TAM OLARAK orada verilir (§1 "İşe başlamadan: kademe seç"). Tam
+    # belgenin S1 kapısını (R8, v1.6) taşımıyorsa, onu hiç açmadan çalışan ajan kendi
+    # S1 seçimini kendi onaylar — R8'in önlediği tam senaryo, en sık kullanılan yüzeyde.
+    metin = oku(CLAUDE_MD)
+    if "§0.1 kapısı" not in metin:
+        return ["CLAUDE.md kademe tablosu S1 kapısını (işi yapmayanın onayı — §0.1/R8) "
+                "anmıyor; tam belgeyi açmadan S1 seçen ajan kendi seçimini kendi onaylar"]
+    return []
+
+
 kalan = 0
 print("YÜZEY SENKRONU VE FORMAT KAPISI\n" + "=" * 46)
 for ad, hatalar in sonuclar:

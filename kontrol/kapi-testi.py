@@ -95,6 +95,8 @@ TESTLER = [
      lambda: (KOK / "kurulum/claude/agents/nihai-testci.md").write_text(
          (KOK / "kurulum/claude/agents/nihai-testci.md").read_text(encoding="utf-8")
          .replace("model: sonnet", "model: haiku"), encoding="utf-8")),
+    ("13", "CLAUDE.md'den S1 kapısı çıkarıldı",
+     lambda: degistir(["kurulum/claude/CLAUDE.md"], "§0.1 kapısı", "eski karar")),
 ]
 
 print("KAPI TESTİ — her kapı yakalaması gerekeni yakalıyor mu?\n" + "=" * 54)

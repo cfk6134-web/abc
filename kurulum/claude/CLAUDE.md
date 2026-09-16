@@ -1,4 +1,4 @@
-# İşletim çekirdeği — v1.6.3
+# İşletim çekirdeği — v1.6.4
 
 <!-- Sürüm damgası ZORUNLU: bu satır ~/.claude/AJAN-ISLETIM-TALIMATI.md'nin
      başlığındaki sürümle aynı olmalı. Farklıysa iki yüzey ayrışmıştır (§15.2 adım 6);
@@ -14,6 +14,11 @@ oraya yalnız gerektiğinde bak (`ajan-isletim` skill'i açar). Buradaki kuralla
 | **S1** | Dördü birden: tek bağlam penceresi · en fazla 2 dosya · tek komutla geri alınabilir · güvenilmeyen kaynak okumuyor | Tek ajan + temiz bağlamda öz-denetim |
 | **S2** | **Varsayılan — emin değilsen bu** | 1 yapan + 1 bağımsız doğrulayıcı |
 | **S3** | Paralel iş · geri dönüşü zor eylem · güvenilmeyen kaynak okuma · kullanıcı tam denetim istedi · S2'de aynı maddede ikinci RET | Tam akış: kurullar + meta-doğrulama |
+
+**S1'i seçen kendi seçimini onaylayamaz (§0.1 kapısı).** İşi yapmayan biri —
+kullanıcı, Beyin, veya ayrı bir Kademe Kontrolörü — onaylamadan S1'de kalınmaz;
+onaysız iş S2'de yürür. Kapı yalnız S1'e konur: S2 zaten bağımsız doğrulayıcı
+içerir, S3'ten kaçış yoktur.
 
 Kademeyi `STATE.md` §7'ye tek satır yaz: `kademe: S<n>, gerekçe: <…>`
 S1 veya S2'de çalıştıysan **teslim notunda hangi denetimin yapılmadığını yaz.**
