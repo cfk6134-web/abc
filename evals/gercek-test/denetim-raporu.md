@@ -28,11 +28,11 @@ Belgeyi denetleyen taraf, belgeyi yazan tarafla aynıdır. Belge kasıtlı tohum
 | `BELİRSİZ` | 3 |
 | `DIŞ DOĞRULAMA GEREKLİ` | 1 |
 | `BELGEDE BELİRTİLMİYOR` | 0 |
-| **Ana bulgu** | **10** |
+| **Ana bulgu** | **11** |
 | Etkilenen konum | 17 |
 
-Riske göre: Yüksek 6 · Orta 3 · Düşük 1
-**Doğrulanıp temiz çıkan kontroller: 6** (aşağıda, R-5)
+Riske göre: Yüksek 7 · Orta 3 · Düşük 1
+**Doğrulanıp temiz çıkan kontroller: 9** (aşağıda, R-5)
 
 **En kritik üç bulgu:** varlık adedi çelişkisi (320 ↔ 280), fesih hakkı ile 18 aylık kilit çakışması, "sözleşme bedeli" teriminin tanımsızlığı — teminat ve ceza tavanı bu terime bağlı.
 
@@ -266,3 +266,5 @@ Tek yüzdelik skor verilmemektedir. Doğru ifade: *incelenen 52 iddia biriminde 
 Rapordaki her birebir alıntı, kaynak metinde metinsel aramayla doğrulandı (KG-1). Bu kontrol **kendi raporumda bir kusur buldu:** R-03 satırında revizyon kaydı "teminat %6'ya çıkarıldı" olarak yazılmıştı; kaynakta "teminat **oranı** %6'ya çıkarıldı" geçiyor. Bir kelime düşürülmüştü. Düzeltildi.
 
 Doğrulama betiğinin sınırı: raporda tırnak içinde geçen her metin kaynak alıntısı değil — önerilen düzeltme metinleri ve tanımlanması istenen terimler de tırnaklı. Betik bunları ayırt etmiyor, ayrıca büyük/küçük harfe duyarlı. Bu nedenle "bulunamadı" çıkan 13 dizgeden 12'si yanlış alarmdı; yalnızca biri gerçek kusurdu. Betiğin kaynak alıntısını öneri metninden ayırt etmesi gerekiyor — açık iş.
+
+**İkinci kendini-denetleme bulgusu:** R-2 özet sayımı ile gövde ve istatistikler birbirini tutmuyordu — özet "10 ana bulgu / 6 temiz kontrol" derken gövdede 11 bulgu (B-01…B-11) ve R-5'te 9 temiz kontrol vardı. Aynı sayının iki yerde farklı olması, bu sistemin Madde 02'sinin tam olarak aradığı kusurdur; denetim raporunun kendisi bu kusuru taşıyordu. Düzeltildi ve sayımlar betikle doğrulandı (11 = 11 = 11).
