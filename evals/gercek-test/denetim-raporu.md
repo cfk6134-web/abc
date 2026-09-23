@@ -24,14 +24,14 @@ Belgeyi denetleyen taraf, belgeyi yazan tarafla aynıdır. Belge kasıtlı tohum
 
 | Etiket | Adet |
 |---|---|
-| `ÇELİŞKİLİ` | 6 |
-| `BELİRSİZ` | 3 |
+| `ÇELİŞKİLİ` | 8 |
+| `BELİRSİZ` | 2 |
 | `DIŞ DOĞRULAMA GEREKLİ` | 1 |
 | `BELGEDE BELİRTİLMİYOR` | 0 |
 | **Ana bulgu** | **11** |
 | Etkilenen konum | 17 |
 
-Riske göre: Yüksek 7 · Orta 3 · Düşük 1
+Riske göre: Yüksek 8 · Orta 2 · Düşük 1
 **Doğrulanıp temiz çıkan kontroller: 9** (aşağıda, R-5)
 
 **En kritik üç bulgu:** varlık adedi çelişkisi (320 ↔ 280), fesih hakkı ile 18 aylık kilit çakışması, "sözleşme bedeli" teriminin tanımsızlığı — teminat ve ceza tavanı bu terime bağlı.
@@ -254,7 +254,7 @@ Uygulanabilir değil (–) işaretli maddeler: belgede görsel yok (08), istatis
 | Etkilenen konum | 17 |
 | Gerekçeli ret | 5 |
 | Temiz çıkan kontrol | 9 |
-| İnsan onayı gereken yüksek riskli bulgu | 6 |
+| İnsan onayı gereken yüksek riskli bulgu | 8 |
 | Dış doğrulama bekleyen | 1 |
 
 Tek yüzdelik skor verilmemektedir. Doğru ifade: *incelenen 52 iddia biriminde 6 yüksek, 3 orta ve 1 düşük öncelikli sorun ile 1 dış doğrulama gerektiren iddia tespit edilmiştir; 5 aday bulgu gerekçeyle düşürülmüştür; mevzuat atıfları ve revizyon geçmişi denetlenememiştir.*
@@ -268,3 +268,5 @@ Rapordaki her birebir alıntı, kaynak metinde metinsel aramayla doğrulandı (K
 Doğrulama betiğinin sınırı: raporda tırnak içinde geçen her metin kaynak alıntısı değil — önerilen düzeltme metinleri ve tanımlanması istenen terimler de tırnaklı. Betik bunları ayırt etmiyor, ayrıca büyük/küçük harfe duyarlı. Bu nedenle "bulunamadı" çıkan 13 dizgeden 12'si yanlış alarmdı; yalnızca biri gerçek kusurdu. Betiğin kaynak alıntısını öneri metninden ayırt etmesi gerekiyor — açık iş.
 
 **İkinci kendini-denetleme bulgusu:** R-2 özet sayımı ile gövde ve istatistikler birbirini tutmuyordu — özet "10 ana bulgu / 6 temiz kontrol" derken gövdede 11 bulgu (B-01…B-11) ve R-5'te 9 temiz kontrol vardı. Aynı sayının iki yerde farklı olması, bu sistemin Madde 02'sinin tam olarak aradığı kusurdur; denetim raporunun kendisi bu kusuru taşıyordu. Düzeltildi ve sayımlar betikle doğrulandı (11 = 11 = 11).
+
+**Üçüncü kendini-denetleme bulgusu:** İkinci düzeltme de eksik kaldı. Toplam ana bulgu sayısı 11'e çekilirken etiket dağılımı (6/3/1) ve risk dağılımı (7/3/1) düzeltilmemişti; doğru değerler 8/2/1 ve 8/2/1. Yani "toplamı düzelttim" demek, alt kırılımı düzelttim demek değildi — tam olarak Madde 02'nin "alt kalemler toplamı üst toplamla eşleşiyor mu" sorusunun tersi durum. Tüm sayımlar betikle yeniden doğrulandı ve gövdeyle eşleşiyor.
