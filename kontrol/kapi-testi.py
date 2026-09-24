@@ -21,6 +21,8 @@ DOSYALAR = [
     "kurulum/claude/CLAUDE.md",
     "kurulum/claude/skills/ajan-isletim/SKILL.md",
     "ajan-isletim-talimati.html",
+    "kurulum/KURULUM.md",
+    "kurulum/claude/KURALLAR.md",
 ] + [f"kurulum/claude/agents/{f.name}"
      for f in sorted((KOK / "kurulum/claude/agents").glob("*.md"))]
 YEDEK = {f: (KOK / f).read_bytes() for f in DOSYALAR}
@@ -96,7 +98,13 @@ TESTLER = [
          (KOK / "kurulum/claude/agents/nihai-testci.md").read_text(encoding="utf-8")
          .replace("model: sonnet", "model: haiku"), encoding="utf-8")),
     ("13", "CLAUDE.md'den S1 kapısı çıkarıldı",
-     lambda: degistir(["kurulum/claude/CLAUDE.md"], "§0.1 kapısı", "eski karar")),
+     lambda: degistir(["kurulum/claude/CLAUDE.md"], "§0.1 kapısı", "eski karar")),    ("14", "KURULUM.md rol sayısı agents/ ile ayrıştı",
+     lambda: degistir(["kurulum/KURULUM.md"], "listesinde 15 rol", "listesinde 10 rol")),
+    ("15", "KURALLAR.md gömülü örneğinden zorunlu alan düştü",
+     lambda: degistir(["kurulum/claude/KURALLAR.md"],
+                      "sayılmaz (yukarıda):\n- <kural>. (dayanak: <hangi hata>, tarih: <…>, "
+                      "hedef hata sınıfı: <id>,",
+                      "sayılmaz (yukarıda):\n- <kural>. (dayanak: <hangi hata>, tarih: <…>,")),
 ]
 
 print("KAPI TESTİ — her kapı yakalaması gerekeni yakalıyor mu?\n" + "=" * 54)

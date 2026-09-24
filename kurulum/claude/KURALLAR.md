@@ -29,8 +29,10 @@ Bir kuralı yalnız "uzun süredir uyuluyor" diye emekli etme; ama "uzun süredi
 
 ## Aktif kurallar
 
-<!-- Örnek biçim — ilk gerçek ders geldiğinde bunu sil:
-- <kural>. (dayanak: <hangi hata>, tarih: <…>, kaynak: güvenilir | KARANTİNALI)
+<!-- Örnek biçim — ilk gerçek ders geldiğinde bunu sil. "Zorunlu biçim"deki beş
+     alanın tamamını taşır; eksik alanla yazılan satır kural sayılmaz (yukarıda):
+- <kural>. (dayanak: <hangi hata>, tarih: <…>, hedef hata sınıfı: <id>,
+            kaynak: güvenilir | KARANTİNALI, son doğrulama: <…>)
 -->
 
 _(henüz kural yok — ilk ders geldiğinde §12 döngüsünden buraya yazılır)_

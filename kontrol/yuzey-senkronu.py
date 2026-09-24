@@ -361,6 +361,51 @@ def _():
     return []
 
 
+
+# ---------------------------------------------------------------------------
+# Kapı 14–15: kurulum/ altındaki yardımcı dosyalar. Bunlar §15.2'nin "üç yüzey"
+# sürüm-kilidinin İÇİNDE DEĞİL (yalnız tam metin/CLAUDE.md/skill kilitlidir) —
+# KURALLAR.md ve KURULUM.md kendi başlarına doğru olmalı, ayrı bir sürüm
+# damgası taşımazlar. Bu yüzden bu ikisi TALIMAT dosyasına değil, doğrudan
+# gerçek dünyaya (agents/ dizini, kendi metinleri) karşı sınanır.
+# ---------------------------------------------------------------------------
+
+KURULUM_MD = KOK / "kurulum/KURULUM.md"
+KURALLAR_MD = KOK / "kurulum/claude/KURALLAR.md"
+
+
+@kapi("14. KURULUM.md'nin rol sayısı iddiası == agents/*.md dosya sayısı")
+def _():
+    metin = oku(KURULUM_MD)
+    m = re.search(r"`/agents` listesinde (\d+) rol görünmeli", metin)
+    if not m:
+        return ["KURULUM.md'de rol sayısı doğrulama cümlesi bulunamadı — ayrıştırıcı bozuk"]
+    iddia = int(m.group(1))
+    gercek = len(list((KOK / "kurulum/claude/agents").glob("*.md")))
+    if gercek == 0:
+        return ["agents/ dizininde hiç dosya yok — sayaç bozuk"]
+    if iddia != gercek:
+        return [f"KURULUM.md {iddia} rol diyor, kurulum/claude/agents/ içinde {gercek} dosya var"]
+    return []
+
+
+@kapi("15. KURALLAR.md gömülü örneği kendi 'Zorunlu biçim'iyle aynı alanları taşıyor")
+def _():
+    metin = oku(KURALLAR_MD)
+    zorunlu = _blok(metin, "**Zorunlu biçim.**", "```\n\n`hedef hata sınıfı`")
+    ornek = _blok(metin, "## Aktif kurallar", "_(henüz kural yok")
+    # Alan adı: "kelime:" biçiminde geçen her belirteç (dayanak, tarih, kaynak, ...).
+    alanlar_zorunlu = set(re.findall(r"(\w[\wçğıöşü ]*?):\s*<", zorunlu))
+    alanlar_ornek = set(re.findall(r"(\w[\wçğıöşü ]*?):\s*<", ornek))
+    if len(alanlar_zorunlu) < 3:
+        return [f"yalnız {len(alanlar_zorunlu)} zorunlu alan ayrıştırıldı — ayrıştırıcı bozuk"]
+    eksik = alanlar_zorunlu - alanlar_ornek
+    if eksik:
+        return [f"gömülü örnekte eksik alan: {sorted(eksik)} "
+                f"(Zorunlu biçim {sorted(alanlar_zorunlu)} istiyor)"]
+    return []
+
+
 kalan = 0
 print("YÜZEY SENKRONU VE FORMAT KAPISI\n" + "=" * 46)
 for ad, hatalar in sonuclar:

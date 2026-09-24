@@ -1,5 +1,7 @@
 # BİRLEŞİK AJAN SİSTEMİ — YOL HARİTASI v1.0
 
+> **Bu belge artık işletim talimatı değildir.** Buradan `AJAN-ISLETIM-TALIMATI.md` damıtıldı (v1.0, bkz. §15.3 değişiklik günlüğü); ajanın okuyup uygulayacağı, güncel tutulan tek belge odur. Bu dosya yalnız tarihsel kaynak olarak saklanır — "tek referans belge" ibaresi ilk yazıldığı ana aittir.
+
 Dinamik iş akışları (dynamic workflows) ile döngü mühendisliğinin (loop engineering) iç içe geçtiği, birbirini denetleyen, hatalardan öğrenen ve kendini geliştiren çok-ajanlı sistem.
 
 **Amaç:** Bundan sonra sistem olarak kullanılacak tek referans belge. Tüm kaynak metinler eksiltilmeden tek çatı altında kaynaştırılmış, tekrarlar tek sese indirgenmiş, çelişen hiçbir madde atılmamıştır.

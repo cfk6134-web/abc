@@ -12,7 +12,7 @@ makineyi hak etmeyen işe kurma" ilkesini (§9.5) ihlal ederdi.
 Bunun yerine üç katmanlı ifşa:
 
 ```
-CLAUDE.md (42 satır)     → her oturumda. Kademe seçimi + kademeden bağımsız kurallar.
+CLAUDE.md (~50 satır)     → her oturumda. Kademe seçimi + kademeden bağımsız kurallar.
 ajan-isletim skill'i     → iş büyüdüğünde açılır, hangi bölümü okuyacağını söyler.
 AJAN-ISLETIM-TALIMATI.md → yalnız ilgili bölümü, grep'le. Tamamı asla bağlama alınmaz.
 ```
@@ -97,7 +97,7 @@ python3 -c "import json,sys,collections;print(collections.Counter(json.loads(l)[
 1. Yeni bir Claude Code oturumu aç. Açılışta telemetri satırı bağlama girmeli.
 2. Çok adımlı bir iş iste ("şu modülü refactor et ve testlerini yaz"). Ajan kademe seçmeli
    (muhtemelen S2) ve bunu söylemeli.
-3. `/skills` listesinde `ajan-isletim` görünmeli; `/agents` listesinde 10 rol görünmeli.
+3. `/skills` listesinde `ajan-isletim` görünmeli; `/agents` listesinde 15 rol görünmeli.
    Görünmüyorlarsa frontmatter bozuktur — geçersiz alan **sessizce düşürülür**, hata vermez.
 4. Küçük bir iş iste ("şu yazım hatasını düzelt"). Ajan S1'de kalmalı, kurul kurmamalı.
    Kurul kuruyorsa çekirdek yanlış okunuyor demektir.
