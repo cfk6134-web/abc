@@ -72,7 +72,7 @@ Adını doldur. Bu dosya projeye özgüdür ve projeyle kalır; `KURALLAR.md` is
 
 | Hook | Ne zaman | Ne yapar | Maliyet |
 |---|---|---|---|
-| `SessionStart` | Oturum açılışı | Zaman damgası basar (§5.1'in ihtiyaç duyduğu ölçüm çıpası) ve kademe seçimini hatırlatır | 0 token |
+| `SessionStart` | Oturum açılışı | Zaman damgası + kademe seçimi hatırlatması basar. Damga hiçbir yerde ölçüme bağlanmaz (§5.1: zaman tahsisi v1.5'te kaldırıldı) — yalnız bilgi amaçlı bağlam satırı | 0 token |
 | `SubagentStop` | Her alt-ajan bitişi | `~/.claude/ajan-telemetri.log`'a JSON satır ekler: zaman + oturum kimliği + ajan rolü | 0 token |
 | `Stop` | Oturum sonu | `STATE.md` varsa ve 30+ dakikadır güncellenmediyse turu **engeller** (modele gider, ekrana değil) | 0 token |
 

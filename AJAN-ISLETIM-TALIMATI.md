@@ -1,4 +1,4 @@
-# AJAN İŞLETİM TALİMATI — v1.6.4
+# AJAN İŞLETİM TALİMATI — v1.6.5
 
 > **Bu belge ne?** Yapay zekâ araçlarıyla yürütülecek her projede uygulanacak **tek işletim talimatı**.
 > **Kime yazıldı?** Doğrudan modele (Claude/ajan). İnsan da okuyabilir, ama cümleler makineye emir kipiyle yazılmıştır.
@@ -1640,6 +1640,33 @@ Oylar geldikten sonra:
 En fazla 3 tur; sonunda RET sürerse açık uyuşmazlık notuyla kullanıcıya sun.
 ```
 
+### 13.8 Kademe Kontrolörü çağrısı
+
+```
+S1 seçimi onay bekliyor. Görev metni: <…>.
+§0.1'in dört S1 ölçütü: tek bağlam · en fazla 2 dosya · tek komutla geri alınabilir ·
+güvenilmeyen kaynak okumuyor.
+Sana YALNIZ bu ikisi verildi — eser, gerekçe, kimin istediği verilmedi ve aranmaz.
+Dördü birden karşılanıyor mu? Çıktın tek satır:
+  ONAY
+  RET — gerekçe: <hangi ölçüt düştü>
+Emin değilsen RET — yanlış RET'in bedeli bir S2 koşusu, yanlış ONAY'ın bedeli altı
+denetimin birden kalkmasıdır.
+```
+
+### 13.9 Çelişki-Tarayıcı çağrısı
+
+```
+Dalga bitti, N≥4 ajan paralel koştu — halka usulü çapraz denetim (§10.5) bu ölçekte
+çiftlerin bir kısmını hiç karşılaştırmaz. Dalgadaki TÜM çıktılar birlikte veriliyor: <…>.
+Tek soru: bu çıktılardan herhangi ikisi birbiriyle çelişen bir varsayım içeriyor mu?
+Çıktı formatı:
+  ÇELİŞKİ YOK — karşılaştırılan çıktı sayısı: <n>
+  ÇELİŞKİ: <hangi varsayım> — alıntı A: <…> / alıntı B: <…>
+<n> sıfır olamaz. Çıktıları düzeltme, silme, üstüne yazma — yalnız bildir; kalite değil
+yalnız çelişki ara (kötü ama tutarlı iki çıktı senden ÇELİŞKİ YOK alır, bu doğrudur).
+```
+
 ---
 
 ## 14. KONTROL LİSTELERİ
@@ -1804,6 +1831,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 | v1.6.2 | **v1.6.1 denetiminin mekanik yarısı** (`DENETIM-v1.6.1.md` — B2·B3·B4·B5·B7). **§13.4 şablonu v1.5 diline getirildi:** silinmiş üç mekanizmayı (süre tahsisi · `karmaşıklık/kritiklik` puanı · %15 doğrulama payı) ajana **birebir yapıştırılan** metinde hâlâ emrediyordu — §13.5 v1.5'te güncellenmiş, §13.4 atlanmıştı. §0 adım 4b uçuş kaydı için §2.2 yerine §2.0'ı gösteriyor (§2.2 kapsam değişikliğidir; belgenin en yüksek trafikli yolu yanlış bölüme gidiyordu). §14.3 §6.2 yerine §6.3'e — §6.2 boş şablon, yazma protokolü §6.3. Sözlükteki anomali sayısı beş → **yedi** (§4.2 listesi v1.5/v1.6'da iki madde büyümüştü). Künyedeki kurul sayısı 5 → **4**: §4.5 Boşluk Taraması belgede hiçbir yerde kurul diye anılmaz. | v1.6.1 denetimi. Sekiz bulgunun yedisi tek kök nedene iniyor: **değişiklik bir yüzeye iner, tüketicileri taranmaz** — v1.4 üç rolü, v1.5 §13.4'ü, v1.6 kataloğu ve sözlüğü atladı. v1.6.1'in senkron kapısı bu sınıfın yalnız **mekanik** yarısını görüyor. **Açık kalanlar:** B1 (Gözcü · Kapsam Belirleyici · Kapsam Uyumu Denetçisi tanım dosyasız — R2 kapandı ilan edilmişti), B6 (Kademe Kontrolörü ve Çelişki-Tarayıcı kataloğa girmemiş), B8 (künyedeki "Final Kurulu 3/3 onay" v1.1'den beri yeniden kazanılmadı). |
 | v1.6.3 | **Denetimin kalan yarısı — B1, B6, B8 kapandı.** Beş ajan tanım dosyası yazıldı: `gozcu` · `kapsam-belirleyici` · `kapsam-uyumu-denetcisi` · `kademe-kontroloru` · `celiski-tarayici`. En kritiği üçüncüsü: v1.5'in §5'i tümden yeniden yazma gerekçesi (R3 — ölçen ile ölçülen aynı kişi olamaz) o rolün **ölçtüğü esere yazamamasına** dayanıyordu, ama rol dosyasız olduğu için `Write`/`Edit`/`Bash` ile doğuyordu. **Kademe Kontrolörü** ve **Çelişki-Tarayıcı** §3.1 kataloğuna girdi: ikisi de doğuruluyordu, ikisi de katalogda yoktu (M10 ihlali) — birincisi S1 kapısının tek uygulayıcısıdır. Künyedeki **"Final Kurulu 3/3 onay"** kaldırıldı; v1.1'den beri yeniden kazanılmamıştı. Yerine §0.1'in zorunlu teslim beyanı kondu. | v1.6.1 denetimi B1, B6, B8. Kapı 11'in açık kümesi boşaldı ve **bir daha büyütülmez**: dosyasız kalan yeni bir rol artık doğrudan KALDI verir. Kapı testi üç dala genişledi — kataloğa girmemiş rol · dosyası silinen rol · kataloğa bağlanmamış dosya. |
 | v1.6.4 | **B9 — CLAUDE.md, R8'in S1 kapısını taşımıyordu.** `CLAUDE.md` "her oturumda yüklenir" ve kademe kararı tam olarak orada verilir (§1 "İşe başlamadan: kademe seç"). Tam belgenin S1 kapısı ("seçen, denetlenen olamaz" — v1.6/R8) yalnız `AJAN-ISLETIM-TALIMATI.md`'de vardı; CLAUDE.md'yi açıp tam belgeyi hiç açmayan bir ajan S1'i kendi seçip kendi onaylayabiliyordu — R8'in tam olarak önlediği senaryo, en sık kullanılan yüzeyde. CLAUDE.md §1'e kapı satırı eklendi. | B1/B6 ile aynı sınıf (bir yüzeydeki kural, başka bir yüzeye taşınmamış) ama farklı yön: burada eksik olan bir AJAN DOSYASI değil, bir TÜREV METNİN kendisiydi. Kapı 13 eklendi: CLAUDE.md'nin S1 kapısına atıf taşıdığını nöbetçi bir işaretle doğrular. |
+| v1.6.5 | **B10 — İki rol §13'te şablonsuz kalmıştı.** Kademe Kontrolörü ve Çelişki-Tarayıcı v1.6.3'te §3.1 kataloğuna ve `agents/`e girdi, ama §13'ün "kopyala-yapıştır" bölümüne hiç girmemişti — Uzman İşçi, Doğrulayıcı, Paralellik Kurulu, Kapsam Belirleyici, Kapsam Uyumu Denetçisi ve Final Kurulu'nun hepsinin şablonu varken bu ikisinin yoktu. §13.8 ve §13.9 eklendi. **(KURULUM.md'de ayrı bir B11:)** SessionStart hook açıklaması "§5.1'in ihtiyaç duyduğu ölçüm çıpası" diyordu; v1.5 §5'i tümden zaman diline çevirip bu ölçüm ihtiyacını kaldırmıştı (T_i/T_dalga silindi) — hook'un zaman damgası hiçbir yerde ölçüme bağlanmıyor, tek başına bilgi satırı. Açıklama düzeltildi. | "Sıfırdan" istenen bir kontrolde bulundu: B1/B6/B9'un aynı sınıfının (yeni eklenen bir şey, komşu bir yüzeyde taranmamış) üçüncü ve dördüncü örneği. §13'e gate eklenmedi — kapsam listesi biçiminde "N şablon" iddiası yok, sayılabilir bir sözleşme değil. KURULUM.md'nin hook açıklaması da gate gerektirmiyor: yanlışlığı bir sayı uyuşmazlığı değil, ölü bir kavrama atıftı. |
 
 ---
 
@@ -1843,7 +1871,7 @@ Skill'in yönlendirme tablosu bölüm NUMARASINA değil BAŞLIK METNİNE göre a
 
 ---
 
-**Belge sonu — v1.6.4.**
+**Belge sonu — v1.6.5.**
 
 Bu belgenin kendisi hakkında, kendi §10.3 standardıyla: v1.3 altı bağımsız denetçi ve bir
 meta-doğrulayıcı tarafından denetlendi (`DENETIM-v1.3.md`); 88 bulgunun indirgendiği 12 kök
