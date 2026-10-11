@@ -1343,5 +1343,505 @@
     "note": "There was nothing to check, and the Saucony CDN and product pages were unreachable. Left empty, with no invented URLs."
    }
   ]
- }
+ },
+ "ikinci_dogrulama": [
+  {
+   "shoe": "New Balance Fresh Foam X 860 v14 (men's, 2E/4E)",
+   "checks": [
+    {
+     "claim": "860 v15 was released in spring 2026 (around April 1, 2026) and is the current model; NL price 170 EUR",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://kinisirunhub.co.uk/blogs/news/new-shoe-alert-new-balance-860v15",
+      "https://www.goat.com/en-gb/sneakers/new-balance-wmns-fresh-foam-x-860v15-white-silver-metallic-w86019f",
+      "https://www.roadtrailrun.com/2026/04/new-balance-fresh-foam-x-review-big.html",
+      "https://carrerasdemontana.com/2026/04/07/new-balance-860-v15-mayayo/",
+      "https://www.testbericht.de/serien/laufschuh/692966-new-balance-fresh-foam-x-860-v15-m860",
+      "https://www.sundried.com/blogs/reviews/new-balance-fresh-foam-x-860-v16-preview"
+     ],
+     "note": "GOAT lists a 04-01-2026 release date, a Kinisi Run Hub post dated Wed Apr 01 2026 says the shoe launches that day, and Road Trail Run reviewed the v15 on April 19, 2026. The only v16 item found is a speculative Sundried preview, so v15 still looks current. The EU price is 170 EUR: Carreras de Montana gives 170 EUR, German shops list 169.90-170 EUR, and mtbiker shows an RRP of 169 EUR. No Dutch retailer showed up, so the NL figure rests on the EU price and is not confirmed by a Dutch shop. Separately, sources disagree on the v15 drop (Run and Become 6 mm, others 8 mm)."
+    },
+    {
+     "claim": "860 v14 (2024) replaced the traditional medial post with 'Stability Plane', a firm plate/layer embedded between Fresh Foam X layers, running along the medial side and across the heel",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html",
+      "https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html",
+      "https://www.sportsshoes.com/product/new695752/fresh-foam-x-860v14-running-shoes",
+      "https://runandbecome.com/running-product-reviews/shoes/new-balance-860-stability",
+      "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html"
+     ],
+     "note": "Road Trail Run says the v14 drops the traditional firm, rigid foam medial post for a thin hardened EVA 'Stability Plane' plate that is longer on the medial side than the lateral side, and adds that there are no posts at all. Sportsshoes and Run and Become place a denser EVA layer or film between the two Fresh Foam X layers. Doctors of Running describes a full-length medial wedge running from heel to forefoot, with a firmer bottom layer that is taller on the medial side. No snippet said in so many words that the plane runs 'across the heel'. A more precise wording would be 'a thin hardened EVA plate between two Fresh Foam X layers, longer on the medial side'. Some retailer copy still says 'medial post', but the tester reviews contradict it."
+    },
+    {
+     "claim": "860 v14 stack 38 mm heel / 30 mm forefoot, 8 mm drop (v13 was 10 mm); RunRepeat measured 36.8/27.5 mm",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runningwarehouse.com/New_Balance_Fresh_Foam_X_860_v14/descpage-NB146M1.html",
+      "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html",
+      "https://runrepeat.com/new-balance-fresh-foam-x-860-v14",
+      "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html",
+      "https://www.fleetfeet.com/blog/new-balance-fresh-foam-x-860-v14-review"
+     ],
+     "note": "Running Warehouse and Doctors of Running both list 38/30 mm with an 8 mm drop. Road Trail Run gives an 8 mm drop and says the prior version was 10 mm. RunRepeat's lab measured 36.8 mm heel and 27.5 mm forefoot, which works out to a 9.3 mm drop, so if the page uses RunRepeat's figures it should mention the 9.3 mm measured drop. Other sources differ: Road Trail Run lists 35.5/27.5 mm, and Fleet Feet lists 29/21 mm (a different measuring method)."
+    },
+    {
+     "claim": "860 v14 men's weight about 298 g US 9",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html",
+      "https://www.runningwarehouse.com/New_Balance_Fresh_Foam_X_860_v14/descpage-NB146M1.html",
+      "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html"
+     ],
+     "note": "Doctors of Running gives 298 g for a men's size 9, and Running Warehouse lists 10.5 oz (298 g). Road Trail Run measured about 296 g in a US 9. Some retailers (Road Runner Sports, PR Run & Walk) list 10.8 oz / 306 g, probably for a different size or width."
+    },
+    {
+     "claim": "860 v14 men's widths D, 2E, 4E",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runandbecome.com/item/New-Balance/860v14-2E-Wide/7MTO",
+      "https://www.runandbecome.com/item/New-Balance/860v14-4E-Extra-Wide/863O",
+      "https://prrunandwalk.com/products/mens-new-balance-860-v14-wide-2e-m860s14-2e",
+      "https://prrunandwalk.com/products/mens-new-balance-860-v14-extra-wide-4e-m860k14-4e",
+      "https://www.runningwarehouse.com/New_Balance_Fresh_Foam_X_860_v14/descpage-NB146M1.html"
+     ],
+     "note": "Retailers carry the men's v14 in 2E (M860S14 2E, M860K14 2E and others) and 4E (M860K14 4E). Running Warehouse lists D. Sportsshoes also has a 'Men's (B Width)' listing (new696665), so a narrow men's B may exist in some markets. No official newbalance.com page appeared in the results."
+    },
+    {
+     "claim": "860 v14 has a removable sockliner; gusseted tongue; firm heel counter; blown rubber outsole; rocker-like geometry",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html",
+      "https://www.paceathletic.com/products/mens-new-balance-fresh-foam-x-860v14",
+      "https://flawlessshoereviews.com/?p=3173",
+      "https://prrunandwalk.com/products/mens-new-balance-860-v14-wide-2e-m860s14-2e",
+      "https://www.i-run.com/woman/shoes/road-trail/new-balance/Fresh-Foam-X-860-V14-W_fiche_141834.html",
+      "https://canadianfootwear.com/new-balance-860-v14-fresh-foam-women-s.html"
+     ],
+     "note": "Gusseted tongue: Doctors of Running and Pace Athletic. Stiff, sturdy heel counter: Doctors of Running, Flawless Shoe Reviews and i-run. Blown rubber outsole: retailer listing. Rocker profile: PR Run & Walk and other retailer copy. Removable insole: a retailer listing only, with no lab source. The insole, rubber and rocker points rest on retailer copy, and RunRepeat's page could not be checked. Road Trail Run calls the shoe 'flexible', so 'rocker-like' is a mild description and the rocker is not pronounced."
+    },
+    {
+     "claim": "Road Trail Run platform widths for 860 v14: 90 mm heel / 80 mm midfoot / 110 mm forefoot",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html",
+      "https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html"
+     ],
+     "note": "Road Trail Run's multi-tester review and its video transcript both give a platform width of 90 mm heel / 80 mm midfoot / 110 mm forefoot."
+    },
+    {
+     "claim": "Any New Balance official YouTube video exists for 860 v14 or v15",
+     "verdict": "unverifiable",
+     "evidence_urls": [
+      "https://www.youtube.com/watch?v=y3YVbaaUFms",
+      "https://www.youtube.com/watch?v=oU7frgiD01M",
+      "https://www.youtube.com/watch?v=4sVs-Rex2fU"
+     ],
+     "note": "YouTube searches for both v14 and v15 returned only reviewers and retailers: Road Trail Run, Supwell, store channels, and Thai, Dutch, German and Swedish shop reviews. None of the results named a New Balance-run channel. A video titled 'New Balance 860 v14 First Look' (y3YVbaaUFms) uses marketing-style wording, but its channel could not be seen. The claim that an official video exists is not supported, so the page should not cite one."
+    }
+   ],
+   "official_videos": []
+  },
+  {
+   "shoe": "ASICS GEL-KAYANO 32 (men's, 2E/4E)",
+   "checks": [
+    {
+     "claim": "GEL-KAYANO 33 launched June 1, 2026 and replaces the 32; 33 drops 4D GUIDANCE SYSTEM in favour of FLUIDSUPPORT and uses dual-layer FF BLAST MAX over FF BLAST PLUS, 8 mm drop, ~200 EUR",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.asics.com/us/en-us/gel-kayano/c/aa50101000/red/",
+      "https://www.gearpatrol.com/footwear/asics-gel-kayano-33/",
+      "https://global.hk01.com/跑步/60348268/跑鞋推荐2026-asics跑鞋gel-kayano-33革新中底-6月全球上市",
+      "https://www.asics.com/au/en-au/gel-kayano-33/c/au70370000/",
+      "https://news-emea.asics.com/latest-News/the-new-gel-kayano--33-shoe-introduces-fluidsupport--technology-for-a-new-era-of-plush-stability-and/s/c685aede-397a-4189-818f-1c36477124aa",
+      "https://www.marathonsports.com/blog/asics-gel-kayano-33-review-meet-fluidsupport-technology",
+      "https://www.roadtrailrun.com/2026/08/asics-gel-kayano-multi-tester-review.html",
+      "https://www.asics.com/ie/en-ie/p/1012B939-101.html",
+      "https://www.i-run.com/man/shoes/running/asics/Gel-Kayano-33_fiche_147422.html",
+      "https://www.doctorsofrunning.com/2026/05/asics-gel-kayano-33-review-2026.html"
+     ],
+     "note": "The ASICS US page gives a US release date of June 1, 2026, and Gear Patrol and HK01 also say June 1. ASICS Australia instead says July 7, so the date varies by region. The ASICS EMEA press release is dated May 5, 2026. Reviews say FLUIDSUPPORT replaced the 4D GUIDANCE SYSTEM used on the 31 and 32, and that the midsole is FF BLAST MAX on top with FF BLAST PLUS underneath. Retailers and Doctors of Running list an 8 mm drop. ASICS Ireland lists the shoe at €200; the US price is $170."
+    },
+    {
+     "claim": "Kayano 32 released 2025 with 4D GUIDANCE SYSTEM (medial foam module under the arch), FF BLAST PLUS (ECO) midsole, Rearfoot PureGEL, HYBRID ASICSGRIP outsole, OrthoLite X-55 removable sockliner",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.designscene.net/2025/05/asics-gel-kayano-32.html",
+      "https://sneakerfreaker.com/performance/releases/asics-gel-kayano-32-price-buy-release-date",
+      "https://www.runnersworld.co.za/gear/asics-new-gel-kayano-32-dynamic-stability-meets-comfort/",
+      "https://www.bizcommunity.com/article/asics-reveals-new-gel-kayano-32-shoe-140526a",
+      "https://www.asics.com/ca/en-ca/gel-kayano-32-extra-wide-1011c054-002",
+      "https://www.rei.com/product/249439",
+      "https://www.roadrunnersports.com/product/48979/mens-asics-1000048979-500",
+      "https://www.roadtrailrun.com/2023/07/asics-gel-kayano-30-review.html"
+     ],
+     "note": "Global launch was June 1, 2025 (Australia July 15, 2025). Sneaker Freaker confirms the rearfoot PureGEL. Copies of the ASICS press release confirm the 4D GUIDANCE SYSTEM, updated FF BLAST PLUS and HYBRID ASICSGRIP. Retailer specs list FF BLAST PLUS ECO and the OrthoLite X-55 sockliner. The 'medial foam under the arch' wording for the 4D system comes from Kayano 30/31 reviews (a softer or resilient medial foam piece in the midfoot), not from an ASICS spec for the 32. For the 32, ASICS also highlights a reinforced medial tongue wing."
+    },
+    {
+     "claim": "Kayano 32 stack 40 mm heel / 32 mm forefoot, 8 mm drop (first 8 mm Kayano; Kayano 31 was 10 mm); RunRepeat measured 39.9/30.6 mm and 9.3 mm drop",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runningwarehouse.com/ASICS_Gel_Kayano_32/descpage-A32KM4.html",
+      "https://www.foroatletismo.com/zapatillas/asics-gel-kayano-32/",
+      "https://www.doctorsofrunning.com/2025/05/asics-gel-kayano-32-review-2025-8mm-drop.html",
+      "https://runrepeat.com/asics-gel-kayano-32",
+      "https://www.rtings.com/running-shoes/tools/compare/asics-gel-kayano-31-asics-gel-kayano-32/63008/81046"
+     ],
+     "note": "Running Warehouse and the official figures give 40/32 mm and 8 mm. Reviewers say the drop fell from 10 to 8 mm because about 2 mm was added under the forefoot, making the 32 the first 8 mm Kayano. RunRepeat measured 39.9/30.6 mm and a 9.3 mm drop (versus 11.5 mm measured on the 31). RTINGS measured something different: 41.7/32.6 mm with a 9.1 mm drop."
+    },
+    {
+     "claim": "Kayano 32 men's weight about 298 g (US 9)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runningwarehouse.com/ASICS_Gel_Kayano_32/descpage-A32KM4.html",
+      "https://www.asics.com/au/en-au/gel-kayano-32-2e-wide/p/AOP_1011C051-002.html",
+      "https://www.rtings.com/running-shoes/tools/compare/asics-gel-kayano-31-asics-gel-kayano-32/63008/81046"
+     ],
+     "note": "Running Warehouse lists 10.5 oz / 298 g for men's US 9. The ASICS Australia 2E page says 300 g, RTINGS measured 300.2 g and Find My Footwear reports 304 g at US 9.5, so 'about 298 g' is reasonable."
+    },
+    {
+     "claim": "Kayano 32 men's widths: D (1011C052), 2E (1011C051), 4E Extra Wide (1011C054)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.asics.com/vn/vi-vn/gel-kayano-32/p/1011C052-405.html",
+      "https://www.asics.com/au/en-au/gel-kayano-32-2e-wide/p/AOP_1011C051-002.html",
+      "https://www.asics.com/ca/en-ca/gel-kayano-32-extra-wide-1011c054-002",
+      "https://www.asics.com/au/en-au/gel-kayano-32-4e-extra-wide/p/AOP_1011C054-402.html"
+     ],
+     "note": "Official ASICS pages show 1011C052 as the standard men's model, 1011C051 as 2E WIDE and 1011C054 as 4E EXTRA WIDE. ASICS Australia marks the 4E as discontinued, while the Canadian and Southeast Asian sites still list it."
+    },
+    {
+     "claim": "Kayano 32 upper is engineered stretch knit and fits snugger than Kayano 31; no pronounced rocker; Doctors of Running reported slight slipping on wet asphalt",
+     "verdict": "corrected",
+     "correct_value": "Saya örme yapıda (perakendeciler 'engineered stretch knit' diyor; ASICS basın metni kopyalarında 'yeniden tasarlanmış engineered mesh' geçiyor) ve önceki iki versiyondan daha dar/sıkı kalıplı. Ancak 'belirgin rocker yok' ifadesi yanlış: Doctors of Running ön ayakta erken devreye giren bir rocker ve neredeyse hiç esnemeyen sert bir ön ayak tarif ediyor (RTINGS ön ayak rocker açısı 24,1°). Doctors of Running ıslak asfaltta hafif kayma bildirdi.",
+     "evidence_urls": [
+      "https://www.doctorsofrunning.com/2025/05/asics-gel-kayano-32-review-2025-8mm-drop.html",
+      "https://www.rei.com/product/249439",
+      "https://www.runnersworld.co.za/gear/asics-new-gel-kayano-32-dynamic-stability-meets-comfort/",
+      "https://www.rtings.com/running-shoes/tools/compare/asics-gel-kayano-33-asics-gel-kayano-32/139849/81046",
+      "https://runnerstribe.com/?p=77226",
+      "https://runrepeat.com/asics-gel-kayano-32"
+     ],
+     "note": "Doctors of Running supports the snugger fit ('new knit upper slightly snug... narrower than the two prior versions') and the wet slip ('mild slippage on wet pavement'). The rocker part is wrong: Doctors of Running, Runner's Tribe and Grivet all describe an early forefoot rocker on a stiff forefoot. On wet grip, RunRepeat's lab test scored it high, so the slip report is one reviewer's experience. The upper material is described differently by retailers ('stretch knit') and the press release ('engineered mesh')."
+    },
+    {
+     "claim": "Official video 'GEL-KAYANO 32' at https://www.youtube.com/watch?v=ajkRWUPkv6c is from the ASICS Running channel",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.youtube.com/watch?v=ajkRWUPkv6c"
+     ],
+     "note": "The search result for this ID carries the label 'ASICS Running' and was described as uploaded by the official ASICS Running channel. Its description covers the Kayano 32 (4D GUIDANCE SYSTEM, FF BLAST PLUS, more forefoot foam). The upload is about 489 days old, which points to around June 2025. The snippet did not show the exact video title, so the title 'GEL-KAYANO 32' is not confirmed word for word."
+    }
+   ],
+   "official_videos": [
+    {
+     "title": "GEL-KAYANO 32 (exact title not shown in the search snippet; the result was labelled 'ASICS Running')",
+     "url": "https://www.youtube.com/watch?v=ajkRWUPkv6c",
+     "channel": "ASICS Running",
+     "evidence": "A YouTube search result for this ID was labelled 'ASICS Running' and described as uploaded by the official ASICS Running channel. Its description covers the Kayano 32's 4D GUIDANCE SYSTEM and FF BLAST PLUS cushioning, and the upload is about 489 days old."
+    }
+   ]
+  },
+  {
+   "shoe": "HOKA Gaviota 6 Wide (men's)",
+   "checks": [
+    {
+     "claim": "Gaviota 6 released January 2026 and is the current Gaviota (no Gaviota 7 as of Oct 2026)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://tradehome.com/a/blog/hoka-gaviota-6-launching-in-january-everything-you-need-to-know",
+      "https://forum.slowtwitch.com/t/hoka-drops-the-gaviota-6-a-plush-and-reliable-ride-for-your-everyday-miles/1295856",
+      "https://www.slowtwitch.com/tag/hoka-gaviota/",
+      "https://www.doctorsofrunning.com/2026/01/hoka-gaviota-6-review-2026.html"
+     ],
+     "note": "Tradehome describes a January launch. Slowtwitch reported the release on 9 January 2026, and one YouTube review says the shoe 'releases TODAY, January 1st'. Doctors of Running published its review in January 2026. Two searches for 'Gaviota 7' (including 2027 previews) found nothing, and every source treats the 6 as the latest version. No 7 turning up is absence of evidence, not proof that none exists. LetsRun lists 'Q1 2026' with a $140 MSRP, which looks wrong; everyone else, HOKA US included, gives $180."
+    },
+    {
+     "claim": "Gaviota 6 stability system is (Enhanced) H-Frame, a firmer-foam frame on both medial and lateral sides; midsole is compression-molded EVA (CMEVA)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+      "https://www.hoka.com/en/us/hoka-technology/",
+      "https://rtings.com/running-shoes/reviews/hoka/gaviota-6",
+      "https://paragonsports.com/products/6948_1101595_3",
+      "https://www.doctorsofrunning.com/2026/01/hoka-gaviota-6-review-2026.html",
+      "https://runrepeat.com/hoka-gaviota-6"
+     ],
+     "note": "HOKA's US product page lists a CMEVA (compression-molded EVA) midsole with no plate and an enhanced H-Frame. RTINGS calls the H-Frame a firmer foam structure that adds stability on both sides of the foot. Caveats: HOKA's general technology page says 'medial and/or lateral'. HOKA's own Gaviota 6 copy talks mostly about stopping overpronation (inward roll), and Doctors of Running calls it 'strong full length medial stability', 'borderline motion control'. The frame's main job is medial support."
+    },
+    {
+     "claim": "Gaviota 6 stack 39/33 mm, 6 mm drop (official); RunRepeat measured 36.0/28.7 mm",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runrepeat.com/hoka-gaviota-6",
+      "https://www.runningwarehouse.com/HOKA_Gaviota_6/descpage-HGAVM1.html",
+      "https://www.doctorsofrunning.com/2026/01/hoka-gaviota-6-review-2026.html",
+      "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html"
+     ],
+     "note": "RunRepeat: 'HOKA states 39.0 mm in the heel, but we measured 36.0 mm'; forefoot 28.7 mm against the 33 mm claim; measured drop 7.3 mm. Running Warehouse and Doctors of Running list 39/33 mm and 6 mm, and HOKA US lists a 6.00 mm drop. One retailer (The RunHouse) lists 40/35 mm and 5 mm, which is an outlier. The page could add RunRepeat's measured drop of 7.3 mm."
+    },
+    {
+     "claim": "Gaviota 6 weight 283 g US 9 (Running Warehouse) / 291 g official",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.runningwarehouse.com/HOKA_Gaviota_6/descpage-HGAVM2.html",
+      "https://www.doctorsofrunning.com/2026/01/hoka-gaviota-6-review-2026.html",
+      "https://www.hoka.com/en/gb/men-road/gaviota-6/1171932.html",
+      "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+      "https://www.fleetfeet.com/products/mens-hoka-gaviota-6"
+     ],
+     "note": "Running Warehouse lists the men's shoe at 10.0 oz / 283 g, and Doctors of Running gives 283 g for a men's US 9. HOKA's UK/IE pages list 291 g for men; the US page lists 10.25 oz (about 291 g), and Fleet Feet repeats it. Women's is 244 g on HOKA UK and 252 g on Running Warehouse. These are figures for the standard width. The Wide (2E) version weighs more: Shop4Runners lists 300 g for 2E."
+    },
+    {
+     "claim": "Gaviota 6 men's widths: Regular, Wide (2E), X-Wide (4E); HOKA NL lists 'Breed' and 'X-Breed' at 180 EUR",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+      "https://www.hoka.com/nl/nl/gaviota-6/",
+      "https://prrunandwalk.com/collections/mens-hoka-gaviota-6-extra-wide-4e",
+      "https://shop.therunningcompany.com.au/products/mens-hoka-gaviota-6-2e-wide",
+      "https://tradehome.com/a/blog/hoka-gaviota-6-launching-in-january-everything-you-need-to-know"
+     ],
+     "note": "HOKA US lists Regular, Wide and X-Wide for men. The HOKA NL Gaviota 6 page shows 3 widths at €180, with separate 'Breed' and 'X-Breed' variants. HOKA's standard for men is D = standard, EE = wide, 4E = extra wide, and PR Run & Walk sells a men's 'Extra Wide - 4E'. RunRepeat notes that not every colorway comes in every width. Some retailers, such as Grivet, stock only D and 2E."
+    },
+    {
+     "claim": "Gaviota 6 has a removable insole about 4.8 mm thick (RunRepeat); internal ghillie lacing; comfort collar",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://runrepeat.com/hoka-gaviota-6",
+      "https://www.fleetfeet.com/products/mens-hoka-gaviota-6",
+      "https://www.confluencerunning.com/products/hoka-gaviota-6-mens-black-black-1"
+     ],
+     "note": "RunRepeat: the insole is 4.8 mm thick (lab average 4.4 mm; Gaviota 5 was 5.0 mm), it is removable, and custom orthotics fit well. HOKA's marketing copy, as repeated by Fleet Feet and Confluence, mentions 'a plusher collar, an elevated engineered mesh upper and a new internal ghillie lacing system', plus a heel pull tab."
+    },
+    {
+     "claim": "RunRepeat toebox width at big toe 76.7 mm; forefoot rocker flatter than Gaviota 5 (Flawless Shoe Reviews)",
+     "verdict": "corrected",
+     "evidence_urls": [
+      "https://runrepeat.com/hoka-gaviota-6",
+      "https://runrepeat.com/guides/best-hoka-walking-shoes",
+      "https://flawlessshoereviews.com/hoka-shoes/hoka-gaviota-6-review/"
+     ],
+     "note": "Both attributions are accurate. RunRepeat measured 76.7 mm (average 73.2 mm); one guide lists 76.7 mm for the big-toe area, the forefoot's widest point is 97.2 mm, and the Gaviota 5 measured 77.2 mm. Flawless Shoe Reviews has a 'Less Aggressive Rocker' section saying the forefoot rocker is flatter than the 5's. However, RunRepeat says the opposite: the Gaviota 6 'features a more pronounced rocker than version 5' with HOKA's Late Stage Meta-Rocker. The rocker point is disputed and should not be presented as settled. Flawless also says the forefoot is slightly tapered with less room around the outer toes, while Doctors of Running says the toe box is still roomy.",
+     "correct_value": "RunRepeat başparmak hizasında burun genişliğini 76,7 mm ölçtü (ortalama 73,2 mm; Gaviota 5'te 77,2 mm). Rocker konusunda kaynaklar çelişiyor: Flawless Shoe Reviews ön ayak rocker'ının Gaviota 5'e göre daha düz olduğunu söylüyor, RunRepeat ise Gaviota 6'nın daha belirgin bir rocker'a (Late Stage Meta-Rocker) sahip olduğunu belirtiyor."
+    },
+    {
+     "claim": "Any HOKA official video exists for Gaviota 6",
+     "verdict": "unverifiable",
+     "evidence_urls": [
+      "https://www.youtube.com/watch?v=0Wqglz3Kr-c",
+      "https://www.youtube.com/watch?v=nUgr1a53ZWQ",
+      "https://www.youtube.com/watch?v=JKrmqyLOkrg"
+     ],
+     "note": "A YouTube search found many Gaviota 6 videos, but the results showed no channel names. Some are titled just 'Hoka Gaviota 6' (0Wqglz3Kr-c, nUgr1a53ZWQ, and a Short), but they may be from retailers or reviewers. No HOKA channel or hoka.com video turned up in any result, so I could not confirm an official video."
+    }
+   ],
+   "official_videos": []
+  },
+  {
+   "shoe": "Brooks Glycerin GTS 23 (men's)",
+   "checks": [
+    {
+     "claim": "Glycerin GTS 23 released February 3, 2026 and is the current version; EU list price 180 EUR",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.soleretriever.com/news/articles/brooks-glycerin-gts-23-release-date-february-2026",
+      "https://www.marathonsports.com/blog/brooks-glycerin-gts-23-review-go-to-shoes-with-go-to-support",
+      "https://www.i-run.com/man/shoes/brooks/Glycerin-GTS-23_fiche_146471.html",
+      "https://shop4runners.eu/glycerin-gts-23-311089?attr=70"
+     ],
+     "note": "Sole Retriever says it was released February 3, 2026 through Brooks and retailers at $180. Marathon Sports agrees on early 2026. A search for a Glycerin GTS 24 found no announcement, so the GTS 23 still looks current as of Oct 2026. The EUR 180 regular price comes from I-RUN and shop4runners.eu; no brooksrunning.com EU page appeared in results. KicksOnFire shows June 2026 dates, which are probably later colorway drops."
+    },
+    {
+     "claim": "GTS 23 uses GuideRails holistic support system on both sides of the heel and DNA TUNED nitrogen-infused midsole",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.paceathletic.com/products/mens-brooks-glycerin-gts-23",
+      "https://www.soleretriever.com/news/articles/brooks-glycerin-gts-23-release-date-february-2026",
+      "https://www.marathons.com/de/tipps/brooks-glycerin-23-und-glycerin-gts-23-die-konigin-des-komforts_e928",
+      "https://prrunandwalk.com/products/mens-brooks-glycerin-gts-23-110503-4e-096"
+     ],
+     "note": "Brooks copy on Pace Athletic and Sole Retriever confirm GuideRails and DNA Tuned nitrogen-infused foam. 'Both sides' is supported only indirectly: Marathons.com says the support is firmer foam on the inner heel and outer side. I saw no snippet with the exact phrase 'holistic support system' for the GTS 23. Some retailer pages (shop4runners, KicksOnFire, Galaxus) wrongly say DNA LOFT v3; ignore those."
+    },
+    {
+     "claim": "GTS 23 drop 8 mm (GTS 22 was 10 mm), stack 38/30 mm, 2 mm more forefoot foam",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.paceathletic.com/products/mens-brooks-glycerin-gts-23",
+      "https://www.roadtrailrun.com/2026/01/brooks-running-glycerin-23-gts-multi.html",
+      "https://www.marathonsports.com/products/brooks-mens-glycerin-gts-23",
+      "https://www.runningwarehouse.com/Brooks_Glycerin_GTS_23/descpage-B23GSM3.html",
+      "https://www.doctorsofrunning.com/2026/01/brooks-glycerin-gts-23-review-2026.html"
+     ],
+     "note": "Brooks copy on Pace Athletic confirms the drop went from 10 mm to 8 mm and the forefoot gained 2 mm. Road Trail Run gives V23 38/30 vs V22 38/28; Marathon Sports also says 38/30. Other sources differ: Running Warehouse and Believe in the Run list 39/31; RunRepeat's lab measured the neutral Glycerin 23 at 37.2/29.0 (8.2 mm drop); Doctors of Running lists 38/28 and 10 mm but also notes 'other sources 38/30, 8 mm'. Suggest saying 'officially 8 mm, 38/30'."
+    },
+    {
+     "claim": "GTS 23 weight about 306 g US 9; Brooks lists 311.8 g",
+     "verdict": "corrected",
+     "correct_value": "Erkek ABD 9 numara için yaklaşık 306 g (10,8 oz). 311,8 g (11,0 oz) değeri Dick's Sporting Goods ve GO Outdoors gibi perakendeci listelerinde geçiyor; Brooks'un resmi sayfasında doğrulanamadı, bu yüzden 'Brooks 311,8 g belirtiyor' yerine 'bazı satıcılar 311,8 g belirtiyor' denmeli.",
+     "evidence_urls": [
+      "https://www.runningwarehouse.com/Brooks_Glycerin_GTS_23/descpage-B23GSM3.html",
+      "https://www.doctorsofrunning.com/2026/01/brooks-glycerin-gts-23-review-2026.html",
+      "https://www.roadtrailrun.com/2026/01/brooks-running-glycerin-23-gts-multi.html",
+      "https://m2.dickssportinggoods.com/p/brooks-mens-glycerin-gts-23-running-shoes-25bromrunnglycrngtjbe/25bromrunnglycrngtjbe",
+      "https://www.gooutdoors.co.uk/products/brooks-mens-glycerin-gts-23-running-shoes-blue-spellbound-starfish-784691"
+     ],
+     "note": "Running Warehouse, Doctors of Running and Road Trail Run all give 306 g (10.8 oz) for men's size 9. The 311.8 g / 11.0 oz figure appears only in retailer listings (Dick's, GO Outdoors), so the attribution to Brooks is unverified."
+    },
+    {
+     "claim": "GTS 23 men's widths Medium (D), Wide (2E), Extra Wide (4E)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://prrunandwalk.com/products/mens-brooks-glycerin-gts-23-110503-4e-096",
+      "https://www.runningwarehouse.com/Brooks_Glycerin_GTS_23/descpage-B23GSM1.html",
+      "https://www.brooksrunning.com/en_se/glycerin/mens/",
+      "https://runtothefinish.com/brooks-glycerin-23-gts/"
+     ],
+     "note": "Running Warehouse lists D and 2E. P.R. Runner & Walker sells a men's GTS 23 Extra Wide 4E (style 110503 4E). A Brooks regional site snippet lists men's widths as Medium, Wide and Extra Wide. Runtothefinish also mentions wide and X-wide. One retailer (Grivet) lists only D/2E, but 4E exists."
+    },
+    {
+     "claim": "GTS 23 has removable insole; Segmented Crash Pad; RoadTack rubber outsole; triple jacquard warp knit upper",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.i-run.com/man/shoes/brooks/Glycerin-GTS-23_fiche_146471.html",
+      "https://canadianfootwear.com/brooks-glycerin-gts-23-womens-navy-stability-runners.html",
+      "https://shop.footsolutions.com/products/brooks-glycerin-gts-24",
+      "https://www.paceathletic.com/products/mens-brooks-glycerin-gts-23",
+      "https://www.galaxus.de/en/s3/product/brooks-running-brooks-glycerin-gts-23-greygreenblack-425-running-shoes-66370252"
+     ],
+     "note": "Removable insole: I-RUN and Canadian Footwear. Triple jacquard warp knit upper: Brooks copy on Pace Athletic and P.R. Runner. RoadTack outsole: Foot Solutions retail listing. The Segmented Crash Pad support is weak: only a Galaxus listing, which also wrongly says 12 mm drop and DNA LOFT, so its copy may come from an older model. No Brooks or lab source in results mentions it; consider softening or dropping that item."
+    },
+    {
+     "claim": "Doctors of Running marked GTS 23 'orthotic friendly: No' and found the toe box pointed/short",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.doctorsofrunning.com/2026/01/brooks-glycerin-gts-23-review-2026.html",
+      "https://www.doctorsofrunning.com/?p=1049"
+     ],
+     "note": "The DOR snippet reads 'Is This Shoe Orthotic Friendly: No'. On fit, DOR says the toe guard makes the toe box feel more tapered and slightly short, with pressure at the toe tips, and suggests half-size-up for in-between sizes. Their wording is 'tapered' rather than 'pointed'; the forefoot itself is called slightly wide with normal volume."
+    },
+    {
+     "claim": "Road Trail Run platform widths 90 heel / 88 midfoot / 115 forefoot mm",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.roadtrailrun.com/2026/01/brooks-running-glycerin-23-gts-multi.html",
+      "https://www.roadtrailrun.com/2026/01/brooks-glycerin-23-review-5-comparisons.html"
+     ],
+     "note": "The spec section of the RTR GTS multi-tester review reads 'Platform Width: 90mm heel / 88mm midfoot / 115mm forefoot'. The same numbers appear in RTR's neutral Glycerin 23 review, whose body text mentions an '88 mm forefoot', so the 115 mm forefoot may be a measurement or typo issue. The claim matches what RTR published."
+    },
+    {
+     "claim": "Video https://www.youtube.com/watch?v=WEnZN5mvBOE 'All-new Glycerin GTS 23' is from Brooks Running's official channel",
+     "verdict": "unverifiable",
+     "evidence_urls": [
+      "https://www.youtube.com/watch?v=WEnZN5mvBOE"
+     ],
+     "note": "YouTube results show a video titled 'All-new Glycerin GTS 23' at this URL with a product-style description (soft cushioning, structured support, plush landings), posted about 268 days ago. No result showed the uploading channel, so I could not confirm it is Brooks Running's official channel."
+    }
+   ],
+   "official_videos": []
+  },
+  {
+   "shoe": "Saucony Hurricane 26 (men's)",
+   "checks": [
+    {
+     "claim": "Hurricane 26 released spring 2026 and is the current version; Saucony NL price 190 EUR; GTX version 210 EUR",
+     "verdict": "corrected",
+     "correct_value": "Hurricane 26, Temmuz 2026'da (yaz) küresel olarak satışa çıktı (ABD'de 1 Temmuz 2026, 170 $; bazı AB perakendecilerinde 1 Ağustos 2026). İncelemeler Mayıs 2026'da, satıştan önce yayımlandı. Ekim 2026 itibarıyla hâlâ güncel model. Saucony NL fiyatı 190 €, GTX versiyonu 210 €.",
+     "evidence_urls": [
+      "https://www.sundried.com/blogs/reviews/saucony-hurricane-26-preview",
+      "https://believeintherun.com/?p=64948",
+      "https://www.i-run.fr/saucony/saucony-hurricane/saucony-hurricane-26.html",
+      "https://21run.com/blog/se/2026/08/koep-nu/",
+      "https://www.youtube.com/watch?v=d08SJQdS10c",
+      "https://www.saucony.com/NL/nl_NL/saucony-hurricane-upg/",
+      "https://www.saucony.com/NL/nl_NL/hurricane-26-wide/61250M.html",
+      "https://www.saucony.com/LU/en_LU/hurricane-26-gtx/62500M.html",
+      "https://www.saucony.com/LV/en_LV/hurricane-26-gtx/62500M.html"
+     ],
+     "note": "'Spring 2026' does not hold up. A preview gives a global release of July 2026, Believe in the Run gives availability on July 1 at $170, and a YouTube preview lists 'Release date: Jul 2026'. i-Run (FR) and 21run (SE) give 1 August 2026, and SportsShoes labels the model AW26. Reviews from Doctors of Running and Road Trail Run went up in May 2026, before launch. Prices check out: the Saucony NL category page shows the Hurricane 26 at €190 and the GTX at €210, and the NL Wide product page also shows €190. Saucony LU, LV and RO all list the GTX at €210. No Hurricane 27 turned up, so 'current version' stands."
+    },
+    {
+     "claim": "Hurricane 26 replaced PWRRUN PB with incrediLUX foam (A-TPU) over a dual-density PWRRUN frame",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.saucony.com/UK/en_GB/saucony-hurricane-upg/",
+      "https://www.doctorsofrunning.com/2026/05/saucony-hurricane-26-review-2026.html",
+      "https://paragonsports.com/products/17_1106844_1",
+      "https://humix.roadtrailrun.com/v/saucony-2026-introductions-triumph-24-hurricane-26-a-tpu-foams-endorphin-elite-3-construction",
+      "https://www.runandbecome.com/item/Saucony/Hurricane-25/8231",
+      "https://www.confluencerunning.com/collections/sustainable/products/saucony-hurricane-25-mens-navy-cloud"
+     ],
+     "note": "Saucony's UK site calls incrediLUX an ATPU-based foam (incrediRUN is its TPEE foam). Saucony product engineer Luca Ciccone describes it as 100% aliphatic TPU in Road Trail Run's video. Doctors of Running describes an ATPU incrediLUX top layer over an EVA PWRRUN frame, and Paragon says it sits on a 'dual-density PWRRUN frame'. The Hurricane 25 used a PWRRUN PB layer over PWRRUN, so the replacement claim holds. Two caveats: Road Trail Run's written review wrongly calls the foam TPEE, and one AU retailer (Active Feet) still lists 'PWRRUN PB', which looks like copy carried over from the v25."
+    },
+    {
+     "claim": "Hurricane 26 stack 41/35 mm, 6 mm drop (official); RunRepeat 38.3/32.4 mm",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.saucony.com/en/hurricane-26/",
+      "https://www.saucony.com/en/buyers-guide/",
+      "https://runrepeat.com/saucony-hurricane-26",
+      "https://www.runningwarehouse.com/Saucony_Hurricane_26/descpage-SH26M2.html",
+      "https://www.doctorsofrunning.com/2026/05/saucony-hurricane-26-review-2026.html"
+     ],
+     "note": "Saucony's product page and buyer's guide give Heel 41 mm, Forefoot 35 mm, Drop 6 mm. RunRepeat's lab measured 38.3 mm heel and 32.4 mm forefoot, a 5.9 mm drop. One retailer (Scandinavian Outdoor) lists 41/36 mm with a 5 mm drop; that is an outlier and contradicts Saucony. The stack is 3 mm taller than the Hurricane 25 (38/32)."
+    },
+    {
+     "claim": "Hurricane 26 weight 262 g men's US 9 (official)",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.saucony.com/en/hurricane-26/",
+      "https://www.saucony.com/en/buyers-guide/",
+      "https://www.doctorsofrunning.com/2026/05/saucony-hurricane-26-review-2026.html",
+      "https://runrepeat.com/saucony-hurricane-26"
+     ],
+     "note": "Saucony's Hurricane 26 page and buyer's guide list 9.2 oz (262 g) for the men's shoe, and Doctors of Running gives 262 g for men's US 9. If the page shows RunRepeat data, note that RunRepeat measured 272 g (9.6 oz), about 10 g more than the official figure. The official 262 g is correct."
+    },
+    {
+     "claim": "Hurricane 26 support is CenterPath Technology: wide base, raised sidewalls, no medial post",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.roadtrailrun.com/2026/05/saucony-hurricane-26-multi-tester.html?m=0",
+      "https://paragonsports.com/products/17_1106844_1",
+      "https://www.wildfiresports.com.au/saucony-hurricane-26-wide-mens-shoes",
+      "https://www.sportsshoes.com/product/sau5629/hurricane-26-men's-running-shoes---aw26"
+     ],
+     "note": "Road Trail Run says that instead of a traditional hard medial post, Saucony uses a wider base, higher sidewalls and a dual-density frame. Retailers describe CenterPath as a wide platform, asymmetrical profile, tall sidewalls and rocker shape, guiding the foot 'rather than relying on medial posts'. Two nuances worth adding to the page: the dual-density PWRRUN frame is part of the support, and one listing mentions extra foam on the medial side. So there is no hard post, but there is medial reinforcement."
+    },
+    {
+     "claim": "Hurricane 26 widths: Standard and Wide (2E) only, no 4E",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://www.saucony.com/NL/nl_NL/hurricane-26-wide/61250M.html",
+      "https://www.saucony.com/CA/en_CA/hurricane-26-wide/61250M.html",
+      "https://www.saucony.com/DE/en_GR/hurricane-26-wide/61250M.html",
+      "https://www.sportsshoes.com/product/sau5632/hurricane-26-men's-running-shoes-(2e-width)---aw26",
+      "https://shop.therunningcompany.com.au/products/mens-saucony-hurricane-26-2e-wide",
+      "https://runrepeat.com/saucony-hurricane-26"
+     ],
+     "note": "Saucony's NL, CA and DE sites list only the regular model (61249M) and a men's Wide (61250M), and retailers list the Wide as 2E. No 4E/X-Wide listing turned up in several targeted searches. That is absence of evidence, not a positive statement, so 'no 4E' is very likely but not formally proven. RunRepeat adds that the Wide is sold only in select markets and limited colours."
+    },
+    {
+     "claim": "Hurricane 26 removable insole; XT-900 carbon rubber outsole; RunRepeat toebox 72.2 mm",
+     "verdict": "confirmed",
+     "evidence_urls": [
+      "https://runrepeat.com/saucony-hurricane-26",
+      "https://www.saucony.com/NL/nl_NL/hurricane-26-wide/61250M.html",
+      "https://paragonsports.com/products/17_1106844_1"
+     ],
+     "note": "RunRepeat confirms the insole is removable and that most custom orthotics should fit. It measured the toebox at 72.2 mm (average 73.2 mm), with toebox height 27.4 mm and forefoot midsole width 129.8 mm. Saucony's NL page and retailers list the outsole as a redesigned XT-900 carbon rubber."
+    },
+    {
+     "claim": "Any Saucony official video exists for Hurricane 26",
+     "verdict": "unverifiable",
+     "evidence_urls": [
+      "https://www.youtube.com/shorts/25A25_9guvo",
+      "https://humix.roadtrailrun.com/v/saucony-2026-introductions-triumph-24-hurricane-26-a-tpu-foams-endorphin-elite-3-construction",
+      "https://www.youtube.com/watch?v=6HdaZY6EqeQ"
+     ],
+     "note": "Several YouTube searches returned about ten Hurricane 26 videos: reviews, previews, a 'First Look' and an unboxing Short. None of the results named the uploader as Saucony. The closest thing to an official video is a Road Trail Run video (3 Dec 2025) in which Saucony's Luca Ciccone presents the shoe, but it is hosted by Road Trail Run, not Saucony. The page should not claim an official Saucony video unless someone checks the channel by hand."
+    }
+   ],
+   "official_videos": []
+  }
+ ]
 }

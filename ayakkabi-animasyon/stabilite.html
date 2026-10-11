@@ -194,7 +194,7 @@ details p{font-size:.88rem;margin-top:8px}
   <div id="shoes"></div>
 
   <footer class="foot">
-    <p><b>Yöntem.</b> Bilgiler resmî marka sayfaları ve laboratuvar ölçümü yapan inceleme siteleri (RunRepeat, RTINGS, Road Trail Run, Doctors of Running, Believe in the Run, Running Warehouse) üzerinden web aramasıyla toplandı ve ikinci bir kontrolle doğrulandı. Marka sayfaları doğrudan açılamadığı için bazı değerler arama özetlerinden alındı; fiyat ve stok değişir.</p>
+    <p><b>Yöntem.</b> Bilgiler resmî marka sayfaları ve laboratuvar ölçümü yapan inceleme siteleri (RunRepeat, RTINGS, Road Trail Run, Doctors of Running, Believe in the Run, Running Warehouse) üzerinden web aramasıyla toplandı Temel bilgiler (güncel sürüm, teknoloji adları, yükseklik ve drop, ağırlık, genişlikler, iç taban) ikinci, bağımsız bir aramayla doğrulandı. Marka sayfaları doğrudan açılamadığı için değerler arama sonuçlarındaki alıntılardan alındı; fiyat ve stok değişir.</p>
     <p><b>Çizimler.</b> Yan görünümler her ayakkabının markaca verilen topuk ve ön ayak yüksekliğine göre ölçekli çizildi; üst görünümler ve arka kesitler şemadır. Orijinal fotoğraflar için her bölümdeki resmî galeri bağlantısını kullanın.</p>
     <p><b>Önemli.</b> Destekli ayakkabı ile kişisel tabanlığın desteği üst üste binebilir. Her modeli kendi tabanlığınızla, günün ikinci yarısında ve 2E/4E genişlikte deneyin; tabanlığı hazırlayan uzmana danışın.</p>
   </footer>
@@ -209,22 +209,22 @@ const SHOES=[
  price:'2E indirimde ≈160 € · liste 200 €',
  mech:{kind:'4d',name:'4D GUIDANCE SYSTEM',short:'Yük arttıkça sertleşen medial modül',desc:'Ark altındaki köpük modülü, topuk içe yattıkça direnç gösteriyor. Normal adımda fark edilmiyor.'},
  dist:'Desteği “gerektiğinde devreye giren” bir parçayla veren tek model. Ark altındaki 4D Guidance modülü normal adımda belli olmaz; ayak içe çöktükçe direnci artar. Topukta ayrıca PureGEL jel yastığı var.',
- spec:{heel:40,fore:32,drop:'8 mm',dropM:'ölçülen 9,3 mm',weight:'298 g',widths:'D · 2E · 4E',widthsN:'4E’nin AB’de satıldığı doğrulanamadı',insole:'Çıkarılabilir',insoleN:'OrthoLite X-55',foam:'FF BLAST PLUS',foamN:'+ 4D modülü, PureGEL',upper:'Engineered stretch knit',outsole:'HYBRID ASICSGRIP'},
- ts:9,
+ spec:{heel:40,fore:32,drop:'8 mm',dropM:'ölçülen 9,3 mm',weight:'298 g',widths:'D · 2E · 4E',widthsN:'4E’nin AB’de satıldığı doğrulanamadı',insole:'Çıkarılabilir',insoleN:'OrthoLite X-55',foam:'FF BLAST PLUS',foamN:'+ 4D modülü, PureGEL',upper:'Örme saya (stretch knit)',outsole:'HYBRID ASICSGRIP'},
+ ts:12,
  tech:[
   {n:'4D GUIDANCE SYSTEM',loc:'midsole_medial',main:true,d:'Ark altındaki köpük modülü. Ayak fazla içe çöktüğünde direnç artar, normal adımda fark edilmez.'},
   {n:'FF BLAST PLUS',loc:'midsole_full',d:'Ara tabanın ana köpüğü. 32’de ön ayağa yaklaşık 2 mm ek köpük eklendi.'},
   {n:'PureGEL',loc:'midsole_heel',d:'Topuk altına gömülü jel. İlk temastaki darbeyi yumuşatır.'},
   {n:'OrthoLite X-55 iç taban',loc:'insole',d:'Çıkarılabilir fabrika tabanı; yerine kişisel tabanlık konabilir.'},
   {n:'Dış topuk çanağı',loc:'heel_counter',d:'Topuğu arkadan saran sert yapı; topuğun yana kaçmasını sınırlar.'},
-  {n:'HYBRID ASICSGRIP',loc:'outsole',d:'Tutuş için ASICSGRIP, aşınan bölgelerde AHARPLUS kauçuk. Islak asfaltta hafif kayma bildirildi.'},
-  {n:'Engineered stretch knit',loc:'upper',d:'Esnek örgü saya; Kayano 31’e göre daha sıkı kalıp.'},
-  {n:'8 mm drop, yeni topuk geometrisi',loc:'geometry_rocker',d:'Kayano serisinde ilk kez 8 mm. Belirgin bir rocker yok; geçiş geometriyle yumuşatılmış.'}],
- pros:['2E ve 4E kalıp: geniş ön ayak ve yazın şişen ayak için ek hacim.','Çıkarılabilir OrthoLite tabanlık; perakendeciler “ortez dostu” olarak listeliyor.','4D Guidance, sert topuk çanağı ve yan duvarlar overpronasyon ile dengesiz topuk temasına yönelik.','Ön ayakta ≈32 mm yastık, CM1 altındaki basıncı dağıtmaya yardımcı olabilir.','Bir inceleme 33’ün desteğini daha “doğal” buluyor; daha belirgin yönlendirme isteyenler için 32 hâlâ güçlü aday.'],
- cons:['Saya Kayano 31’e göre daha sıkı; ortezle birlikte 2E veya 4E denenmeli.','Belirgin rocker yok ve ön ayak oldukça sert; erken topuk kalkışında HOKA ve New Balance kadar yardımcı olmayabilir.','Ortezin medial desteği ile 4D modülü üst üste binebilir.','Model 33’e geçtiği için 2E/4E stoğu azalıyor.','Islak asfaltta hafif kayma ve sıcakta ısınma bildirildi.'],
+  {n:'HYBRID ASICSGRIP',loc:'outsole',d:'Tutuş için ASICSGRIP, aşınan bölgelerde AHARPLUS kauçuk. Bir inceleme ıslak asfaltta hafif kayma bildirdi; RunRepeat laboratuvarında ıslak tutuş yüksek çıktı.'},
+  {n:'Örme saya',loc:'upper',d:'Perakendeciler “engineered stretch knit”, ASICS metni “engineered mesh” diyor. Önceki iki sürüme göre daha dar ve sıkı kalıp.'},
+  {n:'8 mm drop ve ön ayak rocker’ı',loc:'geometry_rocker',d:'Kayano serisinde ilk kez 8 mm. Ön ayakta erken devreye giren bir rocker ve neredeyse hiç esnemeyen sert bir ön ayak var (RTINGS rocker açısı 24,1°).'}],
+ pros:['2E ve 4E kalıp: geniş ön ayak ve yazın şişen ayak için ek hacim.','Çıkarılabilir OrthoLite tabanlık; perakendeciler “ortez dostu” olarak listeliyor.','4D Guidance, sert topuk çanağı ve yan duvarlar overpronasyon ile dengesiz topuk temasına yönelik.','Ön ayakta ≈32 mm yastık ve sert, rocker’lı ön ayak; CM1 altındaki basıncı dağıtmaya ve erken topuk kalkışında geçişe yardımcı olabilir.','Bir inceleme 33’ün desteğini daha “doğal” buluyor; daha belirgin yönlendirme isteyenler için 32 hâlâ güçlü aday.'],
+ cons:['Saya Kayano 31’e göre daha sıkı; ortezle birlikte 2E veya 4E denenmeli.','Ön ayak çok sert, neredeyse hiç esnemiyor; alışmak zaman alabilir.','Ortezin medial desteği ile 4D modülü üst üste binebilir.','Model 33’e geçtiği için 2E/4E stoğu azalıyor; ASICS Avustralya 4E’yi üretimden kaldırmış.','Hava geçirgenliği ortalama; sıcak yaz yürüyüşlerinde ayak ısınabilir.'],
  links:[['ASICS ABD ürün sayfası (fotoğraf galerisi)','https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html'],['ASICS UK ürün sayfası','https://www.asics.com/gb/en-gb/gel-kayano-32/p/1011C052-001.html'],['GEL-KAYANO 32 Extra Wide (4E)','https://www.asics.com/ca/fr-ca/gel-kayano-32-extra-wide-1011c054-002']],
  videos:[['GEL-KAYANO 32 tanıtımı','https://www.youtube.com/watch?v=ajkRWUPkv6c',true],['4D GUIDANCE SYSTEM nasıl çalışır (Kayano 30 üzerinden anlatım, aynı sistem)','https://www.youtube.com/watch?v=zZBJhhc2U2I',true],['GEL-KAYANO 33 teknoloji videosu (yeni model)','https://www.youtube.com/watch?v=T6hcgSGESQo',true]],
- videoNote:'Kanal adları arama sonuçlarından alındı.',
+ videoNote:'İlk video ASICS Running kanalına ait (arama sonucuyla doğrulandı).',
  version:'GEL-KAYANO 33’te 4D Guidance kaldırıldı; destek FluidSupport adlı geometriden geliyor. Ara taban çift katlı (FF BLAST MAX üstte, FF BLAST PLUS altta), drop yine 8 mm, AB fiyatı ≈200 €. Bir inceleme 33’ü 32’den daha sert ve desteğini daha “doğal” buluyor; belirgin overpronasyonda 32 hâlâ mantıklı bir aday.'},
 
 {id:'nb860',brand:'New Balance',model:'Fresh Foam X 860 v14',sub:'2E / 4E',
@@ -266,11 +266,11 @@ const SHOES=[
   {n:'Kauçuk dış taban',loc:'outsole',d:'Aşınma bölgelerinde kauçuk; ıslak zemin tutuşu Gaviota 5’e göre arttı.'},
   {n:'Çıkarılabilir iç taban',loc:'insole',d:'4,8 mm; çıkarınca kişisel tabanlık için hacim açılır.'},
   {n:'Engineered mesh',loc:'upper',d:'Nefes alır; burun kısmı geniş ama sığ bulunuyor.'}],
- pros:['Tam boy H-Frame, geniş taban ve sert topuk: dengesiz topuk ve overpronasyon için setin en güçlüsü.','Wide (2E) ve X-Wide (4E) NL resmî sitede; başparmak bölgesi ortalamadan geniş ölçüldü (76,7 mm).','Çıkarılabilir 4,8 mm tabanlık (RunRepeat ölçümü).','Sert ön ayak ve kalın ön ayak yastığı (33 mm) CM1 ve sinir için koruyucu olabilir.','Islak zemin tutuşu iyileşti; ılımlı 6 mm drop.'],
- cons:['Üst hacmi düşük, burun sığ: ortezle yer daralabilir; X-Wide düşünülmeli.','Orta ayakta iç taban ve yan duvar hafif kabarık; ortezin arkıyla çakışabilir.','Ön ayak rocker’ı Gaviota 5’e göre daha düz bulunuyor.','Eski nesil köpük sert ve “ölü” hissedebilir.','Güçlü düzeltme ile ortezin desteği üst üste binebilir.'],
+ pros:['Tam boy H-Frame, geniş taban ve sert topuk: dengesiz topuk ve overpronasyon için setin en güçlüsü.','Wide (2E) ve X-Wide (4E) NL resmî sitede; başparmak bölgesi ortalamadan geniş ölçüldü (76,7 mm).','Çıkarılabilir 4,8 mm tabanlık; RunRepeat’e göre kişisel ortezler iyi sığıyor.','Sert ön ayak ve kalın ön ayak yastığı (33 mm) CM1 ve sinir için koruyucu olabilir.','Islak zemin tutuşu iyileşti; ılımlı 6 mm drop.'],
+ cons:['Üst hacmi düşük, burun sığ: ortezle yer daralabilir; X-Wide düşünülmeli.','Orta ayakta iç taban ve yan duvar hafif kabarık; ortezin arkıyla çakışabilir.','Rocker konusunda kaynaklar çelişiyor: bir inceleme Gaviota 5’ten daha düz, RunRepeat daha belirgin buluyor. Mağazada yürüyerek deneyin.','Eski nesil köpük sert ve “ölü” hissedebilir.','Güçlü düzeltme ile ortezin desteği üst üste binebilir.'],
  links:[['HOKA NL ürün sayfası (fotoğraf galerisi)','https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html'],['HOKA NL geniş kalıplar (Breed / X-Breed)','https://www.hoka.com/nl/nl/brede-pasvorm-heren/'],['HOKA ABD ürün sayfası','https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html']],
  videos:[['This Max-Cushion Stability Shoe Hits The Spot','https://www.youtube.com/watch?v=JKrmqyLOkrg',false],['Big Difference from the Gaviota 5?','https://www.youtube.com/watch?v=eTqjBZ08iWw',false]],
- videoNote:'HOKA’nın resmî kanalında Gaviota 6’ya özel video bulunamadı.',
+ videoNote:'HOKA’nın resmî kanalında Gaviota 6’ya özel video bulunamadı; bunlar bağımsız incelemeler.',
  version:'Gaviota 5’e göre yaklaşık 27 g daha hafif, Enhanced H-Frame, iç ghillie bağcık, daha fazla kauçuk ve yeni X-Wide seçeneği. Gaviota 7 için duyuru yok.'},
 
 {id:'glycerin',brand:'Brooks',model:'Glycerin GTS 23',sub:'2E / 4E',
@@ -295,7 +295,7 @@ const SHOES=[
  videoNote:'İlk videonun Brooks’un resmî kanalına ait olduğu doğrulanamadı.',
  version:'GTS 22’ye göre: drop 10 mm’den 8 mm’ye indi (ön ayağa 2 mm köpük), yeni örgü saya. GuideRails ve DNA TUNED aynı. GTS 24 için duyuru yok.'},
 {id:'hurricane',brand:'Saucony',model:'Hurricane 26',sub:'Wide (2E)',
- status:{cur:true,text:'Güncel',detail:'2026 baharında çıktı (Hurricane 25’in yerine).'},
+ status:{cur:true,text:'Güncel',detail:'Temmuz 2026’da çıktı (Hurricane 25’in yerine).'},
  price:'190 € (Saucony NL)',
  mech:{kind:'hurr',name:'CenterPath',short:'Geniş taban ve yan duvarlarla, şekilden gelen destek',desc:'Sert bir parça yok. Geniş taban ve ayağı içine alan yükseltilmiş yan duvarlar topuğu merkezde tutuyor.'},
  dist:'Desteği bir post, ray ya da plaka yerine yalnızca ayakkabının şekliyle veriyor: geniş taban, ayağı içine alan yükseltilmiş yan duvarlar ve asimetrik form (CenterPath). Bunu zıplayan incrediLUX köpükle birleştiriyor. Beşli içinde en “nötr ayakkabı gibi” hissettiren ve en hafif seçenek; ama genişlikte yalnızca 2E var.',
@@ -313,7 +313,7 @@ const SHOES=[
  cons:['4E yok, yalnızca 2E: çok geniş ön ayak ve ortez için hacim yetmeyebilir.','Standart kalıpta burun ortalamadan biraz dar ve uçta daralıyor.','Destek seviyesi hafif–orta; belirgin overpronasyon ve dengesiz topukta Kayano veya Gaviota kadar güçlü değil.','Ön ayak hafif esnek; CM1 basıncı için sert ön ayak ve belirgin rocker isteniyorsa yetersiz kalabilir.','6 mm drop, erken topuk kalkışında baldıra 8 mm’lik modellerden biraz daha fazla yük bindirebilir.'],
  links:[['Saucony ürün sayfası (fotoğraf galerisi)','https://www.saucony.com/en/hurricane-26/61249M.html'],['Hurricane 26 Wide (2E)','https://www.saucony.com/en/hurricane-26-wide/61250M.html'],['Saucony NL Hurricane sayfası','https://www.saucony.com/NL/nl_NL/saucony-hurricane-upg/']],
  videos:[],
- videoNote:'Araştırmada Hurricane 26 için doğrulanmış video bulunamadı.',
+ videoNote:'Saucony’nin kendi kanalında Hurricane 26 videosu bulunamadı; çıkan videolar inceleme ve mağaza videoları.',
  version:'Hurricane 25’e göre: PWRRUN PB yerine incrediLUX köpük, stack 38/32’den 41/35 mm’ye çıktı, ağırlık ≈295 g’dan 262 g’a indi, dış taban yenilendi. Gore-Tex’li GTX versiyonu 210 €; yaz için normal mesh daha uygun.'}
 ];
 
@@ -349,7 +349,7 @@ function sideSVG(s){
  const midY=x=>(bot(x)+OUT+top(x)-INS)/2;
  // mechanism overlay (side)
  let mech='';const k=s.mech.kind;
- if(k==='4d')mech=`<path class="d-sup" stroke-dasharray="5 3" d="M${X(78)} ${Y(bot(78)+OUT+5)} L${X(168)} ${Y(bot(168)+OUT+5)} L${X(168)} ${Y(top(168)-INS-6)} L${X(78)} ${Y(top(78)-INS-6)}Z"/><text class="d-txt2" x="${X(80)}" y="${(+Y(top(78)-INS-6)-5).toFixed(1)}">4D modül (iç tarafta)</text><ellipse class="d-acc" cx="${X(40)}" cy="${Y(midY(40))}" rx="30" ry="9"/>`;
+ if(k==='4d')mech=`<path class="d-sup" stroke-dasharray="5 3" d="M${X(78)} ${Y(bot(78)+OUT+5)} L${X(168)} ${Y(bot(168)+OUT+5)} L${X(168)} ${Y(top(168)-INS-6)} L${X(78)} ${Y(top(78)-INS-6)}Z"/><text class="d-txt2" x="${X(82)}" y="${(+Y(top(78)-INS-6)+12).toFixed(1)}">4D modül (iç tarafta)</text><ellipse class="d-acc" cx="${X(40)}" cy="${Y(midY(40))}" rx="30" ry="9"/>`;
  if(k==='plane')mech=`<path class="d-supl" d="M${line(x=>bot(x)+OUT+(st(x)-OUT-INS)*.42,12,236,30).join(' L')}"/><text class="d-txt2" x="${X(70)}" y="${(+Y(bot(70)+OUT+(st(70)-OUT-INS)*.42)+16).toFixed(1)}">Stability Plane</text>`;
  if(k==='hframe')mech=`<path class="d-sup" d="M${line(x=>top(x)-INS,10,246,30).join(' L')} L${line(x=>top(x)-INS-9,246,10,30).join(' L')}Z"/><path class="d-sup" d="M${X(112)} ${Y(top(112)-INS-9)} L${X(112)} ${Y(bot(112)+OUT+2)} L${X(140)} ${Y(bot(140)+OUT+2)} L${X(140)} ${Y(top(140)-INS-9)}Z" stroke-dasharray="4 3"/><text class="d-txt2" x="${X(150)}" y="${(+Y(top(150))-14).toFixed(1)}">H-Frame (iki kenarda)</text>`;
  if(k==='rails')mech=`<path class="d-sup" d="M${X(0)} ${Y(top(0)-INS)} ${line(x=>top(x)+9*(1-ss((x-60)/40)),0,100,20).map(p=>'L'+p).join(' ')} L${line(x=>top(x)-INS,100,0,20).join(' L')}Z"/><text class="d-txt2" x="${X(8)}" y="${(+Y(top(30)+12)-6).toFixed(1)}">GuideRails</text>`;
