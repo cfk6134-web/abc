@@ -1,0 +1,1347 @@
+{
+ "olusturma": "2026-10-11",
+ "not": "Web araması özetlerinden derlendi; marka siteleri bu ortamdan açılamadı. image_urls boş: resmî fotoğraflar ağ erişimi açık oturumda ürün sayfalarından alınmalı.",
+ "ayakkabilar": [
+  {
+   "requested_name": "New Balance Fresh Foam X 860 v14 (2E/4E)",
+   "current_model_name": "New Balance Fresh Foam X 860v15 (requested v14 is superseded)",
+   "release_year": "v14: 2024 (first colourways April–May 2024, lab reviews May–June 2024). v15: soft launch March 2026, official release April 1, 2026.",
+   "support_type": "Stability. New Balance calls it a stability daily trainer. Doctors of Running rates the v14 as moderate to high medial stability, Believe in the Run and Road Trail Run as moderate.",
+   "version_notes_tr": "İstenen 860 v14 artık güncel model değil. Ekim 2026 itibarıyla güncel model Fresh Foam X 860v15. Mart 2026'da sınırlı olarak çıktı, resmi satışa 1 Nisan 2026'da başladı. Taramalarda 860v16'ya dair hiçbir bilgi bulunamadı. v14 2024 baharında çıkmıştı. 860 serisinde klasik sert medial postu bırakıp yerine \"Stability Plane\" adlı ince, sertleştirilmiş EVA plakayı koyan ilk sürüm v14'tür. Drop 10 mm'den 8 mm'ye düşmüştü. v15'teki değişiklikler (çeşitli kaynaklara göre): (1) Platform daha yüksek ve daha geniş. Road Trail Run'a göre topuk yüksekliği yaklaşık 4,5 mm, ön ayak yaklaşık 6,5 mm arttı ve topuk 40 mm civarına çıktı. Running Warehouse/Doctors of Running 43/35 mm, RunRepeat ölçümü 39,7/32,1 mm, RTINGS ise 40,6 mm topuk veriyor. (2) Stability Plane korunmuş ama daha sert bir plaka olmuş. RunRepeat ve RTINGS plakayı plastik olarak tanımlıyor. Medial yan duvar daha yüksek, medial taban taşması daha fazla (Doctors of Running). (3) Drop konusunda kaynaklar çelişiyor: Fleet Feet/RTINGS 6 mm, Running Warehouse/Doctors of Running 8 mm diyor, RunRepeat 7,6 mm ölçmüş. (4) Daha ağır: NB resmi sayfalarında 331 g (ABD) ve 344 g (NL/EU) yazıyor, v14'te 306,5 g idi. (5) Üst kısım yeniden tasarlandı (engineered mesh). Dil daha kalın ve gusset'li. Doctors of Running burun koruyucusunun daha sert, burun hacminin daha düşük olduğunu ve iki beden arasında kalanların yarım numara büyük almasını öneriyor. (6) Fiyat: v15 NL resmi sitede 170 €, v14'ün tavsiye fiyatı 160 € idi ve şu an indirimde (yaklaşık 115–120 €). v15 de 2E ve 4E genişlikte satılıyor (Run and Become 2E ve 4E, shop4runners.eu 2E listeliyor). Özetle: v14 daha hafif, daha alçak ve şu an daha ucuz. v15 daha çok yastıklı, daha geniş ve daha stabil ama daha ağır ve burun hacmi daha az.",
+   "technologies": [
+    {
+     "name": "Stability Plane",
+     "location": "midsole_medial",
+     "official_description": "New Balance: provides the performance and stability you need without compromising the cushioning and comfort of the underfoot platform. Product copy: the 860v14 combines innovative Stability Plane technology with the pinnacle underfoot cushioning experience of Fresh Foam X.",
+     "what_it_does_tr": "İki köpük katmanı arasına yerleştirilmiş ince, sertleştirilmiş bir EVA plaka. İç (medial) tarafta ayakkabı boyunca uzanıyor, topukta ise tüm genişliği kaplıyor. Ayağın içe çökmesini (aşırı pronasyon) eski tip sert post yerine bir yönlendirme gibi sınırlıyor, yastıklamayı da çok azaltmıyor.",
+     "source_url": "https://ee.newbalance.eu/en/pd/fresh-foam-x-860v14/W860V14-45484.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Fresh Foam X (dual-density midsole)",
+     "location": "midsole_full",
+     "official_description": "New Balance: Fresh Foam X midsole delivers our most cushioned Fresh Foam experience, with approximately 3% bio-based content. Reviewers describe it as dual-density: a softer top layer over a firmer bottom layer that is thicker on the medial side.",
+     "what_it_does_tr": "Ara tabanın tamamını oluşturan ana yastıklama köpüğü. Üstteki yumuşak katman uzun yürüyüşlerde konfor sağlıyor. Alttaki daha sert katman iç tarafta daha kalın olduğu için topuktan ön ayağa uzanan bir medial kama gibi çalışıyor ve iç tarafı destekliyor.",
+     "source_url": "https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Rocker profile",
+     "location": "geometry_rocker",
+     "official_description": "New Balance lists a rocker profile among the 860v14 features. Doctors of Running adds a large posterior-lateral heel bevel and an early forefoot rocker with a fairly stiff forefoot.",
+     "what_it_does_tr": "Taban topuktan buruna doğru kavisli. Topuk yumuşak oturuyor, ayak da kendiliğinden öne yuvarlanıyor. Ayak parmağı eklemlerinin daha az bükülmesi gerektiği için itiş anında ön ayak yükünün bir kısmını azaltabilir.",
+     "source_url": "https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Engineered mesh upper",
+     "location": "upper",
+     "official_description": "Believe in the Run and Running Lab describe an engineered mesh upper. New Balance's own listing calls it a synthetic upper. Doctors of Running notes a toe guard and a slightly scratchy inner lining.",
+     "what_it_does_tr": "Ayağı saran nefes alabilen file üst kısım. Doctors of Running'e göre ön ayakta hafif geniş, hacmi normalin biraz üstünde. Burun koruyucusu yüzünden ilk başta kısa hissettirebiliyor.",
+     "source_url": "https://believeintherun.com/shoe-reviews/new-balance-fresh-foam-860v14-review/",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Gusseted tongue",
+     "location": "tongue",
+     "official_description": "Reviewers report a padded tongue gusseted on both sides that helps hold the midfoot.",
+     "what_it_does_tr": "Dil iki yandan üst kısma dikili. Kaymıyor ve orta ayağı sabit tutuyor. Özel tabanlıkla kullanımda ayağın içeride oynamasını azaltır.",
+     "source_url": "https://www.runningshoesguru.com/reviews/road/new-balance-fresh-foam-x-860-v14-review/",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Heel counter (no official technology name)",
+     "location": "heel_counter",
+     "official_description": "Doctors of Running calls the rearfoot counter stiff, with a lot of collar padding. WearTesters calls it rigid with a secure lockdown.",
+     "what_it_does_tr": "Topuğu arkadan saran sert kontrfort. Topuğun yere basarken sağa sola oynamasını sınırlar, bu da dengesiz topuk teması için önemli. Hassas topuğu olanlar sertliği hissedebilir.",
+     "source_url": "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Blown rubber outsole",
+     "location": "outsole",
+     "official_description": "Reviewers describe blown rubber, thinner and lighter than on the v13, placed in high-wear and impact zones with some exposed foam. New Balance's UK listing just says durable rubber outsole.",
+     "what_it_does_tr": "İçine hava katılmış hafif ve esnek kauçuk dış taban. Yürüyüşte yumuşak bir temas ve yeterli tutuş sağlar. Köpüğün açıkta kalan bölgelerinde aşınma daha hızlı olabilir.",
+     "source_url": "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html",
+     "confidence": "reputable_review"
+    }
+   ],
+   "specs": {
+    "heel_stack_mm": "38 mm (brand spec via Running Warehouse and Believe in the Run, men's US 9). Lab: 36.8 mm (RunRepeat), 35.5 mm (Road Trail Run).",
+    "forefoot_stack_mm": "30 mm (brand spec via Running Warehouse and Believe in the Run). Lab: 27.5 mm (RunRepeat and Road Trail Run).",
+    "drop_mm": "8 mm (official New Balance). RunRepeat lab measured 9.3 mm.",
+    "weight_men": "306.5 g / 10.8 oz (official NB EU/NL page, size not stated). 298 g / 10.5 oz (US 9, Running Warehouse and Believe in the Run). 296 g / 10.45 oz (US 9, measured by Road Trail Run).",
+    "widths_men": [
+     "D (Standard)",
+     "2E (Wide)",
+     "4E (Extra Wide)"
+    ],
+    "removable_insole": "Yes, most likely. Canadian Footwear's listings for M860K14 and M860G14 name 'Removable Insole' as a fitting attribute. For v15, Medicus lists removable insoles: yes and orthotic friendly: yes. Caveat: I found no lab review with a photo of the insole being pulled out, and no measured insole thickness. Reviewers say the stock sockliner is thin, so swapping in a thicker custom orthotic will take up interior volume.",
+    "midsole_foam": "Dual-density Fresh Foam X (softer top, firmer bottom that is thicker on the medial side, forming a full-length medial wedge) with the EVA Stability Plane between the layers. About 3% bio-based content (official). RunRepeat rates the midsole soft.",
+    "upper": "Engineered mesh per reviewers (NB lists it as synthetic). Padded gusseted tongue, toe guard, stiff heel counter with heavy collar padding. RunRepeat measured the toe box at 73.0 mm wide (average 73.2 mm). Doctors of Running: forefoot slightly wide, normal-to-high volume, feels slightly short at first because of the toe guard.",
+    "outsole": "Blown rubber in high-wear zones with some exposed foam (Believe in the Run, Road Trail Run, WearTesters). NB text: durable rubber outsole. Road Trail Run platform width: 90 mm heel / 80 mm midfoot / 110 mm forefoot.",
+    "spec_sources": [
+     "https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html",
+     "https://www.newbalance.co.uk/pd/fresh-foam-x-860v14/M860V14-50478.html",
+     "https://www.runningwarehouse.com/New_Balance_Fresh_Foam_X_860_v14/descpage-NB146M0.html",
+     "https://runrepeat.com/new-balance-fresh-foam-x-860-v14",
+     "https://www.roadtrailrun.com/2024/06/new-balance-fresh-foam-x-860-v14-multi.html",
+     "https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html",
+     "https://believeintherun.com/shoe-reviews/new-balance-fresh-foam-860v14-review/",
+     "https://www.doctorsofrunning.com/2024/09/new-balance-fresh-foam-x-860-v14-review.html",
+     "https://canadianfootwear.com/new-balance-fresh-foam-x-860-v14-black-mens.html",
+     "https://www.runandbecome.com/item/New-Balance/860v14-2E-Wide/7MTO",
+     "https://www.runandbecome.com/item/New-Balance/860v14-4E-Extra-Wide/863O",
+     "https://medicus.ca/en/our-products/products/new-balance-860-v15-m/"
+    ]
+   },
+   "distinguishing_feature_tr": "Destek ayakkabının içinden geliyor. \"Stability Plane\", iki yoğunluklu Fresh Foam X katmanının arasına gömülmüş ince, sert bir EVA plaka. İç tarafta ayakkabı boyunca, topukta ise tüm genişlik boyunca uzanıyor. Diğer dört modelde destek başka yerden geliyor: Brooks GuideRails ve HOKA H-Frame yan duvar/çerçeve kullanıyor, ASICS 4D Guidance geometri ve köpük kullanıyor, Saucony Hurricane geniş taban ve yan duvar kullanıyor. 860 ise plaka destekli bir medial kama gibi çalışıyor. Ayrıca v14 şu an indirimli olduğu için grubun en uygun fiyatlı seçeneği olabilir (yaklaşık 115–120 €).",
+   "profile_fit_tr": {
+    "pros": [
+     "İç tarafta ayakkabı boyunca uzanan Stability Plane ve alttaki sert köpüğün iç tarafta daha kalın olması, topuktan ön ayağa kadar süren bir medial kama oluşturuyor. Bu yapı aşırı pronasyonu kontrol etmeye yardımcı olur (Doctors of Running: üç bölgede de orta-yüksek medial stabilite).",
+     "Sert topuk kontrfortu ve geniş topuk tabanı (Road Trail Run: topukta 90 mm) dengesiz topuk temasında topuğun oynamasını sınırlar.",
+     "2E (Wide) ve 4E (Extra Wide) seçenekleri geniş ön ayağa ve özel tabanlığa yer açar. Ön ayağın yanlardan sıkışmasını azalttığı için sinir sıkışması riskine karşı önemli bir artı.",
+     "Fabrika tabanlığı çıkarılabilir görünüyor (perakendeci bilgisi) ve ince. Özel ortez için uygun bir temel.",
+     "Rocker taban ve oldukça sert ön ayak, itiş anında parmak eklemlerinin daha az bükülmesini sağlar. Erken topuk kalkışı olan bir yürüyüşte öne geçişi kolaylaştırır, ön ayak yükünü bir miktar azaltabilir.",
+     "APMA (Amerikan Podiatri Derneği) onay mührü var (NB resmi sayfası).",
+     "v14 tasfiye döneminde: tavsiye fiyatı 160 € iken yaklaşık 115–120 €'ya bulunabiliyor. Deneme amaçlı almak için düşük risk."
+    ],
+    "cons": [
+     "Burun koruyucusu yüzünden ayakkabı ilk başta kısa hissettiriyor (Doctors of Running). Running Lab de D genişlikte burnun 'kısa ve hafif dar' olduğunu söylüyor. Geniş ön ayak ve sinir sıkışması riski için yarım numara büyük ve 2E/4E denemek neredeyse şart.",
+     "Destek zaten ayakkabıda olduğu için, ortezin de medial desteği varsa ikisi birlikte aşırı düzeltme yapabilir. Ortezle birlikte mutlaka denenmeli ve sağlık profesyoneline danışılmalı.",
+     "Doctors of Running, ayakkabının ayağı dışa doğru ittiğini ve dış bilek (lateral) instabilitesi olanlara uygun olmadığını belirtiyor. Topuk teması dış tarafa kayıyorsa bu bir risk.",
+     "Medial sert köpük ön ayağa kadar uzanıyor. İspanyolca bir v15 incelemesi plakanın 1. ve 2. metatarsı desteklediğini söylüyor. CM1 altındaki basınç için bu, rahatlatmaktan çok sertlik hissi yaratabilir. Bu belirsiz bir nokta, CM1 basıncının ortezle (metatarsal pad veya 1. ışın boşluğu) çözülmesi daha güvenli.",
+     "Fabrika tabanlığı ince olduğu için, onu çıkarıp daha kalın bir ortez koymak iç hacmi azaltır. Ayak normalde D olsa bile 2E gerekebilir.",
+     "Üst kısmın iç yüzü biraz pürüzlü (Doctors of Running). Yaz yürüyüşlerinde çorapsız kullanım önerilmiyor. Ağırlık yaklaşık 300 g, hafif bir ayakkabı değil.",
+     "Model eski sezon: Hollanda'da 2E/4E beden stoku sınırlı. NB NL resmi sitesinde geniş versiyon bulunmayabilir, AB perakendecilerinden (ör. shop4runners.eu, Run and Become UK) kontrol etmek gerekebilir.",
+     "RunRepeat'in ölçtüğü drop 9,3 mm, yani iddia edilen 8 mm'den fazla. Daha yüksek drop yükü biraz öne kaydırabilir."
+    ]
+   },
+   "official_product_url": "https://www.newbalance.co.uk/pd/fresh-foam-x-860v14/M860V14-50478.html",
+   "official_nl_or_eu_url": "https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html",
+   "price_eur": "v14: New Balance EU tavsiye fiyatı 160 €. Güncel indirimli fiyatlar: shop4runners.eu'da 114,99 €, i-run.com'da 120 €. v15 (güncel model): NB Hollanda resmi sitesinde (nl.newbalance.eu) 170 €. shop4runners.eu'da 2E genişlik 170 €.",
+   "official_videos": [
+    {
+     "title": "New Balance Fresh Foam X 860 v14 Video Review (Sam Winebaum)",
+     "url": "https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html",
+     "channel": "Road Trail Run",
+     "is_brand_official": false
+    },
+    {
+     "title": "New Balance Fresh Foam X 860 v14 Review: a new and any runner type friendly take on support",
+     "url": "https://humix.roadtrailrun.com/v/new-balance-fresh-foam-x-860-v14-review-a-new-and-any-runner-type-friendly-take-on-support",
+     "channel": "Road Trail Run",
+     "is_brand_official": false
+    },
+    {
+     "title": "New Balance 860 v14 First Look",
+     "url": "https://www.youtube.com/watch?v=y3YVbaaUFms",
+     "channel": "unknown (could not verify; not confirmed as the New Balance channel)",
+     "is_brand_official": false
+    },
+    {
+     "title": "New Balance 860 v14 Review",
+     "url": "https://m.youtube.com/watch?v=_TzZ6GchyDk",
+     "channel": "Trail and Kale",
+     "is_brand_official": false
+    },
+    {
+     "title": "New Balance 860v15, comfort en stabiliteit in balans (specs)",
+     "url": "https://www.youtube.com/watch?v=iXKMkTWFWGQ",
+     "channel": "unknown (Dutch-language v15 video)",
+     "is_brand_official": false
+    }
+   ],
+   "image_urls": [],
+   "caveats_tr": [
+    "Bu çalışmada WebFetch hiçbir siteye bağlanamadı (newbalance.com, nl.newbalance.eu, runrepeat.com, doctorsofrunning.com, roadtrailrun.com hepsi DNS hatası verdi). Bilgiler yalnızca arama sonuçlarındaki alıntılardan toplandı. Sayfaların HTML'i okunamadığı için resmi görsel dosya URL'leri (nb.scene7.com) doğrulanamadı ve image_urls bilerek boş bırakıldı. Farklı açılardan resmi fotoğraflar, verilen NB ürün sayfalarındaki galerilerde bulunuyor.",
+    "Ne v14 ne de v15 için New Balance'ın kendi YouTube kanalında doğrulanmış bir video bulunamadı. Listelenen videoların hepsi bağımsız inceleme ya da kanalı doğrulanamayan videolar (is_brand_official=false).",
+    "Stack değerleri kaynağa göre değişiyor. Marka/Running Warehouse 38/30 mm, RunRepeat ölçümü 36,8/27,5 mm, Road Trail Run 35,5/27,5 mm veriyor. Bazı perakendecilerin 29/21 mm değerleri ise farklı bir ölçüm yöntemine dayanıyor gibi görünüyor.",
+    "Çıkarılabilir tabanlık bilgisi perakendecilerden (Canadian Footwear; v15 için Medicus) geliyor. Tabanlığın çıkarıldığını fotoğrafla gösteren bir laboratuvar incelemesi ve tabanlık kalınlığı ölçümü bulunamadı. Mağazada kendi ortezinizle denemeniz önerilir.",
+    "v15 için drop (6 mm mi 8 mm mi) ve ağırlık (331 g mi 344 g mi) resmi bölgesel sayfalarda bile tutarsız.",
+    "Resmi ABD newbalance.com sitesinde v14 sayfası bulunamadı, sadece v15 sayfası var: https://www.newbalance.com/pd/fresh-foam-x-860v15/M860V15_RU-FTW-802888.html. v15 NL sayfası: https://nl.newbalance.eu/nl/pd/fresh-foam-x-860-v15/M860V15_RU-FTW-802888.html. UK'deki M860V14-48572 URL'si yanlışlıkla '880v14' başlığıyla listelenmiş, bu yüzden M860V14-50478 kullanıldı.",
+    "Ortezin medial desteği ile Stability Plane'in birlikte aşırı düzeltme yapma riski, ayrıca medial ön ayaktaki sertliğin CM1 basıncına etkisi kaynaklarda net değil. Bu noktaları ayağınızı değerlendiren sağlık profesyoneliyle konuşun."
+   ]
+  },
+  {
+   "requested_name": "ASICS GEL-Kayano 32 (2E/4E)",
+   "current_model_name": "ASICS GEL-KAYANO 33",
+   "version_notes_tr": "Talep edilen GEL-KAYANO 32, ASICS EMEA basın bültenine göre 1 Haziran 2025'te dünya genelinde satışa çıktı. Ekim 2026 itibarıyla güncel model GEL-KAYANO 33. ABD çıkışı 1 Haziran 2026, Avustralya çıkışı 7 Temmuz 2026; AB'de liste fiyatı yaklaşık 200 €. Yani Kayano 32 artık bir önceki nesil. Avrupa'da hâlâ indirimli stok var (2E için örneğin 159,99 €), ancak ASICS Avustralya 4E Extra Wide versiyonu \"discontinued\" olarak işaretlemiş.\n\nKayano 32'nin 31'e göre getirdikleri:\n- Drop 10 mm'den 8 mm'ye indi (Kayano serisinde ilk kez 8 mm).\n- Ön ayağa yaklaşık 2 mm ek FF BLAST PLUS köpük eklendi.\n- Topuk geometrisi yenilendi, geçiş daha yumuşak.\n- Yeniden engineered stretch-knit saya kullanıldı; 30/31'e göre daha sıkı oturuyor.\n- 4D GUIDANCE SYSTEM ve Rearfoot PureGEL korundu.\n\nGEL-KAYANO 33'te değişenler:\n- 4D GUIDANCE SYSTEM kaldırıldı, yerine geometriye dayalı FLUIDSUPPORT geldi.\n- Tek katlı FF BLAST PLUS yerine çift katlı ara taban var: üstte FF BLAST MAX, altta FF BLAST PLUS.\n- PureGEL, OrthoLite tabanlık ve HYBRID ASICSGRIP dış taban korundu.\n- Saya yeniden tasarlandı; daha nefes alabilir engineered mesh.\n- Drop yine 8 mm, ağırlık yaklaşık 296–298 g.\n- Stack değerleri kaynağa göre farklı: Doctors of Running 39/31 mm, RoadTrailRun 40/32 mm. RunRepeat laboratuvarı topuğu 36,8 mm ölçmüş, yani 32'ye (39,9 mm) göre daha alçak.\n- Erkek genişlikleri D, 2E ve 4E (4E kodu 1011C229).\n\nYorumcular 33 konusunda ikiye ayrılıyor. Doctors of Running 33'ü 32'den daha sert buluyor ve topuk geçişini \"hantal\" diye tanımlıyor; desteği de daha \"doğal\" bulup önceki hayranları böleceğini söylüyor. Novelship'e göre belirgin overpronasyon düzeltmesi isteyen için 32, hafif pronasyon ve yürüyüş için 33 daha uygun. Kullanıcının profilinde belirgin overpronasyon ve dengesiz topuk teması olduğu için 32 hâlâ çok mantıklı bir aday. Ancak beden ve genişlik stoku azalıyor; 33 de mutlaka mağazada denenmeli.",
+   "technologies": [
+    {
+     "name": "4D GUIDANCE SYSTEM™",
+     "official_description": "ASICS'e göre aşırı yük altında sezgisel tepki veren dinamik bir 'pod'; koşu boyunca adaptif stabilite ve konfor sağlar, ayağı inişten itişe kadar ileri yönlendirir.",
+     "what_it_does_tr": "İç kemer altındaki özel köpük modülü. Ayak içe doğru fazla çöktüğünde (overpronasyon) daha çok direnç gösterir, normal adımda ise fark edilmez. Klasik sert medial post yerine 'gerektiğinde devreye giren' bir destek sunar.",
+     "location": "midsole_medial",
+     "source_url": "https://www.asics.com/sg/en-sg/gel-kayano-32/p/1011C052-003.html",
+     "confidence": "official"
+    },
+    {
+     "name": "FF BLAST™ PLUS",
+     "official_description": "Bulut gibi yastıklamayı reaktif bir sürüş hissiyle birleştiren, orijinal FF BLAST'tan daha hafif ara taban köpüğü. Bazı perakendeciler bu modeli FF BLAST PLUS ECO (yaklaşık %20 biyo-bazlı) olarak listeliyor.",
+     "what_it_does_tr": "Ara tabanın ana gövdesini oluşturan yumuşak ve hafif köpük. Uzun yürüyüşlerde darbeyi emer; 32'de ön ayağa eklenen yaklaşık 2 mm ekstra köpükle ön ayak yastığı artırıldı.",
+     "location": "midsole_full",
+     "source_url": "https://www.asics.com/sg/en-sg/gel-kayano-32/p/1011C052-003.html",
+     "confidence": "official"
+    },
+    {
+     "name": "PureGEL™ (Rearfoot PureGEL technology)",
+     "official_description": "GEL teknolojisinin daha yumuşak, güncellenmiş versiyonu; ASICS'e göre standart GEL'den yaklaşık %65 daha yumuşak, topukta gelişmiş şok emilimi sağlar.",
+     "what_it_does_tr": "Topuk altına gömülü jel. İlk temas anındaki sert darbeyi yumuşatır, topuk kemiğine ve dize giden şoku azaltır. Dengesiz topuk teması olan biri için konforu artırır.",
+     "location": "midsole_heel",
+     "source_url": "https://www.asics.com/sg/en-sg/gel-kayano-32/p/1011C052-003.html",
+     "confidence": "official"
+    },
+    {
+     "name": "HYBRID ASICSGRIP™ outsole",
+     "official_description": "ASICSGRIP kauçuğunu AHARPLUS aşınma dayanımlı kauçukla birleştiren hibrit dış taban.",
+     "what_it_does_tr": "Islak ve kuru zeminde tutuş için yumuşak ASICSGRIP, aşınan bölgelerde dayanıklılık için AHARPLUS kauçuk kullanır. Doctors of Running ıslak asfaltta hafif kayma bildirmiş.",
+     "location": "outsole",
+     "source_url": "https://www.asics.com/sg/en-sg/gel-kayano-32/p/1011C052-003.html",
+     "confidence": "official"
+    },
+    {
+     "name": "OrthoLite™ X-55 sockliner (premium sockliner)",
+     "official_description": "Yastıklama performansı ve nem yönetimi sağlayan, daha serin ve kuru bir iç ortam sunan premium tabanlık.",
+     "what_it_does_tr": "Ayakkabının içindeki fabrika tabanlığı. Çıkarılabilir olduğu için yerine kişiye özel ortez konabilir; nemi uzaklaştırarak yazın terlemeyi azaltmaya yardımcı olur.",
+     "location": "insole",
+     "source_url": "https://www.asics.com/ph/en-ph/gel-kayano-32/p/1011C052-405.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Engineered stretch knit upper",
+     "official_description": "Bazı ASICS ve perakendeci sayfalarında 'engineered mesh' olarak geçiyor. Doctors of Running bunu esnek örgü saya olarak tanımlıyor; 30 ve 31'e göre ayakkabı boyunca biraz daha sıkı oturuyor.",
+     "what_it_does_tr": "Ayağı saran esnek örgü üst kısım. Ayağa uyum sağlar ama standart genişlikte normal-dar ayaklara göre kesilmiş. Geniş ön ayak ve yazın şişen ayak için 2E veya 4E versiyonu tercih edilmeli.",
+     "location": "upper",
+     "source_url": "https://www.doctorsofrunning.com/2025/05/asics-gel-kayano-32-review-2025-8mm-drop.html",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "External heel counter (dış topuk çanağı)",
+     "official_description": "İncelemelerde 'topuğu yerinde kilitleyen' arka dış topuk desteği ve köpükle sarılı, şekillendirilmiş topuk çanağı olarak tanımlanıyor; ASICS ayrıca örgü bir topuk tutamağı (knit heel tab) listeliyor.",
+     "what_it_does_tr": "Topuğu arkadan saran sert yapı. Topuğun içe ya da dışa kaçmasını sınırlar; dengesiz topuk teması ve overpronasyon için önemli bir kontrol noktası.",
+     "location": "heel_counter",
+     "source_url": "https://runnerstribe.com/shoe-reviews/the-asics-gel-kayano-32-a-softer-smarter-sharper-stability-trainer/",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Geniş taban + medial/lateral yan duvarlar (sidewalls)",
+     "official_description": "İncelemelere göre klasik medial post yok. Stabilite geniş ara taban, topuk ve orta ayakta iç ve dış yan duvarlar ve iç (kemer) tarafı daha destekli ara taban geometrisinden geliyor.",
+     "what_it_does_tr": "Ayak, köpüğün içine gömülür gibi oturur ve yan duvarlar ayağı merkezde tutar. Taban geniş olduğu için yere basış daha dengeli olur.",
+     "location": "midsole_heel",
+     "source_url": "https://www.solereview.com/asics-kayano-32-review/",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Yeni topuk geometrisi, 8 mm drop ve ek ön ayak köpüğü",
+     "official_description": "ASICS Kayano 32'de ön ayağa yaklaşık 2 mm ek köpük ekledi ('her zamankinden fazla ön ayak köpüğü'); drop 10 mm'den 8 mm'ye indi ve topuk geçişi yumuşatıldı.",
+     "what_it_does_tr": "Topuktan parmağa geçiş daha akıcı hale gelir, ön ayak altında daha kalın yastık oluşur. Bu, 1. metatars başı altındaki basıncı dağıtmaya yardımcı olabilir. Belirgin bir 'rocker' tasarımı değildir.",
+     "location": "geometry_rocker",
+     "source_url": "https://news-emea.asics.com/latest-news/feel-comfort--find-calm--asics-introduces-the-new-gel-kayano--32-shoe/s/44d391ba-1363-4c8c-a620-964a9b8f66ad",
+     "confidence": "official"
+    },
+    {
+     "name": "FLUIDSUPPORT™ (yalnızca GEL-KAYANO 33; 32'de yok)",
+     "official_description": "Her adımda değişen biyomekanik ihtiyaçlara uyum sağlayan, yürüyüş döngüsünün kilit evrelerini hedefleyen stabilite sistemi; 4D GUIDANCE SYSTEM'in yerini aldı.",
+     "what_it_does_tr": "33'te ayrı bir 'pod' yerine ara taban geometrisi ve çift katlı köpükle destek verir. Topukta daha fazla medial stabilite, ön ayakta daha merkezli bir sürüş hedefler. Bazı yorumcular bunu 32'ye göre daha 'doğal' ve daha az belirgin buluyor.",
+     "location": "midsole_full",
+     "source_url": "https://www.asics.com/ca/en-ca/gel-kayano-33-1011c167-001",
+     "confidence": "official"
+    },
+    {
+     "name": "FF BLAST™ MAX + FF BLAST™ PLUS çift katlı ara taban (yalnızca GEL-KAYANO 33)",
+     "official_description": "FF BLAST MAX, ASICS'in en enerjik ara taban köpüklerinden biri olarak tanımlanıyor; 33'te üst katmanda kullanılıyor, alt katmanda ise daha stabil FF BLAST PLUS var.",
+     "what_it_does_tr": "33'te ayağa yakın üst katman daha yumuşak ve canlı, alt katman daha dengeli. 32'de bu katman ayrımı yoktur, ara taban tek parça FF BLAST PLUS'tır.",
+     "location": "midsole_full",
+     "source_url": "https://www.asics.com/ca/en-ca/gel-kayano-33-1011c167-001",
+     "confidence": "official"
+    }
+   ],
+   "specs": {
+    "heel_stack_mm": "40 mm (Running Warehouse, Marathon Sports); RunRepeat laboratuvar ölçümü 39,9 mm",
+    "forefoot_stack_mm": "32 mm (Running Warehouse); RunRepeat laboratuvar ölçümü 30,6 mm",
+    "drop_mm": "8 mm (resmi ASICS ve Running Warehouse); RunRepeat laboratuvarı 9,3 mm ölçmüş (31'de 11,5 mm). Not: Solereview erkek modeli için 10 mm yazıyor, bu resmi veriyle çelişiyor.",
+    "weight_men": "298 g / 10,5 oz (US 9, Running Warehouse; Doctors of Running da 298 g); ASICS listelerinde yaklaşık 300 g",
+    "widths_men": [
+     "Standart (D) – stil kodu 1011C052",
+     "Wide 2E – stil kodu 1011C051 (Avrupa'da da satılıyor; sportsshoes.com 2E versiyonu 159,99 € fiyatla listeliyor)",
+     "Extra Wide 4E – stil kodu 1011C054 (ASICS Kanada ve ABD'de listeli; ASICS Avustralya'da 'discontinued'; resmi NL/AB mağazasında 4E bulunduğu doğrulanamadı)"
+    ],
+    "removable_insole": "Evet. Fabrika tabanlığı çıkarılabilir OrthoLite X-55. Kanadalı ortopedi perakendecisi Medicus 'Orthotic friendly: Yes, Removable insoles: Yes' yazıyor; Galaxus da çıkarılabilir tabanlığın ortopedik tabanlık kullanımına izin verdiğini belirtiyor. Tabanlık kalınlığı (mm) için laboratuvar verisi bulunamadı.",
+    "midsole_foam": "FF BLAST PLUS (bazı perakendecilerde FF BLAST PLUS ECO, yaklaşık %20 biyo-bazlı); kemer altında 4D GUIDANCE SYSTEM köpük modülü; topukta Rearfoot PureGEL",
+    "upper": "Engineered stretch knit (bazı listelerde engineered mesh); örgü topuk tutamağı, takviyeli dil, yansıtıcı detaylar. 30 ve 31'e göre daha sıkı/dar kalıp (Doctors of Running, The Run House).",
+    "outsole": "HYBRID ASICSGRIP (ASICSGRIP + AHARPLUS kauçuk)",
+    "spec_sources": [
+     "https://www.runningwarehouse.com/ASICS_Gel_Kayano_32/descpage-AGK32M1.html",
+     "https://runrepeat.com/asics-gel-kayano-32",
+     "https://www.doctorsofrunning.com/2025/05/asics-gel-kayano-32-review-2025-8mm-drop.html",
+     "https://www.asics.com/sg/en-sg/gel-kayano-32/p/1011C052-003.html",
+     "https://www.asics.com/ph/en-ph/gel-kayano-32/p/1011C052-405.html",
+     "https://medicus.ca/en/our-products/products/asics-gel-kayano-32-m/",
+     "https://www.galaxus.ch/en/s3/product/asics-performance-gel-kayano-32-405-running-shoes-68060021",
+     "https://www.asics.com/au/en-au/gel-kayano-32-4e-extra-wide/p/AOP_1011C054-402.html",
+     "https://www.asics.com/ca/fr-ca/gel-kayano-32-wide-1011c051-101",
+     "https://www.asics.com/ca/fr-ca/gel-kayano-32-extra-wide-1011c054-002",
+     "https://www.rtings.com/running-shoes/tools/compare/asics-gel-kayano-33-asics-gel-kayano-32/139849/81046",
+     "https://www.solereview.com/asics-kayano-32-review/",
+     "https://therunhouse.com/products/1011c051-002-2e"
+    ]
+   },
+   "distinguishing_feature_tr": "Bu beşli içinde iki şeyi birlikte sunan tek model Kayano 32. Birincisi 4D GUIDANCE SYSTEM: kemer altında, yalnızca ayak aşırı içe çöktüğünde sertleşen, yüke göre tepki veren bir medial köpük modülü. İkincisi topuk altındaki PureGEL jel yastığı. Diğerleri desteği ray, çerçeve veya geometriyle sağlıyor: Brooks GuideRails, HOKA H-Frame, New Balance Stability Plane, Saucony'nin geometri ve yan duvar yaklaşımı. Kayano 32 ise \"gerektiğinde devreye giren\" bir medial destek parçası kullanıyor. Ayrıca D/2E/4E genişlik seçenekleri var; 4E en azından ABD ve Kanada'da sunuluyor.",
+   "profile_fit_tr": {
+    "pros": [
+     "2E (Wide) ve 4E (Extra Wide) kalıplar geniş ön ayak ve yazın şişen ayak için ek hacim sağlıyor. 2E Avrupa'da da satılıyor.",
+     "Fabrika tabanlığı (OrthoLite X-55) çıkarılabiliyor; perakendeciler 'orthotic friendly' olarak listeliyor. Kişiye özel ortez yerleştirilebilir.",
+     "4D GUIDANCE SYSTEM, sert topuk çanağı ve medial/lateral yan duvarlar overpronasyonu ve dengesiz topuk temasını kontrol altına almaya yönelik. Novelship'e göre 32, 33'ten daha belirgin pronasyon kontrolü sunuyor.",
+     "Topuktaki PureGEL ve kalın FF BLAST PLUS, uzun yaz yürüyüşlerinde topuk darbesini yumuşatıyor.",
+     "Ön ayakta yaklaşık 32 mm stack ve 31'e göre +2 mm ek köpük var. Bu kalın yastık 1. metatars başı (CM1) altındaki basıncın dağılmasına yardımcı olabilir.",
+     "8 mm drop ve yenilenen topuk geometrisi, topuktan parmağa daha akıcı bir geçiş sağlıyor (Doctors of Running, Tom's Guide)."
+    ],
+    "cons": [
+     "Saya 30 ve 31'e göre daha sıkı; standart genişlik normal-dar ayaklara göre. Ortez iç hacmi daha da azaltacağı için ön ayakta sinir sıkışması riski açısından mutlaka 2E veya 4E alınmalı ve ortezle denenmeli.",
+     "Ağır bir ayakkabı (yaklaşık 298–300 g). Hava geçirgenliği ortalama (Believe in the Run: 'not very breathable'); sıcak yaz yürüyüşlerinde ayak ısınabilir.",
+     "4E versiyonun resmi NL/AB mağazasında satıldığı doğrulanamadı; ASICS Avustralya 4E'yi üretimden kaldırmış. Model 33'e geçtiği için 32'de beden ve genişlik stoku azalıyor.",
+     "Ortezin kendi medial desteği ile 4D GUIDANCE'ın desteği üst üste binebilir ve kemer altında fazla baskı hissi oluşabilir. Ortezle birlikte deneme şart.",
+     "Belirgin bir rocker yok ve RTINGS ön ayağı 'oldukça sert' buluyor. Erken topuk kalkışı ve CM1 yükü için HOKA veya New Balance'ın daha belirgin rocker'ı kadar ön ayak yükünü azaltmayabilir.",
+     "Islak asfaltta hafif kayma bildirilmiş (Doctors of Running). Hollanda'nın yağışlı ikliminde dikkat edilmeli.",
+     "RunRepeat laboratuvarı drop'u 9,3 mm ölçmüş; ilan edilen 8 mm'den biraz yüksek."
+    ]
+   },
+   "official_product_url": "https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html",
+   "official_nl_or_eu_url": "https://www.asics.com/de/en-de/gel-kayano-32-campaign",
+   "official_videos": [
+    {
+     "title": "ASICS Running – GEL-KAYANO 32 (premium stability & plush cushioning, 4D GUIDANCE SYSTEM)",
+     "url": "https://www.youtube.com/watch?v=ajkRWUPkv6c",
+     "channel": "ASICS Running",
+     "is_brand_official": true
+    },
+    {
+     "title": "ASICS Running – GEL-KAYANO 30 4D GUIDANCE SYSTEM tanıtımı (Kayano 32'deki aynı sistemi anlatıyor)",
+     "url": "https://www.youtube.com/watch?v=zZBJhhc2U2I",
+     "channel": "ASICS Running",
+     "is_brand_official": true
+    },
+    {
+     "title": "GEL-KAYANO 33 Tech Video｜ASICS RUNNING｜アシックス (FLUIDSUPPORT, halef model)",
+     "url": "https://www.youtube.com/watch?v=T6hcgSGESQo",
+     "channel": "ASICS RUNNING (Japonya)",
+     "is_brand_official": true
+    },
+    {
+     "title": "ASICS Running – GEL-KAYANO 33 FLUIDSUPPORT / çift katlı yastıklama",
+     "url": "https://www.youtube.com/watch?v=yP8rBQFxbkw",
+     "channel": "ASICS Running (arama başlığından; kanal doğrudan doğrulanamadı)",
+     "is_brand_official": true
+    },
+    {
+     "title": "Asics Gel-Kayano 32 Review - In-Depth by a Foot Specialist",
+     "url": "https://m.youtube.com/watch?v=d3cxr1hbLhA",
+     "channel": "unknown",
+     "is_brand_official": false
+    },
+    {
+     "title": "ASICS Gel Kayano 33 vs 32",
+     "url": "https://www.youtube.com/watch?v=MHXRRoEICQs",
+     "channel": "unknown",
+     "is_brand_official": false
+    }
+   ],
+   "image_urls": [],
+   "price_eur": "AB liste fiyatı 200 € (i-Run; Kayano 33 de AB'de 200 €). Avrupa'daki indirimli fiyatlar: sportsshoes.com 2E erkek 159,99 € (RRP 199,99 €), BMC Sports (İrlanda) 140 € (190 € yerine). Decathlon.nl pazar yeri satıcılarında yaklaşık 216–231 €. Resmi asics.com/nl fiyatı görülemedi.",
+   "release_year": "2025 (1 Haziran 2025; halefi GEL-KAYANO 33 Haziran 2026)",
+   "support_type": "Stabilite (adaptif / orta düzey destek, overpronasyon için; klasik medial post yok)",
+   "caveats_tr": [
+    "Bu oturumda WebFetch hiçbir siteye bağlanamadı (asics.com, runrepeat.com, doctorsofrunning.com, roadtrailrun.com için DNS/proxy hatası). Proxy, images.asics.com ve youtube.com'u da engelledi. Tüm bilgiler WebSearch sonuç özetlerinden alındı; sayfalar doğrudan açılıp doğrulanamadı.",
+    "Resmi ASICS görsel dosyası (images.asics.com) URL'si arama sonuçlarında hiç görünmediği için image_urls boş bırakıldı; tahmini URL üretilmedi. Resmi galeri ürün sayfalarında var: ABD sayfasında 9, İngiltere sayfasında 8 görsel. https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html ve https://www.asics.com/gb/en-gb/gel-kayano-32/p/1011C052-001.html adreslerinden lateral, medial, üst, taban ve topuk açılarıyla elle alınabilir. 4E için: https://www.asics.com/ca/fr-ca/gel-kayano-32-extra-wide-1011c054-002",
+    "Resmi asics.com/nl Kayano 32 sayfası bulunamadı. AB için ASICS Almanya kampanya sayfası verildi; Avrupa'daki resmi ürün sayfası örneği ASICS UK: https://www.asics.com/gb/en-gb/gel-kayano-32/p/1011C052-001.html",
+    "Video kanal adları arama başlıklarından çıkarıldı. ajkRWUPkv6c ve yP8rBQFxbkw 'ASICS Running' başlığıyla görüldü ama kanal sayfası açılıp doğrulanamadı. zZBJhhc2U2I Kayano 30 videosu; yalnızca 4D GUIDANCE sistemini açıklamak için eklendi.",
+    "Ara taban adı kaynağa göre farklı: ASICS bölgesel sayfaları 'FF BLAST PLUS', bazı perakendeciler 'FF BLAST PLUS ECO' diyor.",
+    "Stack ve drop değerleri kaynağa göre değişiyor: Running Warehouse 40/32 mm ve 8 mm, RunRepeat 39,9/30,6 mm ve 9,3 mm, RTINGS 41,7/32,6 mm ve 9,1 mm. Solereview erkek modeli için 10 mm drop yazıyor; bu resmi 8 mm ile çelişiyor.",
+    "Kalıp konusunda yorumcular çelişiyor: Doctors of Running ve The Run House 'daha sıkı/dar' diyor, The Run Testers parmak bölgesini 'ferah' buluyor. Ortezle birlikte mağazada deneme şiddetle önerilir.",
+    "Model halefine geçtiği için 2E/4E beden stoku hızla azalabilir. 33'ün 2E/4E versiyonları (4E kodu 1011C229) alternatif, ancak destek karakteri değişti (FLUIDSUPPORT)."
+   ]
+  },
+  {
+   "requested_name": "HOKA Gaviota 6 Wide",
+   "current_model_name": "HOKA Gaviota 6 Wide (erkek, 2E). Aynı modelin diğer genişlikleri: Gaviota 6 Regular (D, stil 1171932) ve Gaviota 6 X-Wide (4E, stil 1171936). Wide stil numarası: 1171934. HOKA NL sitesinde \"Heren Gaviota 6 – Breed\" ve \"X-Breed\" olarak geçiyor.",
+   "release_year": "2026 (ABD'de 1 Ocak 2026'da çıktı; bazı bölgelerde Wide sürümün çıkışı 2026 yazına kaydı)",
+   "support_type": "Stabilite, yüksek destek seviyesi ve maksimum yastıklama. Doctors of Running \"neredeyse hareket kontrol (borderline motion control)\" diyor. HOKA'nın kendi sınıflandırması: Stable / Plush, Everyday Run / Walk.",
+   "version_notes_tr": "İstenen \"Gaviota 6\" sürümü Ekim 2026 itibarıyla HOKA'nın en güncel Gaviota modeli. Ocak 2026'da çıktı ve Gaviota 5'in yerini aldı (RTINGS de bu geçişi doğruluyor). Gaviota 7 için herhangi bir duyuru ya da ön inceleme bulamadım; Fleet Feet'te URL'sinde \"gaviota-7\" geçen sayfa aslında eski Gaviota 2'yi anlatıyor. Yani kullanıcının adını verdiği model güncel, eskimiş değil.\n\nGaviota 5'e göre değişenler (birden çok kaynak):\n1) Ağırlık yaklaşık 27 g düştü: US M9'da Gaviota 5 yaklaşık 310 g, Gaviota 6 283 g.\n2) \"Enhanced H-Frame\": yenilenmiş, çift yoğunluklu H biçimli stabilite çerçevesi. Doctors of Running bunu \"tam boy, güçlü medial stabilite\" olarak tanımlıyor.\n3) Üst kısım: daha teknik bir engineered mesh ve iç ghillie bağcık sistemi geldi, yaka daha yumuşak (plush), topuk kilitlenmesi iyileştirildi. Gaviota 5'teki iç tarafta yarı körüklü dil kaldırıldı.\n4) Dış taban: biraz daha fazla kauçuk kaplama var, SATRA tutuş testi 0,46'dan 0,65'e çıktı (RunRepeat).\n5) Stack biraz düştü; markanın verdiği değerler 39/33 mm, drop 6 mm.\n6) Yeni X-Wide (4E) seçeneği eklendi (Tradehome).\n7) Hissiyat konusunda kaynaklar çelişiyor: Flawless Shoe Reviews \"daha sert ve daha stabil\" diyor, RunRepeat ise köpüğü Gaviota 5'ten daha yumuşak ölçtü (32,6 HA).\n8) Flawless'a göre ön ayak rocker'ı Gaviota 5'e göre daha düz. Gaviota 5'in resmî sayfasında \"Early Stage Meta-Rocker\" yazıyordu; Gaviota 6'nın resmî sayfasında Meta-Rocker geçmiyor.\n\nNot: Bazı Avrupa mağazaları (shop4runners) teknolojiyi \"J-Frame\" diye yazıyor. J-Frame, Gaviota 1–4'ün eski sistemiydi; Gaviota 5 ve 6'da doğru isim H-Frame.",
+   "technologies": [
+    {
+     "name": "H-Frame™ (Enhanced H-Frame)",
+     "official_description": "HOKA: Gaviota 6, H-Frame teknolojisini içerir; aşırı içe yuvarlanmayı (overpronasyon) adımı fazla düzeltmeden önlemek için tasarlandı. Sert/rahatsız edici malzemeler kullanmadan stabilite sağlayan, orta tabanla kenetlenen bir çerçeve; geleneksel medial post yok.",
+     "what_it_does_tr": "Orta tabanın içine gömülü, H harfi şeklinde, daha sert köpükten bir çerçeve. Ayağın iç ve dış kenarını sarıyor; ayak içe çökmeye başladığında onu nötre geri yönlendiriyor. Topuk temasından itmeye kadar tüm adım boyunca çalışıyor.",
+     "location": "midsole_full",
+     "source_url": "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Compression-molded EVA (CMEVA) midsole",
+     "official_description": "HOKA metni orta tabanı 'compression-molded foam' olarak tanımlıyor; HOKA Tayland sayfası EVA köpük diyor. RunRepeat bunun eski tip CMEVA olduğunu, süperkritik bir köpük olmadığını doğruluyor.",
+     "what_it_does_tr": "Kalın, maksimum yastıklamalı orta taban; darbeyi sönümlüyor ve uzun yürüyüşte koruma sağlıyor. Ancak eski nesil bir köpük olduğu için enerji geri dönüşü düşük (%45,4) ve hissiyat biraz sert, 'ölü' olabilir.",
+     "location": "midsole_full",
+     "source_url": "https://runrepeat.com/hoka-gaviota-6",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Internal ghillie lacing system",
+     "official_description": "HOKA: Engineered mesh ve iç ghillie bağcık sistemi, daha konforlu olması için ayarlanabilir destek sunar; güvenli, kilitli bir oturuş sağlar.",
+     "what_it_does_tr": "Bağcıklar üst kumaşın içindeki ilmeklerden geçiyor. Orta ayak, basınç noktası oluşturmadan sarılıyor ve ayak tabanın üzerinde kaymıyor. Özel tabanlık kullanırken orta ayak kilitlenmesine yardım ediyor.",
+     "location": "lacing",
+     "source_url": "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Engineered mesh upper (elevated mesh upper)",
+     "official_description": "HOKA: Nefes alabilen engineered mesh üst; daha iyi hava geçirgenliği için 'elevated mesh upper'.",
+     "what_it_does_tr": "Hava geçiren, bölgesel olarak esneyen örgü üst kısım; yaz yürüyüşlerinde ayağın serin kalmasına yardım ediyor. Bazı testçiler üstün hacmini düşük, burun kısmını sığ buluyor.",
+     "location": "upper",
+     "source_url": "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Comfort collar (plusher collar)",
+     "official_description": "HOKA: Daha dolgulu (plush) bir yaka ile rahat, kilitli bir oturuş; topuk çekme kayışı (heel pull webbing) ve yansıtıcı detaylar.",
+     "what_it_does_tr": "Bilek çevresindeki dolgulu yaka topuğu yuvaya oturtuyor ve topuğun erken kalkmasıyla oluşan sürtünmeyi azaltıyor.",
+     "location": "collar",
+     "source_url": "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Abrasion-resistant rubber outsole",
+     "official_description": "HOKA metni: Aşınmaya dayanıklı kauçuk dış taban, farklı zeminlerde dayanıklı tutuş sağlar. RunRepeat'e göre Gaviota 5'ten biraz daha fazla kauçuk kaplama var ve SATRA tutuş değeri 0,65.",
+     "what_it_does_tr": "Çok aşınan noktalara yerleştirilmiş kauçuk pedler tabanı koruyor ve ıslak zeminde tutuşu artırıyor. İçe basan (pronasyonlu) kullanıcılarda tipik olan iç kenar aşınmasına karşı ekstra koruma sağlıyor. Hollanda'nın yağışlı yollarında işe yarar.",
+     "location": "outsole",
+     "source_url": "https://runrepeat.com/hoka-gaviota-6",
+     "confidence": "official"
+    },
+    {
+     "name": "Late Stage Meta-Rocker (doğrulanamadı)",
+     "official_description": "Bir perakendeci ürün metni (Confluence Running) 'Late Stage Meta-Rocker Geometry' diyor. HOKA'nın resmî Gaviota 6 sayfasında Meta-Rocker geçmiyor. Testçiler uzun ve yuvarlatılmış (rocker) bir sürüş tarif ediyor; Flawless Shoe Reviews ön ayak rocker'ının v5'ten daha düz olduğunu yazıyor.",
+     "what_it_does_tr": "Tabanın ön kısmı kavisli olduğu için ayak parmaklarının fazla bükülmeden ileri yuvarlanmasına yardım ediyor. Sert ön ayakla (eğilmek için 19,0 N kuvvet gerekiyor) birlikte metatars başlarındaki bükülme stresini azaltabilir. Ancak rocker'ın v5'ten daha düz olduğu bildiriliyor.",
+     "location": "geometry_rocker",
+     "source_url": "https://www.confluencerunning.com/products/hoka-gaviota-6-mens-black-black",
+     "confidence": "uncertain"
+    },
+    {
+     "name": "Çıkarılabilir iç taban (sockliner; markanın özel bir adı yok)",
+     "official_description": "RunRepeat laboratuvarı: iç taban 4,8 mm kalınlığında (ortalama 4,4 mm) ve çıkarılabiliyor. i-Run da özellikler arasında 'removable insole' sayıyor.",
+     "what_it_does_tr": "Fabrika tabanlığı çıkarılınca yerine özel ortez (custom orthotic) konabiliyor. Yaklaşık 4,8 mm'lik bir hacim boşalıyor.",
+     "location": "insole",
+     "source_url": "https://runrepeat.com/hoka-gaviota-6",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Topuk sayacı (heel counter; markanın özel bir adı yok)",
+     "official_description": "RunRepeat topuk sayacı sertliğine 5 üzerinden 4 veriyor (ortalama 3). Testçiler topuk kilitlenmesinin iyileştirildiğini belirtiyor.",
+     "what_it_does_tr": "Topuğu arkadan saran sert kap, topuğun yere basarken yana kaymasını sınırlıyor. Kararsız topuk teması için önemli.",
+     "location": "heel_counter",
+     "source_url": "https://runrepeat.com/hoka-gaviota-6",
+     "confidence": "reputable_review"
+    }
+   ],
+   "specs": {
+    "heel_stack_mm": "39 mm (HOKA verisi; Running Warehouse ve Doctors of Running). Laboratuvar ölçümleri: RunRepeat 36,0 mm, RTINGS 37,6 mm",
+    "forefoot_stack_mm": "33 mm (HOKA verisi). RunRepeat ölçümü: 28,7 mm",
+    "drop_mm": "6 mm (HOKA resmî). Ölçülen: RunRepeat 7,3 mm, RTINGS 7,6 mm",
+    "weight_men": "283 g (US M9, Running Warehouse ve Doctors of Running). HOKA US resmî: 10,25 oz ≈ 291 g. HOKA NL/EU resmî: 291 g. Believe in the Run: 289 g (US M10). RTINGS ölçümü: 279,7 g. Wide sürüm için HOKA Tayland: 290,6 g",
+    "widths_men": [
+     "Regular (D), stil 1171932",
+     "Wide (2E), stil 1171934 (NL: 'Breed')",
+     "X-Wide (4E), stil 1171936 (NL: 'X-Breed')"
+    ],
+    "removable_insole": "Evet. RunRepeat laboratuvar incelemesine göre iç taban çıkarılabiliyor ve 4,8 mm kalınlığında; i-Run da 'removable insole' diyor. Shoe is APMA (Amerikan Podiatri Derneği) onaylı. Doctors of Running'in ikinci testçisi yan duvar ve iç tabanın orta ayakta hafifçe yukarı kabardığını belirtiyor; ortez kullanacaklar için önemli. Ortezle yapılmış bir test bulamadım.",
+    "midsole_foam": "Compression-molded EVA (CMEVA), içine gömülü çift yoğunluklu Enhanced H-Frame. Süperkritik köpük değil. RunRepeat: 32,6 HA yumuşaklık; topukta 122 SA şok emilimi (ortalama 131); enerji geri dönüşü %45,4 (ortalama %58,7)",
+    "upper": "Nefes alan engineered mesh ('elevated mesh upper'), iç ghillie bağcık sistemi, dolgulu comfort collar, topuk çekme kayışı, yansıtıcı detaylar. RunRepeat: burun kısmı geniş (başparmak bölgesinde 76,7 mm, ortalama 73,3 mm). RTINGS ve Doctors of Running: burun sığ, üst hacmi düşük.",
+    "outsole": "Aşınmaya dayanıklı kauçuk pedler ve açıkta kalan köpük bölgeler. Kauçuk kaplama v5'ten biraz fazla; SATRA TM144 tutuş değeri 0,65 (v5'te 0,46). Burulma sertliği 17,7 Nm (sert); eğilmek için gereken kuvvet 19,0 N (sert ön ayak). Kaynak: RunRepeat",
+    "spec_sources": [
+     "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+     "https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html",
+     "https://www.hoka.com/nl/nl/brede-pasvorm-heren/",
+     "https://hoka.co.th/en/products/1171934-bwht-gaviota-6-wide-men",
+     "https://www.runningwarehouse.com/HOKA_Gaviota_6/descpage-HGAVM4.html",
+     "https://runrepeat.com/hoka-gaviota-6",
+     "https://www.doctorsofrunning.com/2026/01/hoka-gaviota-6-review-2026.html",
+     "https://believeintherun.com/shoe-reviews/hoka-gaviota-6-review/",
+     "https://www.rtings.com/running-shoes/reviews/hoka/gaviota-6",
+     "https://flawlessshoereviews.com/hoka-shoes/hoka-gaviota-6-review/",
+     "https://prrunandwalk.com/collections/mens-hoka-gaviota-6-extra-wide-4e",
+     "https://www.i-run.com/man/shoes/road-trail/hoka-one-one/Gaviota-6-Wide_fiche_146548.html"
+    ]
+   },
+   "distinguishing_feature_tr": "Beş ayakkabı içinde en \"düzeltici\" olan model: H-Frame, ayağın hem iç hem dış kenarını tam boy saran sert bir köpük çerçevesi. HOKA'nın çok geniş, maksimum yükseklikteki platformuyla birleşince \"neredeyse hareket kontrol\" seviyesinde stabilite veriyor. Burulma sertliği (17,7 Nm) ve ön ayak sertliği (19 N) de çok yüksek. Kayano 32'nin 4D Guidance'ı, 860 v14'ün Stability Plane'i, Glycerin GTS'in GuideRails'i ve Hurricane'in yaklaşımı daha yumuşak ve daha doğal bir yönlendirme sunuyor; Gaviota 6 ise en katı ve en sabit platformu veriyor. Bunun bedeli, setteki en eski teknoloji köpük (CMEVA) ve en düşük enerji geri dönüşü.",
+   "profile_fit_tr": {
+    "pros": [
+     "Kararsız topuk teması ve overpronasyon için çok güçlü: tam boy H-Frame, geniş taban ve sert topuk sayacı (RunRepeat 4/5) var. RTINGS yanal stabiliteye 9,3 veriyor.",
+     "Geniş ön ayak için gerçek seçenekler var: Wide (2E) ve X-Wide (4E). İkisi de hoka.com/nl'de 'Breed' ve 'X-Breed' olarak €180'a listeleniyor. RunRepeat burun kısmını ortalamadan geniş ölçtü (başparmakta 76,7 mm).",
+     "Fabrika iç tabanı çıkarılabiliyor (4,8 mm). Yerine özel ortez konabiliyor; ayakkabı APMA onaylı.",
+     "Sert ön ayak (19 N) ve rocker'lı sürüş, parmak eklemlerinin bükülmesini azaltıyor. Markanın verdiği 33 mm'lik kalın ön ayak yastığı, 1. metatars başı (CM1) altındaki basınç ve sinir sıkışması riski için koruyucu olabilir.",
+     "Doctors of Running bu modeli 'gün boyu yürüme ve ayakta durma için çok stabil bir ayakkabı' olarak öneriyor. Uzun yaz yürüyüşlerine ve günlük kullanıma uygun.",
+     "Dış tabandaki kauçuk artırıldı, ıslak zeminde tutuş iyileşti (SATRA 0,65). Hollanda'daki yağışlı yollar ve bisiklet yolları için avantaj.",
+     "6 mm'lik ılımlı drop, topuğun erken kalkmasını aşırı zorlamadan geçişi destekliyor."
+    ],
+    "cons": [
+     "Üst hacmi düşük, burun kısmı sığ (RTINGS, Doctors of Running). Özel ortez ekleyince üstte yer daralabilir; bu da ön ayak sinir sıkışması riskini artırabilir. Mutlaka ortezle denenmeli; gerekirse X-Wide (4E) düşünülmeli.",
+     "Doctors of Running'e göre iç taban ve yan duvar orta ayakta hafifçe kabarıyor. Ortezin kemer kısmıyla çakışabilir.",
+     "Flawless Shoe Reviews ön ayak rocker'ının v5'ten daha düz olduğunu, bu yüzden başparmak eklemini rahatlatmada daha az etkili olduğunu yazıyor. CM1 basıncı için önemli bir dezavantaj. Bir kullanıcı da burnun v5'ten dar olduğunu söylüyor.",
+     "Köpük eski nesil CMEVA: enerji geri dönüşü düşük (%45,4), şok emilimi ortalamanın altında (122 SA). Hissiyat sert ve 'ölü' olabilir; uzun yürüyüşlerde ayak yorulabilir, koşuda canlılık beklenmemeli.",
+     "RTINGS topuğun platformun geri kalanından daha yumuşak ve daha az stabil olduğunu, bir testçi de topuğun ilk başta hantal hissettirdiğini söylüyor. Topuk kararsızlığı olan biri için denenmesi gereken bir nokta.",
+     "Çok güçlü düzeltme yapan bu şasi, özel ortezle birlikte 'çift düzeltme' yaratabilir. Ortezi hazırlayan uzmana danışılmalı.",
+     "Ayakkabı yüksek ve hacimli. Ortez ayağı biraz daha yükseltir; görünüm ve yanal hissiyat herkese uymayabilir."
+    ]
+   },
+   "official_product_url": "https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+   "official_nl_or_eu_url": "https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html (Breed/X-Breed listesi: https://www.hoka.com/nl/nl/brede-pasvorm-heren/)",
+   "price_eur": "€180 (hoka.com/nl: Gaviota 6, Breed ve X-Breed). HOKA Portekiz sayfası €185 gösteriyor. Mağazalarda Wide sürüm için görülen fiyatlar: 21run €152,95 (tavsiye edilen fiyat €179,95), Outnorth €144, i-Run €180",
+   "official_videos": [
+    {
+     "title": "Hoka Gaviota 6 review: This Max-Cushion Stability Shoe Hits The Spot",
+     "url": "https://www.youtube.com/watch?v=JKrmqyLOkrg",
+     "channel": "bilinmiyor (bağımsız incelemeci)",
+     "is_brand_official": false
+    },
+    {
+     "title": "HOKA Gaviota 6 Shoe Review! / Big Difference from the Gaviota 5?!",
+     "url": "https://www.youtube.com/watch?v=eTqjBZ08iWw",
+     "channel": "bilinmiyor (bağımsız incelemeci)",
+     "is_brand_official": false
+    },
+    {
+     "title": "Hoka Gaviota 6 Real World Review",
+     "url": "https://www.youtube.com/watch?v=9pPtyTBNXJM",
+     "channel": "bilinmiyor (bağımsız incelemeci)",
+     "is_brand_official": false
+    }
+   ],
+   "image_urls": [],
+   "caveats_tr": [
+    "Bu oturumda WebFetch hiçbir siteye bağlanamadı (DNS hatası). hoka.com'a proxy üzerinden erişim de politika gereği engellendi (403). Bu yüzden tüm bilgiler WebSearch özetlerinden ve arama sonuçlarındaki URL'lerden geliyor; resmî sayfaların HTML'ini doğrudan okuyamadım.",
+    "Resmî görsel dosya URL'lerinin hiçbirini (HOKA'nın dms.deckers.com CDN'i dahil) kendim göremedim. Uydurmamak için image_urls listesini boş bıraktım. Görseller resmî ürün sayfalarında var: hoka.com/en/us/.../1171932.html ve hoka.com/nl/nl/heren-road/gaviota-6/1171932.html; Wide için hoka.co.th/en/products/1171934-bwht-gaviota-6-wide-men.",
+    "HOKA'nın resmî YouTube kanalında Gaviota 6'ya özel bir video bulamadım. Listelenen videolar bağımsız incelemecilere ait; kanal adlarını doğrulayamadım.",
+    "Late Stage Meta-Rocker yalnızca bir perakendecinin ürün metninde geçiyor, HOKA'nın resmî sayfasında yok. Bu yüzden 'uncertain' olarak işaretledim.",
+    "Bazı Avrupa mağazaları (shop4runners) teknolojiyi yanlışlıkla 'J-Frame' olarak yazıyor ve ağırlığı 310–326 g, drop'u 5 mm veriyor. Bu değerler eski Gaviota sürümlerinden kalma ya da hatalı; resmî drop 6 mm.",
+    "Ağırlık ve stack değerleri kaynağa göre değişiyor. Laboratuvarlar (RunRepeat, RTINGS) topuk stack'ini markanın verdiği 39 mm'den düşük (36–37,6 mm), drop'u ise yüksek (7,3–7,6 mm) ölçtü.",
+    "Testçiler burun genişliği konusunda çelişiyor: RunRepeat ve Doctors of Running geniş diyor; RTINGS burnun sığ olduğunu, Flawless ise ön ayağın hafif sivrildiğini söylüyor. Özel ortezle mağazada (Wide ve X-Wide) denemek şart.",
+    "NL fiyatı (€180) HOKA NL sayfasının arama özetinden alındı. Güncel stok ve kampanyalar sitede ayrıca kontrol edilmeli."
+   ]
+  },
+  {
+   "requested_name": "Brooks Glycerin GTS",
+   "current_model_name": "Brooks Glycerin GTS 23",
+   "version_notes_tr": "Kullanıcı modeli numarasız (\"Glycerin GTS\") yazmış. Ekim 2026 itibarıyla güncel sürüm Glycerin GTS 23. Ana çıkış tarihi 3 Şubat 2026, fiyatı ABD'de 180 $, AB'de 180 €. Glycerin GTS 24 için hiçbir duyuru ya da sızıntı bulamadım. Brooks'un Glycerin serisi sayfasında Glycerin 23, Glycerin GTS 23, Glycerin Max 2 ve Glycerin Flex listeleniyor. GTS 22'ye (2025) göre değişenler: (1) Ön ayağa 2 mm daha DNA TUNED köpük eklenmiş, böylece topuk-burun farkı (drop) 10 mm'den 8 mm'ye inmiş. Topuk yaklaşık 38 mm'de kalmış. (2) Saya yeni: 'enhanced triple jacquard warp knit', yaklaşık %60 geri dönüştürülmüş malzeme. (3) GuideRails korunmuş. Doctors of Running'e göre iç taraftaki (medial) ray önceki sürümlerdeki kadar 'post' gibi değil, yine de ayakkabı boyunca belirgin bir kontrol hissi veriyor. (4) DNA TUNED köpük GTS 22'de gelmişti, GTS 23 aynı köpüğü kullanıyor. DNA LOFT v3 ise GTS 21 ve öncesine ait. (5) Ağırlık biraz artmış: bir karşılaştırmada US 12 numarada 352 g'dan 369 g'a çıkmış. Not: Bazı AB satıcıları (ör. shop4runners.eu) hâlâ eski bilgiyi gösteriyor (10 mm drop, DNA LOFT v3). Brooks'un ABD sayfasındaki resmi değer 8 mm.",
+   "release_year": "2026 (ana çıkış 3 Şubat 2026; ek renkler Haziran 2026)",
+   "support_type": "Stabilite. Brooks'un 'Support' sınıfında, GuideRails destekli. Doctors of Running'e göre maksimum yastıklı, orta düzey stabilite sunan bir antrenman ayakkabısı.",
+   "technologies": [
+    {
+     "name": "GuideRails® (GuideRails Technology System / holistik destek sistemi)",
+     "official_description": "Brooks'a göre topuğun iki yanında birer sert köpük parça var. İç taraftaki parça ayağın içe yuvarlanmasını azaltıyor. Dış taraftaki parça hem daha sert hem daha yüksek ve topuğun dışa kaymasını azaltıyor. Amaç, aşırı kaval kemiği ve topuk rotasyonunu sınırlayarak dizin doğal hareketini güvenli aralıkta tutmak (diz ile ayak bileği arasındaki 'coupling' bağı).",
+     "what_it_does_tr": "Topuğun iki yanında 'korkuluk' gibi çalışır. Ayağı zorla düzeltmez, ayak normal yolundan saptığında aşırı içe basmayı ve topuk yalpalamasını sınırlar. Böylece dizin doğru hatta kalmasına yardım eder.",
+     "location": "midsole_heel",
+     "source_url": "https://www.brooksrunning.com/en_nl/blog/research-innovation/the-science-behind-guiderails-technology.html",
+     "confidence": "official"
+    },
+    {
+     "name": "DNA TUNED",
+     "official_description": "Azotla şişirilmiş, süperkritik yeni nesil EVA köpük. Çift hücre yapısı var: topukta iri hücreler yumuşak iniş için, ön ayakta küçük hücreler daha tepkili bir itiş için. GTS 23'te ön ayağa 2 mm daha köpük eklendi.",
+     "what_it_does_tr": "Tüm orta tabanı oluşturan köpük. Topukta daha yumuşak, ön ayakta daha canlı ve biraz daha sıkı bir his verir. Ön ayaktaki ek 2 mm, metatars başlarının altında daha fazla koruma sağlar.",
+     "location": "midsole_full",
+     "source_url": "https://blog.brooksrunning.com.au/running-you-through-the-updates-to-the-glycerin-23-glycerin-gts-23-and-the-glycerin-max-2/",
+     "confidence": "official"
+    },
+    {
+     "name": "RoadTack Rubber",
+     "official_description": "Ön ayakta ve topuğun iç tarafında kullanılan dış taban kauçuğu. Brooks'a göre önceki kauçuklardan %50 daha fazla aşınmaya dayanıklı, %20 geri dönüştürülmüş içerik barındırıyor ve aynı tutuşu, aynı geri tepmeyi koruyor.",
+     "what_it_does_tr": "En çok aşınan bölgelerde, yani ön ayakta ve içe basan topuk kenarında, uzun ömürlü ve hafif bir tutuş katmanı sağlar. Islak ve kuru zeminde güvenli tutuş sunar.",
+     "location": "outsole",
+     "source_url": "https://blog.brooksrunning.com.au/running-you-through-the-updates-to-the-glycerin-23-glycerin-gts-23-and-the-glycerin-max-2/",
+     "confidence": "official"
+    },
+    {
+     "name": "Segmented Crash Pad",
+     "official_description": "Topuğun dış tarafına tümleşik bir dizi şok emici bölme. Farklı topuk basma biçimlerine uyum sağlaması amaçlanıyor.",
+     "what_it_does_tr": "Topuğun dış kenarından yere değildiğinde darbeyi bölmeler halinde emer. İnişten ön ayağa geçişi yumuşatır ve kararsız topuk temasında daha kontrollü bir geçiş sağlar.",
+     "location": "midsole_lateral",
+     "source_url": "https://blog.brooksrunning.com.au/running-you-through-the-updates-to-the-glycerin-23-glycerin-gts-23-and-the-glycerin-max-2/",
+     "confidence": "official"
+    },
+    {
+     "name": "Triple jacquard warp knit upper (enhanced)",
+     "official_description": "Yeni üç katmanlı jakarlı örme saya. Ayağı sarıp daha esnek ve rahat bir kalıp sunması hedefleniyor. Yaklaşık %60 geri dönüştürülmüş malzemeden yapılmış.",
+     "what_it_does_tr": "Ayağı yumuşak bir örgüyle sarar ve nefes alır. Ancak Doctors of Running burun koruması yüzünden burnun hafif sivri ve kısa hissettirdiğini, başparmağın yanında hafif sürtünme yaptığını belirtiyor.",
+     "location": "upper",
+     "source_url": "https://www.doctorsofrunning.com/2026/01/brooks-glycerin-gts-23-review-2026.html",
+     "confidence": "reputable_review"
+    }
+   ],
+   "specs": {
+    "heel_stack_mm": "38 mm (Brooks/perakende verisi ve Road Trail Run). Believe in the Run 39 mm diyor. GTS 23 için laboratuvar ölçümü yok. Referans olarak RunRepeat, GTS 22'nin topuğunu 37,8 mm ölçmüş.",
+    "forefoot_stack_mm": "30 mm (Brooks/perakende verisi ve Road Trail Run). Believe in the Run 31 mm, Doctors of Running başlıkta 28 mm diyor.",
+    "drop_mm": "8 mm (Brooks ABD resmi sayfası, Marathon Sports, Road Trail Run). GTS 22'de 10 mm idi. Not: Doctors of Running başlıkta 10 mm yazıyor. Road Trail Run de 8 mm'nin klasik 10 mm gibi hissettirdiğini söylüyor.",
+    "weight_men": "Brooks resmi: 311,8 g / 11,0 oz (beden belirtilmemiş). İncelemeler: 306 g / 10,8 oz (US M9; Doctors of Running, Believe in the Run). Road Trail Run'ın US 8,5 numunesi 296 g.",
+    "widths_men": [
+     "Medium (D)",
+     "Wide (2E)",
+     "Extra Wide (4E)"
+    ],
+    "removable_insole": "Evet. Brooks'un kendi destek sayfaları çıkarılabilir iç taban ('removable insert') olduğunu söylüyor. Bu modele en yakın laboratuvar verileri: RunRepeat GTS 22'de çıkarılabilir, 4,9 mm iç taban ölçmüş. Podiatrist Tested, RunRepeat verisine dayanarak nötr Glycerin 23'ün iç tabanını çıkarılabilir ve 4,4 mm olarak veriyor. GTS 23'ü özel tabanlıkla deneyen bir inceleme bulamadım. Doctors of Running ise GTS 23'ü 'orthotic friendly: No' olarak işaretlemiş.",
+    "midsole_foam": "DNA TUNED: azotlu, süperkritik, çift hücreli EVA köpük (topukta iri, ön ayakta küçük hücreler). Topuğun iki yanında GuideRails sert köpük rayları var.",
+    "upper": "Enhanced triple jacquard warp knit örme saya, yaklaşık %60 geri dönüştürülmüş. Topuk yakası yumuşak örgü kaplı. Doctors of Running'e göre dil kalın ve yanlardan bağlı değil (gusset yok), topuk çanağı sert.",
+    "outsole": "RoadTack Rubber (ön ayak ve topuğun iç tarafı) ve topuğun dış tarafında Segmented Crash Pad. Believe in the Run tam boy dış taban diyor. Road Trail Run'a göre taban genişliği topukta 90 mm, ortada 88 mm, ön ayakta 115 mm.",
+    "spec_sources": [
+     "https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/glycerin-gts-23/110503.html",
+     "https://blog.brooksrunning.com.au/running-you-through-the-updates-to-the-glycerin-23-glycerin-gts-23-and-the-glycerin-max-2/",
+     "https://www.doctorsofrunning.com/2026/01/brooks-glycerin-gts-23-review-2026.html",
+     "https://believeintherun.com/shoe-reviews/brooks-glycerin-gts-23-review/",
+     "https://www.roadtrailrun.com/2026/01/brooks-running-glycerin-23-gts-multi.html",
+     "https://www.marathonsports.com/blog/brooks-glycerin-gts-23-review-go-to-shoes-with-go-to-support",
+     "https://runrepeat.com/brooks-glycerin-gts-22",
+     "https://podiatristtested.com/reviews/brooks-glycerin-23/",
+     "https://prrunandwalk.com/products/mens-brooks-glycerin-gts-23-110503-4e-096",
+     "https://www.soleretriever.com/news/articles/brooks-glycerin-gts-23-release-date-february-2026"
+    ]
+   },
+   "distinguishing_feature_tr": "Bu setteki ayırt edici özellik GuideRails sistemi. Topuğun iki yanına yerleştirilmiş iki sert köpük ray, ayağı sürekli düzeltmeye çalışmıyor. Yalnızca ayak normal hareketinden saptığında devreye girip topuk ve kaval kemiği rotasyonunu sınırlıyor. Brooks bu sistemi açıkça 'diz odaklı' (diz ile ayak bileği arasındaki coupling) olarak tanımlıyor. Buna çift hücreli, azotlu DNA TUNED köpük eşlik ediyor: topukta yumuşak iniş, ön ayakta tepkili itiş. Kullanıcının notundaki 'diz ve topuk hattında yönlendirme' ihtiyacına en doğrudan yanıt veren model bu.",
+   "profile_fit_tr": {
+    "pros": [
+     "GuideRails, topuğun iki yanından aşırı içe basmayı ve topuk yalpalamasını sınırlıyor. Kararsız topuk teması ve diz hizası sorunu olan biri için doğrudan bir uyum.",
+     "Erkek modelinde Medium (D), Wide (2E) ve Extra Wide (4E) seçenekleri var. Geniş ön ayak ve yazın şişen ayak için 2E ya da 4E denenebilir.",
+     "Brooks'a göre iç taban çıkarılabiliyor. Fabrika tabanı yaklaşık 4,4–4,9 mm kalınlıkta, çıkarıldığında özel tabanlık için hacim açılıyor.",
+     "Ön ayakta yaklaşık 30 mm yükseklik ve GTS 23 ile eklenen 2 mm köpük var. Bu, 1. metatars başı (CM1) altındaki basıncın dağılmasına ve uzun yaz yürüyüşlerinde koruma sağlanmasına yardımcı olabilir.",
+     "8 mm drop hâlâ orta-yüksek bir değer. Erken topuk kalkışı olan birinde baldır ve aşil yükünü düşük drop'lu modeller kadar artırmaz.",
+     "Taban geniş: ön ayakta yaklaşık 115 mm, topukta 90 mm (Road Trail Run). Hafif yan duvarlarla birlikte genel bir denge hissi veriyor.",
+     "RoadTack kauçuk aşınmaya dayanıklı, günlük kullanım ve uzun yürüyüşler için uzun ömürlü. Bazı satıcılar APMA onayı ve PDAC A5500 kodu olduğunu belirtiyor (resmi kaynaktan doğrulanmadı)."
+    ],
+    "cons": [
+     "Doctors of Running bu modeli 'özel tabanlık dostu değil' diye işaretlemiş. Özel tabanlık zaten pronasyonu kontrol ediyorsa, GuideRails ile birlikte aşırı düzeltme riski var. Bir podiyatri kliniği aynı uyarıyı GTS 21 için yapıyor ve tabanlık kullananlara nötr modeli öneriyor. Mutlaka kendi tabanlığınızla deneyin.",
+     "Doctors of Running'e göre burun koruması yüzünden burun bölgesi sivri ve hafif kısa hissettiriyor, başparmak yanında hafif sürtünme yapıyor. Bu, CM1 bölgesi ve ön ayak siniri sıkışması riski için olumsuz. Wide ya da Extra Wide almak ve gerekirse yarım numara büyük seçmek önerilir.",
+     "Doctors of Running ara tabanı 'sert', GuideRails'i 'fazla kontrolcü' bulmuş. Pronasyonu olan test kişisinde inciği rahatsız etmiş. Bir başka inceleme köpüğün yaklaşık 30 milde (≈48 km) açıldığını söylüyor.",
+     "Ön ayaktaki küçük hücreli DNA TUNED daha tepkili ve sıkı. Metatars başı altında çok yumuşak bir his arayanlar için beklentiyi karşılamayabilir.",
+     "Ağır sayılır: yaklaşık 306–312 g (US M9). Koşudan çok yürüyüş ve sakin tempo için daha uygun.",
+     "Doctors of Running'e göre dil yanlardan bağlı değil ve kayabiliyor. Believe in the Run bağcık kilidini ayarlamakta zorlanmış.",
+     "Hollanda'da 2E ve 4E stoku sınırlı olabilir. Brooks NL sayfası online fiyat yerine yerel mağazaya yönlendiriyor. Liste fiyatı 180 € ile setin pahalı tarafında."
+    ]
+   },
+   "official_product_url": "https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/glycerin-gts-23/110503.html",
+   "official_nl_or_eu_url": "https://www.brooksrunning.com/nl_nl/mens/road-running-shoes/glycerin-gts-23/110503.html",
+   "price_eur": "180 € (Brooks'un AB liste fiyatı: Brooks Avusturya sayfası 180 €, Brooks AB Glycerin kategori sayfası 180 €). Brooks NL ürün sayfası fiyat göstermiyor, 'lokaal shoppen' ile yerel mağazaya yönlendiriyor. AB satıcılarında renge göre indirimli olarak yaklaşık 117–160 € görüldü (ör. The Sports Edit 117 €, Tonton Outdoor 119 €). Bu fiyatlar değişebilir.",
+   "official_videos": [
+    {
+     "title": "All-new Glycerin GTS 23",
+     "url": "https://www.youtube.com/watch?v=WEnZN5mvBOE",
+     "channel": "Doğrulanamadı. Başlık ve açıklama Brooks tanıtım üslubunda, muhtemelen Brooks Running.",
+     "is_brand_official": false
+    },
+    {
+     "title": "Brooks Glycerin GTS 23 vs. 22: Are GuideRails Right for You?",
+     "url": "https://www.youtube.com/watch?v=LQ40dYLqgBg",
+     "channel": "Doctors of Running (arama sonucuna göre)",
+     "is_brand_official": false
+    },
+    {
+     "title": "Brooks Glycerin GTS 23, Stability Running Shoes: Expert Review",
+     "url": "https://www.youtube.com/watch?v=qudm5J2SXvc",
+     "channel": "Tahminen Run and Become (Birleşik Krallık'taki mağaza; aynı başlıklı yazılı incelemesi var)",
+     "is_brand_official": false
+    }
+   ],
+   "image_urls": [],
+   "caveats_tr": [
+    "WebFetch bu ortamda DNS hatası verdi ('getaddrinfo ENOTFOUND'), doğrudan curl ise proxy tarafından 403 ile engellendi. Bu yüzden Brooks sayfalarının HTML'i açılamadı. Bilgiler WebSearch sonuç özetlerinden ve inceleme sitelerinden derlendi.",
+    "Brooks'un sitesinden ya da CDN'inden resmi görsel dosyası URL'si göremedim. Uydurmamak için image_urls alanını boş bıraktım. Görseller için resmi ürün sayfalarına bakılmalı: ABD 110503 ve NL 110503.",
+    "Ölçüler kaynaklar arasında çelişkili: topuk 38–39 mm, ön ayak 28–31 mm, drop 8 ya da 10 mm. Brooks'un ABD sayfası 8 mm ve 311,8 g veriyor.",
+    "RunRepeat ya da RTINGS'te GTS 23'e özel bir laboratuvar testi bulamadım. İç taban ve burun genişliği bilgisi için GTS 22 (RunRepeat) ve nötr Glycerin 23 verileri vekil olarak kullanıldı.",
+    "APMA onayı ve PDAC A5500 kodu yalnızca satıcı beyanı. Brooks ya da APMA'dan doğrulanamadı.",
+    "'All-new Glycerin GTS 23' videosunun Brooks'un resmi kanalına ait olduğu doğrulanamadı.",
+    "GuideRails'in özel tabanlıkla birlikte aşırı düzeltme yapıp yapmadığı kişiye göre değişir. Satın almadan önce ortez yapan sağlık profesyoneliyle, kendi tabanlığınızla mağazada deneyerek kontrol edin."
+   ]
+  },
+  {
+   "requested_name": "Saucony Hurricane",
+   "current_model_name": "Saucony Hurricane 26 (Men's; also Hurricane 26 Wide and Hurricane 26 GTX)",
+   "release_year": "2026",
+   "version_notes_tr": "Kullanıcı model numarası vermedi (\"Saucony Hurricane\"). Ekim 2026 itibarıyla güncel sürüm Hurricane 26. 2026 baharında çıktı; Doctors of Running ve Road Trail Run incelemeleri Mayıs 2026 tarihli, İngiliz bir satıcı da modeli \"AW26\" olarak listeliyor. Hurricane 27 ile ilgili bir bilgi bulunamadı. Önceki sürümler: Hurricane 25 (2025) ve Hurricane 24 (2024; seri bir süre ara verdikten sonra 24 ile döndü).\n\nHurricane 25'ten 26'ya başlıca değişiklikler:\n(1) Üst köpük: PEBA içerikli PWRRUN PB yerine yeni incrediLUX geldi. Bu bir A-TPU köpük ve Saucony onu ilk olarak Triumph 24'te kullandı. Altında çift yoğunluklu bir PWRRUN çerçeve var.\n(2) Resmi yığın yüksekliği 38/32 mm'den 41/35 mm'ye çıktı; drop yine 6 mm.\n(3) Resmi ağırlık yaklaşık 295 g'dan 262 g'a (US 9) indi. Doctors of Running, 26'nın öncekinden yaklaşık 1 oz daha hafif olduğunu ve önceki sürümdeki fazla yumuşak, daha az stabil hissin düzeltilmeye çalışıldığını yazıyor.\n(4) XT-900 karbon kauçuk dış taban yeniden tasarlandı.\n(5) Üst kısım daha hafif ve nefes alan engineered mesh oldu. Running Lab Store burun bölgesini öncekinden biraz daha geniş buluyor.\n(6) RunRepeat karşılaştırmasında topuk sayacı 25'te \"Stiff\", 26'da \"Moderate\" olarak geçiyor.\n\nDestek sistemi iki sürümde de CenterPath: medial post yok; geniş taban, yükseltilmiş yan duvarlar ve asimetrik form var. Yaz kullanımı için GTX (Gore-Tex) versiyonu yerine normal mesh versiyon daha uygun.",
+   "support_type": "Stability – max cushion (Saucony: \"Max Cushion Support\" / \"light support\"; CenterPath guidance, no medial post). Fleet Feet: mild to severe overpronation; Running Northwest: mild to moderate.",
+   "technologies": [
+    {
+     "name": "incrediLUX",
+     "official_description": "Saucony's new foam; the brand says it is lighter weight and gives exceptional cushion and comfort for daily runs or all-day wear. Reviewers identify it as an A-TPU top layer, first used in the Triumph 24.",
+     "what_it_does_tr": "Ara tabanın ayağa yakın üst katmanındaki hafif, yumuşak ve geri sekmeli köpük. Uzun yürüyüşlerde topuğa ve ön ayağa gelen darbeyi azaltır, adımlara canlı bir his verir.",
+     "location": "midsole_full",
+     "source_url": "https://www.saucony.com/en/hurricane-26/61249M.html",
+     "confidence": "official"
+    },
+    {
+     "name": "PWRRUN (dual-density PWRRUN frame)",
+     "official_description": "Dual-density PWRRUN (EVA-based) frame/carrier around the incrediLUX core, adding stability and structure.",
+     "what_it_does_tr": "Yumuşak üst köpüğü çevreleyen, iki farklı sertlikte EVA tabanlı bir taşıyıcı. Ayağın yumuşak köpükte yana kaymasını sınırlar, topuk ve orta ayakta platforma yapı ve denge katar.",
+     "location": "midsole_full",
+     "source_url": "https://www.doctorsofrunning.com/2026/05/saucony-hurricane-26-review-2026.html",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "CenterPath Technology",
+     "official_description": "Saucony's guidance system: broad base, raised sidewalls, asymmetric profile and a rocker shape instead of a traditional medial post.",
+     "what_it_does_tr": "Destek sert bir iç taraf parçasından değil, ayakkabının şeklinden gelir: geniş taban, ayağı içine alan yükseltilmiş yan duvarlar ve asimetrik form. Böylece topuk temasında ayak merkezde tutulur ve içe basma (pronasyon) nazikçe yönlendirilir. Rocker form da topuktan parmağa geçişi yuvarlar.",
+     "location": "geometry_rocker",
+     "source_url": "https://www.fleetfeet.com/products/mens-saucony-hurricane-26",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "XT-900 carbon rubber outsole",
+     "official_description": "Redesigned XT-900 carbon rubber outsole; Saucony says it provides unmatched durability and protection.",
+     "what_it_does_tr": "Dayanıklı karbon katkılı kauçuk dış taban. Asfaltta ve kaldırımda uzun süre aşınmaya dayanır ve tutuş sağlar.",
+     "location": "outsole",
+     "source_url": "https://www.saucony.com/en/hurricane-26/61249M.html",
+     "confidence": "official"
+    },
+    {
+     "name": "Engineered comfort mesh upper",
+     "official_description": "Breathable comfort mesh with a plush and secure fit; retailers describe it as engineered mesh with perforations and discreet reinforcements.",
+     "what_it_does_tr": "Nefes alan, delikli ve yumuşak bir üst kısım. Yaz sıcağında ayağın havalanmasına yardım eder, ayağı baskı yapmadan sarar.",
+     "location": "upper",
+     "source_url": "https://www.saucony.com/en/hurricane-26/61249M.html",
+     "confidence": "official"
+    },
+    {
+     "name": "SRS Sockliner (some sources: incrediLUX sockliner)",
+     "official_description": "Removable sockliner; retailers call it an SRS sockliner that moulds to the foot (Snow+Rock: SRS OrthoLite), while one listing names it an incrediLUX sockliner. Naming conflicts between sources.",
+     "what_it_does_tr": "Çıkarılabilir fabrika tabanı. Giyerken yumuşak bir ilk his verir. Çıkarıldığında yerine özel ortez konabilir.",
+     "location": "insole",
+     "source_url": "https://www.sportsshoes.com/product/sau5632/hurricane-26-men's-running-shoes-(2e-width)---aw26",
+     "confidence": "uncertain"
+    },
+    {
+     "name": "Heel counter (no brand name)",
+     "official_description": "Doctors of Running: stiff but well padded heel counter. RunRepeat comparison rates the Hurricane 26 heel counter as Moderate (Hurricane 25: Stiff).",
+     "what_it_does_tr": "Topuğu arkadan saran sert kap. Topuk temasında topuğun yana kaymasını azaltır. Kaynaklar sertliği konusunda farklı şeyler söylüyor.",
+     "location": "heel_counter",
+     "source_url": "https://runrepeat.com/saucony-hurricane-26",
+     "confidence": "reputable_review"
+    },
+    {
+     "name": "Hurricane 26 Wide",
+     "official_description": "Official wide version: the stability shoe with extra room for a more accommodating fit (men's 2E).",
+     "what_it_does_tr": "Geniş kalıp (2E) seçeneği. Geniş ön ayak ve ortez için daha fazla iç hacim sağlar, ön ayaktaki sinirlere binen yan baskıyı azaltır.",
+     "location": "last_fit",
+     "source_url": "https://www.saucony.com/en/hurricane-26-wide/61250M.html",
+     "confidence": "official"
+    }
+   ],
+   "specs": {
+    "heel_stack_mm": "41 mm (Saucony official); RunRepeat lab measurement 38.3 mm",
+    "forefoot_stack_mm": "35 mm (Saucony official); RunRepeat lab measurement 32.4 mm",
+    "drop_mm": "6 mm (official); RunRepeat measured 5.9 mm",
+    "weight_men": "262 g / 9.2 oz (men's US 9, Saucony official); RunRepeat lab 272 g / 9.6 oz; Doctors of Running about 9.6 oz (men's US 10)",
+    "widths_men": [
+     "Standard (D / Medium) – 61249M",
+     "Wide (2E) – official 'Hurricane 26 Wide' 61250M",
+     "4E / X-Wide: not found for Hurricane 26"
+    ],
+    "removable_insole": "Yes. RunRepeat (cut-in-half lab review) says the insole is removable and most custom orthotics should fit. A retailer listing calls it orthotic friendly with a removable footbed. Doctors of Running marks it orthotic friendly but adds that this is not suggested because it is already a stability shoe; Flawless Shoe Reviews also urges caution about stacking a corrective orthotic on stability geometry.",
+    "midsole_foam": "incrediLUX (A-TPU) top layer over a dual-density PWRRUN (EVA-based) frame",
+    "upper": "Engineered breathable comfort mesh with perforations and discreet reinforcements; plush, secure fit. Not recommended sockless (Doctors of Running). RunRepeat toebox width 72.2 mm (average 73.2 mm), classic shape, rated Medium; Doctors of Running: slightly tapered at the toe guard, normal-to-slightly-wide forefoot.",
+    "outsole": "XT-900 carbon rubber (redesigned)",
+    "spec_sources": [
+     "https://www.saucony.com/en/hurricane-26/61249M.html",
+     "https://www.saucony.com/en/hurricane-26-wide/61250M.html",
+     "https://runrepeat.com/saucony-hurricane-26",
+     "https://www.doctorsofrunning.com/2026/05/saucony-hurricane-26-review-2026.html",
+     "https://www.roadtrailrun.com/2026/05/saucony-hurricane-26-multi-tester.html",
+     "https://www.marathonsports.com/products/saucony-mens-hurricane-26",
+     "https://www.fleetfeet.com/products/mens-saucony-hurricane-26",
+     "https://runningnw.com/2026/05/20/saucony-hurricane-26-review/",
+     "https://www.sportsshoes.com/product/sau5632/hurricane-26-men's-running-shoes-(2e-width)---aw26",
+     "https://flawlessshoereviews.com/saucony-shoes/saucony-hurricane-26-review/",
+     "https://runninglabstore.com/blogs/news/saucony-hurricane-26-guided-cushioned-and-ready-for-miles"
+    ]
+   },
+   "distinguishing_feature_tr": "Bu beşli içinde yüksek yığınlı (41/35 mm) stabilite modellerinin en hafiflerinden biri (resmi 262 g, US 9). Desteği medial post, ray veya plaka yerine yalnızca ayakkabının şekliyle veriyor (CenterPath: geniş taban, yükseltilmiş yan duvarlar, asimetrik form). Bunu A-TPU yapıdaki zıplayan incrediLUX köpükle birleştiriyor. Sonuç olarak en \"nötr ayakkabı gibi\" hissettiren, en canlı ve yumuşak destekli seçenek. Ancak genişlikte sadece 2E (Wide) var, Kayano ve 860 gibi 4E sunmuyor.",
+   "profile_fit_tr": {
+    "pros": [
+     "Fabrika tabanı çıkarılabiliyor. RunRepeat çoğu özel ortezin sığacağını belirtiyor; ortez kullanımı için temel şart karşılanıyor.",
+     "Resmi bir Wide (2E) versiyonu var. Geniş ön ayak ve ortez hacmi için deneme yaparken öncelikle Wide numarası alınmalı.",
+     "CenterPath'in geniş tabanı ve ayağı içine alan yan duvarları, dengesiz topuk temasını ve aşırı pronasyonu sert bir post olmadan yönlendirir. Topuk sayacı Doctors of Running'e göre sert ve iyi dolgulu.",
+     "41/35 mm yüksek yastık ve yüksek topuk şok emilimi (RunRepeat 145 SA, ortalamanın üzerinde): uzun yaz yürüyüşlerinde topuğa ve 1. metatars başına (CM1) gelen darbe yükü azalır.",
+     "Rocker formu topuktan parmağa geçişi yuvarlar. Bu, ön ayakta parmak eklemlerinin bükülme ihtiyacını ve CM1 altındaki yükü bir miktar azaltmaya yardımcı olabilir.",
+     "Hafif yapı (262 g) ve nefes alan mesh, uzun yürüyüşlerde yorgunluğu ve yaz sıcağında terlemeyi azaltır. Doctors of Running yürüme ve uzun süre ayakta durma için iyi buluyor, dayanıklılığını da yüksek değerlendiriyor.",
+     "Hollanda'da kolay bulunuyor: Saucony NL sitesinde 190 €."
+    ],
+    "cons": [
+     "4E (ekstra geniş) seçeneği yok, sadece 2E Wide var. Çok geniş ön ayak artı özel ortez için iç hacim Kayano veya 860'ın 4E'sine göre yetersiz kalabilir.",
+     "Standart versiyonun burnu ortalamadan biraz dar (RunRepeat 72,2 mm, ortalama 73,2 mm). Doctors of Running burnun parmak koruması bölgesinde hafif daraldığını yazıyor. Ön ayakta sinir sıkışması riski olan biri için standart genişlik uygun değil.",
+     "Destek seviyesi hafif–orta (Saucony 'light support' diyor; Running Northwest hafif–orta pronasyon için öneriyor). Belirgin aşırı pronasyon ve kararsız topukta Kayano veya 860 kadar güçlü yönlendirmeyebilir.",
+     "Topuk sayacı RunRepeat'e göre 26'da 'Moderate', 25'te 'Stiff'. Topuk kararsızlığı için daha sert bir topuk kabı isteniyorsa bu bir dezavantaj; Doctors of Running ise sert diyor, yani kaynaklar çelişkili.",
+     "Ön ayak 'hafif esnek' (Doctors of Running). CM1 basıncını azaltmak için daha sert bir ön ayak veya belirgin rocker isteniyorsa yetersiz kalabilir.",
+     "Erken topuk kalkışı baldır veya Aşil gerginliğiyle ilişkiliyse, 6 mm drop 8–10 mm drop'lu modellere (ör. Glycerin GTS) göre baldıra biraz daha fazla yük bindirebilir. Ortezin topuk yüksekliği de etkin drop'u değiştirir.",
+     "Doctors of Running ve Flawless Shoe Reviews, stabilite geometrisinin üzerine düzeltici ortez eklemenin fazla düzeltme veya baskı yaratabileceği konusunda uyarıyor. Mağazada mutlaka kendi ortezinizle deneyin; gerekirse ortezi yapan sağlık profesyoneline danışın.",
+     "Yumuşak, zıplayan köpük çok yavaş yürüyüş temposunda biraz 'yumuşak ve kaygan' hissedebilir; RTINGS bunu Hurricane 25 için belirtmişti. Çorapsız giyime uygun değil."
+    ]
+   },
+   "official_product_url": "https://www.saucony.com/en/hurricane-26/61249M.html",
+   "official_nl_or_eu_url": "https://www.saucony.com/NL/nl_NL/saucony-hurricane-upg/",
+   "official_videos": [],
+   "image_urls": [],
+   "price_eur": "€190 on Saucony's official NL and BE sites (Hurricane 26 GTX: €210). The Saucony IE product page also shows €190.00. A Dutch retailer, Snowleader.nl, listed €189.90 with a 20% discount at the time of indexing.",
+   "caveats_tr": [
+    "WebFetch aracı her alan adında DNS hatası (ENOTFOUND) verdi; Saucony ve inceleme sayfaları dahil hiçbir sayfa doğrudan açılamadı. Tüm bilgiler arama motoru sonuç özetlerinden alındı.",
+    "Paylaşılan 200 web araması sınırı dolduğu için resmi Saucony YouTube videoları ve marka CDN'indeki ürün görseli dosya URL'leri aranamadı. Bu yüzden official_videos ve image_urls boş bırakıldı; hiçbir URL uydurulmadı. Kullanıcı takip mesajı gönderirse arama devam ettirilebilir.",
+    "Hollandaca (nl_NL) ürün sayfası doğrudan görülmedi. Görülen resmi sayfalar: NL Hurricane açılış sayfası (saucony.com/NL/nl_NL/saucony-hurricane-upg/), İrlanda ürün sayfası (https://www.saucony.com/IE/en_IE/hurricane-26/61249M.html, 190 €) ve global Wide sayfası (https://www.saucony.com/en/hurricane-26-wide/61250M.html).",
+    "Yığın yüksekliği: resmi 41/35 mm, RunRepeat ölçümü 38,3/32,4 mm (ölçüm yöntemi farkı). Ağırlık: resmi 262 g (US 9), RunRepeat 272 g, Doctors of Running yaklaşık 9,6 oz (US 10).",
+    "İç tabanın adı kaynaklar arasında çelişkili (SRS sockliner, SRS OrthoLite, incrediLUX sockliner). Çıkarılabilir olduğu ise birden fazla kaynakta doğrulanıyor.",
+    "PWRRUN çerçeve ve CenterPath adları resmi Saucony sayfasında doğrudan görülemedi; satıcı ve inceleme kaynaklarından alındı. CenterPath, Saucony'nin kendi teknoloji adı olarak geniş çapta kullanılıyor.",
+    "Hurricane 26 için 4E (X-Wide) versiyonu bulunamadı; sadece standart ve 2E Wide doğrulandı.",
+    "Pronasyon kontrol seviyesi kaynaklara göre değişiyor: Fleet Feet hafiften şiddetliye, Running Northwest hafiften ortaya diyor.",
+    "Ayak profiliyle ilgili değerlendirmeler genel bilgidir. Nihai seçimi kendi ortezinizle yapılan mağaza denemesi ve sağlık profesyonelinin görüşü belirlemeli."
+   ]
+  }
+ ],
+ "ilk_dogrulama": {
+  "New Balance Fresh Foam X 860 v14 (2E/4E)": [
+   {
+    "claim": "Method limitation for this whole fact-check pass",
+    "verdict": "unverifiable",
+    "note": "No independent evidence could be gathered. WebSearch returned 'turn web search budget used up' on the first call. WebFetch failed with DNS errors (nl.newbalance.eu, newbalance.co.uk, runningwarehouse.com). Direct HTTPS via the agent proxy was refused (403 CONNECT) for newbalance.com, nb.scene7.com, youtube.com oEmbed, roadtrailrun.com and runrepeat.com. Every verdict below rests on internal consistency and the checker's prior knowledge (training data to mid-2026), not on fetched sources."
+   },
+   {
+    "claim": "Requested 860 v14 is superseded; the current model is Fresh Foam X 860v15 (soft launch March 2026, official April 1, 2026); no v16 exists",
+    "verdict": "unverifiable",
+    "note": "Could not check. A v15 is plausible, but the dates and the roughly 2-year v14-to-v15 gap could not be confirmed. Kept as is, with a note in version_notes_tr that the v15 data was not independently verified."
+   },
+   {
+    "claim": "v14 released spring 2024 (colourways April–May 2024, reviews May–June 2024)",
+    "verdict": "unverifiable",
+    "note": "Fits the checker's prior knowledge and the dated review URLs (roadtrailrun 2024/05 and 2024/06). No live confirmation."
+   },
+   {
+    "claim": "Stability Plane is the official NB technology of the 860v14 and v14 is the first 860 to swap the medial post for it",
+    "verdict": "unverifiable",
+    "note": "Fits the checker's prior knowledge with high confidence: NB marketed the 860v14 around Stability Plane plus Fresh Foam X, replacing the v13's medial post. The quoted NB copy reads like genuine NB text. Not re-fetched. Kept unchanged."
+   },
+   {
+    "claim": "Stability Plane is a thin, firm EVA plate between foam layers, running along the medial side and across the full heel",
+    "verdict": "unverifiable",
+    "note": "Plausible and fits the reviewer descriptions the checker knows of. The exact material (EVA) and shape could not be confirmed live."
+   },
+   {
+    "claim": "Technology entry named 'Fresh Foam X (dual-density midsole)' with confidence 'official'",
+    "verdict": "corrected",
+    "note": "The name field must be the brand's official name, so it is renamed 'Fresh Foam X'. The cited official copy only covers Fresh Foam X and its roughly 3% bio-based content. The dual-density / medial-wedge description comes from reviewers, so the description, what_it_does_tr and the midsole_foam spec now say so."
+   },
+   {
+    "claim": "Rocker profile listed by New Balance as an official 860v14 feature (confidence official)",
+    "verdict": "corrected",
+    "note": "Not confirmable: the original agent's own caveat says no NB page was ever loaded, and the checker has no reliable memory of NB listing 'rocker' for the 860v14. Confidence lowered to reputable_review and the source moved to the Doctors of Running review, which describes the heel bevel and forefoot rocker. The entry is kept."
+   },
+   {
+    "claim": "Engineered mesh upper (reviewers) vs 'synthetic' (NB)",
+    "verdict": "unverifiable",
+    "note": "Internally consistent and already labelled reputable_review. Not checked live."
+   },
+   {
+    "claim": "Gusseted tongue on v14",
+    "verdict": "unverifiable",
+    "note": "Single review source (runningshoesguru). version_notes_tr implied the gusset was new on v15, which contradicted this entry. That sentence now says the v14 tongue was also reported as gusseted."
+   },
+   {
+    "claim": "Stiff heel counter; blown rubber outsole thinner than v13",
+    "verdict": "unverifiable",
+    "note": "Review-sourced claims, correctly labelled reputable_review. Not checked live."
+   },
+   {
+    "claim": "Drop 8 mm official; RunRepeat measured 9.3 mm",
+    "verdict": "unverifiable",
+    "note": "8 mm fits the checker's prior knowledge (the v13 was 10 mm). The RunRepeat figures add up (36.8 - 27.5 = 9.3). No live confirmation."
+   },
+   {
+    "claim": "Stack 38/30 mm brand spec; 36.8/27.5 RunRepeat; 35.5/27.5 Road Trail Run",
+    "verdict": "unverifiable",
+    "note": "38/30 fits the checker's prior knowledge of the Running Warehouse listing. The lab numbers could not be checked."
+   },
+   {
+    "claim": "Weight 306.5 g (NB EU), 298 g US9 (RW/BITR), 296 g US9 (RTR)",
+    "verdict": "unverifiable",
+    "note": "The values are consistent with each other. Not checked live."
+   },
+   {
+    "claim": "Men's widths D, 2E, 4E",
+    "verdict": "unverifiable",
+    "note": "Fits the checker's prior knowledge and the Run and Become 2E and 4E listing URLs. Some 860 generations also came in a men's narrow (B), which could not be checked for v14. List kept as is."
+   },
+   {
+    "claim": "Removable insole: yes, most likely",
+    "verdict": "unverifiable",
+    "note": "NB 860 sockliners are normally removable and the shoe is commonly used with orthotics. The retailer sources (Canadian Footwear, Medicus) could not be fetched. The hedged wording is appropriate and kept."
+   },
+   {
+    "claim": "APMA Seal of Acceptance on the NB page",
+    "verdict": "unverifiable",
+    "note": "Earlier 860s carried the APMA seal. Not confirmed for v14."
+   },
+   {
+    "claim": "Official product URLs: newbalance.co.uk M860V14-50478 and nl.newbalance.eu M860V14-45483 (plus ee.newbalance.eu W860V14-45484)",
+    "verdict": "unverifiable",
+    "note": "The URL patterns match NB's regional site structure, and the men's/women's IDs (45483/45484) are consecutive, which is consistent. DNS and proxy blocked any check that the pages are live and about this model."
+   },
+   {
+    "claim": "v15 official URLs on newbalance.com and nl.newbalance.eu (M860V15_RU-FTW-802888)",
+    "verdict": "unverifiable",
+    "note": "Unusual ID pattern. Could not be fetched. Left only in caveats_tr, not used as the primary product URL."
+   },
+   {
+    "claim": "Video: Road Trail Run 860 v14 video review page and humix page",
+    "verdict": "unverifiable",
+    "note": "Plausible URLs for RTR, which hosts video through humix. The proxy refused roadtrailrun.com. Correctly marked not brand-official."
+   },
+   {
+    "claim": "Video: YouTube y3YVbaaUFms '860 v14 First Look', channel unknown",
+    "verdict": "unverifiable",
+    "note": "The oEmbed lookup was blocked, so neither title nor channel could be confirmed. Kept and flagged as unverified, not brand-official."
+   },
+   {
+    "claim": "Video: YouTube _TzZ6GchyDk '860 v14 Review' by Trail and Kale",
+    "verdict": "corrected",
+    "note": "Content not verifiable (oEmbed blocked). The only change is the URL, normalized from m.youtube.com to www.youtube.com."
+   },
+   {
+    "claim": "Video: YouTube iXKMkTWFWGQ (Dutch, 860v15)",
+    "verdict": "unverifiable",
+    "note": "Not about the requested v14. Kept only because the record names v15 as current, and the channel field now says it covers v15. Content not verifiable."
+   },
+   {
+    "claim": "No brand-official New Balance video exists for v14/v15",
+    "verdict": "unverifiable",
+    "note": "Could not search YouTube or NB channels. All videos stay is_brand_official=false."
+   },
+   {
+    "claim": "image_urls empty (no official scene7 images verified)",
+    "verdict": "confirmed",
+    "note": "Correct choice. nb.scene7.com was refused by the proxy in this pass too, so no official image URL could be checked, and none were invented."
+   },
+   {
+    "claim": "Prices: v14 RRP 160 €, discounted 114.99 € (shop4runners) / 120 € (i-run); v15 170 € on NB NL",
+    "verdict": "unverifiable",
+    "note": "Time-sensitive and not checkable. A note was added to price_eur that prices may have changed."
+   },
+   {
+    "claim": "v15 change details (stack 43/35 or 39.7/32.1, plastic Stability Plane, drop 6/7.6/8 mm, weight 331/344 g)",
+    "verdict": "unverifiable",
+    "note": "Many conflicting figures, all from search snippets. None could be checked. Kept with the existing conflict caveat plus a new note that the v15 data is unverified."
+   }
+  ],
+  "HOKA Gaviota 6 Wide": [
+   {
+    "claim": "Gaviota 6 is the current Gaviota version as of Oct 2026 (released Jan 2026, replacing Gaviota 5; no Gaviota 7 announced)",
+    "verdict": "unverifiable",
+    "note": "My web search budget was already used up, WebFetch failed with DNS errors, and the proxy blocked hoka.com, runrepeat.com, doctorsofrunning.com and youtube.com (403). I could not find independent support. The timeline is plausible: Gaviota 5 came out in early 2023, about three years before."
+   },
+   {
+    "claim": "Style numbers: Regular 1171932, Wide 1171934, X-Wide 4E 1171936; NL naming 'Breed' / 'X-Breed'",
+    "verdict": "unverifiable",
+    "note": "hoka.com and hoka.co.th could not be fetched. 'Breed' is the correct Dutch word for 'wide', so the naming is plausible."
+   },
+   {
+    "claim": "H-Frame (Enhanced H-Frame) is the stability technology of Gaviota 6",
+    "verdict": "unverifiable",
+    "note": "I could not reach the official page. It fits the Gaviota line: as far as I know, recent Gaviota versions use H-Frame, not J-Frame. Kept as is."
+   },
+   {
+    "claim": "J-Frame was the system of Gaviota 1-4; H-Frame only in Gaviota 5 and 6",
+    "verdict": "corrected",
+    "note": "From background knowledge, not a live source: H-Frame most likely arrived with Gaviota 4 (2022), so J-Frame belongs to roughly Gaviota 1-3. The text now says only 'older Gaviota versions' and flags the v4 detail as unverified. The point that matters is unchanged: Gaviota 6 uses H-Frame."
+   },
+   {
+    "claim": "Gaviota 5 official page listed Early Stage Meta-Rocker; Gaviota 6 official page does not mention Meta-Rocker",
+    "verdict": "unverifiable",
+    "note": "I could not fetch HOKA pages. Early Stage Meta-Rocker on Gaviota 5 matches what I remember, but I could not confirm it here."
+   },
+   {
+    "claim": "Late Stage Meta-Rocker (retailer Confluence Running text)",
+    "verdict": "unverifiable",
+    "note": "Already marked 'uncertain' in the record. That label fits, because only a retailer reports it. Kept."
+   },
+   {
+    "claim": "Midsole is compression-molded EVA (CMEVA), not supercritical; RunRepeat energy return 45.4%, 32.6 HA, 122 SA",
+    "verdict": "unverifiable",
+    "note": "runrepeat.com is blocked by the proxy. CMEVA matches earlier Gaviota versions."
+   },
+   {
+    "claim": "Internal ghillie lacing, engineered/elevated mesh upper, comfort collar are official Gaviota 6 features",
+    "verdict": "unverifiable",
+    "note": "I could not reach the official HOKA page to confirm the wording. Kept with 'official' confidence as the original researcher sourced it."
+   },
+   {
+    "claim": "Abrasion-resistant rubber outsole labeled confidence 'official' with RunRepeat as source_url",
+    "verdict": "corrected",
+    "note": "The confidence label did not match the source: a RunRepeat URL is a review, not an official source. Changed confidence to 'reputable_review'. The content itself could not be verified."
+   },
+   {
+    "claim": "Brand stack 39 mm heel / 33 mm forefoot, 6 mm drop",
+    "verdict": "unverifiable",
+    "note": "No source reachable. The numbers are consistent with each other (39 - 33 = 6) and with the claimed small stack drop from Gaviota 5."
+   },
+   {
+    "claim": "Lab measurements: RunRepeat 36.0/28.7 mm, 7.3 mm drop; RTINGS 37.6 mm heel, 7.6 mm drop",
+    "verdict": "unverifiable",
+    "note": "Sources are blocked. The arithmetic is consistent: 36.0 - 28.7 = 7.3."
+   },
+   {
+    "claim": "Weight 283 g (US M9); HOKA US 10.25 oz ~ 291 g; Gaviota 5 ~310 g (27 g lighter)",
+    "verdict": "unverifiable",
+    "note": "The arithmetic checks out (10.25 oz = 290.6 g; 310 - 283 = 27). I could not confirm the source values. Gaviota 5 at ~310 g (~10.9 oz) matches what I remember."
+   },
+   {
+    "claim": "HOKA Thailand gives 290.6 g specifically for the Wide version",
+    "verdict": "corrected",
+    "note": "290.6 g is exactly 10.25 oz, the same nominal figure as the regular model. It is not evidence of a Wide-specific weight. The wording now says this."
+   },
+   {
+    "claim": "Men's widths: Regular D, Wide 2E, X-Wide 4E (4E new for v6)",
+    "verdict": "unverifiable",
+    "note": "I could not reach hoka.com, prrunandwalk or Tradehome. Wide 2E is plausible because the Gaviota line has offered it before. The new 4E is unconfirmed."
+   },
+   {
+    "claim": "Removable insole, 4.8 mm thick (RunRepeat, i-Run)",
+    "verdict": "unverifiable",
+    "note": "No source reachable. It is plausible because HOKA road shoes, including earlier Gaviotas, use removable sockliners. Still, the user should check in store with their orthotic."
+   },
+   {
+    "claim": "Gaviota 6 is APMA-approved (stated as fact, in English, inside a Turkish field, with no source)",
+    "verdict": "corrected",
+    "note": "No source was given and I could not verify it. Earlier Gaviota versions carried the APMA seal, as far as I know. I softened the claim to say v6 approval is unverified, translated it to Turkish, and also softened the matching item in pros."
+   },
+   {
+    "claim": "Official US product URL https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html",
+    "verdict": "unverifiable",
+    "note": "hoka.com is blocked by the proxy (403). The URL follows HOKA's /en/us/<category>/<model>/<style>.html pattern."
+   },
+   {
+    "claim": "Official NL URL https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html and https://www.hoka.com/nl/nl/brede-pasvorm-heren/",
+    "verdict": "unverifiable",
+    "note": "hoka.com is blocked. The URLs match the HOKA locale pattern."
+   },
+   {
+    "claim": "HOKA Thailand Wide page https://hoka.co.th/en/products/1171934-bwht-gaviota-6-wide-men",
+    "verdict": "unverifiable",
+    "note": "I could not fetch it, because WebFetch DNS failed."
+   },
+   {
+    "claim": "Video https://www.youtube.com/watch?v=JKrmqyLOkrg is a Gaviota 6 review",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked by the proxy. Correctly marked not brand-official. The channel is unknown."
+   },
+   {
+    "claim": "Video https://www.youtube.com/watch?v=eTqjBZ08iWw is a Gaviota 6 review",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked. Not brand-official."
+   },
+   {
+    "claim": "Video https://www.youtube.com/watch?v=9pPtyTBNXJM is a Gaviota 6 real-world review",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked. Not brand-official."
+   },
+   {
+    "claim": "image_urls left empty (no official image URLs retrieved)",
+    "verdict": "unverifiable",
+    "note": "No image URLs to check. I did not add any, because I could not confirm real dms.deckers.com file paths or colorway codes, and making them up would be fabrication."
+   },
+   {
+    "claim": "Price EUR 180 on hoka.com/nl (Breed/X-Breed), EUR 185 Portugal, retailer prices",
+    "verdict": "unverifiable",
+    "note": "No source reachable."
+   },
+   {
+    "claim": "SATRA traction 0.46 (v5) -> 0.65 (v6), torsional rigidity 17.7 Nm, bend force 19.0 N (RunRepeat)",
+    "verdict": "unverifiable",
+    "note": "runrepeat.com is blocked by the proxy."
+   },
+   {
+    "claim": "Doctors of Running calls it 'borderline motion control'; RTINGS lateral stability 9.3",
+    "verdict": "unverifiable",
+    "note": "doctorsofrunning.com is blocked. I could not reach the RTINGS page."
+   }
+  ],
+  "ASICS GEL-Kayano 32 (2E/4E)": [
+   {
+    "claim": "Kayano 32 launched globally 1 June 2025 (ASICS EMEA press release)",
+    "verdict": "unverifiable",
+    "note": "news-emea.asics.com is blocked (proxy 403) and the web search limit was used up. A mid-2025 launch fits the yearly Kayano release cycle (Kayano 31 came out in 2024), but I could not open the press release."
+   },
+   {
+    "claim": "As of Oct 2026 the current model is GEL-KAYANO 33 (US 1 Jun 2026, AU 7 Jul 2026, EU ~200 EUR)",
+    "verdict": "unverifiable",
+    "note": "No source could be reached. A mid-2026 successor fits the yearly cycle, but the dates and price are unconfirmed."
+   },
+   {
+    "claim": "Kayano 32 drop is 8 mm, down from 10 mm in Kayano 31; first 8 mm Kayano",
+    "verdict": "unverifiable",
+    "note": "Matches what I already knew and the 40/32 mm stack cited from Running Warehouse (40 - 32 = 8). Not re-checked against a live ASICS page. The 'first 8 mm Kayano' part is plausible but unconfirmed."
+   },
+   {
+    "claim": "Stack 40/32 mm (Running Warehouse); RunRepeat lab 39.9/30.6 mm; RTINGS 41.7/32.6 mm",
+    "verdict": "unverifiable",
+    "note": "runrepeat.com is blocked; Running Warehouse and RTINGS could not be searched. The numbers agree with each other: the RunRepeat drop of 9.3 = 39.9 - 30.6 and the RTINGS drop of 9.1 = 41.7 - 32.6."
+   },
+   {
+    "claim": "Men's weight 298 g / 10.5 oz US 9",
+    "verdict": "unverifiable",
+    "note": "Plausible next to Kayano 31 (about 300 g), but not confirmed."
+   },
+   {
+    "claim": "4D GUIDANCE SYSTEM is used on Kayano 32",
+    "verdict": "unverifiable",
+    "note": "asics.com is blocked. From what I already knew, the system arrived on Kayano 30 and stayed on 31, so being on 32 is consistent. The ASICS description quoted matches its Kayano 30-era marketing."
+   },
+   {
+    "claim": "FF BLAST PLUS (some retailers say FF BLAST PLUS ECO) midsole",
+    "verdict": "unverifiable",
+    "note": "Could not open the ASICS SG page. Kayano 30/31 used FF BLAST PLUS ECO, so the naming difference between sources is plausible and the record already says so."
+   },
+   {
+    "claim": "Rearfoot PureGEL, about 65% softer than standard GEL",
+    "verdict": "unverifiable",
+    "note": "ASICS has used the '65% softer' PureGEL claim since the Kayano 30 / Nimbus 25 era, so this is consistent. Not re-confirmed for the 32 page."
+   },
+   {
+    "claim": "HYBRID ASICSGRIP outsole (ASICSGRIP + AHARPLUS)",
+    "verdict": "unverifiable",
+    "note": "This outsole name appeared on Kayano 31, so carrying it over is plausible. Could not open the source."
+   },
+   {
+    "claim": "OrthoLite X-55 sockliner, removable, orthotic-friendly (Medicus, Galaxus)",
+    "verdict": "unverifiable",
+    "note": "Removable OrthoLite sockliners are standard across the Kayano line, but I could not reach the Medicus, Galaxus or ASICS PH pages. Insole thickness is unknown."
+   },
+   {
+    "claim": "Engineered stretch knit upper, tighter than 30/31",
+    "verdict": "unverifiable",
+    "note": "doctorsofrunning.com is blocked. The record already notes that sources disagree (knit vs mesh; tight vs roomy)."
+   },
+   {
+    "claim": "External heel counter; sidewalls with no traditional medial post",
+    "verdict": "unverifiable",
+    "note": "The cited review pages (runnerstribe, solereview) could not be reached."
+   },
+   {
+    "claim": "About 2 mm more forefoot foam and new heel geometry on Kayano 32",
+    "verdict": "unverifiable",
+    "note": "Matches a 40/32 stack against Kayano 31's roughly 40/30, but the press release could not be opened."
+   },
+   {
+    "claim": "FLUIDSUPPORT listed as a technology in this Kayano 32 record",
+    "verdict": "corrected",
+    "note": "By the record's own description this belongs to the successor, Kayano 33, not this model. Taken out of the technologies list so it cannot be drawn on Kayano 32 images; still described in version_notes_tr. Whether Kayano 33 really has it is unverified.",
+    "evidence_url": "https://www.asics.com/ca/en-ca/gel-kayano-33-1011c167-001"
+   },
+   {
+    "claim": "FF BLAST MAX + FF BLAST PLUS two-layer midsole listed as a technology in this Kayano 32 record",
+    "verdict": "corrected",
+    "note": "Kayano 33 only, by the record's own label. Taken out of the technologies list and kept in version_notes_tr. FF BLAST MAX existed by 2025 (Novablast 5), so its use on Kayano 33 is plausible but unconfirmed."
+   },
+   {
+    "claim": "Men's widths D (1011C052), 2E (1011C051), 4E (1011C054)",
+    "verdict": "unverifiable",
+    "note": "ASICS CA/AU/US pages are blocked. The codes match the cited URLs and follow ASICS's code pattern, but could not be confirmed."
+   },
+   {
+    "claim": "4E discontinued at ASICS AU; 4E not confirmed in NL/EU store",
+    "verdict": "unverifiable",
+    "note": "asics.com is blocked."
+   },
+   {
+    "claim": "Official product URL https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html is real and about this model",
+    "verdict": "unverifiable",
+    "note": "asics.com is blocked (403). The URL follows ASICS US conventions (ANA_ prefix plus style code), but it is the standard D width, not the requested 2E/4E. A caveat now points to the 1011C051 and 1011C054 codes."
+   },
+   {
+    "claim": "EU URL https://www.asics.com/de/en-de/gel-kayano-32-campaign",
+    "verdict": "unverifiable",
+    "note": "Blocked. It is a campaign page, not a product page. No NL product page was found."
+   },
+   {
+    "claim": "Video ajkRWUPkv6c is the official ASICS Running GEL-KAYANO 32 video",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked (403). The title fits the model, but the channel could not be checked."
+   },
+   {
+    "claim": "Video zZBJhhc2U2I (GEL-KAYANO 30 4D GUIDANCE) as an official video for this model",
+    "verdict": "refuted_removed",
+    "note": "Its own title says it is about Kayano 30, so it does not show this shoe. Removed from official_videos."
+   },
+   {
+    "claim": "Video T6hcgSGESQo is the official ASICS Japan GEL-KAYANO 33 tech video",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked. The title follows ASICS Japan's naming style. It shows the successor, not Kayano 32, and is labelled that way."
+   },
+   {
+    "claim": "Video yP8rBQFxbkw is an official ASICS Running Kayano 33 video",
+    "verdict": "unverifiable",
+    "note": "The record itself admits the channel was not verified, so is_brand_official=true has no support. Kept, with a caveat that its official status is unproven; it shows the successor model."
+   },
+   {
+    "claim": "Third-party review videos d3cxr1hbLhA and MHXRRoEICQs",
+    "verdict": "unverifiable",
+    "note": "youtube.com is blocked. Both are correctly marked as not brand-official."
+   },
+   {
+    "claim": "image_urls left empty rather than guessed",
+    "verdict": "confirmed",
+    "note": "The list is empty, so there are no made-up or non-official image URLs. I could not add official images.asics.com URLs because the host is blocked."
+   },
+   {
+    "claim": "EU price about 200 EUR; sportsshoes.com 2E 159.99 EUR; BMC 140 EUR",
+    "verdict": "unverifiable",
+    "note": "No retailer pages could be reached."
+   },
+   {
+    "claim": "Kayano 33 details: stack 39/31 or 40/32, RunRepeat heel 36.8 mm, 296-298 g, 4E code 1011C229, reviewer opinions",
+    "verdict": "unverifiable",
+    "note": "All Kayano 33 sources are blocked and I had no prior knowledge of them."
+   },
+   {
+    "claim": "Novelship as a source for '32 offers more pronation control than 33'",
+    "verdict": "corrected",
+    "note": "Novelship is a sneaker resale marketplace blog, not a biomechanics source. Marked as a weak source in version_notes_tr and profile_fit_tr pros."
+   },
+   {
+    "claim": "Distinguishing feature: only shoe of the five with a load-responsive medial pod (4D GUIDANCE) plus heel gel",
+    "verdict": "unverifiable",
+    "note": "Logically consistent with the competitors' known stability systems (GuideRails, H-Frame, Stability Plane, geometry and sidewalls), none of which use gel. Depends on 4D GUIDANCE being on Kayano 32, which was not re-confirmed."
+   }
+  ],
+  "Saucony Hurricane": [
+   {
+    "claim": "Current version as of Oct 2026 is Hurricane 26; no Hurricane 27 exists yet",
+    "verdict": "unverifiable",
+    "note": "I could not search: the shared WebSearch budget of 200 calls was already used up. WebFetch failed with ENOTFOUND, and the egress proxy refused curl to saucony.com and the review sites with 403. The yearly cadence (24 in 2024, 25 in 2025, 26 in 2026) is plausible, but I found no independent evidence for or against it."
+   },
+   {
+    "claim": "Hurricane 26 released spring 2026; UK retailer lists it as AW26",
+    "verdict": "corrected",
+    "note": "Could not verify. The cited SportsShoes URL is specifically the 2E-width listing tagged AW26 (Autumn/Winter 2026). That fits poorly with a spring launch, unless the Wide version arrived later. I reworded version_notes_tr to say it is the 2E listing that carries the AW26 tag, without claiming more.",
+    "evidence_url": "https://www.sportsshoes.com/product/sau5632/hurricane-26-men's-running-shoes-(2e-width)---aw26"
+   },
+   {
+    "claim": "Series history: Hurricane 24 (2024) returned after a hiatus; Hurricane 25 in 2025",
+    "verdict": "unverifiable",
+    "note": "From background knowledge (no live source), this fits: Hurricane 23 came out around 2021 and Hurricane 24 in early 2024. I found no fresh evidence."
+   },
+   {
+    "claim": "Hurricane 25 used PEBA-based PWRRUN PB top layer, replaced by incrediLUX in 26",
+    "verdict": "unverifiable",
+    "note": "From background knowledge, PWRRUN PB is Saucony's PEBA-based bead foam and Hurricane 24 used it. I could not confirm this for Hurricane 25 or check the swap to incrediLUX."
+   },
+   {
+    "claim": "incrediLUX foam is used in Hurricane 26, is A-TPU, first used in Triumph 24",
+    "verdict": "unverifiable",
+    "note": "No access to saucony.com or the reviews. The original agent also never opened the Saucony page and relied on search snippets. Its 'official' confidence rests only on those snippets."
+   },
+   {
+    "claim": "Dual-density PWRRUN (EVA-based) frame around the incrediLUX core",
+    "verdict": "unverifiable",
+    "note": "A PWRRUN frame around a softer core matches the Hurricane 24 design (background knowledge). I could not check 'dual-density' for 26 or exactly what PWRRUN is made of (EVA-based, or an EVA/TPU blend, depending on the source)."
+   },
+   {
+    "claim": "CenterPath Technology is the guidance system on Hurricane 26",
+    "verdict": "unverifiable",
+    "note": "CenterPath is a real Saucony technology name (Guide 17 and Hurricane 24 era, background knowledge). I could not independently confirm it on the Hurricane 26 page."
+   },
+   {
+    "claim": "Redesigned XT-900 carbon rubber outsole",
+    "verdict": "unverifiable",
+    "note": "XT-900 is Saucony's long-standing carbon rubber compound (background knowledge). I could not verify that it is on Hurricane 26 or that it was 'redesigned'."
+   },
+   {
+    "claim": "Engineered breathable comfort mesh upper",
+    "verdict": "unverifiable",
+    "note": "Could not reach the official page or retailer pages."
+   },
+   {
+    "claim": "Sockliner name SRS / SRS OrthoLite / incrediLUX sockliner",
+    "verdict": "unverifiable",
+    "note": "The record already marks this as uncertain and conflicting. I could not resolve it."
+   },
+   {
+    "claim": "Heel counter: RunRepeat Moderate (26) vs Stiff (25); Doctors of Running: stiff, well padded",
+    "verdict": "unverifiable",
+    "note": "runrepeat.com and doctorsofrunning.com were blocked by the proxy (403)."
+   },
+   {
+    "claim": "Stack 41/35 mm official; RunRepeat lab 38.3/32.4 mm",
+    "verdict": "unverifiable",
+    "note": "No source reachable. The lab figures sit about 3 mm below the official ones, which is the usual gap between brand-stated and lab-measured stack, so the claim is internally plausible."
+   },
+   {
+    "claim": "Drop 6 mm official; RunRepeat 5.9 mm",
+    "verdict": "unverifiable",
+    "note": "41-35 = 6 and 38.3-32.4 = 5.9, so the numbers agree with each other. Their source values could not be checked."
+   },
+   {
+    "claim": "Weight 262 g / 9.2 oz (US 9) official; RunRepeat 272 g / 9.6 oz; DoR ~9.6 oz (US 10)",
+    "verdict": "unverifiable",
+    "note": "The unit conversions are right (262 g = 9.24 oz; 272 g = 9.59 oz). I could not verify the source values."
+   },
+   {
+    "claim": "Men's widths: D standard (61249M) and 2E Wide (61250M); no 4E",
+    "verdict": "corrected",
+    "note": "Could not verify. The record says '4E not found' in specs but states 'no 4E' as fact in distinguishing_feature_tr and profile_fit_tr.cons. I changed both to 'not found / only 2E confirmed', because nothing proves 4E does not exist."
+   },
+   {
+    "claim": "Removable insole, orthotic friendly",
+    "verdict": "unverifiable",
+    "note": "Sources unreachable. Plausible, since Saucony running shoes normally ship with a removable sockliner."
+   },
+   {
+    "claim": "Official product URL https://www.saucony.com/en/hurricane-26/61249M.html is real and about this model",
+    "verdict": "unverifiable",
+    "note": "WebFetch returned ENOTFOUND and the proxy denied curl with 403. I could not check whether the URL resolves."
+   },
+   {
+    "claim": "Wide URL https://www.saucony.com/en/hurricane-26-wide/61250M.html is real",
+    "verdict": "unverifiable",
+    "note": "saucony.com unreachable."
+   },
+   {
+    "claim": "official_nl_or_eu_url https://www.saucony.com/NL/nl_NL/saucony-hurricane-upg/",
+    "verdict": "unverifiable",
+    "note": "Unreachable. Even if it resolves, it is a Hurricane landing page, not the Hurricane 26 product page. I added a note in caveats_tr."
+   },
+   {
+    "claim": "Price €190 on Saucony NL/BE/IE; GTX €210; Snowleader.nl €189.90",
+    "verdict": "unverifiable",
+    "note": "No access to any retailer or brand page."
+   },
+   {
+    "claim": "Support level: Fleet Feet mild-to-severe overpronation; Running Northwest mild-to-moderate; Saucony 'light support' / 'Max Cushion Support'",
+    "verdict": "unverifiable",
+    "note": "Sources unreachable."
+   },
+   {
+    "claim": "RunRepeat toebox 72.2 mm (avg 73.2 mm) and heel shock absorption 145 SA",
+    "verdict": "unverifiable",
+    "note": "runrepeat.com blocked by the proxy."
+   },
+   {
+    "claim": "Lightest high-stack stability shoe among the five compared models",
+    "verdict": "unverifiable",
+    "note": "This depends on the weights of the other four shoes, which this check could not verify. The record already hedges it ('en hafiflerinden biri'), so I left it unchanged."
+   },
+   {
+    "claim": "Review and retailer URLs in spec_sources exist and cover Hurricane 26",
+    "verdict": "unverifiable",
+    "note": "Every host tested (runrepeat.com, doctorsofrunning.com, fleetfeet.com, roadtrailrun.com) was blocked. The URL patterns look right for each site (Blogger /YYYY/MM/ paths for DoR and RTR, WordPress date path for Running NW), but that is not proof."
+   },
+   {
+    "claim": "official_videos list (empty)",
+    "verdict": "unverifiable",
+    "note": "There was nothing to check, and I could not search for Saucony YouTube videos (search budget used up; youtube.com blocked). Left empty, with no invented URLs."
+   },
+   {
+    "claim": "image_urls list (empty)",
+    "verdict": "unverifiable",
+    "note": "There was nothing to check, and the Saucony CDN and product pages were unreachable. Left empty, with no invented URLs."
+   }
+  ]
+ }
+}

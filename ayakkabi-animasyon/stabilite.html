@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Beş Stabilite Ayakkabısı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  /* Layout: katalog sayfası. Üstte destek karşılaştırması, ardından tablo, sonra her ayakkabı için iki sütunlu teknik föy. */
+  --bg:#EBEFF2; --surface:#FFFFFF; --surface-2:#F4F6F8; --line:#D3DBE1; --line-2:#B9C5CE;
+  --ink:#0F1A22; --mute:#566874; --dim:#7C8C98;
+  --accent:#B0602E; --support:#2C5DB5; --support-soft:rgba(44,93,181,.16); --accent-soft:rgba(176,96,46,.16);
+  --ok:#1E7F55; --warn:#8F6A00; --no:#B8443A;
+  --foam:#F7F8F9; --rubber:#C79A72;
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C141B; --surface:#121D26; --surface-2:#17242F; --line:#26384A; --line-2:#3A4E60;
+  --ink:#E8EDF1; --mute:#9DADBA; --dim:#6F8394;
+  --accent:#E3A56F; --support:#86AAF0; --support-soft:rgba(134,170,240,.2); --accent-soft:rgba(227,165,111,.2);
+  --ok:#7FD3A2; --warn:#F1CF5E; --no:#F07B72; --foam:#1C2B37; --rubber:#8A6A4F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C141B; --surface:#121D26; --surface-2:#17242F; --line:#26384A; --line-2:#3A4E60;
+  --ink:#E8EDF1; --mute:#9DADBA; --dim:#6F8394;
+  --accent:#E3A56F; --support:#86AAF0; --support-soft:rgba(134,170,240,.2); --accent-soft:rgba(227,165,111,.2);
+  --ok:#7FD3A2; --warn:#F1CF5E; --no:#F07B72; --foam:#1C2B37; --rubber:#8A6A4F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,40px);padding-block:clamp(24px,5vw,56px) 64px}
+a{color:var(--support);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font:600 .7rem/1.3 var(--f-mono);letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 .7rem}
+h1{font-family:var(--f-disp);font-stretch:118%;font-weight:800;font-size:clamp(2rem,5vw,3.6rem);line-height:.98;letter-spacing:-.015em;margin:0 0 1rem;text-wrap:balance;max-width:16ch}
+h2{font-family:var(--f-disp);font-stretch:112%;font-weight:760;font-size:clamp(1.45rem,2.8vw,2.2rem);line-height:1.05;margin:0 0 .6rem;text-wrap:balance}
+h3{font-size:1.02rem;font-weight:700;margin:0 0 .4rem}
+p{margin:0 0 .8rem;max-width:68ch}
+.lede{font-size:clamp(1.02rem,1.3vw,1.18rem);color:var(--ink);max-width:62ch}
+.mute{color:var(--mute)}
+.mono{font-family:var(--f-mono)}
+.small{font-size:.86rem}
+section{margin-top:clamp(40px,6vw,72px)}
+
+/* hero */
+.hero{display:grid;gap:24px}
+@media (min-width:960px){.hero{grid-template-columns:1.2fr .8fr;align-items:end}}
+.vstat{background:var(--surface);border:1px solid var(--line);padding:14px 16px}
+.vstat h3{font:600 .66rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.vstat ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.vstat li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;font-size:.9rem;align-items:baseline}
+.chip{display:inline-block;font:600 .64rem/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;white-space:nowrap}
+.chip.cur{color:var(--ok)}
+.chip.old{color:var(--warn)}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.nav a{font:600 .74rem var(--f-mono);text-decoration:none;color:var(--ink);border:1px solid var(--line-2);padding:6px 10px;background:var(--surface)}
+.nav a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* mechanisms */
+.mechs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-top:16px}
+.mech{background:var(--surface);border:1px solid var(--line);padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px}
+.mech svg{width:100%;height:auto;display:block}
+.mech .nm{font:600 .74rem var(--f-mono);letter-spacing:.06em;color:var(--support);text-transform:uppercase}
+.mech .sh{font-weight:700;font-size:.95rem}
+.mech p{font-size:.86rem;color:var(--mute);margin:0}
+.mhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px}
+.btn{appearance:none;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:600 .74rem var(--f-mono);padding:7px 11px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--mute);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:-1px}
+
+/* table */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface);margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:.88rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font:600 .64rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--surface-2);white-space:nowrap}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td .sub{display:block;font-size:.76rem;color:var(--dim);margin-top:2px}
+tbody tr:last-child td{border-bottom:0}
+td b{font-weight:700}
+
+/* shoe */
+.shoe{background:var(--surface);border:1px solid var(--line);padding:clamp(16px,3vw,32px)}
+.shead{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+.shead .brand{font:600 .72rem var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:4px}
+.shead h2{margin:0}
+.shead .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.86rem}
+.sgrid{display:grid;gap:24px}
+@media (min-width:980px){.sgrid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}}
+.views{display:grid;gap:10px;align-content:start}
+.view{border:1px solid var(--line);background:var(--surface-2);padding:8px 10px 6px}
+.view .vt{display:flex;justify-content:space-between;gap:8px;font:600 .62rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.view svg{width:100%;height:auto;display:block;overflow:visible}
+.photo{font-size:.84rem;color:var(--mute);border:1px dashed var(--line-2);padding:10px 12px}
+.dist{border-left:3px solid var(--support);padding:2px 0 2px 14px;margin:0 0 16px;font-size:.98rem}
+.dist .k{display:block;font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--support);margin-bottom:3px}
+.tech{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:4px}
+.tech li{display:grid;grid-template-columns:1.7rem minmax(0,1fr);gap:10px;padding:7px 8px;border:1px solid transparent;cursor:pointer;transition:background .2s,border-color .2s}
+.tech li:hover,.tech li.on{background:var(--surface-2);border-color:var(--line)}
+.tech li.on{border-color:var(--accent)}
+.tech .n{width:1.55rem;height:1.55rem;display:grid;place-items:center;font:600 .72rem var(--f-mono);border:1px solid var(--line-2);color:var(--ink);background:var(--surface)}
+.tech li.mainmech .n{background:var(--support);color:var(--surface);border-color:var(--support)}
+.tech b{font-weight:700;font-size:.94rem}
+.tech .loc{font:500 .62rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-left:6px}
+.tech p{margin:2px 0 0;font-size:.88rem;color:var(--mute)}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:16px}
+.specs div{background:var(--surface);padding:8px 10px;min-width:0}
+.specs .k{display:block;font:600 .6rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.specs .v{display:block;font-size:.88rem;font-weight:600;line-height:1.35}
+.specs .v small{display:block;font-weight:400;color:var(--mute);font-size:.76rem}
+.fit{display:grid;gap:12px;margin-bottom:16px}
+@media (min-width:640px){.fit{grid-template-columns:1fr 1fr}}
+.fit h3{font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.fit .p h3{color:var(--ok)}.fit .c h3{color:var(--no)}
+.fit ul{margin:0;padding-left:1.05rem;display:grid;gap:5px;font-size:.87rem}
+.media{display:grid;gap:12px}
+@media (min-width:640px){.media{grid-template-columns:1fr 1fr}}
+.media h3{font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.media ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.86rem}
+.media .tagv{font:600 .58rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:1px 5px;border:1px solid var(--line-2);color:var(--dim);margin-left:6px;white-space:nowrap}
+.media .tagv.off{color:var(--ok);border-color:var(--ok)}
+details{margin-top:16px;border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font:600 .74rem var(--f-mono);letter-spacing:.06em;color:var(--mute)}
+details p{font-size:.88rem;margin-top:8px}
+
+/* svg drawing classes */
+.d-foam{fill:var(--foam);stroke:var(--ink);stroke-width:1.2}
+.d-rub{fill:var(--rubber);stroke:var(--ink);stroke-width:1}
+.d-up{fill:var(--surface);stroke:var(--mute);stroke-width:1.2}
+.d-line{fill:none;stroke:var(--mute);stroke-width:1}
+.d-dash{fill:none;stroke:var(--dim);stroke-width:1;stroke-dasharray:4 3}
+.d-sup{fill:var(--support-soft);stroke:var(--support);stroke-width:1.6}
+.d-supl{fill:none;stroke:var(--support);stroke-width:3.2;stroke-linecap:round}
+.d-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4}
+.d-txt{font:600 9.5px var(--f-mono);fill:var(--dim);letter-spacing:.08em}
+.d-txt2{font:600 10px var(--f-mono);fill:var(--support)}
+.reg{fill:transparent;stroke:transparent;transition:fill .2s,stroke .2s}
+.reg.on{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.mk circle{fill:var(--surface);stroke:var(--ink);stroke-width:1.1}
+.mk text{font:600 9px var(--f-mono);fill:var(--ink);text-anchor:middle;dominant-baseline:central}
+.mk.main circle{fill:var(--support);stroke:var(--support)}
+.mk.main text{fill:var(--surface)}
+.mk.on circle{fill:var(--accent);stroke:var(--accent)}
+.mk.on text{fill:var(--surface)}
+.mk{cursor:pointer}
+.m-foot{fill:var(--surface);stroke:var(--ink);stroke-width:1.4}
+.m-ghost{fill:none;stroke:var(--dim);stroke-width:1.2;stroke-dasharray:4 3}
+.m-gr{stroke:var(--line-2);stroke-width:1}
+.foot{margin-top:56px;border-top:1px solid var(--line);padding-top:18px;font-size:.86rem;color:var(--mute)}
+.foot p{max-width:90ch}
+@media (prefers-reduced-motion:reduce){.tech li,.reg{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Kişisel karşılaştırma · Ekim 2026 · Hollanda</p>
+      <h1>Beş stabilite ayakkabısı, beş ayrı destek fikri</h1>
+      <p class="lede">Hepsi overpronasyona karşı destek veriyor, ama desteği farklı yerden alıyor. Bu sayfa her ayakkabının teknolojisini, nerede durduğunu ve sizin ayak profilinize (dengesiz topuk, overpronasyon, geniş ön ayak, CM1 basıncı, kişisel tabanlık) ne anlama geldiğini gösteriyor.</p>
+      <nav class="nav" id="nav" aria-label="Ayakkabılar"></nav>
+    </div>
+    <aside class="vstat" aria-label="Sürüm durumu">
+      <h3>Sürüm durumu</h3>
+      <ul id="vlist"></ul>
+    </aside>
+  </header>
+
+  <section id="destek" aria-labelledby="destek-h">
+    <div class="mhead">
+      <div>
+        <p class="eyebrow">Ayırt edici özellik</p>
+        <h2 id="destek-h">Destek nereden geliyor?</h2>
+        <p class="mute">Arkadan bakış, sağ ayak. Topuk içe yattıkça her ayakkabının destek parçası farklı bir yerde devreye giriyor. Mavi alan destek parçası, kesik çizgi desteksiz hareket.</p>
+      </div>
+      <button class="btn" id="mplay" type="button" aria-pressed="true">Duraklat</button>
+    </div>
+    <div class="mechs" id="mechs"></div>
+    <div class="legend"><span><i style="background:var(--support-soft);border:1.5px solid var(--support)"></i>destek parçası</span><span><i style="border:1.2px dashed var(--dim)"></i>desteksiz yatma</span><span>Kavramsal çizim; ölçüm değildir.</span></div>
+  </section>
+
+  <section id="tablo" aria-labelledby="tablo-h">
+    <p class="eyebrow">Yan yana</p>
+    <h2 id="tablo-h">Ölçüler ve seçenekler</h2>
+    <p class="mute small">Yükseklik (stack) ve drop markanın verdiği değerlerdir; laboratuvar ölçümleri birkaç milimetre farklı çıkabiliyor (altında not edildi). Ağırlık erkek US 9.</p>
+    <div class="tbl"><table id="ctable"></table></div>
+  </section>
+
+  <div id="shoes"></div>
+
+  <footer class="foot">
+    <p><b>Yöntem.</b> Bilgiler resmî marka sayfaları ve laboratuvar ölçümü yapan inceleme siteleri (RunRepeat, RTINGS, Road Trail Run, Doctors of Running, Believe in the Run, Running Warehouse) üzerinden web aramasıyla toplandı ve ikinci bir kontrolle doğrulandı. Marka sayfaları doğrudan açılamadığı için bazı değerler arama özetlerinden alındı; fiyat ve stok değişir.</p>
+    <p><b>Çizimler.</b> Yan görünümler her ayakkabının markaca verilen topuk ve ön ayak yüksekliğine göre ölçekli çizildi; üst görünümler ve arka kesitler şemadır. Orijinal fotoğraflar için her bölümdeki resmî galeri bağlantısını kullanın.</p>
+    <p><b>Önemli.</b> Destekli ayakkabı ile kişisel tabanlığın desteği üst üste binebilir. Her modeli kendi tabanlığınızla, günün ikinci yarısında ve 2E/4E genişlikte deneyin; tabanlığı hazırlayan uzmana danışın.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+const SHOES=[
+{id:'kayano',brand:'ASICS',model:'GEL-KAYANO 32',sub:'2E / 4E',
+ status:{cur:false,text:'Önceki nesil',detail:'Yerine Haziran 2026’da GEL-KAYANO 33 çıktı.'},
+ price:'2E indirimde ≈160 € · liste 200 €',
+ mech:{kind:'4d',name:'4D GUIDANCE SYSTEM',short:'Yük arttıkça sertleşen medial modül',desc:'Ark altındaki köpük modülü, topuk içe yattıkça direnç gösteriyor. Normal adımda fark edilmiyor.'},
+ dist:'Desteği “gerektiğinde devreye giren” bir parçayla veren tek model. Ark altındaki 4D Guidance modülü normal adımda belli olmaz; ayak içe çöktükçe direnci artar. Topukta ayrıca PureGEL jel yastığı var.',
+ spec:{heel:40,fore:32,drop:'8 mm',dropM:'ölçülen 9,3 mm',weight:'298 g',widths:'D · 2E · 4E',widthsN:'4E’nin AB’de satıldığı doğrulanamadı',insole:'Çıkarılabilir',insoleN:'OrthoLite X-55',foam:'FF BLAST PLUS',foamN:'+ 4D modülü, PureGEL',upper:'Engineered stretch knit',outsole:'HYBRID ASICSGRIP'},
+ ts:9,
+ tech:[
+  {n:'4D GUIDANCE SYSTEM',loc:'midsole_medial',main:true,d:'Ark altındaki köpük modülü. Ayak fazla içe çöktüğünde direnç artar, normal adımda fark edilmez.'},
+  {n:'FF BLAST PLUS',loc:'midsole_full',d:'Ara tabanın ana köpüğü. 32’de ön ayağa yaklaşık 2 mm ek köpük eklendi.'},
+  {n:'PureGEL',loc:'midsole_heel',d:'Topuk altına gömülü jel. İlk temastaki darbeyi yumuşatır.'},
+  {n:'OrthoLite X-55 iç taban',loc:'insole',d:'Çıkarılabilir fabrika tabanı; yerine kişisel tabanlık konabilir.'},
+  {n:'Dış topuk çanağı',loc:'heel_counter',d:'Topuğu arkadan saran sert yapı; topuğun yana kaçmasını sınırlar.'},
+  {n:'HYBRID ASICSGRIP',loc:'outsole',d:'Tutuş için ASICSGRIP, aşınan bölgelerde AHARPLUS kauçuk. Islak asfaltta hafif kayma bildirildi.'},
+  {n:'Engineered stretch knit',loc:'upper',d:'Esnek örgü saya; Kayano 31’e göre daha sıkı kalıp.'},
+  {n:'8 mm drop, yeni topuk geometrisi',loc:'geometry_rocker',d:'Kayano serisinde ilk kez 8 mm. Belirgin bir rocker yok; geçiş geometriyle yumuşatılmış.'}],
+ pros:['2E ve 4E kalıp: geniş ön ayak ve yazın şişen ayak için ek hacim.','Çıkarılabilir OrthoLite tabanlık; perakendeciler “ortez dostu” olarak listeliyor.','4D Guidance, sert topuk çanağı ve yan duvarlar overpronasyon ile dengesiz topuk temasına yönelik.','Ön ayakta ≈32 mm yastık, CM1 altındaki basıncı dağıtmaya yardımcı olabilir.','Bir inceleme 33’ün desteğini daha “doğal” buluyor; daha belirgin yönlendirme isteyenler için 32 hâlâ güçlü aday.'],
+ cons:['Saya Kayano 31’e göre daha sıkı; ortezle birlikte 2E veya 4E denenmeli.','Belirgin rocker yok ve ön ayak oldukça sert; erken topuk kalkışında HOKA ve New Balance kadar yardımcı olmayabilir.','Ortezin medial desteği ile 4D modülü üst üste binebilir.','Model 33’e geçtiği için 2E/4E stoğu azalıyor.','Islak asfaltta hafif kayma ve sıcakta ısınma bildirildi.'],
+ links:[['ASICS ABD ürün sayfası (fotoğraf galerisi)','https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html'],['ASICS UK ürün sayfası','https://www.asics.com/gb/en-gb/gel-kayano-32/p/1011C052-001.html'],['GEL-KAYANO 32 Extra Wide (4E)','https://www.asics.com/ca/fr-ca/gel-kayano-32-extra-wide-1011c054-002']],
+ videos:[['GEL-KAYANO 32 tanıtımı','https://www.youtube.com/watch?v=ajkRWUPkv6c',true],['4D GUIDANCE SYSTEM nasıl çalışır (Kayano 30 üzerinden anlatım, aynı sistem)','https://www.youtube.com/watch?v=zZBJhhc2U2I',true],['GEL-KAYANO 33 teknoloji videosu (yeni model)','https://www.youtube.com/watch?v=T6hcgSGESQo',true]],
+ videoNote:'Kanal adları arama sonuçlarından alındı.',
+ version:'GEL-KAYANO 33’te 4D Guidance kaldırıldı; destek FluidSupport adlı geometriden geliyor. Ara taban çift katlı (FF BLAST MAX üstte, FF BLAST PLUS altta), drop yine 8 mm, AB fiyatı ≈200 €. Bir inceleme 33’ü 32’den daha sert ve desteğini daha “doğal” buluyor; belirgin overpronasyonda 32 hâlâ mantıklı bir aday.'},
+
+{id:'nb860',brand:'New Balance',model:'Fresh Foam X 860 v14',sub:'2E / 4E',
+ status:{cur:false,text:'Önceki nesil',detail:'Yerine Nisan 2026’da 860 v15 çıktı.'},
+ price:'≈115–120 € indirimde · liste 160 € · v15: 170 €',
+ mech:{kind:'plane',name:'Stability Plane',short:'Köpük katmanları arasına gömülü sert plaka',desc:'İnce plaka içte boydan boya, topukta tüm genişlik boyunca uzanıyor. Üstündeki köpük ezilse de plaka eğilmeye direniyor.'},
+ dist:'Destek ayakkabının içinden geliyor: iki yoğunluklu Fresh Foam X katmanının arasına gömülü ince, sert bir EVA plaka. İç tarafta boydan boya, topukta tüm genişlik boyunca uzanıyor ve bir medial kama gibi çalışıyor.',
+ spec:{heel:38,fore:30,drop:'8 mm',dropM:'ölçülen 9,3 mm',weight:'298 g',widths:'D · 2E · 4E',widthsN:'Eski sezon; NL’de geniş stok sınırlı',insole:'Çıkarılabilir',insoleN:'perakendeci bilgisi; ince',foam:'Fresh Foam X',foamN:'+ Stability Plane (incelemelere göre çift yoğunluk)',upper:'Engineered mesh, körüklü dil',outsole:'Blown rubber'},
+ platform:'Taban genişliği: topuk 90 · orta 80 · ön ayak 110 mm (Road Trail Run)',
+ ts:13,
+ tech:[
+  {n:'Stability Plane',loc:'midsole_medial',main:true,d:'İki köpük katmanı arasındaki ince sert plaka. İç tarafta boydan boya, topukta tüm genişlik boyunca uzanır; içe çökmeyi sınırlar.'},
+  {n:'Fresh Foam X',loc:'midsole_full',d:'Ana yastık köpüğü. İncelemelere göre iki yoğunluklu: üst katman yumuşak, alt katman daha sert ve iç tarafta daha kalın.'},
+  {n:'Rocker profil',loc:'geometry_rocker',d:'İncelemelere göre topukta pah, ön ayakta yukarı kıvrık taban; ayak öne yuvarlanır, parmak eklemleri daha az bükülür.'},
+  {n:'Körüklü dil',loc:'tongue',d:'Dil iki yandan sayaya dikili; kaymaz, orta ayağı sabit tutar.'},
+  {n:'Topuk kontrforu',loc:'heel_counter',d:'Sert ve dolgulu; topuğun yere basarken yana oynamasını sınırlar.'},
+  {n:'Engineered mesh saya',loc:'upper',d:'Ön ayakta hafif geniş, hacmi normalin biraz üstünde. Burun koruyucusu ilk başta kısa hissettirebilir.'},
+  {n:'Blown rubber dış taban',loc:'outsole',d:'Hafif, esnek kauçuk; aşınma bölgelerinde.'}],
+ pros:['İç tarafta boydan boya Stability Plane ve içte kalın alt köpük: topuktan ön ayağa medial destek.','Sert topuk kontrforu ve geniş topuk tabanı (90 mm) dengesiz topuk temasını sınırlar.','2E ve 4E seçenekleri; çıkarılabilir ince tabanlık.','Rocker taban, erken topuk kalkışında öne geçişi kolaylaştırır.','Şu an indirimde (≈115–120 €): denemek için düşük risk.'],
+ cons:['Burun koruyucusu yüzünden ilk başta kısa hissettirir; yarım numara büyük ve 2E/4E denemek neredeyse şart.','Ortezin medial desteğiyle birlikte aşırı düzeltme riski.','Ayağı dışa ittiği, dış bilek instabilitesi olanlara uygun olmadığı belirtiliyor.','Sert medial köpük ön ayağa uzanıyor; CM1 altında sertlik hissi yaratabilir.','İnce fabrika tabanının yerine kalın ortez iç hacmi azaltır.'],
+ links:[['New Balance NL ürün sayfası (fotoğraf galerisi)','https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html'],['New Balance UK ürün sayfası','https://www.newbalance.co.uk/pd/fresh-foam-x-860v14/M860V14-50478.html'],['Yeni model 860 v15 (NL)','https://nl.newbalance.eu/nl/pd/fresh-foam-x-860-v15/M860V15_RU-FTW-802888.html']],
+ videos:[['Road Trail Run video incelemesi','https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html',false],['Trail and Kale incelemesi','https://m.youtube.com/watch?v=_TzZ6GchyDk',false]],
+ videoNote:'New Balance’ın resmî kanalında bu model için video bulunamadı.',
+ version:'860 v15: daha yüksek (topuk ≈40 mm) ve daha geniş platform, daha sert Stability Plane, daha ağır (331–344 g), burun hacmi daha az. 2E ve 4E var; NL fiyatı 170 €. v14 daha hafif, daha alçak ve şu an daha ucuz.'},
+
+{id:'gaviota',brand:'HOKA',model:'Gaviota 6',sub:'Wide (2E) / X-Wide (4E)',
+ status:{cur:true,text:'Güncel',detail:'Ocak 2026’da çıktı; Gaviota 5’in yerini aldı.'},
+ price:'180 € (HOKA NL) · mağazalarda ≈145–155 €',
+ mech:{kind:'hframe',name:'H-Frame',short:'İki kenarı saran sert köpük çerçeve',desc:'Daha sert köpükten H biçimli çerçeve ayağın iki kenarını tam boy sarıyor; topuk platformun içine oturuyor.'},
+ dist:'Setin en “düzeltici” modeli. Enhanced H-Frame, ara tabana gömülü ve iki kenarı tam boy saran çift yoğunluklu bir çerçeve. Çok geniş, yüksek platformla birleşince yorumcular “neredeyse hareket kontrol” diyor. Bedeli: eski nesil CMEVA köpük ve düşük enerji geri dönüşü.',
+ spec:{heel:39,fore:33,drop:'6 mm',dropM:'ölçülen 7,3–7,6 mm',weight:'283 g',widths:'D · 2E · 4E',widthsN:'NL: Breed ve X-Breed',insole:'Çıkarılabilir',insoleN:'4,8 mm',foam:'CMEVA',foamN:'+ Enhanced H-Frame',upper:'Engineered mesh, iç ghillie bağcık',outsole:'Kauçuk pedler'},
+ ts:11,
+ tech:[
+  {n:'Enhanced H-Frame',loc:'midsole_medial',main:true,d:'Ara tabana gömülü, H biçiminde daha sert köpük çerçeve. İç ve dış kenarı sarar; ayak içe çökmeye başlayınca onu ortaya yönlendirir.'},
+  {n:'CMEVA ara taban',loc:'midsole_full',d:'Kalın, maksimum yastıklı köpük. Eski nesil; enerji geri dönüşü düşük (≈%45).'},
+  {n:'İç ghillie bağcık',loc:'lacing',d:'Bağcıklar sayanın içindeki ilmeklerden geçer; orta ayağı basınç noktası oluşturmadan sarar.'},
+  {n:'Comfort collar',loc:'collar',d:'Dolgulu yaka topuğu yuvaya oturtur, erken topuk kalkışındaki sürtünmeyi azaltır.'},
+  {n:'Topuk kontrforu',loc:'heel_counter',d:'Sert topuk kabı; topuğun yana kaymasını sınırlar.'},
+  {n:'Kauçuk dış taban',loc:'outsole',d:'Aşınma bölgelerinde kauçuk; ıslak zemin tutuşu Gaviota 5’e göre arttı.'},
+  {n:'Çıkarılabilir iç taban',loc:'insole',d:'4,8 mm; çıkarınca kişisel tabanlık için hacim açılır.'},
+  {n:'Engineered mesh',loc:'upper',d:'Nefes alır; burun kısmı geniş ama sığ bulunuyor.'}],
+ pros:['Tam boy H-Frame, geniş taban ve sert topuk: dengesiz topuk ve overpronasyon için setin en güçlüsü.','Wide (2E) ve X-Wide (4E) NL resmî sitede; başparmak bölgesi ortalamadan geniş ölçüldü (76,7 mm).','Çıkarılabilir 4,8 mm tabanlık (RunRepeat ölçümü).','Sert ön ayak ve kalın ön ayak yastığı (33 mm) CM1 ve sinir için koruyucu olabilir.','Islak zemin tutuşu iyileşti; ılımlı 6 mm drop.'],
+ cons:['Üst hacmi düşük, burun sığ: ortezle yer daralabilir; X-Wide düşünülmeli.','Orta ayakta iç taban ve yan duvar hafif kabarık; ortezin arkıyla çakışabilir.','Ön ayak rocker’ı Gaviota 5’e göre daha düz bulunuyor.','Eski nesil köpük sert ve “ölü” hissedebilir.','Güçlü düzeltme ile ortezin desteği üst üste binebilir.'],
+ links:[['HOKA NL ürün sayfası (fotoğraf galerisi)','https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html'],['HOKA NL geniş kalıplar (Breed / X-Breed)','https://www.hoka.com/nl/nl/brede-pasvorm-heren/'],['HOKA ABD ürün sayfası','https://www.hoka.com/en/us/mens-everyday-running-shoes/gaviota-6/1171932.html']],
+ videos:[['This Max-Cushion Stability Shoe Hits The Spot','https://www.youtube.com/watch?v=JKrmqyLOkrg',false],['Big Difference from the Gaviota 5?','https://www.youtube.com/watch?v=eTqjBZ08iWw',false]],
+ videoNote:'HOKA’nın resmî kanalında Gaviota 6’ya özel video bulunamadı.',
+ version:'Gaviota 5’e göre yaklaşık 27 g daha hafif, Enhanced H-Frame, iç ghillie bağcık, daha fazla kauçuk ve yeni X-Wide seçeneği. Gaviota 7 için duyuru yok.'},
+
+{id:'glycerin',brand:'Brooks',model:'Glycerin GTS 23',sub:'2E / 4E',
+ status:{cur:true,text:'Güncel',detail:'Şubat 2026’da çıktı (GTS 22’nin yerine).'},
+ price:'180 € liste · renge göre ≈117–160 €',
+ mech:{kind:'rails',name:'GuideRails',short:'Yalnız sapınca devreye giren topuk rayları',desc:'Topuğun iki yanındaki raylar normal adımda karışmıyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor.'},
+ dist:'GuideRails, topuğun iki yanında iki sert köpük ray. Ayağı sürekli düzeltmeye çalışmaz; ayak normal yolundan saptığında topuk ve kaval kemiği dönüşünü sınırlar. Brooks bunu diz odaklı bir sistem olarak tanımlıyor.',
+ spec:{heel:38,fore:30,drop:'8 mm',dropM:'GTS 22’de 10 mm idi',weight:'306 g',widths:'D · 2E · 4E',widthsN:'NL’de geniş stok sınırlı olabilir',insole:'Çıkarılabilir',insoleN:'≈4,4–4,9 mm',foam:'DNA TUNED',foamN:'azotlu, çift hücreli',upper:'Triple jacquard warp knit',outsole:'RoadTack + Segmented Crash Pad'},
+ platform:'Taban genişliği: topuk 90 · orta 88 · ön ayak 115 mm (Road Trail Run)',
+ ts:10,
+ tech:[
+  {n:'GuideRails',loc:'midsole_heel',main:true,d:'Topuğun iki yanında korkuluk gibi çalışır; yalnız ayak saptığında devreye girer, aşırı içe basmayı ve topuk yalpalamasını sınırlar.'},
+  {n:'DNA TUNED',loc:'midsole_full',d:'Topukta iri hücreli yumuşak, ön ayakta küçük hücreli canlı köpük. GTS 23’te ön ayağa 2 mm eklendi.'},
+  {n:'Segmented Crash Pad',loc:'midsole_lateral',d:'Topuğun dış kenarında bölmeli yastık; inişten ön ayağa geçişi yumuşatır.'},
+  {n:'RoadTack kauçuk',loc:'outsole',d:'Ön ayak ve topuğun iç kenarında dayanıklı tutuş.'},
+  {n:'Triple jacquard warp knit',loc:'upper',d:'Yumuşak örgü saya. Burun koruması yüzünden burun hafif sivri ve kısa bulunuyor.'},
+  {n:'Çıkarılabilir iç taban',loc:'insole',d:'Brooks’a göre çıkarılabilir; kalınlık yaklaşık 4,4–4,9 mm.'}],
+ pros:['GuideRails topuğun iki yanından yalpalamayı sınırlar; diz ve topuk hattı için doğrudan yanıt.','D, 2E ve 4E seçenekleri.','Ön ayakta ≈30 mm ve +2 mm köpük: CM1 altında koruma.','Geniş taban (ön ayakta 115 mm) genel denge hissi verir.','Dayanıklı RoadTack kauçuk.'],
+ cons:['Bir inceleme sitesi “ortez dostu değil” diye işaretlemiş; ortezle aşırı düzeltme riski. Mutlaka kendi tabanlığınızla deneyin.','Burun sivri ve kısa hissettirebilir, başparmak yanında sürtünme bildirildi: CM1 ve sinir için olumsuz.','Ara tabanı sert, raylarını “fazla kontrolcü” bulan yorumcu var.','Dil yanlardan bağlı değil, kayabiliyor.','Liste fiyatı 180 €; NL’de geniş kalıp stoğu sınırlı olabilir.'],
+ links:[['Brooks NL ürün sayfası (fotoğraf galerisi)','https://www.brooksrunning.com/nl_nl/mens/road-running-shoes/glycerin-gts-23/110503.html'],['Brooks ABD ürün sayfası','https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/glycerin-gts-23/110503.html'],['GuideRails nasıl çalışır (Brooks)','https://www.brooksrunning.com/en_nl/blog/research-innovation/the-science-behind-guiderails-technology.html']],
+ videos:[['All-new Glycerin GTS 23 (tanıtım)','https://www.youtube.com/watch?v=WEnZN5mvBOE',false],['Glycerin GTS 23 vs 22: GuideRails size uygun mu?','https://www.youtube.com/watch?v=LQ40dYLqgBg',false]],
+ videoNote:'İlk videonun Brooks’un resmî kanalına ait olduğu doğrulanamadı.',
+ version:'GTS 22’ye göre: drop 10 mm’den 8 mm’ye indi (ön ayağa 2 mm köpük), yeni örgü saya. GuideRails ve DNA TUNED aynı. GTS 24 için duyuru yok.'},
+{id:'hurricane',brand:'Saucony',model:'Hurricane 26',sub:'Wide (2E)',
+ status:{cur:true,text:'Güncel',detail:'2026 baharında çıktı (Hurricane 25’in yerine).'},
+ price:'190 € (Saucony NL)',
+ mech:{kind:'hurr',name:'CenterPath',short:'Geniş taban ve yan duvarlarla, şekilden gelen destek',desc:'Sert bir parça yok. Geniş taban ve ayağı içine alan yükseltilmiş yan duvarlar topuğu merkezde tutuyor.'},
+ dist:'Desteği bir post, ray ya da plaka yerine yalnızca ayakkabının şekliyle veriyor: geniş taban, ayağı içine alan yükseltilmiş yan duvarlar ve asimetrik form (CenterPath). Bunu zıplayan incrediLUX köpükle birleştiriyor. Beşli içinde en “nötr ayakkabı gibi” hissettiren ve en hafif seçenek; ama genişlikte yalnızca 2E var.',
+ spec:{heel:41,fore:35,drop:'6 mm',dropM:'ölçülen 5,9 mm',weight:'262 g',widths:'D · 2E',widthsN:'4E (X-Wide) yok',insole:'Çıkarılabilir',insoleN:'çoğu ortez sığar (RunRepeat)',foam:'incrediLUX',foamN:'+ çift yoğunluklu PWRRUN çerçeve',upper:'Engineered mesh',outsole:'XT-900 karbon kauçuk'},
+ ts:12,
+ tech:[
+  {n:'CenterPath',loc:'geometry_support',main:true,d:'Destek sert bir iç parçadan değil ayakkabının şeklinden gelir: geniş taban, ayağı içine alan yükseltilmiş yan duvarlar, asimetrik form. Rocker form topuktan parmağa geçişi yuvarlar.'},
+  {n:'incrediLUX',loc:'midsole_full',d:'Ayağa yakın üst katmandaki hafif, yumuşak ve geri sekmeli köpük (A-TPU). Hurricane 26’da PWRRUN PB’nin yerine geldi.'},
+  {n:'PWRRUN çerçeve',loc:'midsole_heel',d:'Yumuşak üst köpüğü çevreleyen çift yoğunluklu taşıyıcı; ayağın yumuşak köpükte yana kaymasını sınırlar.'},
+  {n:'XT-900 karbon kauçuk',loc:'outsole',d:'Dayanıklı, karbon katkılı dış taban; Hurricane 26’da yeniden tasarlandı.'},
+  {n:'Engineered mesh',loc:'upper',d:'Delikli, nefes alan saya. Standart kalıpta burun ortalamadan biraz dar ölçüldü (72,2 mm).'},
+  {n:'Çıkarılabilir iç taban',loc:'insole',d:'RunRepeat’e göre çıkarılabilir; çoğu kişisel ortez sığar.'},
+  {n:'Topuk kontrforu',loc:'heel_counter',d:'Topuğu arkadan saran kap. Sertliği konusunda kaynaklar çelişiyor (orta / sert).'}],
+ pros:['Resmî Wide (2E) versiyonu ve çıkarılabilir iç taban; çoğu ortez sığıyor.','Geniş taban ve yan duvarlar topuğu sert bir parça olmadan merkezde tutuyor.','41/35 mm yastık ve yüksek topuk şok emilimi: uzun yaz yürüyüşlerinde topuğa ve CM1’e gelen darbe azalır.','Setin en hafifi (262 g); nefes alan saya.','Saucony NL’de 190 €; kolay bulunuyor.'],
+ cons:['4E yok, yalnızca 2E: çok geniş ön ayak ve ortez için hacim yetmeyebilir.','Standart kalıpta burun ortalamadan biraz dar ve uçta daralıyor.','Destek seviyesi hafif–orta; belirgin overpronasyon ve dengesiz topukta Kayano veya Gaviota kadar güçlü değil.','Ön ayak hafif esnek; CM1 basıncı için sert ön ayak ve belirgin rocker isteniyorsa yetersiz kalabilir.','6 mm drop, erken topuk kalkışında baldıra 8 mm’lik modellerden biraz daha fazla yük bindirebilir.'],
+ links:[['Saucony ürün sayfası (fotoğraf galerisi)','https://www.saucony.com/en/hurricane-26/61249M.html'],['Hurricane 26 Wide (2E)','https://www.saucony.com/en/hurricane-26-wide/61250M.html'],['Saucony NL Hurricane sayfası','https://www.saucony.com/NL/nl_NL/saucony-hurricane-upg/']],
+ videos:[],
+ videoNote:'Araştırmada Hurricane 26 için doğrulanmış video bulunamadı.',
+ version:'Hurricane 25’e göre: PWRRUN PB yerine incrediLUX köpük, stack 38/32’den 41/35 mm’ye çıktı, ağırlık ≈295 g’dan 262 g’a indi, dış taban yenilendi. Gore-Tex’li GTX versiyonu 210 €; yaz için normal mesh daha uygun.'}
+];
+
+const LOC={geometry_support:'taban şekli',midsole_full:'ara taban',midsole_heel:'topuk, ara taban',midsole_medial:'iç taraf, ara taban',midsole_lateral:'dış taraf, topuk',midsole_forefoot:'ön ayak',outsole:'dış taban',insole:'iç taban',upper:'saya',heel_counter:'topuk',collar:'yaka',tongue:'dil',lacing:'bağcık',geometry_rocker:'taban geometrisi',last_fit:'kalıp'};
+const NS='http://www.w3.org/2000/svg';
+const $=(s,r=document)=>r.querySelector(s);
+const ss=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- side view (to scale, mm) ---------- */
+function sideSVG(s){
+ const H=s.spec.heel,F=s.spec.fore,TS=s.ts,L=290,OUT=3.5,INS=4;
+ const bot=x=>(x<35?5*Math.pow(1-x/35,2):0)+(x>195?TS*Math.pow((x-195)/95,2):0);
+ const st=x=>x<=60?H:x<=200?H+(F-H)*ss((x-60)/140):x<=262?F:F*(1-.5*Math.pow((x-262)/28,2));
+ const top=x=>bot(x)+st(x);
+ const X=x=>(34+x*2).toFixed(1),Y=y=>(268-y*2).toFixed(1);
+ const line=(f,a,b,n=40)=>{let p=[];for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;p.push(X(x)+' '+Y(f(x)));}return p;};
+ const midsole='M'+line(x=>bot(x)+OUT,0,L).join(' L')+' L'+line(x=>top(x)-INS,L,0).join(' L')+'Z';
+ const outsole='M'+line(bot,3,287).join(' L')+' L'+line(x=>bot(x)+OUT,287,3).join(' L')+'Z';
+ const insole='M'+line(x=>top(x)-INS,6,280).join(' L')+' L'+line(top,280,6).join(' L')+'Z';
+ const clipX=(a,b)=>`M${X(a)} 0 H${X(b)} V300 H${X(a)}Z`;
+ const U=(x,h)=>[X(x),Y(top(x)+h)];
+ const up=[U(0,0),U(-3,40),U(1,74),U(16,80),U(40,66),U(62,57),U(92,70),U(122,74),U(162,64),U(202,50),U(242,38),U(272,27),U(287,15),U(291,3)];
+ const cr=pts=>{let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;const c1=[+p1[0]+(p2[0]-p0[0])/6,+p1[1]+(p2[1]-p0[1])/6],c2=[+p2[0]-(p3[0]-p1[0])/6,+p2[1]-(p3[1]-p1[1])/6];d+=` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0]} ${p2[1]}`;}return d;};
+ const upper=cr(up)+' L'+line(top,291,0,30).join(' L')+'Z';
+ const counter=cr([U(1,0),U(-3,36),U(4,52),U(30,46),U(52,34),U(60,0)])+'Z';
+ const collar=cr([U(1,74),U(16,80),U(40,66),U(62,57)]);
+ const tongue=cr([U(66,58),U(80,80),U(96,78),U(104,69)]);
+ const toebox=cr([U(205,0),U(202,50),U(242,38),U(272,27),U(287,15),U(291,3)])+' L'+line(top,291,205,20).join(' L')+'Z';
+ const lacePts=[0,1,2,3,4].map(i=>{const x=104+i*22;return U(x,71-i*4.2);});
+ const laces=lacePts.map(p=>`M${(+p[0]-5).toFixed(1)} ${(+p[1]-3).toFixed(1)} l10 6 M${(+p[0]+5).toFixed(1)} ${(+p[1]-3).toFixed(1)} l-10 6`).join(' ');
+ const rocker=`M${X(232)} ${Y(bot(232)-7)} Q${X(268)} ${Y(bot(268)-7)} ${X(292)} ${Y(bot(292)+4)} M${X(48)} ${Y(-6)} Q${X(14)} ${Y(-4)} ${X(-3)} ${Y(8)}`;
+ const midY=x=>(bot(x)+OUT+top(x)-INS)/2;
+ // mechanism overlay (side)
+ let mech='';const k=s.mech.kind;
+ if(k==='4d')mech=`<path class="d-sup" stroke-dasharray="5 3" d="M${X(78)} ${Y(bot(78)+OUT+5)} L${X(168)} ${Y(bot(168)+OUT+5)} L${X(168)} ${Y(top(168)-INS-6)} L${X(78)} ${Y(top(78)-INS-6)}Z"/><text class="d-txt2" x="${X(80)}" y="${(+Y(top(78)-INS-6)-5).toFixed(1)}">4D modül (iç tarafta)</text><ellipse class="d-acc" cx="${X(40)}" cy="${Y(midY(40))}" rx="30" ry="9"/>`;
+ if(k==='plane')mech=`<path class="d-supl" d="M${line(x=>bot(x)+OUT+(st(x)-OUT-INS)*.42,12,236,30).join(' L')}"/><text class="d-txt2" x="${X(70)}" y="${(+Y(bot(70)+OUT+(st(70)-OUT-INS)*.42)+16).toFixed(1)}">Stability Plane</text>`;
+ if(k==='hframe')mech=`<path class="d-sup" d="M${line(x=>top(x)-INS,10,246,30).join(' L')} L${line(x=>top(x)-INS-9,246,10,30).join(' L')}Z"/><path class="d-sup" d="M${X(112)} ${Y(top(112)-INS-9)} L${X(112)} ${Y(bot(112)+OUT+2)} L${X(140)} ${Y(bot(140)+OUT+2)} L${X(140)} ${Y(top(140)-INS-9)}Z" stroke-dasharray="4 3"/><text class="d-txt2" x="${X(150)}" y="${(+Y(top(150))-14).toFixed(1)}">H-Frame (iki kenarda)</text>`;
+ if(k==='rails')mech=`<path class="d-sup" d="M${X(0)} ${Y(top(0)-INS)} ${line(x=>top(x)+9*(1-ss((x-60)/40)),0,100,20).map(p=>'L'+p).join(' ')} L${line(x=>top(x)-INS,100,0,20).join(' L')}Z"/><text class="d-txt2" x="${X(8)}" y="${(+Y(top(30)+12)-6).toFixed(1)}">GuideRails</text>`;
+ if(k==='hurr')mech=`<path class="d-sup" d="M${X(4)} ${Y(top(4)-INS-6)} ${line(x=>top(x)+5*(1-ss((x-110)/50)),4,170,24).map(p=>'L'+p).join(' ')} L${line(x=>top(x)-INS-6,170,4,24).join(' L')}Z"/><text class="d-txt2" x="${X(12)}" y="${(+Y(top(30)+6)-8).toFixed(1)}">CenterPath: yükseltilmiş yan duvar</text>`;
+ // regions + anchors
+ const R={
+  midsole_full:{d:midsole,a:[150,midY(150)]},
+  midsole_heel:{d:midsole,clip:[0,85],a:[38,midY(38)]},
+  midsole_forefoot:{d:midsole,clip:[185,290],a:[235,midY(235)]},
+  midsole_lateral:{d:midsole,clip:[0,72],a:[24,bot(24)+OUT+4]},
+  outsole:{d:outsole,a:[120,bot(120)+1.7]},
+  insole:{d:insole,a:[175,top(175)-2]},
+  upper:{d:upper,a:[168,top(168)+40]},
+  heel_counter:{d:counter,a:[22,top(22)+24]},
+  collar:{d:collar,a:[16,top(16)+80],line:true},
+  tongue:{d:tongue,a:[86,top(86)+78],line:true},
+  lacing:{d:laces,a:[148,top(148)+66],line:true},
+  geometry_rocker:{d:rocker,a:[268,bot(268)-7],line:true},
+  last_fit:{d:toebox,a:[255,top(255)+18]},
+  midsole_medial:null
+ };
+ const id='sv-'+s.id;
+ let regs='',mks='';
+ s.tech.forEach((t,i)=>{
+  const r=R[t.loc];if(!r)return;
+  const clip=r.clip?` clip-path="url(#${id}-c${i})"`:'';
+  const cdef=r.clip?`<clipPath id="${id}-c${i}"><path d="${clipX(r.clip[0],r.clip[1])}"/></clipPath>`:'';
+  regs+=cdef+`<path class="reg" data-i="${i}" d="${r.d}"${clip}${r.line?' style="fill:none;stroke-width:4"':''}/>`;
+  const ax=X(r.a[0]),ay=Y(r.a[1]);
+  mks+=`<g class="mk${t.main?' main':''}" data-i="${i}" transform="translate(${ax} ${ay})"><circle r="8"/><text>${i+1}</text></g>`;
+ });
+ if(s.tech.some(t=>t.main&&!R[t.loc])){const i=s.tech.findIndex(t=>t.main);const ax=k==='hframe'?X(205):k==='hurr'?X(110):X(122),ay=k==='hframe'?Y(top(205)-INS-4.5):k==='hurr'?Y(top(110)-INS-5):k==='plane'?Y(bot(122)+OUT+(st(122)-OUT-INS)*.42):Y(midY(122));mks+=`<g class="mk main" data-i="${i}" transform="translate(${ax} ${ay})"><circle r="8"/><text>${i+1}</text></g>`;}
+ return `<svg viewBox="0 0 660 300" role="img" aria-label="${esc(s.brand+' '+s.model)} yan görünüm şeması, topuk ${H} mm, ön ayak ${F} mm">
+  <defs></defs>
+  <line class="m-gr" x1="20" x2="640" y1="${Y(0)}" y2="${Y(0)}"/>
+  <path class="d-up" d="${upper}"/>
+  <path class="d-line" d="${counter}"/>
+  <path class="d-line" d="${collar}" style="stroke-width:2.2"/>
+  <path class="d-up" d="${tongue}"/>
+  <path class="d-line" d="${laces}" style="stroke:var(--accent);stroke-width:1.6"/>
+  <path class="d-foam" d="${midsole}"/>
+  <path class="d-dash" d="${insole}"/>
+  <path class="d-rub" d="${outsole}"/>
+  ${mech}
+  ${regs}
+  <g class="dim">
+   <line class="d-line" x1="${X(-10)}" x2="${X(-10)}" y1="${Y(0)}" y2="${Y(top(40))}"/><text class="d-txt" x="${X(-12)}" y="${(+Y(top(40)/2)).toFixed(1)}" text-anchor="end">${H}</text>
+   <line class="d-line" x1="${X(300)}" x2="${X(300)}" y1="${Y(bot(230))}" y2="${Y(top(230))}"/><text class="d-txt" x="${X(302)}" y="${(+Y(top(230)/2+bot(230)/2)).toFixed(1)}">${F}</text>
+   <text class="d-txt" x="${X(-12)}" y="${(+Y(top(40))-6).toFixed(1)}" text-anchor="end">mm</text>
+  </g>
+  ${mks}
+ </svg>`;
+}
+
+/* ---------- top view (schematic) ---------- */
+function topSVG(s){
+ const L=290,K=[[0,0],[2,17],[8,31],[22,42],[60,44],[120,41],[175,46],[215,53],[250,50],[272,40],[284,26],[288.5,14],[290,0]],M=[[0,0],[2,17],[8,31],[22,42],[60,41],[110,33],[150,36],[200,51],[230,55],[258,48],[276,34],[286,18],[290,0]];
+ const itp=(T,x)=>{for(let i=0;i<T.length-1;i++){if(x<=T[i+1][0]){const t=(x-T[i][0])/(T[i+1][0]-T[i][0]);return T[i][1]+(T[i+1][1]-T[i][1])*ss(t);}}return 0;};
+ const X=x=>(34+x*2).toFixed(1),Yl=w=>(134+w*1.55).toFixed(1),Ym=w=>(134-w*1.55).toFixed(1);const LY=34;
+ const xs=[];for(let i=0;i<=60;i++)xs.push(L*i/60);
+ const outline='M'+xs.map(x=>X(x)+' '+Ym(itp(M,x))).join(' L')+' L'+xs.slice().reverse().map(x=>X(x)+' '+Yl(itp(K,x))).join(' L')+'Z';
+ const band=(a,b,fr0,fr1,side)=>{const p=[];const n=24;for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;const w=side<0?itp(M,x):itp(K,x);p.push([X(x),side<0?Ym(w*fr1):Yl(w*fr1)]);}for(let i=n;i>=0;i--){const x=a+(b-a)*i/n;const w=side<0?itp(M,x):itp(K,x);p.push([X(x),side<0?Ym(w*fr0):Yl(w*fr0)]);}return 'M'+p.map(q=>q.join(' ')).join(' L')+'Z';};
+ let mech='',lab='',ax=0,ay=0;const k=s.mech.kind;
+ if(k==='4d'){mech=`<path class="d-sup" d="${band(72,172,.08,.92,-1)}"/><ellipse class="d-acc" cx="${X(38)}" cy="134" rx="38" ry="26"/>`;lab=`<text class="d-txt2" x="${X(74)}" y="${LY}">4D GUIDANCE (iç taraf)</text><text class="d-txt" x="${X(38)}" y="176" text-anchor="middle">PureGEL</text>`;ax=X(122);ay=Ym(itp(M,122)*.5);}
+ if(k==='plane'){mech=`<path class="d-sup" d="${band(12,238,.0,.95,-1)}"/><path class="d-sup" d="${band(10,78,0,.92,1)}"/>`;lab=`<text class="d-txt2" x="${X(40)}" y="${LY}">Stability Plane: içte boydan boya, topukta tam genişlik</text>`;ax=X(150);ay=Ym(itp(M,150)*.5);}
+ if(k==='hframe'){mech=`<path class="d-sup" d="${band(14,246,.74,.97,-1)}"/><path class="d-sup" d="${band(14,246,.74,.97,1)}"/><path class="d-sup" d="M${X(112)} ${Ym(itp(M,112)*.74)} L${X(142)} ${Ym(itp(M,142)*.74)} L${X(142)} ${Yl(itp(K,142)*.74)} L${X(112)} ${Yl(itp(K,112)*.74)}Z"/>`;lab=`<text class="d-txt2" x="${X(40)}" y="${LY}">H-Frame: iki kenar boyunca + orta köprü</text>`;ax=X(200);ay=Ym(itp(M,200)*.86);}
+ if(k==='rails'){mech=`<path class="d-sup" d="${band(4,100,.78,1,-1)}"/><path class="d-sup" d="${band(4,100,.78,1,1)}"/>`;lab=`<text class="d-txt2" x="${X(4)}" y="${LY}">GuideRails: topuğun iki yanında</text>`;ax=X(60);ay=Ym(itp(M,60)*.89);}
+ if(k==='hurr'){mech=`<path class="d-sup" d="${band(6,175,.74,1,-1)}"/><path class="d-sup" d="${band(6,150,.8,1,1)}"/>`;lab=`<text class="d-txt2" x="${X(10)}" y="${LY}">CenterPath: geniş taban, iki yanda yan duvar (içte daha uzun)</text>`;ax=X(90);ay=Ym(itp(M,90)*.87);}
+ const i=s.tech.findIndex(t=>t.main);
+ return `<svg viewBox="0 0 660 258" role="img" aria-label="${esc(s.brand+' '+s.model)} üstten taban şeması">
+  <path class="d-foam" d="${outline}"/>
+  ${mech}${lab}
+  <text class="d-txt" x="${X(290)}" y="14" text-anchor="end">İÇ TARAF (MEDİAL) ↑</text>
+  <text class="d-txt" x="${X(290)}" y="252" text-anchor="end">DIŞ TARAF (LATERAL) ↓</text>
+  <text class="d-txt" x="${X(0)}" y="134" text-anchor="end" dx="-6">topuk</text>
+  <text class="d-txt" x="${X(290)}" y="134" dx="6">burun</text>
+  <g class="mk main" data-i="${i}" transform="translate(${ax} ${ay})"><circle r="8"/><text>${i+1}</text></g>
+ </svg>`;
+}
+
+/* ---------- rear-view mechanism (animated) ---------- */
+const mechEls=[];
+function mechSVG(s){
+ const k=s.mech.kind;const cx=110,gy=176,mt=132,wb=(s.id==='gaviota'||s.id==='hurricane')?138:126,wt=wb-14;
+ let extra='',react='';
+ if(k==='4d'){extra=`<path class="d-sup react" d="M${cx-wt/2+4} ${mt+3} L${cx-8} ${mt+3} L${cx-10} ${gy-9} L${cx-wb/2+6} ${gy-9}Z"/>`;}
+ if(k==='plane'){extra=`<path class="d-supl" d="M${cx-wb/2+4} ${gy-24} L${cx+wb/2-4} ${gy-24}"/>`;}
+ if(k==='hframe'){extra=`<path class="d-sup react" d="M${cx-wt/2-2} ${mt-12} L${cx-wt/2+12} ${mt-6} L${cx-wb/2+16} ${gy-8} L${cx-wb/2} ${gy-8}Z"/><path class="d-sup" d="M${cx+wt/2+2} ${mt-12} L${cx+wt/2-12} ${mt-6} L${cx+wb/2-16} ${gy-8} L${cx+wb/2} ${gy-8}Z"/>`;}
+ if(k==='rails'){extra=`<path class="d-sup react" d="M${cx-wt/2} ${mt} L${cx-wt/2-2} ${mt-20} L${cx-wt/2+9} ${mt-20} L${cx-wt/2+11} ${mt}Z"/><path class="d-sup" d="M${cx+wt/2} ${mt} L${cx+wt/2+2} ${mt-20} L${cx+wt/2-9} ${mt-20} L${cx+wt/2-11} ${mt}Z"/>`;}
+ if(k==='hurr'){extra=`<path class="d-sup react" d="M${cx-wt/2-3} ${mt-16} L${cx-wt/2+8} ${mt-4} L${cx-wt/2+8} ${mt+4} L${cx-wt/2-1} ${mt+4}Z"/><path class="d-sup" d="M${cx+wt/2+3} ${mt-10} L${cx+wt/2-8} ${mt-2} L${cx+wt/2-8} ${mt+4} L${cx+wt/2+1} ${mt+4}Z"/>`;}
+ const foot=`<path class="m-foot" d="M${cx-24} ${mt-44} C${cx-30} ${mt-18} ${cx-24} ${mt} ${cx} ${mt} C${cx+24} ${mt} ${cx+30} ${mt-18} ${cx+24} ${mt-44}"/><path class="d-line" d="M${cx-22} ${mt-44} C${cx-22} ${mt-80} ${cx-26} ${mt-110} ${cx-28} ${mt-128} M${cx+22} ${mt-44} C${cx+22} ${mt-80} ${cx+26} ${mt-110} ${cx+28} ${mt-128}" style="stroke:var(--ink);stroke-width:1.4"/>`;
+ const ghost=`<path class="m-ghost" d="M${cx-24} ${mt-44} C${cx-30} ${mt-18} ${cx-24} ${mt} ${cx} ${mt} C${cx+24} ${mt} ${cx+30} ${mt-18} ${cx+24} ${mt-44} M${cx-22} ${mt-44} L${cx-28} ${mt-128} M${cx+22} ${mt-44} L${cx+28} ${mt-128}"/>`;
+ return `<svg viewBox="0 0 220 196" role="img" aria-label="${esc(s.mech.name)} arkadan kavramsal çizim">
+  <line class="m-gr" x1="12" x2="208" y1="${gy}" y2="${gy}"/>
+  <text class="d-txt" x="16" y="16">İÇ</text><text class="d-txt" x="204" y="16" text-anchor="end">DIŞ</text>
+  <g class="ghost" style="transform-origin:${cx}px ${mt}px">${ghost}</g>
+  <path class="d-foam" d="M${cx-wt/2} ${mt} L${cx+wt/2} ${mt} L${cx+wb/2} ${gy-6} L${cx-wb/2} ${gy-6}Z"/>
+  <path class="d-rub" d="M${cx-wb/2} ${gy-6} L${cx+wb/2} ${gy-6} L${cx+wb/2-2} ${gy} L${cx-wb/2+2} ${gy}Z"/>
+  ${extra}
+  <g class="heel" style="transform-origin:${cx}px ${mt}px">${foot}</g>
+ </svg>`;
+}
+
+/* ---------- render ---------- */
+const nav=$('#nav'),vlist=$('#vlist'),mechs=$('#mechs'),shoesEl=$('#shoes'),tbl=$('#ctable');
+let th='<thead><tr><th>Model</th><th>Destek sistemi</th><th>Drop</th><th>Topuk / ön ayak</th><th>Ağırlık</th><th>Genişlik</th><th>İç taban</th><th>Fiyat (NL/AB)</th></tr></thead><tbody>';
+SHOES.forEach(s=>{
+ nav.insertAdjacentHTML('beforeend',`<a href="#${s.id}">${esc(s.brand)} ${esc(s.model.replace('Fresh Foam X ',''))}</a>`);
+ vlist.insertAdjacentHTML('beforeend',`<li><span>${esc(s.brand)} ${esc(s.model.replace('Fresh Foam X ',''))}<br><span class="mute small">${esc(s.status.detail)}</span></span><span class="chip ${s.status.cur?'cur':'old'}">${esc(s.status.text)}</span></li>`);
+ const m=document.createElement('div');m.className='mech';m.innerHTML=mechSVG(s)+`<span class="nm">${esc(s.mech.name)}</span><span class="sh">${esc(s.brand)} ${esc(s.model.replace('Fresh Foam X ',''))}</span><p>${esc(s.mech.desc)}</p>`;mechs.appendChild(m);
+ mechEls.push({heel:m.querySelector('.heel'),ghost:m.querySelector('.ghost'),react:m.querySelector('.react')});
+ th+=`<tr><td><b>${esc(s.brand)} ${esc(s.model)}</b><span class="sub">${esc(s.status.cur?'Güncel model':'Önceki nesil')}</span></td><td>${esc(s.mech.name)}<span class="sub">${esc(s.mech.short)}</span></td><td class="num">${esc(s.spec.drop)}<span class="sub">${esc(s.spec.dropM)}</span></td><td class="num">${s.spec.heel} / ${s.spec.fore} mm</td><td class="num">${esc(s.spec.weight)}</td><td class="num">${esc(s.spec.widths)}</td><td>${esc(s.spec.insole)}<span class="sub">${esc(s.spec.insoleN)}</span></td><td>${esc(s.price)}</td></tr>`;
+ const sec=document.createElement('section');sec.id=s.id;sec.setAttribute('aria-label',s.brand+' '+s.model);
+ sec.innerHTML=`<article class="shoe">
+  <div class="shead"><div><span class="brand">${esc(s.brand)}</span><h2>${esc(s.model)} <span class="mute" style="font-size:.55em;font-stretch:100%">${esc(s.sub)}</span></h2></div>
+   <div class="meta"><span class="chip ${s.status.cur?'cur':'old'}">${esc(s.status.text)}</span><span class="mute">${esc(s.status.detail)}</span><span><b>${esc(s.price)}</b></span></div></div>
+  <div class="sgrid">
+   <div class="views">
+    <div class="view"><div class="vt"><span>Yan görünüm · dış taraf</span><span>ölçekli · topuk ${s.spec.heel} / ön ayak ${s.spec.fore} mm</span></div>${sideSVG(s)}</div>
+    <div class="view"><div class="vt"><span>Üstten · taban şeması</span><span>${esc(s.mech.name)}</span></div>${topSVG(s)}</div>
+    ${s.platform?`<p class="mute small" style="margin:0">${esc(s.platform)}</p>`:''}
+    <p class="photo">Orijinal fotoğraflar (yan, iç yan, üst, taban, arka): <a href="${s.links[0][1]}" target="_blank" rel="noopener">${esc(s.links[0][0])} ↗</a></p>
+   </div>
+   <div>
+    <p class="dist"><span class="k">Ayırt edici özellik</span>${esc(s.dist)}</p>
+    <ol class="tech">${s.tech.map((t,i)=>`<li data-i="${i}" class="${t.main?'mainmech':''}" tabindex="0"><span class="n">${i+1}</span><div><b>${esc(t.n)}</b><span class="loc">${esc(LOC[t.loc]||'')}</span><p>${esc(t.d)}</p></div></li>`).join('')}</ol>
+    <div class="specs">
+     <div><span class="k">Drop</span><span class="v">${esc(s.spec.drop)}<small>${esc(s.spec.dropM)}</small></span></div>
+     <div><span class="k">Ağırlık (US 9)</span><span class="v">${esc(s.spec.weight)}</span></div>
+     <div><span class="k">Genişlik</span><span class="v">${esc(s.spec.widths)}<small>${esc(s.spec.widthsN)}</small></span></div>
+     <div><span class="k">İç taban</span><span class="v">${esc(s.spec.insole)}<small>${esc(s.spec.insoleN)}</small></span></div>
+     <div><span class="k">Ara taban</span><span class="v">${esc(s.spec.foam)}<small>${esc(s.spec.foamN)}</small></span></div>
+     <div><span class="k">Saya / dış taban</span><span class="v">${esc(s.spec.upper)}<small>${esc(s.spec.outsole)}</small></span></div>
+    </div>
+    <div class="fit"><div class="p"><h3>Sizin profiliniz için artı</h3><ul>${s.pros.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div><div class="c"><h3>Dikkat</h3><ul>${s.cons.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div></div>
+    <div class="media">
+     <div><h3>Resmî sayfalar</h3><ul>${s.links.map(l=>`<li><a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])} ↗</a></li>`).join('')}</ul></div>
+     <div><h3>Videolar</h3><ul>${s.videos.length?'':'<li class="mute">—</li>'}${s.videos.map(v=>`<li><a href="${v[1]}" target="_blank" rel="noopener">${esc(v[0])} ↗</a><span class="tagv${v[2]?' off':''}">${v[2]?'marka':'bağımsız'}</span></li>`).join('')}</ul><p class="mute small" style="margin:6px 0 0">${esc(s.videoNote)}</p></div>
+    </div>
+    <details><summary>Sürüm notu</summary><p>${esc(s.version)}</p></details>
+   </div>
+  </div></article>`;
+ shoesEl.appendChild(sec);
+ const art=sec;
+ const set=(i,on)=>{art.querySelectorAll(`[data-i="${i}"]`).forEach(el=>el.classList.toggle('on',on));};
+ let pinned=-1;
+ art.querySelectorAll('.tech li,.mk').forEach(el=>{
+  const i=+el.dataset.i;
+  el.addEventListener('mouseenter',()=>{if(pinned<0)set(i,true);});
+  el.addEventListener('mouseleave',()=>{if(pinned<0)set(i,false);});
+  const click=()=>{if(pinned===i){set(i,false);pinned=-1;}else{if(pinned>=0)set(pinned,false);pinned=i;set(i,true);}};
+  el.addEventListener('click',click);
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();click();}});
+  el.addEventListener('focus',()=>{if(pinned<0)set(i,true);});
+  el.addEventListener('blur',()=>{if(pinned<0)set(i,false);});
+ });
+});
+tbl.innerHTML=th+'</tbody>';
+
+/* ---------- animation ---------- */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let playing=!reduce,t0=performance.now(),tp=0;
+const btn=$('#mplay');btn.textContent=playing?'Duraklat':'Oynat';btn.setAttribute('aria-pressed',String(playing));
+function pose(t){
+ const ph=(t/3200)%1;const s=Math.pow(Math.sin(ph*Math.PI),2);
+ const ghostA=-12*s,realA=-12*s*.42;
+ mechEls.forEach(m=>{m.ghost.style.transform=`rotate(${ghostA}deg)`;m.heel.style.transform=`rotate(${realA}deg)`;if(m.react)m.react.style.fillOpacity=String(.25+.75*s);});
+}
+function loop(now){if(playing){tp=now-t0;pose(tp);}requestAnimationFrame(loop);}
+pose(reduce?1600:0);requestAnimationFrame(loop);
+btn.addEventListener('click',()=>{playing=!playing;if(playing)t0=performance.now()-tp;btn.textContent=playing?'Duraklat':'Oynat';btn.setAttribute('aria-pressed',String(playing));});
+})();
+</script>
+
+</body>
+</html>
