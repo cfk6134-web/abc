@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Erkek Ayakkabısı Karar Raporu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  /* Layout: film sahnesi. Tam ekran 3D sahne, anlatım panelleri sahnenin bir yanında, altta bölümlü zaman şeridi. */
+  --ink:#0C141B; --ink-2:#121D26; --ink-3:#1A2833; --spot:#1B2D3B;
+  --line:#2A3B4A; --line-2:#3B5063;
+  --paper:#E8EDF1; --mute:#97A7B5; --dim:#67798A;
+  --gum:#E3A56F; --delft:#7FA6EE;
+  --ok:#7FD3A2; --warn:#F1CF5E; --no:#F07B72;
+  --glass:rgba(16,26,35,.88);
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --barh:66px;
+  --fs-hero:clamp(2.5rem,6.6vw,6rem);
+  --fs-h2:clamp(1.65rem,3.3vw,2.85rem);
+  --fs-body:clamp(.97rem,1.1vw,1.1rem);
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.5;overflow:hidden;-webkit-font-smoothing:antialiased}
+#app{position:fixed;inset:0;overflow:hidden;background:radial-gradient(ellipse 58% 52% at var(--sx,62%) var(--sy,48%),var(--spot) 0%,var(--ink) 72%)}
+#gl,#fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+#gl{z-index:0;touch-action:none;cursor:grab}
+#gl.drag{cursor:grabbing}
+#fx{z-index:1;pointer-events:none}
+#tags{position:absolute;inset:0;z-index:2;pointer-events:none}
+#hud{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:16px;z-index:4;font:500 .68rem/1 var(--f-mono);letter-spacing:.12em;color:var(--dim);pointer-events:none;transition:opacity .5s}
+#scenes{position:absolute;left:0;right:0;top:0;bottom:calc(var(--barh) + env(safe-area-inset-bottom,0px));z-index:3;pointer-events:none}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.scene.active{opacity:1;visibility:visible;transition:opacity .7s ease .12s}
+.scene.notrans,.scene.notrans *{transition:none!important}
+.pe{pointer-events:auto}
+
+/* type */
+.eyebrow{font:600 .7rem/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gum);margin:0 0 .9rem}
+.h1{font-family:var(--f-disp);font-stretch:125%;font-weight:820;font-size:var(--fs-hero);line-height:.92;letter-spacing:-.015em;margin:0 0 1.2rem;text-wrap:balance}
+.h1 span{display:block}
+.h1 .acc{color:var(--gum)}
+.h2{font-family:var(--f-disp);font-stretch:115%;font-weight:760;font-size:var(--fs-h2);line-height:1.02;letter-spacing:-.01em;margin:0 0 .8rem;text-wrap:balance}
+.lede{font-size:clamp(1.05rem,1.35vw,1.28rem);color:var(--paper);max-width:36rem;margin:0 0 1rem;line-height:1.45}
+p{margin:0 0 .8rem;font-size:var(--fs-body);max-width:38rem}
+.mute{color:var(--mute)}
+.mono{font-family:var(--f-mono)}
+.small{font-size:.86rem}
+.quote{font-family:var(--f-disp);font-stretch:100%;font-weight:600;font-size:clamp(1.1rem,1.6vw,1.45rem);line-height:1.3;border-left:2px solid var(--gum);padding:.2rem 0 .2rem 1rem;margin:1.2rem 0;max-width:34rem}
+.hint{font:400 .74rem/1.5 var(--f-mono);color:var(--dim);margin-top:1.4rem}
+kbd{font:600 .7rem var(--f-mono);border:1px solid var(--line-2);padding:1px 5px;color:var(--mute)}
+
+/* reveal */
+.r{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.r.in{opacity:1;transform:none}
+.r.fade{transform:none}
+
+/* layouts: tall first */
+.lay-split .panel{position:absolute;left:0;right:0;top:45%;bottom:0;padding:18px 16px 22px;overflow:auto;display:flex;flex-direction:column;background:linear-gradient(to bottom,rgba(12,20,27,0),var(--ink) 28px)}
+.pin{margin:auto 0;min-width:0}
+.lay-center .top{position:absolute;left:16px;right:16px;top:calc(18px + env(safe-area-inset-top,0px))}
+.lay-center .cap{position:absolute;left:16px;right:16px;bottom:14px;max-width:780px;margin:0 auto;background:var(--glass);border:1px solid var(--line);padding:14px 18px;backdrop-filter:blur(6px)}
+.lay-center .cap.left{margin:0}
+.lay-full .panel,.lay-cat .panel{position:absolute;inset:0;overflow:auto;padding:calc(18px + env(safe-area-inset-top,0px)) 16px 24px}
+.lay-full .panel{background:linear-gradient(var(--ink),rgba(12,20,27,.94))}
+.lay-full .pin{max-width:1120px;margin:0 auto}
+.lay-cat .grid{display:grid;gap:18px}
+@media (min-width:860px) and (min-aspect-ratio:21/20){
+  .lay-split .panel{top:0;bottom:0;right:auto;width:min(47vw,610px);padding:clamp(24px,5vh,64px) 24px clamp(24px,5vh,64px) clamp(24px,5vw,84px);background:none}
+  .lay-center .top{left:clamp(24px,5vw,84px);right:auto;max-width:44rem;top:clamp(24px,5vh,56px)}
+  .lay-center .cap{bottom:24px;left:24px;right:24px}
+  .lay-center .cap.left{left:clamp(24px,5vw,84px);right:auto;max-width:520px}
+  .lay-full .panel{padding:clamp(28px,5vh,56px) clamp(24px,5vw,80px)}
+  .lay-cat .panel{padding:clamp(24px,4vh,44px) clamp(24px,4vw,64px)}
+  .lay-cat .grid{grid-template-columns:minmax(280px,.78fr) minmax(0,1.32fr);gap:clamp(24px,3.4vw,56px);align-items:start}
+  .lay-cat .lc{position:sticky;top:0}
+}
+
+/* intro */
+.intro .lede{max-width:32rem}
+
+/* profile viz */
+.viz{position:absolute;left:16px;right:16px;top:12px;height:calc(45% - 16px)}
+.viz canvas{width:100%;height:100%;display:block}
+@media (min-width:860px) and (min-aspect-ratio:21/20){.viz{left:48%;right:3%;top:6%;height:auto;bottom:5%}}
+.finds{list-style:none;padding:0;margin:.4rem 0 1rem;display:grid;gap:8px}
+.finds li{display:grid;grid-template-columns:2.2rem 1fr;gap:2px 10px;padding:9px 12px;border:1px solid transparent;transition:opacity .7s,transform .8s,border-color .4s,background .4s}
+.finds li .n{grid-row:span 2;font:600 .78rem var(--f-mono);color:var(--dim);padding-top:3px}
+.finds li b{font-stretch:100%;font-weight:680;font-size:1.02rem}
+.finds li span{color:var(--mute);font-size:.92rem;line-height:1.4}
+.finds li.cur{border-color:var(--line-2);background:var(--ink-3)}
+.finds li.cur .n{color:var(--gum)}
+.sought{border:1px solid var(--gum);padding:12px 14px;font-size:.98rem;max-width:36rem}
+.sought b{color:var(--gum);font-weight:650}
+
+/* tur chips */
+.vchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:.6rem}
+.vchip{font:500 .68rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border:1px solid var(--line);color:var(--dim);transition:all .4s}
+.vchip.cur{border-color:var(--gum);color:var(--paper);background:rgba(227,165,111,.12)}
+.capstack{position:relative;min-height:4.4rem}
+.capstack>div{position:absolute;inset:0}
+.capstack>div.in{position:relative}
+.capstack>div:not(.in),.dstack>div:not(.in){transition:opacity .25s ease,transform .25s ease}
+.capstack>div.in,.dstack>div.in{transition-delay:.28s}
+.capstack b{display:block;font-stretch:110%;font-weight:720;font-size:1.15rem;margin-bottom:2px}
+.capstack span{color:var(--mute);font-size:.98rem}
+
+/* tags */
+.tag{position:absolute;left:0;top:0;transform:translate(-999px,-999px);opacity:0;transition:opacity .45s,border-color .3s;background:var(--glass);border:1px solid var(--line-2);padding:6px 10px;max-width:230px;white-space:normal}
+.tag.on{opacity:1}
+.tag.hl{border-color:var(--gum)}
+.tag b{display:block;font-stretch:88%;font-weight:720;font-size:.86rem;letter-spacing:.01em}
+.tag span{display:block;font:400 .66rem/1.35 var(--f-mono);color:var(--mute);margin-top:2px}
+@media (max-width:640px){.tag{max-width:150px;padding:4px 7px}.tag b{font-size:.76rem}.tag span{font-size:.6rem}}
+
+/* detail cards in center layouts */
+.dstack{position:relative;min-height:6rem}
+.dstack>div{position:absolute;inset:0}
+.dstack>div.in{position:relative}
+.dstack h3{font-stretch:110%;font-weight:740;font-size:1.2rem;margin:0 0 4px}
+.dstack p{color:var(--mute);margin:0;font-size:.97rem}
+.dstack .why{display:block;margin-top:6px;font:500 .7rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gum)}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:.4rem 0 1rem;display:grid;gap:7px}
+.steps li{display:grid;grid-template-columns:1.9rem 1fr;gap:10px;align-items:start;padding:7px 10px;border:1px solid transparent;transition:opacity .7s,transform .8s,border-color .4s,background .4s}
+.steps li .n{font:600 .76rem var(--f-mono);color:var(--dim);border:1px solid var(--line-2);height:1.6rem;display:grid;place-items:center}
+.steps li.cur{border-color:var(--line-2);background:var(--ink-3)}
+.steps li.cur .n{border-color:var(--gum);color:var(--gum)}
+.steps li.done .n{background:var(--line);color:var(--paper)}
+.steps li p{margin:0;font-size:.95rem}
+.warnbox{border:1px dashed var(--warn);color:var(--paper);padding:10px 12px;font-size:.92rem;max-width:36rem}
+.warnbox b{color:var(--warn)}
+
+/* gates */
+.gates{display:grid;gap:8px;margin:.4rem 0 1rem}
+.gate{display:grid;grid-template-columns:2.4rem 1fr;gap:4px 12px;padding:10px 12px;border:1px solid var(--line);transition:opacity .7s,transform .8s,border-color .4s,background .4s}
+.gate.cur{border-color:var(--gum);background:var(--ink-3)}
+.gate .ck{grid-row:span 2;width:2.1rem;height:2.1rem;border:1px solid var(--line-2);display:grid;place-items:center}
+.gate .ck svg{width:20px;height:20px;fill:none;stroke:var(--ok);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.gate .ck path{stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset .7s ease .5s}
+.gate.in .ck path{stroke-dashoffset:0}
+.gate b{font-weight:680;font-size:1rem}
+.gate span{color:var(--mute);font-size:.9rem;line-height:1.4}
+
+/* gait */
+.gait{width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
+.gait text{font:500 11px var(--f-mono);fill:var(--mute)}
+.gait .seg{fill:var(--line)}
+.gait .seg.cur{fill:var(--gum)}
+
+/* rejected */
+.rej{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin-top:1.2rem}
+.rcard{position:relative;border:1px solid var(--line);background:var(--ink-2);padding:14px 16px 16px;display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start;overflow:hidden}
+.rcard svg.ic{width:52px;height:52px;fill:none;stroke:var(--paper);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rcard h3{font-size:1rem;font-weight:680;margin:0 0 3px;font-stretch:100%;padding-right:70px}
+.rcard p{font-size:.88rem;color:var(--mute);margin:0}
+.rcard .x{position:absolute;right:12px;top:12px;font:700 .64rem var(--f-mono);letter-spacing:.14em;color:var(--no);border:1px solid var(--no);padding:3px 6px;opacity:0;transform:scale(1.6) rotate(-8deg);transition:all .45s cubic-bezier(.3,1.6,.5,1)}
+.rcard.struck .x{opacity:1;transform:rotate(-8deg)}
+.rcard.struck svg.ic{stroke:var(--dim)}
+.rcard.struck h3{text-decoration:line-through;text-decoration-color:var(--no);text-decoration-thickness:2px}
+.rcard.struck{border-color:rgba(240,123,114,.4)}
+
+/* brands */
+.bgroups{display:grid;gap:10px;margin-top:1rem}
+.bg{display:grid;gap:8px;border:1px solid var(--line);padding:12px 14px;background:var(--ink-2)}
+@media (min-width:860px){.bg{grid-template-columns:200px 1fr 300px;align-items:start;gap:16px}}
+.bg h3{margin:0;font-size:.95rem;font-weight:680}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:500 .72rem var(--f-mono);padding:4px 7px;border:1px solid var(--line-2);color:var(--paper);transition:opacity .6s,transform .7s,border-color .5s,background .5s}
+.judged .chip.fin{border-color:var(--gum);background:rgba(227,165,111,.14)}
+.judged .chip.in:not(.fin){opacity:.32}
+.bg .dec{font-size:.84rem;color:var(--mute);margin:0}
+.tally{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:1.1rem;align-items:baseline}
+.tally div{display:flex;gap:10px;align-items:baseline}
+.tally b{font:600 2rem/1 var(--f-mono);color:var(--paper)}
+.tally b.g{color:var(--gum)}
+.tally span{font-size:.86rem;color:var(--mute)}
+
+/* category */
+.box{border:1px solid var(--line-2);background:var(--ink-2)}
+.box-top{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;font:500 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-bottom:1px dashed var(--line-2)}
+.box-main{display:flex;align-items:center;gap:14px;padding:14px 14px 10px}
+.box-main svg{width:46px;height:46px;flex:none;fill:none;stroke:var(--gum);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.box-main h2{margin:0;font-stretch:118%;font-weight:800;font-size:clamp(1.5rem,2.8vw,2.4rem);line-height:1;text-wrap:balance}
+.box-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.box-fields>div{padding:8px 12px;min-width:0}
+.box-fields>div+div{border-left:1px solid var(--line)}
+.box-fields .k{display:block;font:500 .6rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.box-fields .v{display:block;font-size:.84rem;font-weight:600;margin-top:2px;line-height:1.25}
+.season .w{display:none;color:var(--delft)}
+.winter .season .s{display:none}
+.winter .season .w{display:inline}
+.season .s{color:var(--gum)}
+.principle{margin-top:14px;font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.5}
+.rlist-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.spill{font:600 .68rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--gum);color:var(--gum);transition:all .5s}
+.winter .spill{border-color:var(--delft);color:var(--delft)}
+.spill .w{display:none}.winter .spill .s{display:none}.winter .spill .w{display:inline}
+.rows{position:relative;transition:height .6s}
+.row{position:absolute;left:0;right:0;top:0;--dx:28px;--y:0px;transform:translate(var(--dx),var(--y));opacity:0;transition:transform .9s cubic-bezier(.2,.75,.2,1),opacity .6s,border-color .4s,background .4s;display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:12px;padding:10px 12px;border:1px solid var(--line);background:var(--ink-2)}
+.row.in{opacity:1;--dx:0px}
+.row.focus{border-color:var(--gum);background:var(--ink-3)}
+.winter .row.focus{border-color:var(--delft)}
+.rk{font:600 1.5rem/1 var(--f-mono);color:var(--gum);padding-top:2px}
+.winter .rk{color:var(--delft)}
+.rm{font-weight:700;font-size:1.04rem;font-stretch:100%;margin-bottom:4px}
+.rd{display:grid;gap:4px 18px}
+@media (min-width:1100px){.rd{grid-template-columns:1fr 1fr}}
+.rd p{margin:0;font-size:.88rem;line-height:1.4;color:var(--mute)}
+.lb{display:inline-block;font:600 .6rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;margin-right:7px;padding:1px 5px;border:1px solid}
+.lb.ok{color:var(--ok);border-color:rgba(127,211,162,.5)}
+.lb.wn{color:var(--warn);border-color:rgba(241,207,94,.5)}
+.notes{margin-top:12px;display:grid;gap:8px}
+.note{font-size:.9rem;padding:10px 12px;border:1px dashed var(--line-2);color:var(--paper)}
+.note b{font-weight:650}
+.note.wn{border-color:rgba(127,166,238,.6)}
+.note.wn b{color:var(--delft)}
+
+/* rain table */
+.tbl-wrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--line)}
+table.rain{border-collapse:collapse;width:100%;min-width:620px;font-size:.9rem}
+.rain th,.rain td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+.rain th{font:600 .66rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);background:var(--ink-2)}
+.rain td.m{font-weight:650}
+.rain td.nt{color:var(--mute);font-size:.84rem}
+.rain tr{transition:opacity .6s}
+.cell{display:inline-block;font:600 .72rem var(--f-mono);padding:4px 8px;border:1px solid;opacity:0;transform:scale(.6);transition:all .45s cubic-bezier(.3,1.5,.5,1)}
+.cell.in{opacity:1;transform:none}
+.cell.e{color:var(--ok);border-color:var(--ok)}
+.cell.d{color:var(--warn);border-color:var(--warn)}
+.cell.h{color:var(--no);border-color:var(--no)}
+
+/* signals */
+.sig{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.sig span{font-size:.92rem;padding:8px 12px;border:1px solid rgba(240,123,114,.55);background:rgba(240,123,114,.08)}
+.bigcall{font-family:var(--f-disp);font-stretch:112%;font-weight:720;font-size:clamp(1.25rem,2.2vw,1.9rem);line-height:1.2;max-width:44rem;margin:1.2rem 0}
+.bigcall em{font-style:normal;color:var(--gum)}
+
+/* donut */
+.qwrap{display:grid;gap:24px;align-items:center;margin-top:1rem}
+@media (min-width:860px){.qwrap{grid-template-columns:minmax(260px,380px) 1fr}}
+.qwrap svg{width:100%;max-width:380px;height:auto;display:block;margin:0 auto}
+.qwrap svg text{fill:var(--paper)}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.legend li{display:grid;grid-template-columns:14px 3.2rem 1fr;gap:10px;align-items:baseline;font-size:.95rem}
+.legend i{width:12px;height:12px;display:block;transform:translateY(1px)}
+.legend b{font:600 1.05rem var(--f-mono);text-align:right}
+
+/* summary cards */
+.sum{display:grid;gap:10px}
+.scard{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 14px;border:1px solid var(--line);background:var(--ink-2);transition:opacity .7s,transform .8s,border-color .4s,background .4s}
+.scard.cur{border-color:var(--gum);background:var(--ink-3)}
+.scard .k{font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gum)}
+.scard .m{font-weight:720;font-size:1.08rem}
+.scard .w{color:var(--mute);font-size:.9rem}
+
+/* bar */
+#bar{position:absolute;left:0;right:0;bottom:0;height:calc(var(--barh) + env(safe-area-inset-bottom,0px));padding:0 12px env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:8px;background:var(--ink-2);border-top:1px solid var(--line);z-index:6}
+.btn{appearance:none;border:1px solid var(--line-2);background:transparent;color:var(--paper);height:38px;min-width:38px;padding:0 10px;display:inline-grid;place-items:center;cursor:pointer;font:600 .76rem var(--f-mono);border-radius:0}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.btn:hover{border-color:var(--gum);color:var(--gum)}
+.btn:focus-visible{outline:2px solid var(--gum);outline-offset:2px}
+.btn.main{background:var(--gum);border-color:var(--gum);color:var(--ink)}
+.btn.main:hover{background:transparent;color:var(--gum)}
+.bmid{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding:0 6px}
+.btitle{display:flex;gap:8px;align-items:baseline;font-size:.82rem;white-space:nowrap;overflow:hidden}
+.btitle .no{font:600 .72rem var(--f-mono);color:var(--gum)}
+.btitle .nm{overflow:hidden;text-overflow:ellipsis;font-weight:600}
+#track{position:relative;height:16px;cursor:pointer;touch-action:none}
+#segs{position:absolute;left:0;right:0;top:5px;height:6px;display:flex;gap:2px}
+#segs i{display:block;height:100%;background:var(--line);position:relative;overflow:hidden}
+#segs i b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gum)}
+#segs i:hover{background:var(--line-2)}
+#knob{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 0 0 1px var(--gum);pointer-events:none}
+#time{font:500 .72rem var(--f-mono);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:640px){#time,#bPrev,#bSpeed{display:none}.btitle{font-size:.76rem}}
+#menu{position:absolute;right:12px;bottom:calc(var(--barh) + env(safe-area-inset-bottom,0px) + 8px);z-index:7;width:min(360px,calc(100% - 24px));max-height:min(70vh,560px);overflow:auto;background:var(--ink-2);border:1px solid var(--line-2);padding:12px}
+#menu h3{margin:0 0 8px;font:600 .7rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#menu ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+#menu button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:2rem 1fr auto;gap:8px;width:100%;padding:7px 8px;cursor:pointer;font-size:.86rem}
+#menu button:hover,#menu button:focus-visible{background:var(--ink-3);outline:none}
+#menu button .n{font:600 .7rem var(--f-mono);color:var(--dim);padding-top:2px}
+#menu button .t{font:500 .7rem var(--f-mono);color:var(--dim);padding-top:2px}
+#menu button.cur{background:var(--ink-3)}
+#menu button.cur .n{color:var(--gum)}
+#nogl{position:absolute;right:16px;top:60px;z-index:4;font:500 .72rem var(--f-mono);color:var(--dim)}
+
+@media (max-width:640px){#hud{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .r,.row,.cell,.rcard .x,.gate .ck path{transition-duration:.01s!important}
+}
+</style>
+
+<div id="app">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div id="tags" aria-hidden="true"></div>
+  <div id="hud" aria-hidden="true">KAMERA 030° · 16°</div>
+  <main id="scenes"></main>
+  <nav id="bar" aria-label="Oynatma kontrolleri">
+    <button class="btn main" id="bPlay" aria-label="Duraklat"><svg viewBox="0 0 16 16" id="icPlay"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg></button>
+    <button class="btn" id="bPrev" aria-label="Önceki bölüm"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="2" height="12"/><path d="M14 2v12L5 8z"/></svg></button>
+    <button class="btn" id="bNext" aria-label="Sonraki bölüm"><svg viewBox="0 0 16 16"><rect x="12" y="2" width="2" height="12"/><path d="M2 2v12l9-6z"/></svg></button>
+    <div class="bmid">
+      <div class="btitle"><span class="no" id="chNo">01/27</span><span class="nm" id="chName">Açılış</span></div>
+      <div id="track" role="slider" aria-label="Zaman çizelgesi" tabindex="0" aria-valuemin="0"><div id="segs"></div><div id="knob"></div></div>
+    </div>
+    <span id="time">00:00 / 00:00</span>
+    <button class="btn" id="bSpeed" aria-label="Oynatma hızı">1×</button>
+    <button class="btn" id="bMenu" aria-label="Bölüm listesi" aria-expanded="false">Bölümler</button>
+  </nav>
+  <div id="menu" hidden><h3>Bölümler</h3><ol id="menuList"></ol></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const sstep=(a,b,v)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+function kf(t,keys){if(t<=keys[0][0])return keys[0][1];for(let i=0;i<keys.length-1;i++){const a=keys[i],b=keys[i+1];if(t<=b[0])return lerp(a[1],b[1],sstep(a[0],b[0],t));}return keys[keys.length-1][1];}
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const WQ=matchMedia('(min-width: 860px) and (min-aspect-ratio: 21/20)');
+let WIDE=WQ.matches;
+const A=(w,t)=>WIDE?w:t;
+
+/* ================= DATA ================= */
+const ICON={
+ stopwatch:'<circle cx="24" cy="27" r="15"/><path d="M24 27v-9M20 6h8M24 6v6M36 14l3-3"/>',
+ steps:'<path d="M14 40c-4 0-6-4-6-9s2-12 6-12 6 7 6 12-2 9-6 9z"/><path d="M33 29c-4 0-6-4-6-9s2-12 6-12 6 7 6 12-2 9-6 9z"/>',
+ suitcase:'<rect x="8" y="15" width="32" height="25" rx="2"/><path d="M18 15v-5h12v5M8 26h32"/>',
+ bag:'<path d="M10 16h28l-2 25H12z"/><path d="M18 16a6 6 0 0 1 12 0"/>',
+ clock:'<circle cx="24" cy="24" r="16"/><path d="M24 14v10l7 5"/>',
+ dumbbell:'<path d="M6 19v10M42 19v10M11 14v20M37 14v20M11 24h26"/>',
+ house:'<path d="M8 22 24 9l16 13v18H8z"/><path d="M20 40V29h8v11"/>',
+ mailbox:'<path d="M8 38V22a7 7 0 0 1 14 0v16zM22 22h18v16H22"/><path d="M30 22V10h7v5h-7"/>',
+ sun:'<circle cx="24" cy="24" r="8"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11 11l3.5 3.5M33.5 33.5 37 37M11 37l3.5-3.5M33.5 14.5 37 11"/>',
+ shower:'<path d="M10 40V14a6 6 0 0 1 12 0v2M16 16h12"/><path d="M19 23v3M25 23v3M31 23v3M22 30v3M28 30v3M25 37v3"/>',
+ wc:'<rect x="7" y="12" width="34" height="24" rx="2"/><path d="M12 19l2.5 10 2.5-8 2.5 8 2.5-10M35 20a4.5 4.5 0 1 0 0 8"/>'
+};
+const RICON={
+ narrow:'<path d="M17 44c-3-12 0-26 7-38 7 12 10 26 7 38z"/><path d="M3 26h8M45 26h-8M8 22l3 4-3 4M40 22l-3 4 3 4"/>',
+ fixed:'<path d="M6 33h36M6 38h36"/><rect x="18" y="13" width="12" height="11" rx="1"/><path d="M20 13V9a4 4 0 0 1 8 0v4"/>',
+ slipper:'<path d="M6 36h36"/><path d="M24 36c0-8 5-12 12-12 4 0 6 4 6 12"/><path d="M8 30l6 2" stroke-dasharray="2 3"/>',
+ slide:'<path d="M6 36h36"/><path d="M17 36V25h14v11"/><path d="M4 18h10M34 18h10" stroke-dasharray="2 3"/>',
+ rocker:'<path d="M6 32c6 8 30 8 36-3"/><path d="M6 32c8-6 28-6 36-3"/><path d="M14 9v9M34 9v9M14 13.5h20"/>',
+ water:'<path d="M24 7c6 8 10 13 10 19a10 10 0 0 1-20 0c0-6 4-11 10-19z"/><path d="M21 24a3 3 0 1 1 4 3v2M24 34v.5"/>'
+};
+
+const W_NOTE='Kar botu gereksinimi varsayılmamıştır. Yoğun yağmurda mevcut listede doğrulanmış waterproof + genişlik + tabanlık uyumlu ana model yoktur.';
+const CATS=[
+ {no:1,name:'Koşu',icon:'stopwatch',variant:'sneaker',cls:'Stabil koşu ayakkabısı',
+  pr:'Koşuda ayakkabı tedavi değildir. Kişisel tabanlığı koyduktan sonra topuk kilidi, ön ayak hacmi ve ilk 2-3 kısa koşuda semptom tepkisi belirleyicidir.',
+  it:[['HOKA Gaviota 5 Wide','Stabilite odaklı geometri, geniş varyant ve belirgin fakat kontrollü rocker; raporun en dengeli koşu seçimi.','Mesh üst yüzey yağmur için uygun değil; tabanlıkla mutlaka deneyin.'],
+      ['Brooks Beast GTS 24','Çok belirgin guidance/stabilite ve geniş varyant; topuk kontrolü önceliği çok yüksek olduğunda.','Ağır ve hacimli; herkese rahat hissettirmeyebilir.'],
+      ['New Balance Fresh Foam X 860v15','Daha az agresif, günlük antrenman için dengeli stabilite; wide/extra-wide bulunursa güçlü aday.','Varyanta göre gerçek ön ayak hacmi değişir.'],
+      ['ASICS GEL-KAYANO 31','Koruyucu yastıklama ve stability platformu; uzun, kolay tempolu koşular için aday.','Genişlik seçeneği ve tabanlık hacmi lokal stokta teyit edilmeli.'],
+      ['Saucony Guide 17','Merkezleme/stabilite hissi ve daha az sert yönlendirme isteyenler için aday.','En geniş ayakta ancak Wide ile, deneme koşusuyla karar verin.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4]},
+ {no:2,name:'Uzun yürüyüş',icon:'steps',variant:'sneaker',cls:'Kapalı yürüyüş ayakkabısı',
+  pr:'Uzun yürüyüşte amaç, topuğu sakin tutmak ve ön ayakta basınç ya da uyuşmayı artırmadan adım geçişini yönetmektir.',
+  it:[['HOKA Gaviota 5 Wide','Genişlik, stabilite ve rocker dengesi nedeniyle kuru zeminde en çok yönlü seçim.','Yoğun yağmur ayakkabısı değil.'],
+      ['Brooks Addiction GTS 15','Geniş, destekli ve nispeten tanıdık koşu-yürüyüş platformu.','Hava koşullarında waterproof koruma yok.'],
+      ['Brooks Addiction Walker 2','Daha düz, çok stabil platform; deri üst yüzey ve kaymaz tabanla ıslak kaldırımda daha mantıklı.','Ağır; rocker etkisi sınırlı.'],
+      ['New Balance 928v3','Motion-control sınıfı, çıkarılabilir tabanlık ve geniş seçenek arayanlar için.','Resmî sayfa Birleşik Krallık; NL teslimat/iade kontrolü zorunlu.'],
+      ['Xsensible Golden Gate Men H','H genişlik ve şehir ayakkabısı görünümüyle, daha az sportif uzun yürüyüş alternatifi.','Yoğun yağmurda kullanmayın; rocker, koşu ayakkabısı kadar belirgin değil.']],
+  s:[0,1,2,3,4],w:[2,3,4,0,1]},
+ {no:3,name:'Seyahat ve 10 günlük şehir turu',icon:'suitcase',variant:'sneaker',cls:'Tek çift, çok amaç',
+  pr:'Uçak, tren, araba ve sabah-akşam şehir yürüyüşleri için tek çift seçecekseniz, önce tabanlık uyumu ve gün sonu şişme payı gelir.',
+  it:[['HOKA Gaviota 5 Wide','Yürüyüş hacmi yüksek seyahatlerde en dengeli bir-çift seçeneği.','Sıcak/ıslak günlerde yedek çorap ve kurutma planı gerekir.'],
+      ['Brooks Addiction GTS 15','Spor görünümü kabul ediliyorsa destekli yedek seyahat ayakkabısı.','Yağmurda ana seçim değil.'],
+      ['Xsensible Golden Gate Men H','Daha şehirli görünüm, genişlik ve çıkarılabilir footbed.','Çok uzun günlerde Gaviota kadar geçiş yardımı beklemeyin.'],
+      ['Brooks Addiction Walker 2','Yağmurlu rota, müze/istasyon ve uzun ayakta bekleme günleri için daha güvenli alternatif.','Valizde ağırlık ve daha sert his.'],
+      ['New Balance 928v3','Uzun ayakta kalma da olacaksa motion-control odaklı seçim.','Teslim/iade rotası önceden teyit edilmeli.']],
+  s:[0,1,2,3,4],w:[2,3,4,0,1]},
+ {no:4,name:'Günlük hayat: okul, alışveriş, şehir',icon:'bag',variant:'sneaker',cls:'Günlük kapalı ayakkabı',
+  pr:'Kısa-orta mesafe, toplu taşıma ve gün içinde değişen hareket miktarı için; estetikten önce ön ayak alanını koruyun.',
+  it:[['HOKA Gaviota 5 Wide','Günlük hareket ve ayak basıncı yönetimi için en iyi genel denge.','Kumaş üst yüzey yağmurda çabuk ıslanır.'],
+      ['Brooks Addiction GTS 15','Güçlü guidance ve genişlik seçeneğiyle aktif günler.','Sportif görünüm ve su geçirmezlik eksiği.'],
+      ['New Balance Fresh Foam X 860v15','Daha hafif stabilite isteyen aktif gün kullanıcısı için.','Wide bulunmazsa eleme kriterine takılabilir.'],
+      ['Xsensible Golden Gate Men H','H kalıp, çıkarılabilir footbed ve daha düzgün şehir görünümü.','Tabanlıkla topuk derinliğini deneyin.'],
+      ['Solidus Ken','Ortopedik ayakkabı odaklı marka; genişlik/derinlik açısından mağaza denemesiyle değerlendirilmeli.','Model kodu ve footbed durumu bayi bazında teyit edilmeli.']],
+  s:[0,1,2,3,4],w:[3,4,0,1,2]},
+ {no:5,name:'Uzun süre ayakta çalışma',icon:'clock',variant:'sneaker',cls:'Stabil iş ayakkabısı',
+  pr:'Sabit zeminde saatlerce ayakta kalmada, çok yumuşak ve çok rockerlı taban yerine stabil taban platformu ve kayma direnci daha ağır basar.',
+  it:[['HOKA Gaviota 5 Wide','Çok adımlı vardiyalar için basınç ve geçiş konforu.','Islak zeminde ve yoğun yağmurda ana seçim değil.'],
+      ['New Balance 928v3','Motion-control karakteri, tabanlık değişimi ve genişlik olasılığıyla en güçlü kuru zemin seçimi.','NL stok/iade rotası teyit edilmeli.'],
+      ['Brooks Addiction Walker 2','Kaymaz dış taban, deri ve stabil platform; hafif/orta yağmurda da daha kullanışlı.','Waterproof değil; ağır olabilir.'],
+      ['Skechers Work Arch Fit SR','İş zemini odaklı kayma direnci.','Kendi tabanlığınızla derinlik ve topuk kilidi mutlaka kontrol edilmeli.'],
+      ['Solidus Ken','Daha ortopedik kalıp/derinlik arayanlar için yetkili mağazada incelenecek aday.','İş ayakkabısı sertifikası ve kayma sınıfı modele göre değişir.']],
+  s:[0,1,2,3,4],w:[1,2,3,4,0],midH:.85},
+ {no:6,name:'Salon ve fitness',icon:'dumbbell',variant:'sneaker',cls:'Alçak, geniş trainer',
+  pr:'Ağır kuvvet antrenmanında yüksek, yumuşak ve yuvarlak koşu tabanı ana tercih olmamalı. Önce geniş, alçak ve torsiyonel olarak stabil platform arayın.',
+  it:[['New Balance 608v5','Daha alçak/geniş trainer platformu; 4E bulunduğunda en pratik tercih.','Koşu ayakkabısı değil; yüksek hacimli tabanlıkla deneyin.'],
+      ['New Balance 857v3','Cross-trainer yapısı ve destek odağı; genişlik seçeneği bulunursa güçlü aday.','Hollanda stok ve exact width teyidi gerekir.'],
+      ['Reebok Nano X5','Daha dinamik fitness/cross-training isteyenlerde geniş platform için denenebilir.','Kişisel tabanlık hacmi ve ön ayak genişliği kesinlikle yerinde denenmeli.'],
+      ['Altra Solstice XT 3','Geniş toe box isteyenler için aday.','Zero-drop geçişi; erken topuk kalkışı ve Aşil tendonu nedeniyle uzmanla ve çok yavaş adaptasyonla. İlk tercih değil.'],
+      ['Brooks Addiction Walker 2','Çok ağır olmayan makine çalışması ve ayakta egzersiz için stabil yedek.','Dinamik lateral hareket ve sprint için tasarlanmadı.']],
+  s:[0,1,2,3,4],w:[4,0,1,2,3],midH:.55},
+ {no:7,name:'Ev içi terliği',icon:'house',variant:'clog',cls:'Kapalı, ayarlanabilir terlik',
+  pr:'Ev içi terlik, tüm gün desteksiz yumuşak terlik demek olmamalı. Çıkarılabilir footbed, ayarlanabilir üst yüzey ve kapalı ya da güvenli topuk tercih edin.',
+  it:[['Berkemann Max Plus','Ayarlanabilir üst yüzey ve değiştirilebilir/çıkarılabilir footbed sınıfında aranacak ana aday.','Exact varyantın tabanlık uyumunu teyit edin.'],
+      ['Varomed Kopenhagen','Hacimli, ayarlanabilir ve hassas/geniş ayak odaklı ev modeli.','Daha klinik görünüm; model bazlı footbed teyidi gerekir.'],
+      ['Finn Comfort Vaasa','Premium ev/ortopedik mule sınıfında genişlik ve footbed kalitesi için aday.','Açık topuk; instabil topukta tüm gün ana tercih olmayabilir.'],
+      ['Finn Comfort Corfu','Ayarlanabilir kayışlı, dışarı kısa çıkış için de kullanılabilir.','Arka topuk desteği yoksa sadece kısa ev içi rota.'],
+      ['Mephisto Hester','Konforlu, ayarlanabilir sandal/mule alternatifi.','Kişisel tabanlık ve topuk güvenliği modele göre sınırlı olabilir.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4],rain:.35},
+ {no:8,name:'Çok kısa dış mekân terliği',icon:'mailbox',variant:'mule',cls:'Mule, yalnız kısa rota',
+  pr:'Posta kutusu, çöp, apartman içi gibi çok kısa mesafeler için. Uzun yürüyüş ve hızlı yön değiştirme için açık topuklu mule kullanmayın.',
+  it:[['Finn Comfort Corfu','Ayarlanabilir üst yüzey ve premium footbed yapısıyla en güvenli mule sınıfı adayı.','Arka kayış/topuk tutuşu yoksa uzun kullanıma uygun değil.'],
+      ['Finn Comfort Vaasa','Evden kısa çıkış için destekli ev terliği seçeneği.','Yağmur ve uzun rota için uygun değil.'],
+      ['Berkemann Max Plus','Ayarlanabilirlik ve hassas ön ayağa uyum için.','Dış taban/ıslanma performansını model bazında teyit edin.'],
+      ['Mephisto Hester','Daha şehirli mule hissi isteyenlerde denenebilir.','Kişisel tabanlıkla yeterli derinlik garanti değil.'],
+      ['Brooks Addiction Walker 2','Terlik değil; instabil topuk veya yağmur varsa terlik yerine daha güvenli kapalı alternatif.','Kolay giy-çıkar rahatlığı yok.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4]},
+ {no:9,name:'Sandalet',icon:'sun',variant:'sandal',cls:'Arka kayışlı sandalet',
+  pr:'Sandalette öncelik arka kayış ve topuk güvenliği, ayarlanabilirlik ve çıkarılabilir footbed olmalıdır. Parmak arası ve tek bantlı slide modeller uzun yürüyüş için uygun değildir.',
+  it:[['Finn Comfort Baltrum','Arka/topuk desteği, ayarlanabilir kayışlar ve çıkarılabilir footbed arayanlar için ilk aday.','Sıcak havada dahi uzun rota önce kademeli denenmeli.'],
+      ['Finn Comfort Riad','Ayarlanabilir kayışlar ve daha destekli sandal sınıfı.','Exact footbed/çıkarılabilirlik varyanta göre teyit edilmeli.'],
+      ['Mephisto IANIS','Kaliteli deri ve ayarlanabilir sandal alternatifi.','Kişisel tabanlık için footbed çıkarılabilirliği önce doğrulanmalı.'],
+      ['Naot Men Sandals','Ayarlanabilirlik ve konfor odaklı alternatif marka.','Model bazında tabanlık değişimi değişir; uzmanlık gerektirir.'],
+      ['Birkenstock Milano','Arka kayışlı, stabil sandalet konsepti.','Standart footbed çıkarılabilir olmadığından kişisel tabanlıkta ilk tercih değil; tabanlıksız denemede aday.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4],wnote:'Sandalet ve açık terlik yağmurda yalnız kısa süre kullanılabilir: kayma ve ön ayak kayması riski artar.'},
+ {no:10,name:'Banyo için ayrı terlik',icon:'shower',variant:'clog',cls:'Yıkanabilir clog',
+  pr:'Banyo terliği iki hedefe hizmet eder: ıslak zeminde tutuş ve kolay temizlenme. Kişisel tabanlık bu ortamda genellikle kullanılmaz; bunu ortopedik ana terliğin yerine koymayın.',
+  it:[['Birkenstock Profi-Birki','Yıkanabilir profesyonel PU clog sınıfı, daha kapalı/koruyucu yapı ve çıkarılabilir footbed olasılığı.','Kaymazlık sınıfını resmî sayfada teyit edin; tabanlığı banyoda kullanmayın.'],
+      ['Birkenstock Super-Birki','Yıkanabilir kapalı clog yapısı, geniş hacim ve kolay temizlik.','Arka topuk sabitlemesi sınırlı; sadece ev içi ıslak alan.'],
+      ['Crocs Specialist II Clog','Kapalı burun, kolay yıkanma ve banyo/tuvalet için pratiklik.','Kişisel tabanlık ve topuk kontrolü için uygun değil.'],
+      ['Crocs Classic Clog','Hafif, kuruyan ve kolay temizlenen kısa banyo kullanımı.','Arka bandı kullansanız bile ortopedik ana ayakkabı değil.'],
+      ['Birkenstock Arizona EVA','Suya dayanıklı, ayarlanabilir iki bant; duş sonrası kısa rota.','Açık parmak, heel counter yok; uzun ayakta kalma için değil.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4],sl:['Kuru ev içi','Islak ev içi'],rain:.3,
+  snote:'Temizlik, havalandırma ve ayrı kullanıma dikkat edin. Bunlar ortopedik ana terliğin yerine geçmez.',
+  wnote:'Kayma riski daha yüksek olduğundan kapalı ve yıkanabilir clog tipi ilk sıradadır. Kişisel tabanlığı bu ıslak alanda kullanmayın.'},
+ {no:11,name:'Tuvalet için ayrı terlik',icon:'wc',variant:'clog',cls:'Ayrı, hijyenik clog',
+  pr:'Tuvalet terliğini banyodan bile ayırmak hijyen açısından mantıklıdır. Hedef kolay silinme/yıkanma ve kayma riskini azaltmaktır; uzun konfor veya tabanlık desteği ikinci plandadır.',
+  it:[['Birkenstock Profi-Birki','Kapalı, temizlenebilir, daha stabil profesyonel clog sınıfı; bu bölümün en düşük riskli seçimi.','Ana yürüyüş ayakkabısının yerine geçmez.'],
+      ['Birkenstock Super-Birki','Yıkanabilirlik ve hacim; ayrı tuvalet kullanımı için mantıklı.','Topuk tutuşu sınırlı.'],
+      ['Crocs Specialist II Clog','Kapalı burun ve temizleme kolaylığı.','Wide/ortotik derinlik iddiası yok; banyo dışında kullanmayın.'],
+      ['Crocs Classic Clog','Kısa, kuru veya yarı ıslak tuvalet rotası için pratik.','İnstabil topukta arka bant olmadan kullanmayın.'],
+      ['Adidas Adilette Aqua','Yıkanabilir ve uygun maliyetli ayrı terlik.','Tek bant, heel counter ve tabanlık uyumu olmadığı için sadece çok kısa tuvalet rotası.']],
+  s:[0,1,2,3,4],w:[0,1,2,3,4],sl:['Kuru ev içi','Islak ev içi'],rain:.3,
+  snote:'Temizlik, havalandırma ve ayrı kullanıma dikkat edin. Bunlar ortopedik ana terliğin yerine geçmez.',
+  wnote:'Kayma riski daha yüksek olduğundan kapalı ve yıkanabilir clog tipi ilk sıradadır. Kişisel tabanlığı bu ıslak alanda kullanmayın.'}
+];
+
+const PARTS={
+ outsole:['Dış taban','Kaymaz kauçuk, ıslak kaldırım tutuşu'],
+ midsole:['Ara taban','Stabil platform, medial destek, kontrollü rocker'],
+ insole:['Çıkarılabilir iç taban','Kişisel tabanlık için yer açar'],
+ orthotic:['Kişisel tabanlık','Ark desteği, topuk çanağı'],
+ upper:['Üst yüzey','Mesh nefes alır, deri yağmura dayanır'],
+ counter:['Topuk kontrforu','Sert ve stabil, topuğu sabitler'],
+ toebox:['Burun kutusu','Gerçek genişlik, CM1 ve sinire alan'],
+ laces:['Bağcık ve yaka','Topuğu kilitler, kaymayı azaltır']
+};
+
+/* ================= SCENES ================= */
+const SC=[];
+const add=o=>SC.push(o);
+const R=(at,html,cls='',out)=>`<div class="r ${cls}" data-at="${at}"${out!=null?` data-out="${out}"`:''}>${html}</div>`;
+const svgI=(p,cls='')=>`<svg viewBox="0 0 48 48" class="${cls}" aria-hidden="true">${p}</svg>`;
+
+/* 1 intro */
+add({id:'acilis',title:'Açılış',dur:22,lay:'lay-split intro',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Hollanda · Harderwijk · 6 Ekim 2026 · EUR</p>
+  <h1 class="h1 r in" data-at="0"><span>Erkek</span><span>Ayakkabısı</span><span class="acc">Karar Raporu</span></h1>
+  ${R(2.5,'<p class="lede">Ayak basıncı, overpronasyon, geniş ön ayak ve kişisel tabanlık odaklı seçim rehberi, baştan sona animasyonla.</p>')}
+  ${R(7,'<p class="mute">Önce ayağın ihtiyacını, sonra ayakkabının içini ve dışını göreceğiz. Ardından 11 kullanım alanının her biri için yaz ve yağmurlu kış sıralamasına geçeceğiz.</p>')}
+  ${R(12,'<div class="quote">Tek bir ayakkabıyı her koşulda kullanmak yerine, kullanıma göre ayrı ayakkabılar seçmek daha güvenli ve daha rasyoneldir.</div>')}
+  ${R(16,'<p class="hint"><kbd>Boşluk</kbd> oynat / duraklat · <kbd>←</kbd> <kbd>→</kbd> bölümler · sahneyi sürükleyerek ayakkabıyı döndürün</p>')}
+ </div></div>`,
+ state:t=>({az:28+t*9,el:16,dist:A(7.6,6.2),cx:A(.69,.5),cy:A(.5,.24),reveal:t+.15}),
+ fx:()=>({motes:1,sun:.35})
+});
+
+/* 2 profile */
+const FINDS=[
+ ['İnstabil topuk teması','Basışta topuk dengesiz oturuyor; sert topuk kontrforu bu yüzden zorunlu.'],
+ ['Overpronasyon','Ayak basışta içe doğru fazla yuvarlanıyor; stabil ve geniş platform aranır.'],
+ ['Erken topuk kalkışı','Topuk adımda erken kalkıyor; kontrollü rocker geçişi yardımcı olabilir.'],
+ ['CM1 basınç artışı','Başparmak kökünde (1. metatars başı) yük artıyor; geniş burun ve tabanlık hacmi gerekir.'],
+ ['Ön ayakta sinir sıkışması riski','Dar burun ön ayağı yanlardan sıkıştırır; gerçek genişlik şart.']
+];
+const FT=[2,8,14,20,26];
+add({id:'profil',title:'Ayak profili',dur:36,lay:'lay-split',
+ html:`<div class="viz"><canvas class="footcv" aria-label="Temsili ayak basınç haritası ve arkadan topuk görünümü" role="img"></canvas></div>
+ <div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Sağlık uzmanının notu</p>
+  <h2 class="h2 r in" data-at="0">Önce ayak, sonra ayakkabı</h2>
+  <ol class="finds">${FINDS.map((f,i)=>`<li class="r" data-at="${FT[i]}" data-i="${i}"><span class="n">0${i+1}</span><b>${f[0]}</b><span>${f[1]}</span></li>`).join('')}</ol>
+  ${R(31,'<div class="sought"><b>Aranan ayakkabı:</b> topuğu kontrol eden, ön ayakta gerçek alan bırakan, çıkarılabilir iç tabanlı ve tabanlıkla yeterli derinliği koruyan model.</div>')}
+ </div></div>`,
+ state:()=>({show:0,cx:A(.72,.5),cy:A(.5,.22)}),
+ update(t,root){
+  const fi=t<FT[0]?-1:t<FT[1]?0:t<FT[2]?1:t<FT[3]?2:t<FT[4]?3:t<31?4:5;
+  $$('.finds li',root).forEach((li,i)=>li.classList.toggle('cur',i===fi));
+  drawFoot(root.querySelector('.footcv'),t,fi);
+ },
+ fx:()=>({motes:.5})
+});
+
+/* 3 tour */
+const VIEWS=[
+ {t:0,az:35,el:20,n:'Üç çeyrek',c:'Genel görünüm: kapalı, bağcıklı ve stabil tabanlı günlük ayakkabı.'},
+ {t:4,az:0,el:5,n:'Dış yan',c:'Ara taban kalınlığı ve rocker eğrisi: topuktan buruna yuvarlanma profili buradan okunur.'},
+ {t:8.5,az:0,el:80,n:'Üstten',c:'Burun kutusu genişliği: en geniş ön ayak noktasında kenar baskısı olmamalı.'},
+ {t:13,az:90,el:8,n:'Önden',c:'Burun yüksekliği: parmaklar ve CM1 üzerinde basınç yaratmayan hacim.'},
+ {t:17.5,az:270,el:12,n:'Arkadan',c:'Topuk kontrforu dik ve sert olmalı; topuk içe yatmamalı.'},
+ {t:22,az:180,el:5,n:'İç yan',c:'Ark bölgesi ve medial destek: overpronasyona karşı stabil, geniş platform.'},
+ {t:26.5,az:200,el:-58,n:'Alttan',c:'Dış taban deseni: ıslak kaldırımda kaymaz kauçuk ve geniş temas alanı.'}
+];
+const TAZ=[[0,35]],TEL=[[0,20]];
+VIEWS.forEach((v,i)=>{if(!i)return;const p=VIEWS[i-1];TAZ.push([v.t,p.az],[v.t+1.8,v.az]);TEL.push([v.t,p.el],[v.t+1.8,v.el]);});
+TAZ.push([31,200],[32.6,395]);TEL.push([31,-58],[32.6,20]);
+add({id:'tur',title:'360° tur',dur:33,lay:'lay-center',
+ html:`<div class="top"><p class="eyebrow r in" data-at="0">Farklı açılardan</p><h2 class="h2 r in" data-at="0">Her açı başka bir şey söyler</h2>
+  <div class="vchips">${VIEWS.map((v,i)=>`<span class="vchip" data-i="${i}">${v.n}</span>`).join('')}</div></div>
+  <div class="cap pe"><div class="capstack">${VIEWS.map((v,i)=>R(v.t+.6,`<b>${v.n}</b><span>${v.c}</span>`,'fade',i<VIEWS.length-1?VIEWS[i+1].t+.3:99)).join('')}</div></div>`,
+ state:t=>({az:kf(t,TAZ),el:kf(t,TEL),dist:A(6.6,6.4),cx:A(.6,.5),cy:A(.5,.48),ring:1}),
+ update(t,root){let k=0;VIEWS.forEach((v,i)=>{if(t>=v.t)k=i;});$$('.vchip',root).forEach((c,i)=>c.classList.toggle('cur',i===k));}
+});
+
+/* 4 exploded */
+const PD=[
+ ['outsole',8,'Dış taban','Zemine değen tek katman. Hollanda’nın ıslak kaldırımında kayma direnci ana seçim kriterlerinden biri.','Yağmur senaryosu'],
+ ['midsole',12,'Ara taban','Ayakkabının motoru. Geniş ve stabil platform topuğu dengeler; iç kenardaki medial destek içe yuvarlanmayı sınırlar; kontrollü rocker adım geçişini kolaylaştırır.','Overpronasyon, erken topuk kalkışı'],
+ ['insole',16,'Çıkarılabilir iç taban','Fabrika tabanı çıkabilmeli. Kişisel tabanlık iç hacmi daraltmadan ancak bu sayede yerleşir.','Kişisel tabanlık'],
+ ['upper',20,'Üst yüzey','Mesh nefes alır ama yağmurda çabuk ıslanır. Deri ve nubuk ıslak havaya daha dayanıklıdır, yine de su geçirmez değildir.','Mevsim seçimi'],
+ ['counter',24,'Topuk kontrforu','Topuğu saran sert kabuk. İnstabil topuk teması ve overpronasyonda ilk zorunlu kapı.','İnstabil topuk'],
+ ['toebox',28,'Burun kutusu','Gerçek genişlik (Wide, 2E/4E, H) ön ayağa alan bırakır. Dar burun ön ayak sinirini ve CM1 basıncını artırabilir.','CM1, sinir sıkışması'],
+ ['laces',32,'Bağcık ve yaka','Bağcık ve yastıklı yaka topuğu kilitler. Tabanlık takıldıktan sonra topuğun yukarı çıkmadığını kontrol edin.','Topuk kilidi']
+];
+add({id:'patlat',title:'Katman katman',dur:44,lay:'lay-center',
+ html:`<div class="top"><p class="eyebrow r in" data-at="0">Ayrılmış ve birleştirilmiş görünüm</p><h2 class="h2 r in" data-at="0">Ayakkabıyı söküp yeniden birleştiriyoruz</h2></div>
+ <div class="cap left pe"><div class="dstack">
+  ${R(0.5,'<h3>Yedi parça, tek ayakkabı</h3><p>Katmanlar birazdan birbirinden ayrılacak. Her parçanın ayak profilindeki hangi soruna yanıt verdiğine bakacağız.</p>','fade',8)}
+  ${PD.map((p,i)=>R(p[1],`<h3>${p[2]}</h3><p>${p[3]}</p><span class="why">İlgili not: ${p[4]}</span>`,'fade',i<PD.length-1?PD[i+1][1]:36)).join('')}
+  ${R(36,'<h3>Yeniden birleşiyor</h3><p>Görevleri ortak: topuğu sabitlemek, ön ayağa alan bırakmak ve kişisel tabanlığı taşımak.</p>','fade')}
+ </div></div>`,
+ state:t=>{
+  const lab=PD.filter(p=>t>=p[1]&&t<40.5).map(p=>p[0]);
+  let cur=null;PD.forEach(p=>{if(t>=p[1]&&t<36)cur=p[0];});
+  return {explode:kf(t,[[0,0],[2.5,0],[7,1],[38.5,1],[42.5,0]]),az:kf(t,[[0,35],[7,24],[38,52],[44,40]])+5*Math.sin(t*.35),el:kf(t,[[0,18],[7,14],[38,22]]),dist:A(9.8,8.8),cx:A(.6,.5),cy:A(.53,.42),labels:lab,hl:cur?[cur]:[]};
+ }
+});
+
+/* 5 orthotic */
+add({id:'tabanlik',title:'Kişisel tabanlık',dur:26,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">İçeriği değiştirmek</p>
+  <h2 class="h2 r in" data-at="0">Fabrika tabanı çıkar, kişisel tabanlık girer</h2>
+  <ol class="steps">
+   ${[['Üst yüzey kaldırılır, fabrika iç tabanı tamamen çıkarılır.',2],
+      ['Kişisel tabanlık eski tabanın üstüne değil, onun yerine yerleşir.',8],
+      ['Uzmanın hazırladığı tabanlık, sizin ayağınızın ark ve topuk şeklini taşır.',13],
+      ['Takıldıktan sonra: topuk yukarı çıkmamalı, topukta kayma ve ön ayakta kenar baskısı olmamalı.',18]]
+     .map((s,i)=>`<li class="r" data-at="${s[1]}"><span class="n">${i+1}</span><p>${s[0]}</p></li>`).join('')}
+  </ol>
+  ${R(21,'<div class="warnbox"><b>Yağmurdan sonra:</b> ıslanan ayakkabıdan tabanlığı çıkarın ve oda sıcaklığında kurutun. Radyatör veya sıcak hava kullanmayın.</div>')}
+ </div></div>`,
+ state:t=>({az:kf(t,[[0,40],[12,25],[26,45]]),el:kf(t,[[0,24],[4,36],[20,26]]),dist:A(8.3,6.4),cx:A(.725,.5),cy:A(.5,.23),
+  upperLift:kf(t,[[0,0],[2,0],[4.5,1],[17,1],[20,0]]),insoleLift:kf(t,[[0,0],[4.5,0],[8,1]]),ortho:kf(t,[[0,0],[9,0],[13.5,1]]),
+  labels:[...(t>=5&&t<10?['insole']:[]),...(t>=12.5?['orthotic']:[])],hl:t>=13.5&&t<21?['orthotic']:[]})
+});
+
+/* 6 gates */
+const GATES=[
+ ['Gerçek genişlik veya geniş toe box','Dar burun, ön ayak sinirini ve CM1 basıncını artırabilir.',2],
+ ['Sert ve stabil topuk kontrforu','İnstabil topuk temasını azaltmaya yardımcı olur.',9],
+ ['Çıkarılabilir iç taban ve yeterli hacim','Kişisel tabanlık, üst yüzeyi sıkıştırmadan yerleştirilebilmeli.',16],
+ ['Kontrollü rocker veya geçiş','Erken topuk kalkışı ve ön ayak yük yönetiminde yararlı olabilir.',23],
+ ['Güvenli satın alma rotası','Hollanda veya AB içinde iade ve garanti tercih edilir.',30]
+];
+add({id:'kapilar',title:'Zorunlu kapılar',dur:40,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Eleme ölçütleri</p>
+  <h2 class="h2 r in" data-at="0">Beş zorunlu seçim kapısı</h2>
+  <div class="gates">${GATES.map((g,i)=>`<div class="gate r" data-at="${g[2]}" data-i="${i}"><span class="ck"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><b>${g[0]}</b><span>${g[1]}</span></div>`).join('')}</div>
+  ${R(36,'<p class="mute">Bir model, ancak bu kapıları karşılama ihtimali varsa önerildi. Marka popülerliği ya da fiyat bu sıralamada belirleyici değil.</p>')}
+ </div></div>`,
+ state:t=>{
+  const g=t<9?0:t<16?1:t<23?2:t<30?3:t<36?4:5;
+  const base={dist:A(8.5,6.4),cx:A(.735,.5),cy:A(.5,.23)};
+  if(t<2)return {...base,az:35,el:20};
+  if(g===0)return {...base,az:0,el:78,hl:['toebox'],labels:['toebox']};
+  if(g===1)return {...base,az:-112,el:14,hl:['counter'],labels:['counter']};
+  if(g===2)return {...base,az:30,el:30,upperLift:.85,hl:['insole'],labels:['insole']};
+  if(g===3)return {...base,az:0,el:5,rock:gait((t-23)/4.6%1),hl:['midsole'],labels:['midsole']};
+  return {...base,az:30+(t-30)*24,el:18};
+ },
+ update(t,root){const g=t<9?0:t<16?1:t<23?2:t<30?3:t<36?4:-1;$$('.gate',root).forEach((el,i)=>el.classList.toggle('cur',i===g&&t>=2));},
+ fxDraw(ctx,t){if(t>=3&&t<9)drawWidth(ctx,sstep(3,4.5,t)*(1-sstep(8.4,9,t)));}
+});
+
+/* 7 rocker */
+function gait(p){return kf(((p%1)+1)%1,[[0,9],[.12,0],[.45,0],[.7,-14],[.85,-26],[.93,-8],[1,9]]);}
+const GPH=[['Topuk teması',0,.12],['Orta duruş',.12,.45],['Topuk kalkışı',.45,.75],['Parmak itişi',.75,.93]];
+add({id:'rocker',title:'Kontrollü rocker',dur:30,lay:'lay-center',
+ html:`<div class="top"><p class="eyebrow r in" data-at="0">Adım geçişi</p><h2 class="h2 r in" data-at="0">Topuktan buruna yuvarlanma</h2></div>
+ <div class="cap pe">
+  <div class="dstack">
+   ${R(.5,'<h3>Kontrollü rocker</h3><p>Ara tabanın burun ve topuk uçları hafifçe yukarı kıvrık. Ayak, topuk temasından parmak itişine daha az bükülerek geçer; erken topuk kalkışında ön ayak yükünü yönetmeye yardımcı olabilir.</p>','fade',16)}
+   ${R(16,'<h3>Her zemin için değil</h3><p>Yüksek ve yumuşak rocker koşuda iyi çalışır, ağır kuvvet antrenmanında ise dengeyi bozar. Salon ve uzun süre ayakta kalma için alçak, düz ve geniş platform daha stabildir.</p>','fade')}
+  </div>
+  <svg class="gait" viewBox="0 0 600 54" aria-hidden="true">
+   ${GPH.map((g,i)=>`<rect class="seg" data-i="${i}" x="${g[1]*600}" y="6" width="${(g[2]-g[1])*600-3}" height="8"/><text x="${g[1]*600}" y="${i%2?50:32}">${g[0]}</text>`).join('')}
+   <line class="gm" x1="0" x2="0" y1="0" y2="20" stroke="var(--paper)" stroke-width="2"/>
+  </svg>
+ </div>`,
+ state:t=>{const flat=sstep(17,19,t);return {az:kf(t,[[0,8],[16,-6],[30,8]]),el:5,dist:A(6.2,6.6),cx:A(.6,.5),cy:A(.44,.42),rock:gait(t/4.8)*(1-flat*.7),midH:lerp(1,.55,flat),hl:t<16?['midsole']:[],labels:t>=2&&t<16?['midsole']:[]};},
+ update(t,root){const p=((t/4.8)%1);root.querySelector('.gm').setAttribute('transform',`translate(${p*600},0)`);$$('.seg',root).forEach((s,i)=>s.classList.toggle('cur',p>=GPH[i][1]&&p<GPH[i][2]));}
+});
+
+/* 8 rejected */
+const REJ=[
+ ['narrow','Dar veya sivri burun kutusu','Ön ayağı yanlardan sıkıştırır; CM1 ve sinir riski artar.'],
+ ['fixed','Çıkarılamayan veya ince iç taban','Kişisel tabanlık yerleşmez ya da iç hacmi sıkıştırır.'],
+ ['slipper','Topuğu serbest bırakan yumuşak terlik','İnstabil topuk temasında destek vermez.'],
+ ['slide','Tek bantlı slide ile uzun yürüyüş','Topuk tutuşu yok; yalnız çok kısa rota.'],
+ ['rocker','Yüksek-yumuşak rockerlı koşu ayakkabısıyla ağır kuvvet','Ağırlık altında platform dengesiz kalır.'],
+ ['water','Genişliği doğrulanmayan waterproof model','Waterproof etiketi tek başına yetmez; genişlik ve tabanlık hacmi şart.']
+];
+add({id:'elenen',title:'Elenen sınıflar',dur:28,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Otomatik eleme</p>
+  <h2 class="h2 r in" data-at="0">Sağlık açısından baştan elenen sınıflar</h2>
+  ${R(.8,'<p class="mute">Bu sınıflar, marka veya fiyat ne olursa olsun kısa listeye giremedi.</p>')}
+  <div class="rej">${REJ.map((r,i)=>`<div class="rcard r" data-at="${2+i*3.4}" data-x="${3.6+i*3.4}">${svgI(RICON[r[0]],'ic')}<div><h3>${r[1]}</h3><p>${r[2]}</p></div><span class="x">ELENDİ</span></div>`).join('')}</div>
+ </div></div>`,
+ state:()=>({show:0}),
+ update(t,root){$$('.rcard',root).forEach(c=>c.classList.toggle('struck',t>=+c.dataset.x));}
+});
+
+/* 9 brands */
+const BG=[
+ ['Stabil koşu / aktif gün',['HOKA','Brooks','New Balance','ASICS','Saucony','Mizuno','On','Topo Athletic','Altra'],'Wide/extra-wide ve tabanlık hacmi olmayan varyantlar elendi; nihai listede HOKA, Brooks, New Balance, ASICS ve Saucony ağırlıklı.'],
+ ['Ortopedik / derin kalıp',['Solidus','Xsensible','Finn Comfort','Berkemann','Varomed','Waldläufer','Ganter','Joya','Orthofeet','Propet','Aetrex','Vionic'],'Model bazında çıkarılabilir footbed ve genişlik teyidi zorunlu; yetkili mağazada deneme notuyla yer alır.'],
+ ['Yürüyüş / şehir / dış mekân',['Ecco','Mephisto','Merrell','Salomon','Lowa','Hanwag','Keen','MBT','Joya'],'Çoğu modelde tabanlık hacmi, ön ayak genişliği veya sert topuk kontrforu kesinliği yetersiz; uygun varyant bulunursa tekrar bakılabilir.'],
+ ['Fitness / iş zemini',['New Balance','Brooks','Skechers Work','Reebok','Nike','Adidas','Puma','Under Armour'],'Yüksek/yumuşak koşu tabanları ağır kuvvette elendi; alçak-geniş platform ve kayma direnci aranır.'],
+ ['Ev / banyo / tuvalet / sandalet',['Finn Comfort','Berkemann','Varomed','Mephisto','Birkenstock','Crocs','Scholl','OOFOS','Naot'],'Islak alanda hijyen ve kayma riski önce gelir; bu terlikler kişisel tabanlıklı ana ayakkabının yerine geçmez.']
+];
+const FIN=new Set(['HOKA','Brooks','New Balance','ASICS','Saucony','Altra','Solidus','Xsensible','Finn Comfort','Berkemann','Varomed','Mephisto','Skechers Work','Reebok','Adidas','Birkenstock','Crocs','Naot']);
+const ALLB=new Set(BG.flatMap(g=>g[1]));
+const FINC=[...ALLB].filter(b=>FIN.has(b)).length;
+add({id:'marka',title:'Marka taraması',dur:32,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Sağlık önce</p>
+  <h2 class="h2 r in" data-at="0">Önce kapılar, sonra marka</h2>
+  ${R(.8,'<p class="mute">Önce geniş ön ayak, sert topuk kontrforu, çıkarılabilir iç taban ve tabanlıkla yeterli hacim aranır; marka ancak sonra gelir. Her markanın her modeli önerilmez.</p>')}
+  <div class="bgroups">${BG.map((g,i)=>{const t0=2.5+i*4.2;return `<div class="bg r" data-at="${t0}"><h3>${g[0]}</h3><div class="chips">${g[1].map((b,j)=>`<span class="chip r fade${FIN.has(b)?' fin':''}" data-at="${(t0+.3+j*.14).toFixed(2)}">${b}</span>`).join('')}</div><p class="dec">${g[2]}</p></div>`;}).join('')}</div>
+  ${R(25.5,`<div class="tally"><div><b>${ALLB.size}</b><span>taranan marka ailesi</span></div><div><b class="g">${FINC}</b><span>nihai listede en az bir modeli olan</span></div></div>`)}
+ </div></div>`,
+ state:()=>({show:0}),
+ update(t,root){root.classList.toggle('judged',t>=24.5);}
+});
+
+/* 10 seasons */
+add({id:'mevsim',title:'Harderwijk mevsimleri',dur:26,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Mevsim senaryosu</p>
+  <h2 class="h2 r in" data-at="0">Kar değil, tekrar eden yağmur</h2>
+  ${R(1.5,'<p><b>Yaz:</b> kuru veya daha ılık, uzun gün ışıklı dönem. Havalandırma ve ön ayakta gün sonu şişme payı önceliklidir.</p>')}
+  ${R(12.5,'<p><b>Hollanda kışı:</b> genellikle çok soğuk ya da karlı değil. Asıl senaryo tekrar eden hafif-orta yağmur, ıslak kaldırım ve rüzgâr.</p>')}
+  ${R(16.5,'<p class="mute">Bu yüzden “kış” grubu kar botu değil: kapalı üst yüzey, daha güvenli dış taban ve yedek kuru çorap üzerinden sıralandı.</p>')}
+  ${R(20.5,'<div class="warnbox"><b>Sınır:</b> şiddetli yağmur veya derin su birikintisinde açık ya da mesh modellerin hiçbiri ana çözüm değildir.</div>')}
+ </div></div>`,
+ state:t=>({az:20+t*10,el:14,dist:A(8.3,6.2),cx:A(.725,.5),cy:A(.5,.23),wet:t>=12?1:0}),
+ fx:t=>t<12?{sun:1,motes:1}:{rain:sstep(12,15,t)*.9}
+});
+
+/* 11-21 categories */
+CATS.forEach(c=>{
+ const sl=c.sl||['Yaz / kuru','Kış / yağmur'];
+ const same=c.s.join()===c.w.join();
+ const rows=c.it.map((it,i)=>`<div class="row" data-i="${i}"><div class="rk">${c.s.indexOf(i)+1}</div><div><div class="rm">${it[0]}</div><div class="rd"><p><span class="lb ok">Neden</span>${it[1]}</p><p><span class="lb wn">Ödün</span>${it[2]}</p></div></div></div>`).join('');
+ add({id:'k'+c.no,title:c.name,dur:40,lay:'lay-cat',cat:c,
+  html:`<div class="panel pe"><div class="grid">
+   <div class="lc">
+    <div class="box r in" data-at="0">
+     <div class="box-top"><span>Kullanım alanı ${String(c.no).padStart(2,'0')} / 11</span><span>En fazla 5 seçenek</span></div>
+     <div class="box-main">${svgI(ICON[c.icon])}<h2>${c.name}</h2></div>
+     <div class="box-fields"><div><span class="k">Mevsim</span><span class="v season"><b class="s">${sl[0]}</b><b class="w">${sl[1]}</b></span></div><div><span class="k">Ayakkabı tipi</span><span class="v">${c.cls}</span></div><div><span class="k">Sıralama</span><span class="v">Uyum kapıları, sonra amaç</span></div></div>
+    </div>
+    ${R(1.2,`<p class="principle">${c.pr}</p>`)}
+   </div>
+   <div class="rc">
+    <div class="rlist-h r in" data-at="0"><span class="eyebrow" style="margin:0">Kısa liste</span><span class="spill"><span class="s">${sl[0]}</span><span class="w">${sl[1]}</span></span></div>
+    <div class="rows">${rows}</div>
+    <div class="notes">
+     ${c.snote?R(12,`<div class="note"><b>${sl[0]}:</b> ${c.snote}</div>`,'',19):''}
+     ${same?R(20.5,`<div class="note wn"><b>Sıralama aynı kalır.</b> ${sl[1]} döneminde de ilk beş değişmiyor.</div>`):''}
+     ${R(22.5,`<div class="note wn"><b>${sl[1]}:</b> ${c.wnote||W_NOTE}</div>`)}
+    </div>
+   </div>
+  </div></div>`,
+  state:t=>({variant:c.variant,show:A(1,0),cx:.2,cy:.76,dist:10.8,az:25+t*7,el:14,wet:t>=19?1:0,midH:c.midH||1}),
+  fx:t=>t<19?{sun:.6,motes:.6}:{rain:(c.rain||.85)*sstep(19,21,t)},
+  update(t,root){
+   root.classList.toggle('winter',t>=19);
+   const rows=this._rows||(this._rows=$$('.row',root));
+   rows.forEach((r,i)=>r.classList.toggle('in',t>=3.5+c.s.indexOf(i)*1.8));
+   const order=t>=20.5?c.w:c.s;
+   let foc=-1;if(t>=12&&t<19)foc=c.s[0];else if(t>=24)foc=c.w[Math.min(4,Math.floor((t-24)/3))];
+   rows.forEach((r,i)=>{r.classList.toggle('focus',i===foc);const rk=order.indexOf(i)+1;if(r._rk!==rk){r._rk=rk;r.firstChild.textContent=rk;}});
+   const cont=root.querySelector('.rows');const key=order.join()+'|'+cont.clientWidth;
+   if(this._key!==key){this._key=key;layoutRows(cont,rows,order);}
+  },
+  enter(){this._key=null;}
+ });
+});
+
+/* 22 rain table */
+const RT=[
+ ['HOKA Gaviota 5 Wide','e','d','h','Mesh üst yüzey; yağmur ayakkabısı değil.'],
+ ['Brooks Beast GTS 24','e','d','h','Güçlü destek, fakat su geçirmez değil.'],
+ ['Brooks Addiction Walker 2','e','e','d','Deri ve kaymaz taban; yine de waterproof değil.'],
+ ['Xsensible Golden Gate Men H','e','d','h','Deri/nubuk; yoğun yağmurda ana seçim değil.'],
+ ['New Balance 928v3','e','d','h','Waterproof iddiası doğrulanmadı.'],
+ ['Skechers Work Arch Fit SR','e','d','d','Kaymazlık var, waterproof iddiası yok.'],
+ ['Sandalet ve açık terlik','e','k','h','Yağmurda kayma ve ön ayak kayması riski.']
+];
+const CW={e:['e','Evet'],d:['d','Dikkatli'],h:['h','Hayır'],k:['d','Kısa süre']};
+add({id:'yagmur',title:'Yağmur uygunluğu',dur:34,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Hollanda hava koşulları</p>
+  <h2 class="h2 r in" data-at="0">Kaymaz taban, su geçirmez üst yüzey demek değildir</h2>
+  ${R(.8,'<p class="mute">Ana fark kar değil; hafif-orta yağmur ve ıslak kaldırım. Listede geniş ön ayak, tabanlık hacmi, stabil topuk ve resmen doğrulanmış waterproof membranı birlikte karşılayan model bulunmadı.</p>')}
+  <div class="tbl-wrap r" data-at="1.5"><table class="rain"><thead><tr><th>Model</th><th>Kuru</th><th>Hafif yağmur</th><th>Orta yağmur</th><th>Not</th></tr></thead><tbody>
+  ${RT.map((r,i)=>`<tr class="r fade" data-at="${2+i*1.1}"><td class="m">${r[0]}</td>${[1,2,3].map(k=>`<td><span class="cell ${CW[r[k]][0]}" data-at="${(k===1?11:k===2?15:20)+i*.25}">${CW[r[k]][1]}</span></td>`).join('')}<td class="nt">${r[4]}</td></tr>`).join('')}
+  </tbody></table></div>
+  ${R(27,'<div class="warnbox" style="margin-top:14px"><b>Sonuç:</b> şiddetli yağmur, büyük su birikintisi veya uzun süre kesintisiz yağmur için mevcut önerilerden hiçbiri ana ayakkabı olarak seçilmemeli. Bu durum ayrı bir waterproof + genişlik + tabanlık uyumlu model araştırması gerektirir.</div>')}
+ </div></div>`,
+ state:()=>({show:0}),
+ fx:t=>({rain:t<11?.12:t<15?.2:t<20?.5:.95})
+});
+
+/* 23 protocol */
+const PROT=['Orijinal iç tabanı tamamen çıkarın; kişisel tabanlığı eski tabanın üstüne koymayın.',
+ 'Tabanlık takıldıktan sonra topuğun yukarı çıkmadığını ve topukta kayma olmadığını kontrol edin.',
+ 'En geniş ön ayak noktasında ayakkabı kenarı baskı yapmamalı.',
+ 'Başparmak arkası ve CM1 bölgesinde sert dikiş, katlanma veya lokal basınç olmamalı.',
+ 'Denemeyi günün ikinci yarısında yapın; ayak gün sonunda daha geniş olabilir.',
+ 'İade süresinde 30-45 dakikalık yürüyüş, merdiven iniş-çıkış ve yön değiştirme deneyin.',
+ 'Uyuşma, yanma, elektriklenme, artan ağrı veya topuk kayması olursa modeli eleyin.',
+ 'Yağmurda ıslanan ayakkabıdan tabanlığı çıkarın ve oda sıcaklığında kurutun; radyatör veya sıcak hava kullanmayın.'];
+const PS=i=>2+i*5;
+add({id:'protokol',title:'Deneme protokolü',dur:44,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Satın alma ve deneme</p>
+  <h2 class="h2 r in" data-at="0">Mağazada ve iade süresinde 8 adım</h2>
+  <ol class="steps">${PROT.map((s,i)=>`<li class="r" data-at="${PS(i)}"><span class="n">${i+1}</span><p>${s}</p></li>`).join('')}</ol>
+ </div></div>`,
+ state:t=>{
+  const i=t<2?-1:Math.min(7,Math.floor((t-2)/5));
+  const b={dist:A(8.5,6.4),cx:A(.735,.5),cy:A(.5,.22)};
+  switch(i){
+   case 0:return {...b,az:30,el:34,upperLift:.85,insoleLift:1,labels:['insole']};
+   case 1:return {...b,az:-120,el:18,ortho:1,hl:['counter'],labels:['counter']};
+   case 2:return {...b,az:0,el:78,ortho:1,hl:['toebox'],labels:['toebox']};
+   case 3:return {...b,az:62,el:26,ortho:1,hl:['toebox']};
+   case 4:return {...b,az:30+(t-22)*20,el:16,ortho:1};
+   case 5:return {...b,az:0,el:5,ortho:1,rock:gait((t-27)/4.8)};
+   case 6:return {...b,az:-100,el:14,ortho:1,hl:['counter']};
+   case 7:return {...b,az:30,el:30,wet:1,upperLift:.85,ortho:kf(t,[[37,1],[40,0]]),labels:['orthotic']};
+   default:return {...b,az:35,el:20};
+  }
+ },
+ update(t,root){const i=t<2?-1:Math.min(7,Math.floor((t-2)/5));$$('.steps li',root).forEach((li,k)=>{li.classList.toggle('cur',k===i);li.classList.toggle('done',k<i);});},
+ fx:t=>t>=37?{rain:.5}:{motes:.4}
+});
+
+/* 24 specialist */
+add({id:'uzman',title:'Uzmana dönüş',dur:22,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin" style="max-width:860px">
+  <p class="eyebrow r in" data-at="0">Ne zaman uzmanla tekrar görüşülmeli</p>
+  <h2 class="h2 r in" data-at="0">Ayakkabı değişikliği tedavinin yerine geçmez</h2>
+  <div class="sig">${['Ön ayakta uyuşma veya yanmanın belirgin artması','CM1 bölgesinde keskin ağrı','Topukta artan kararsızlık','Tek taraflı belirgin şişlik, kızarıklık, ısı artışı','Yürüme toleransında belirgin düşüş'].map((s,i)=>`<span class="r" data-at="${2+i*1.8}">${s}</span>`).join('')}</div>
+  ${R(12,'<p class="bigcall">Bu işaretlerden biri varsa <em>podoloji, ortopedik tabanlık veya ayak sağlığı uzmanı</em> ile yeniden görüşün.</p>')}
+ </div></div>`,
+ state:()=>({show:0})
+});
+
+/* 25 method */
+const QW=[['Topuk stabilitesi ve kontrfort',25,'#E3A56F'],['Ön ayak genişliği, toe box ve tabanlık uyumu',25,'#7FA6EE'],['Rocker-geçiş ve gerçek kullanım',21,'#7FD3A2'],['Klinik-biyomekanik uyum',10,'#C9A0F0'],['Kullanım alanına özgü uygunluk',9,'#F1CF5E'],['Uzun dönem kullanıcı deneyimi',5,'#63C7D3'],['Satıcı, iade ve garanti güveni',5,'#F0868B']];
+const QC=2*Math.PI*78;
+add({id:'metod',title:'Kalite puanı Q',dur:26,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Metodoloji</p>
+  <h2 class="h2 r in" data-at="0">Q puanı 100 üzerinden nasıl kuruldu</h2>
+  <div class="qwrap">
+   <svg viewBox="0 0 200 200" role="img" aria-label="Q puanı ağırlıkları halka grafiği">
+    <circle cx="100" cy="100" r="78" fill="none" stroke="var(--line)" stroke-width="26"/>
+    ${(()=>{let acc=0;return QW.map((q,i)=>{const s=acc;acc+=q[1];return `<circle class="qs" data-i="${i}" cx="100" cy="100" r="78" fill="none" stroke="${q[2]}" stroke-width="26" stroke-dasharray="0 ${QC}" stroke-dashoffset="${-s/100*QC}" transform="rotate(-90 100 100)"/>`;}).join('');})()}
+    <text x="100" y="96" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="30" font-weight="600" class="qtot">0</text>
+    <text x="100" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" fill="var(--mute)" style="fill:var(--mute)">Q PUANI</text>
+   </svg>
+   <ul class="legend">${QW.map((q,i)=>`<li class="r" data-at="${2+i*1.8}"><i style="background:${q[2]}"></i><b>${q[1]}</b><span>${q[0]}</span></li>`).join('')}</ul>
+  </div>
+  ${R(16,'<p class="mute" style="margin-top:1.2rem">Fiyat Q puanının dışında tutuldu. Fiyat, stok, renk ve beden zamanla değişir; satın alma anında resmî sayfada yeniden kontrol edilmeli.</p>')}
+ </div></div>`,
+ state:()=>({show:0}),
+ update(t,root){let tot=0;$$('.qs',root).forEach((c,i)=>{const p=clamp((t-(2+i*1.8))/1.3);const e=ease(p);tot+=QW[i][1]*e;c.setAttribute('stroke-dasharray',`${Math.max(0,QW[i][1]/100*QC*e-1.2)} ${QC}`);});root.querySelector('.qtot').textContent=Math.round(tot);}
+});
+
+/* 26 summary */
+const SUM=[['Genel günlük ana ayakkabı','HOKA Gaviota 5 Wide','Genişlik, stabilite ve kontrollü rocker geçişinin en dengeli bileşimi.',{variant:'sneaker'}],
+ ['Yağmurlu gün ana ayakkabısı','Brooks Addiction Walker 2 4E','Deri üst yüzey, kaymaz taban ve stabil geniş platform. Waterproof değil.',{variant:'sneaker',wet:1}],
+ ['Şehirli günlük alternatif','Xsensible Golden Gate Men H','H genişlik ve çıkarılabilir footbed ile daha az sportif görünüm.',{variant:'sneaker'}],
+ ['Kuvvet / fitness','New Balance 608v5 4E','Daha alçak ve stabil platform; yüksek rocker tabanlı koşu ayakkabılarından daha uygun.',{variant:'sneaker',midH:.55}],
+ ['Yaz sandaleti','Finn Comfort Baltrum','Arka/topuk desteği, ayarlanabilir kayışlar ve çıkarılabilir footbed.',{variant:'sandal'}],
+ ['Ev içi','Berkemann veya Varomed tipi kapalı model','Çıkarılabilir footbed ve ayarlanabilir üst yüzey arayın.',{variant:'clog'}]];
+add({id:'ozet',title:'Karar özeti',dur:36,lay:'lay-cat',
+ html:`<div class="panel pe"><div class="grid">
+  <div class="lc"><p class="eyebrow r in" data-at="0">Karar özeti</p><h2 class="h2 r in" data-at="0">Altı iş, altı ayakkabı</h2>${R(1,'<p class="principle">Her kullanım için ayrı bir çift. Hepsinde ortak şart aynı: geniş ön ayak, stabil topuk ve kişisel tabanlığa yer.</p>')}</div>
+  <div class="sum">${SUM.map((s,i)=>`<div class="scard r" data-at="${2+i*5}"><span class="k">${s[0]}</span><span class="m">${s[1]}</span><span class="w">${s[2]}</span></div>`).join('')}</div>
+ </div></div>`,
+ state:t=>{const i=t<2?0:Math.min(5,Math.floor((t-2)/5));return Object.assign({show:A(1,0),cx:.2,cy:.76,dist:10.8,az:25+t*8,el:14},SUM[i][3]);},
+ update(t,root){const i=t<2?-1:t>=32?-1:Math.min(5,Math.floor((t-2)/5));$$('.scard',root).forEach((c,k)=>c.classList.toggle('cur',k===i));}
+});
+
+/* 27 closing */
+add({id:'kapanis',title:'Kapanış',dur:18,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Son not</p>
+  <h2 class="h2 r in" data-at="0">Doğru çift, doğru yerde</h2>
+  ${R(2,'<p class="lede">Bu animasyon, sağlık uzmanının değerlendirmesini destekleyen bir satın alma araştırmasını anlatır. Klinik tanı veya tedavi planı değildir.</p>')}
+  ${R(6,'<p class="mute">Ana bağlantılar resmî marka mağazası veya resmî ürün sayfasıdır. Markanın kendi mağazası Hollanda teslimatı sunmuyorsa sayfayı yalnız ürün bilgisi için kullanın; teslimat, beden ve iadeyi ayrıca kontrol edin.</p>')}
+  ${R(10,'<p class="hint">Bitti. Bölümler menüsünden istediğiniz yere dönebilir ya da ▶ ile baştan izleyebilirsiniz.</p>')}
+ </div></div>`,
+ state:t=>({az:30+t*12,el:18,dist:A(9.8,8.2),cx:A(.71,.5),cy:A(.52,.25),explode:.4-.4*Math.cos(Math.max(0,t-2)*.5),labels:[]}),
+ fx:()=>({motes:1,sun:.3})
+});
+
+let acc=0;SC.forEach((s,i)=>{s.i=i;s.start=acc;acc+=s.dur;});
+const TOTAL=acc;
+
+/* ================= DOM build ================= */
+const scenesEl=$('#scenes');
+SC.forEach(s=>{
+ const d=document.createElement('section');d.className='scene '+s.lay;d.id='s-'+s.id;d.setAttribute('aria-label',s.title);d.innerHTML=s.html;scenesEl.appendChild(d);s.root=d;
+ s.items=$$('[data-at]',d).map(el=>({el,at:+el.dataset.at,out:el.dataset.out!=null?+el.dataset.out:Infinity}));
+});
+function layoutRows(cont,rows,order){let y=0;const h=rows.map(r=>r.offsetHeight);order.forEach(i=>{rows[i].style.setProperty('--y',y+'px');y+=h[i]+8;});cont.style.height=Math.max(0,y-8)+'px';}
+
+/* ================= footprint canvas ================= */
+const heatCv=document.createElement('canvas');heatCv.width=72;heatCv.height=120;
+const heatCtx=heatCv.getContext('2d');const heatImg=heatCtx.createImageData(72,120);
+const CMAP=[[0,[30,50,75,0]],[.14,[60,98,170,.5]],[.38,[127,166,238,.82]],[.6,[227,165,111,.92]],[.8,[240,123,114,.96]],[1,[255,238,205,1]]];
+function cmap(v){v=clamp(v);for(let i=0;i<CMAP.length-1;i++){const a=CMAP[i],b=CMAP[i+1];if(v<=b[0]){const t=(v-a[0])/(b[0]-a[0]);return a[1].map((x,k)=>lerp(x,b[1][k],t));}}return CMAP[CMAP.length-1][1];}
+function drawFoot(cv,t,fi){
+ const r=cv.getBoundingClientRect();const W=r.width,H=r.height;if(W<20||H<20)return;
+ const dpr=Math.min(2,devicePixelRatio||1);
+ if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);}
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+ const css=getComputedStyle(document.documentElement);const C=k=>css.getPropertyValue(k).trim();
+ const len=Math.min(H*.8,W*.5*1.85);const zS=len/2.8;const cx=W*.28,by=H*.5+len/2-H*.02;
+ const P=(u,z)=>[cx+z*zS,by-u*len];
+ const footPath=()=>{const p=new Path2D();let s=P(0,centerZ(0));p.moveTo(s[0],s[1]);
+  for(let i=1;i<=40;i++){const u=i/40*.8;const q=P(u,centerZ(u)+halfW(u,1)*.84);p.lineTo(q[0],q[1]);}
+  const e=P(.88,centerZ(.88)-halfW(.88,-1)*.84),c=P(1.0,.08);p.quadraticCurveTo(c[0],c[1],e[0],e[1]);
+  for(let i=40;i>=0;i--){const u=i/40*.88;const q=P(u,centerZ(u)-halfW(u,-1)*.84);p.lineTo(q[0],q[1]);}
+  p.closePath();return p;};
+ const toePath=()=>{const p=new Path2D();[[.935,-.22,.12],[.925,-.05,.072],[.9,.07,.066],[.868,.17,.06],[.83,.255,.055]].forEach(o=>{const q=P(o[0],o[1]);p.moveTo(q[0]+o[2]*zS,q[1]);p.arc(q[0],q[1],o[2]*zS,0,Math.PI*2);});return p;};
+ const fp=footPath(),tp=toePath();
+ const ph=(t*.45)%1;
+ const heelF=fi===2?(ph<.35?1:.22):fi===0?.85+.15*Math.sin(t*6):1;
+ const over=fi===1?1:fi>=2?.55:.12;
+ const cmB=fi===3?.35+.2*Math.sin(t*5):fi>3?.25:0;
+ const B=[[.11,0,.27,.85*heelF],[.4,.17,.15,.36],[.43,-.11,.14,.55*over],[.715,-.22,.15,.78+cmB],[.735,-.06,.13,.6],[.73,.07,.12,.5],[.715,.18,.12,.42],[.69,.28,.12,.36],[.935,-.22,.12,.55],[.925,-.05,.07,.3],[.9,.07,.065,.26],[.868,.17,.06,.22],[.83,.255,.055,.2]];
+ const gw=72,gh=120,x0=cx-.62*zS,x1=cx+.62*zS,y0=by-len*1.04,y1=by+len*.02;
+ const d=heatImg.data;
+ for(let j=0;j<gh;j++){const y=lerp(y0,y1,(j+.5)/gh);const u=(by-y)/len;for(let i=0;i<gw;i++){const x=lerp(x0,x1,(i+.5)/gw);const z=(x-cx)/zS;let v=0;for(const b of B){const du=(u-b[0])*2.8,dz=z-b[1];v+=b[3]*Math.exp(-(du*du+dz*dz)/(b[2]*b[2]));}const c=cmap(v);const k=(j*gw+i)*4;d[k]=c[0];d[k+1]=c[1];d[k+2]=c[2];d[k+3]=c[3]*255;}}
+ heatCtx.putImageData(heatImg,0,0);
+ [fp,tp].forEach(pp=>{g.save();g.clip(pp);g.fillStyle=C('--ink-2');g.fillRect(x0,y0,x1-x0,y1-y0);g.imageSmoothingEnabled=true;g.drawImage(heatCv,x0,y0,x1-x0,y1-y0);g.restore();});
+ g.strokeStyle=C('--line-2');g.lineWidth=1.2;g.stroke(fp);g.stroke(tp);
+ g.font='600 11px "JetBrains Mono", monospace';g.fillStyle=C('--mute');g.textAlign='left';
+ g.fillText('ÜSTTEN · SAĞ AYAK',x0,Math.max(14,y0-8));
+ const lbl=(u,z,txt,dx,dy,col)=>{const p=P(u,z);const tw=g.measureText(txt).width;if(dx<0&&p[0]+dx-4-tw<4)dx=-dx;if(dx>0&&p[0]+dx+4+tw>W-4)dx=-dx;g.strokeStyle=col;g.fillStyle=col;g.lineWidth=1;g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(p[0]+dx,p[1]+dy);g.stroke();g.beginPath();g.arc(p[0],p[1],2.5,0,7);g.fill();g.fillStyle=C('--paper');g.textAlign=dx<0?'right':'left';g.fillText(txt,p[0]+dx+(dx<0?-4:4),p[1]+dy+4);};
+ if(fi===0)lbl(.11,0,'topuk teması',-zS*.75,8,C('--gum'));
+ if(fi===1){const a=P(.5,-.36),b=P(.43,-.18);g.strokeStyle=C('--gum');g.lineWidth=2;g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke();lbl(.43,-.11,'içe yuvarlanma',-zS*.8,-6,C('--gum'));}
+ if(fi===2){const p=P(.11,0);const k=ph>=.35?1:0;g.strokeStyle=C('--gum');g.lineWidth=2;g.beginPath();g.moveTo(p[0]+zS*.45,p[1]+10);g.lineTo(p[0]+zS*.45,p[1]-20-k*8);g.moveTo(p[0]+zS*.45-5,p[1]-14-k*8);g.lineTo(p[0]+zS*.45,p[1]-20-k*8);g.lineTo(p[0]+zS*.45+5,p[1]-14-k*8);g.stroke();g.fillStyle=C('--paper');g.textAlign='left';g.fillText('erken kalkış',p[0]+zS*.45+8,p[1]-6);}
+ if(fi===3){const p=P(.715,-.22);g.strokeStyle=C('--paper');g.lineWidth=1.5;g.beginPath();g.arc(p[0],p[1],zS*(.14+.03*Math.sin(t*5)),0,7);g.stroke();lbl(.715,-.22,'CM1 · 1. metatars başı',-zS*.8,-18,C('--paper'));}
+ if(fi===4){g.strokeStyle=C('--warn');g.lineWidth=1.8;g.beginPath();for(let i=0;i<=14;i++){const u=.6+i/14*.24;const z=.125+(i%2?.03:-.03)*(.6+.4*Math.sin(t*20+i));const p=P(u,z);i?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1]);}g.stroke();
+  const push=6*Math.sin(t*4)+6;[[-1,-.5],[1,.48]].forEach(([s,z0])=>{const p=P(.72,z0);g.strokeStyle=C('--no');g.lineWidth=2;g.beginPath();g.moveTo(p[0]+s*(26+push),p[1]);g.lineTo(p[0]+s*(8+push),p[1]);g.moveTo(p[0]+s*(14+push),p[1]-5);g.lineTo(p[0]+s*(8+push),p[1]);g.lineTo(p[0]+s*(14+push),p[1]+5);g.stroke();});
+  lbl(.84,.125,'sinir sıkışması riski',zS*.7,-20,C('--warn'));}
+ // legend
+ const lx=x0,ly=Math.min(H-14,y1+16),lw=Math.min(150,W*.3);const gr=g.createLinearGradient(lx,0,lx+lw,0);CMAP.forEach(s=>{const c=s[1];gr.addColorStop(s[0],`rgba(${c[0]},${c[1]},${c[2]},${Math.max(.25,c[3])})`);});
+ g.fillStyle=gr;g.fillRect(lx,ly-8,lw,6);g.fillStyle=C('--dim');g.font='500 10px "JetBrains Mono", monospace';g.textAlign='left';g.fillText('düşük',lx,ly+8);g.textAlign='right';g.fillText('yüksek basınç',lx+lw,ly+8);g.textAlign='left';g.fillText('temsili harita',lx+lw+10,ly-2);
+ // rear view
+ const s=Math.min(W*.0024,H*.0042);const rx=W*.77,gy=H*.8;
+ let a=-.04;if(fi===0)a=.1*Math.sin(t*4.2);else if(fi===1)a=-.2-.02*Math.sin(t*2);else if(fi>=2)a=-.12;
+ const lift=fi===2?Math.max(0,Math.sin(t*2.8))*14*s:0;
+ g.strokeStyle=C('--line-2');g.lineWidth=1;g.beginPath();g.moveTo(rx-70*s,gy);g.lineTo(rx+70*s,gy);g.stroke();
+ g.setLineDash([3,4]);g.beginPath();g.moveTo(rx,gy);g.lineTo(rx,gy-170*s);g.stroke();g.setLineDash([]);
+ g.save();g.translate(rx,gy-lift);g.rotate(a);
+ g.fillStyle=C('--ink-3');g.strokeStyle=C('--paper');g.lineWidth=1.6;
+ g.beginPath();g.moveTo(-17*s,-40*s);g.bezierCurveTo(-24*s,-20*s,-20*s,0,0,0);g.bezierCurveTo(20*s,0,24*s,-20*s,17*s,-40*s);g.closePath();g.fill();g.stroke();
+ g.beginPath();g.moveTo(-15*s,-40*s);g.bezierCurveTo(-16*s,-80*s,-20*s,-120*s,-22*s,-165*s);g.moveTo(15*s,-40*s);g.bezierCurveTo(16*s,-80*s,20*s,-120*s,22*s,-165*s);g.stroke();
+ g.strokeStyle=C('--gum');g.lineWidth=1.6;g.setLineDash([5,4]);g.beginPath();g.moveTo(0,-2*s);g.lineTo(0,-180*s);g.stroke();g.setLineDash([]);
+ g.restore();
+ if(Math.abs(a)>.03){g.fillStyle='rgba(227,165,111,.22)';g.beginPath();g.moveTo(rx,gy-lift);g.arc(rx,gy-lift,90*s,-Math.PI/2,-Math.PI/2+a,a<0);g.closePath();g.fill();}
+ g.fillStyle=C('--mute');g.font='600 11px "JetBrains Mono", monospace';g.textAlign='center';g.fillText('ARKADAN · SAĞ AYAK',rx,Math.max(14,gy-196*s));
+ const st=fi===0?'topuk teması kararsız':fi===1?'topuk içe yatıyor':fi===2?'topuk erken kalkıyor':fi>=3?'stabil topuk gerekli':'';
+ if(st){g.fillStyle=C('--paper');g.font='500 12px "Archivo", sans-serif';g.fillText(st,rx,gy+20);}
+}
+
+/* ================= THREE: shoe ================= */
+const L=2.8,X0=-1.4,ux=u=>X0+u*L;
+const WK=[[.10,.33],[.25,.355],[.45,.335],[.62,.45],[.74,.475],[.85,.43]];
+function baseW(u){if(u<=.10){const t=(.10-u)/.10;return .33*Math.sqrt(Math.max(0,1-t*t));}if(u>=.85){const t=(u-.85)/.15;return .43*Math.sqrt(Math.max(0,1-t*t));}for(let i=0;i<WK.length-1;i++){const a=WK[i],b=WK[i+1];if(u<=b[0]){const s=(u-a[0])/(b[0]-a[0]);const e=s*s*(3-2*s);return a[1]+(b[1]-a[1])*e;}}return .43;}
+function halfW(u,side){let w=baseW(u);if(side<0)w*=1-.17*Math.exp(-Math.pow((u-.42)/.12,2));else w*=1+.03*Math.exp(-Math.pow((u-.7)/.1,2));return w;}
+const centerZ=u=>-.07*sstep(.6,1,u);
+const rockY=u=>.22*Math.pow(clamp((u-.62)/.38),2)+.07*Math.pow(clamp((.13-u)/.13),2);
+const OUT_T=.06,midT=u=>.19+.13*(1-u),soleTop=u=>rockY(u)+OUT_T+midT(u);
+const UH=[[0,.62],[.08,.66],[.3,.62],[.45,.56],[.6,.46],[.75,.36],[.9,.25],[1,.12]];
+function domeH(u){for(let i=0;i<UH.length-1;i++){const a=UH[i],b=UH[i+1];if(u<=b[0]){const s=(u-a[0])/(b[0]-a[0]);return a[1]+(b[1]-a[1])*s*s*(3-2*s);}}return .12;}
+function sp(u,th,k=1,hk=1){const c=Math.cos(th),s=Math.max(0,Math.sin(th));const side=c>=0?1:-1;const w=halfW(u,side)*k;return [ux(u),soleTop(u)-.025+domeH(u)*hk*Math.pow(s,.8),centerZ(u)+side*w*Math.pow(Math.abs(c),.55)];}
+const alphaO=u=>u<=.40?1.2*Math.sqrt(Math.max(0,1-Math.pow((u-.17)/.23,2))):0;
+
+let renderer=null,scene3,camera,root,showG,rockG,shadow,ring,ringMat;
+const P={},VAR={},MATS={};
+const BOT=[];for(let i=0;i<=50;i++){const u=i/50;BOT.push([ux(u),rockY(u)]);}
+function col(h){return new THREE.Color(h).convertSRGBToLinear();}
+function canvasTex(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+function std(hex,o={}){return new THREE.MeshStandardMaterial(Object.assign({color:col(hex),roughness:.75,metalness:0,side:THREE.DoubleSide},o));}
+function outline(k=1,uPad=0,n=110){const pts=[];const us=[];for(let i=0;i<=n;i++){const t=i/n;us.push(uPad+(1-2*uPad)*(1-Math.cos(Math.PI*t))/2);}
+ us.forEach(u=>pts.push([ux(u),-(centerZ(u)+halfW(u,1)*k)]));for(let i=us.length-1;i>=0;i--){const u=us[i];pts.push([ux(u),-(centerZ(u)-halfW(u,-1)*k)]);}
+ const out=[];pts.forEach(p=>{const l=out[out.length-1];if(!l||Math.hypot(l.x-p[0],l.y-p[1])>1e-5)out.push(new THREE.Vector2(p[0],p[1]));});
+ if(out.length>2&&out[0].distanceTo(out[out.length-1])<1e-5)out.pop();return out;}
+function layerGeo(k,uPad,yAt){const g=new THREE.ExtrudeGeometry(new THREE.Shape(outline(k,uPad)),{depth:1,bevelEnabled:false,curveSegments:2});g.rotateX(-Math.PI/2);const p=g.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),f=p.getY(i),z=p.getZ(i);p.setY(i,yAt(clamp((x-X0)/L),f,z));}g.computeVertexNormals();return g;}
+function paramGeo(nu,nv,fn,k=1,hk=1){const pos=[],uv=[],idx=[];for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){const q=fn(i/nu,j/nv);pos.push(...sp(q[0],q[1],k,hk));uv.push(q[0]*6,j/nv*2);}
+ for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const a=i*(nv+1)+j,b=a+nv+1;idx.push(a,b,a+1,b,b+1,a+1);}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeVertexNormals();return g;}
+function shellGeo(o){const u0=o.u0??0,u1=o.u1??1,nu=o.nu??70,th0=o.th0??0,th1=o.th1??Math.PI,nv=o.nv??36,k=o.k??1,hk=o.hk||(()=>1),keep=o.keep,cos=o.cos!==false;
+ const pos=[],uv=[],idx=[],U=[],T=[];for(let i=0;i<=nu;i++){let t=i/nu;if(cos)t=(1-Math.cos(Math.PI*t))/2;U.push(u0+(u1-u0)*t);}for(let j=0;j<=nv;j++)T.push(th0+(th1-th0)*j/nv);
+ U.forEach(u=>T.forEach((th,j)=>{pos.push(...sp(u,th,k,hk(u)));uv.push(u*6,j/nv*2);}));
+ for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){if(keep&&!keep((U[i]+U[i+1])/2,(T[j]+T[j+1])/2))continue;const a=i*(nv+1)+j,b=a+nv+1;idx.push(a,b,a+1,b,b+1,a+1);}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeVertexNormals();return g;}
+const V=a=>new THREE.Vector3(a[0],a[1],a[2]);
+function tube(points,r,mat,closed=false,seg=120){return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points,closed),seg,r,8,closed),mat);}
+function mkPart(key,meshes,ud){const g=new THREE.Group();meshes.forEach(m=>g.add(m));g.userData=Object.assign({key,ex:[0,0,0],delay:0,upper:false,anchor:new THREE.Vector3(),mats:[]},ud);meshes.forEach(m=>{(Array.isArray(m.material)?m.material:[m.material]).forEach(mt=>{if(!g.userData.mats.includes(mt))g.userData.mats.push(mt);});});P[key]=g;return g;}
+
+function init3D(){
+ const cv=$('#gl');
+ try{if(!window.THREE)throw 0;renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});}catch(e){renderer=null;const n=document.createElement('div');n.id='nogl';n.textContent='3D sahne bu tarayıcıda açılamadı';$('#app').appendChild(n);return;}
+ renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));renderer.setClearColor(0x000000,0);
+ renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
+ scene3=new THREE.Scene();camera=new THREE.PerspectiveCamera(30,1,.1,120);
+ scene3.add(new THREE.HemisphereLight(0xcfe0ff,0x2a1f18,.6));
+ const key=new THREE.DirectionalLight(0xffffff,1.35);key.position.set(4,6,5);scene3.add(key);
+ const rim=new THREE.DirectionalLight(0x86aaff,.95);rim.position.set(-5,3,-4);scene3.add(rim);
+ const fill=new THREE.DirectionalLight(0xffd2a8,.38);fill.position.set(-3,2,5);scene3.add(fill);
+ root=new THREE.Group();scene3.add(root);showG=new THREE.Group();root.add(showG);rockG=new THREE.Group();showG.add(rockG);
+
+ // textures
+ const meshTex=canvasTex(256,256,(g,w,h)=>{g.fillStyle='#D3CEC4';g.fillRect(0,0,w,h);g.fillStyle='#ABA59A';for(let y=0;y<h;y+=8){for(let x=(y/8)%2?4:0;x<w;x+=8){g.beginPath();g.arc(x,y,2.2,0,7);g.fill();}}});
+ const treadTex=canvasTex(256,256,(g,w,h)=>{g.fillStyle='#B57D48';g.fillRect(0,0,w,h);g.strokeStyle='#7E522C';g.lineWidth=5;for(let y=8;y<h+16;y+=21){g.beginPath();for(let x=0;x<=w;x+=4){const yy=y+Math.sin(x/w*Math.PI*4)*6;x?g.lineTo(x,yy):g.moveTo(x,yy);}g.stroke();}});
+ treadTex.repeat.set(2.2,2.2);
+ const insTex=canvasTex(512,256,(g,w,h)=>{g.fillStyle='#5E7891';g.fillRect(0,0,w,h);g.fillStyle='rgba(20,32,44,.45)';for(let y=6;y<h;y+=12)for(let x=6;x<w;x+=12){g.beginPath();g.arc(x,y,1.6,0,7);g.fill();}});
+ insTex.repeat.set(1/2.8,1/1.1);insTex.offset.set(.5,.5);
+ const orthoTex=canvasTex(512,256,(g,w,h)=>{g.fillStyle='#4C7EDD';g.fillRect(0,0,w,h);g.strokeStyle='rgba(225,236,255,.4)';g.lineWidth=2;for(let r=10;r<300;r+=16){g.beginPath();g.ellipse(w*.36,h*.52,r*1.6,r*.62,0,0,7);g.stroke();}});
+ orthoTex.repeat.set(1/2.8,1/1.1);orthoTex.offset.set(.5,.5);
+ const shTex=canvasTex(256,128,(g,w,h)=>{const gr=g.createRadialGradient(w/2,h/2,4,w/2,h/2,w/2);gr.addColorStop(0,'rgba(0,0,0,.62)');gr.addColorStop(.55,'rgba(0,0,0,.25)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);});
+
+ // materials
+ const po={polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2};
+ MATS.upper=std('#ffffff',{map:meshTex,roughness:.86});
+ MATS.tongue=std('#C6C0B5',{roughness:.9});
+ MATS.collar=std('#3B4753',{roughness:.7});
+ MATS.counter=std('#506070',Object.assign({roughness:.55},po));
+ MATS.toe=std('#506070',Object.assign({roughness:.6},po));
+ MATS.lace=std('#E3A56F',{roughness:.6});
+ MATS.eye=std('#1E2A33',{metalness:.6,roughness:.35});
+ MATS.mid=std('#ffffff',{vertexColors:true,roughness:.55});
+ MATS.outCap=std('#ffffff',{map:treadTex,roughness:.85});MATS.outSide=std('#A06F40',{roughness:.8});
+ MATS.ins=std('#ffffff',{map:insTex,roughness:.9});
+ MATS.ortho=std('#ffffff',{map:orthoTex,roughness:.45});
+ MATS.clog=std('#6C8CA3',{roughness:.42});MATS.mule=std('#8B6A54',{roughness:.6});MATS.strap=std('#7E5D46',{roughness:.6});MATS.buckle=std('#C9CED6',{metalness:.85,roughness:.3});
+ ['upper','tongue','clog','mule','strap'].forEach(k=>{MATS[k].userData.base=MATS[k].color.clone();MATS[k].userData.rough=MATS[k].roughness;});
+
+ // sole
+ const gOut=layerGeo(1,0,(u,f)=>rockY(u)+f*OUT_T);
+ const gMid=layerGeo(1,0,(u,f)=>rockY(u)+OUT_T+f*midT(u));
+ {const p=gMid.attributes.position,cols=[],w=col('#EEF0F2'),m=col('#9DB7E2');for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i);const u=clamp((x-X0)/L);const rel=(z-centerZ(u))/Math.max(.05,halfW(u,-1));const f=sstep(-.55,-.9,rel)*sstep(.1,.18,u)*(1-sstep(.5,.6,u));const c=w.clone().lerp(m,f);cols.push(c.r,c.g,c.b);}gMid.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));}
+ const gIns=layerGeo(.93,.015,(u,f)=>soleTop(u)-.008+f*.035);
+ const gOrt=layerGeo(.93,.015,(u,f,z)=>{const c=centerZ(u);const m=clamp(-(z-c)/.3);const arch=.1*Math.exp(-Math.pow((u-.42)/.11,2))*m;const cup=.05*(1-sstep(.05,.25,u))*Math.pow(Math.abs(z-c)/Math.max(.08,halfW(u,1)),2);return soleTop(u)-.008+f*(.04+arch+cup);});
+ const edge=(u,y,s)=>new THREE.Vector3(ux(u),y,centerZ(u)+s*halfW(u,s));
+ rockG.add(mkPart('outsole',[new THREE.Mesh(gOut,[MATS.outCap,MATS.outSide])],{ex:[0,-.95,0],delay:.2,anchor:edge(.57,rockY(.57)+.03,1)}));
+ rockG.add(mkPart('midsole',[new THREE.Mesh(gMid,MATS.mid)],{ex:[0,-.45,0],delay:.7,anchor:edge(.3,rockY(.3)+OUT_T+midT(.3)*.5,1)}));
+ rockG.add(mkPart('insole',[new THREE.Mesh(gIns,[MATS.ins,MATS.ins])],{ex:[0,.38,0],delay:1.1,anchor:new THREE.Vector3(ux(.3),soleTop(.3)+.03,centerZ(.3))}));
+ const ort=mkPart('orthotic',[new THREE.Mesh(gOrt,[MATS.ortho,MATS.ortho])],{ex:[0,.38,0],delay:1.1,anchor:new THREE.Vector3(ux(.42),soleTop(.42)+.08,centerZ(.42)-.1)});ort.visible=false;rockG.add(ort);
+
+ // sneaker
+ VAR.sneaker=new THREE.Group();rockG.add(VAR.sneaker);
+ const keepUpper=(u,th)=>!(alphaO(u)>0&&Math.abs(th-Math.PI/2)<alphaO(u));
+ const gUp=shellGeo({nu:84,nv:40,keep:keepUpper});
+ const cpts=[];for(let i=0;i<=40;i++){const u=i/40*.4;cpts.push(V(sp(u,Math.PI/2-alphaO(u))).add(new THREE.Vector3(0,.012,0)));}for(let i=39;i>=1;i--){const u=i/40*.4;cpts.push(V(sp(u,Math.PI/2+alphaO(u))).add(new THREE.Vector3(0,.012,0)));}
+ const gTon=shellGeo({u0:.3,u1:.64,nu:24,nv:10,th0:Math.PI/2-.36,th1:Math.PI/2+.36,cos:false,hk:u=>1.05+(u<.4?(.4-u)*2.2:0)});
+ VAR.sneaker.add(mkPart('upper',[new THREE.Mesh(gUp,MATS.upper),tube(cpts,.036,MATS.collar,true,160),new THREE.Mesh(gTon,MATS.tongue)],{ex:[0,1.0,0],delay:1.6,upper:true,anchor:V(sp(.62,.75))}));
+ const thTop=u=>Math.min(.8,Math.PI/2-alphaO(u)-.05);
+ const gCtrL=paramGeo(36,14,(a,b)=>{const u=a*(.34-.13*b);return [u,b*thTop(u)];},1.03);
+ const gCtrM=paramGeo(36,14,(a,b)=>{const u=a*(.34-.13*b);return [u,Math.PI-b*thTop(u)];},1.03);
+ VAR.sneaker.add(mkPart('counter',[new THREE.Mesh(gCtrL,MATS.counter),new THREE.Mesh(gCtrM,MATS.counter)],{ex:[-.5,1.0,0],delay:2.1,upper:true,anchor:V(sp(.05,.5,1.03))}));
+ const gToe=paramGeo(26,44,(a,b)=>{const th=Math.PI*b;const us=.835-.065*(1-Math.sin(th));return [us+(1-us)*a,th];},1.025,1.03);
+ VAR.sneaker.add(mkPart('toebox',[new THREE.Mesh(gToe,MATS.toe)],{ex:[.5,1.0,0],delay:2.4,upper:true,anchor:V(sp(.92,1.15,1.025,1.03))}));
+ const lm=[];const E=[];for(let k=0;k<5;k++){const u=.425+k*.057;E.push({L:V(sp(u,Math.PI/2-.4,1,1.04)),M:V(sp(u,Math.PI/2+.4,1,1.04))});}
+ const lace=(a,b)=>{const m=a.clone().add(b).multiplyScalar(.5);m.y+=.035;return new THREE.Mesh(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(a,m,b),12,.017,6,false),MATS.lace);};
+ for(let k=0;k<4;k++){lm.push(lace(E[k].L,E[k+1].M),lace(E[k].M,E[k+1].L));}lm.push(lace(E[4].L,E[4].M));
+ E.forEach(e=>[e.L,e.M].forEach(p=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.024,.008,6,14),MATS.eye);t.position.copy(p);t.rotation.x=Math.PI/2;lm.push(t);}));
+ const top=V(sp(.43,Math.PI/2,1,1.1));[-1,1].forEach(s=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.085,.016,6,20),MATS.lace);t.position.copy(top).add(new THREE.Vector3(-.02,.03,s*.1));t.rotation.set(Math.PI/2-.5,0,s*.4);t.scale.set(1.25,.75,1);lm.push(t);});
+ VAR.sneaker.add(mkPart('laces',lm,{ex:[0,1.55,0],delay:2.8,upper:true,anchor:V(sp(.52,Math.PI/2,1,1.08))}));
+
+ // clog
+ VAR.clog=new THREE.Group();rockG.add(VAR.clog);
+ const hs=(th,k,u1)=>{const pts=[];for(let i=0;i<=20;i++){const u=u1*(1-i/20);pts.push(V(sp(u,th,k)));}for(let i=1;i<=20;i++){const u=u1*i/20;pts.push(V(sp(u,Math.PI-th,k)));}return pts;};
+ const rimPts=(u,k,hk)=>{const pts=[];for(let j=0;j<=30;j++)pts.push(V(sp(u,Math.PI*j/30,k,hk)));return pts;};
+ VAR.clog.add(mkPart('clog',[new THREE.Mesh(shellGeo({u0:.3,u1:1,nu:60,nv:36,k:1.06,hk:()=>1.12}),MATS.clog),tube(rimPts(.3,1.06,1.12),.03,MATS.clog,false,60),tube(hs(.6,1.07,.32),.034,MATS.clog,false,80)],{ex:[0,.9,0],upper:true}));
+ VAR.mule=new THREE.Group();rockG.add(VAR.mule);
+ VAR.mule.add(mkPart('mule',[new THREE.Mesh(shellGeo({u0:.44,u1:1,nu:50,nv:36,k:1.05,hk:()=>1.07}),MATS.mule),tube(rimPts(.44,1.05,1.07),.026,MATS.mule,false,60)],{ex:[0,.9,0],upper:true}));
+ VAR.sandal=new THREE.Group();rockG.add(VAR.sandal);
+ const band=(a,b)=>new THREE.Mesh(shellGeo({u0:a,u1:b,nu:6,nv:30,k:1.05,hk:()=>.93,cos:false}),MATS.strap);
+ const bk=new THREE.Mesh(new THREE.BoxGeometry(.07,.06,.02),MATS.buckle);bk.position.copy(V(sp(.535,.35,1.07,.93)));
+ const conn=[1,-1].map(s=>tube([V(sp(.36,s>0?.95:Math.PI-.95,1.06)),V(sp(.38,s>0?.5:Math.PI-.5,1.06)),V(sp(.4,s>0?.05:Math.PI-.05,1.05))],.028,MATS.strap,false,20));
+ VAR.sandal.add(mkPart('sandal',[band(.5,.57),band(.75,.82),tube(hs(.95,1.06,.36),.03,MATS.strap,false,80),...conn,bk],{ex:[0,.9,0],upper:true}));
+ ['clog','mule','sandal'].forEach(k=>{VAR[k].visible=false;});
+
+ // shadow + ring
+ shadow=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:shTex,transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.scale.set(3.7,1.5,1);shadow.position.y=.003;showG.add(shadow);
+ const rp=[];const R0=2.15;for(let i=0;i<128;i++){const a=i/128*Math.PI*2,b=(i+1)/128*Math.PI*2;rp.push(Math.cos(a)*R0,0,Math.sin(a)*R0,Math.cos(b)*R0,0,Math.sin(b)*R0);}
+ for(let d=0;d<360;d+=10){const a=d*Math.PI/180;const l=d%90===0?.24:d%30===0?.14:.06;rp.push(Math.cos(a)*R0,0,Math.sin(a)*R0,Math.cos(a)*(R0+l),0,Math.sin(a)*(R0+l));}
+ const rg=new THREE.BufferGeometry();rg.setAttribute('position',new THREE.Float32BufferAttribute(rp,3));ringMat=new THREE.LineBasicMaterial({color:col('#5A7287'),transparent:true,opacity:0});ring=new THREE.LineSegments(rg,ringMat);ring.position.y=.004;root.add(ring);
+}
+
+/* ================= TAGS ================= */
+const tagsEl=$('#tags');const TAG={};
+const TOFF={outsole:[110,58],midsole:[-170,46],insole:[-175,-34],orthotic:[-180,-44],upper:[130,-74],counter:[-130,70],toebox:[140,-26],laces:[90,-40]};
+Object.keys(PARTS).forEach(k=>{const d=document.createElement('div');d.className='tag';d.innerHTML=`<b>${PARTS[k][0]}</b><span>${PARTS[k][1]}</span>`;tagsEl.appendChild(d);TAG[k]={el:d,w:0,h:0,x:0,y:0,ax:0,ay:0,on:false};});
+function measureTags(){Object.values(TAG).forEach(t=>{t.w=t.el.offsetWidth;t.h=t.el.offsetHeight;});}
+
+/* ================= FX canvas ================= */
+const fx=$('#fx');const fctx=fx.getContext('2d');let FW=0,FH=0;
+const drops=[],motes=[],ripples=[];
+function initFx(){drops.length=0;motes.length=0;for(let i=0;i<300;i++)drops.push({x:Math.random(),y:Math.random(),l:10+Math.random()*16,v:.9+Math.random()*.7});for(let i=0;i<70;i++)motes.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.8,vx:(Math.random()-.5)*.006,vy:-.004-Math.random()*.008,p:Math.random()*6});}
+initFx();
+const fxc={rain:0,sun:0,motes:0};
+
+/* ================= STATE ================= */
+const DEF={az:35,el:18,dist:7,cx:.5,cy:.5,explode:0,upperLift:0,insoleLift:0,ortho:0,rock:0,variant:'sneaker',show:1,hl:[],labels:[],midH:1,wet:0,reveal:99,ring:0};
+const cur=Object.assign({},DEF,{vs:{sneaker:1,clog:0,mule:0,sandal:0}});
+let userAz=0,userEl=0,uAzT=0,uElT=0;
+let T=0,playing=true,speed=1,curScene=-1;
+const SPEEDS=[1,1.5,2,.5];
+
+function sceneAt(t){for(let i=SC.length-1;i>=0;i--)if(t>=SC[i].start)return i;return 0;}
+function activate(i){
+ if(curScene>=0){const o=SC[curScene];o.root.classList.remove('active');}
+ curScene=i;const s=SC[i];s.enter&&s.enter();
+ s.root.classList.add('notrans');updateScene(s,T-s.start);void s.root.offsetWidth;s.root.classList.remove('notrans');
+ s.root.classList.add('active');uAzT=0;uElT=0;bounds(s);
+ $('#chNo').textContent=String(i+1).padStart(2,'0')+'/'+SC.length;$('#chName').textContent=s.title;
+ $$('#menuList button').forEach((b,k)=>b.classList.toggle('cur',k===i));
+}
+function bounds(s){s._minX=8;s._minY=8;if(!WIDE)return;const pin=s.root.querySelector('.lay-split .pin, .lay-split.panel .pin');if(s.lay.includes('lay-split')&&pin)s._minX=pin.getBoundingClientRect().right+16;const top=s.root.querySelector('.top');if(s.lay.includes('lay-center')&&top)s._minY=top.getBoundingClientRect().bottom+10;}
+function updateScene(s,lt){for(const it of s.items){const on=lt>=it.at&&lt<it.out;if(it.el._on!==on){it.el._on=on;it.el.classList.toggle('in',on);}}s.update&&s.update.call(s,lt,s.root);}
+
+/* ================= camera / 3D per frame ================= */
+const tmpV=window.THREE?new THREE.Vector3():null;
+function project(obj,v3){tmpV.copy(v3);obj.localToWorld(tmpV);tmpV.project(camera);return [(tmpV.x+1)/2*FW,(1-tmpV.y)/2*FH,tmpV.z];}
+function wrap(d){return ((d+540)%360)-180;}
+function step3D(st,dt,time){
+ const k=r=>1-Math.exp(-r*dt);
+ const dAz=wrap(st.az-cur.az);cur.az+=dAz*k(3.2);
+ ['el','dist','cx','cy'].forEach(p=>{cur[p]+=(st[p]-cur[p])*k(3.2);});
+ ['explode','upperLift','insoleLift','ortho','midH','ring','show'].forEach(p=>{cur[p]+=(st[p]-cur[p])*k(3.6);});
+ cur.wet+=(st.wet-cur.wet)*k(1.6);cur.rock+=(st.rock-cur.rock)*k(11);
+ Object.keys(cur.vs).forEach(v=>{cur.vs[v]+=((st.variant===v?1:0)-cur.vs[v])*k(3);});
+ userAz+=(uAzT-userAz)*k(drag?20:1.2);userEl+=(uElT-userEl)*k(drag?20:1.2);
+ document.documentElement.style.setProperty('--sx',(cur.cx*100).toFixed(1)+'%');document.documentElement.style.setProperty('--sy',(cur.cy*100*(FH-barH())/FH).toFixed(1)+'%');
+ if(!renderer)return;
+ const E=cur.explode,mdrop=(1-cur.midH)*.24;
+ Object.values(P).forEach(g=>{const d=g.userData;const rv=st.reveal>=50?1:ease(clamp((st.reveal-d.delay)/.7));
+  g.position.set(d.ex[0]*E,d.ex[1]*E,d.ex[2]*E);
+  if(d.upper)g.position.y+=cur.upperLift-mdrop;
+  if(d.key==='insole'){g.position.y+=cur.insoleLift*.75-mdrop;g.position.z+=cur.insoleLift*1.3;g.rotation.x=-cur.insoleLift*.3;}
+  if(d.key==='orthotic'){g.position.y+=(1-cur.ortho)*2.1-mdrop;g.rotation.z=(1-cur.ortho)*.25;}
+  let sy=Math.max(.001,rv);if(d.key==='midsole'){sy*=cur.midH;g.position.y+=.06*(1-cur.midH);}
+  g.scale.y=sy;g.visible=rv>.002&&(d.key!=='orthotic'||cur.ortho>.015)&&(d.key!=='insole'||!(cur.ortho>.6&&cur.insoleLift<.3));
+  const hl=st.hl.includes(d.key==='toebox'?'toebox':d.key);const pulse=hl?.22+.16*Math.sin(time*5):0;
+  d.mats.forEach(m=>{if(m.emissive){m.emissive.setRGB(.89*pulse,.55*pulse,.3*pulse);}});
+ });
+ Object.keys(VAR).forEach(v=>{const a=cur.vs[v];VAR[v].visible=a>.01;VAR[v].scale.set(1,Math.max(.001,ease(clamp(a))),1);});
+ const wet=cur.wet;['upper','tongue','clog','mule','strap'].forEach(kk=>{const m=MATS[kk];m.color.copy(m.userData.base).multiplyScalar(1-.42*wet);m.roughness=lerp(m.userData.rough,.32,wet);});
+ const a=cur.rock*Math.PI/180;rockG.rotation.z=a;let mn=1e9;for(const b of BOT){const y=b[0]*Math.sin(a)+b[1]*Math.cos(a);if(y<mn)mn=y;}rockG.position.y=-mn;
+ const sh=Math.max(.001,ease(clamp(cur.show)));showG.scale.setScalar(sh);showG.visible=cur.show>.01;
+ const el=clamp(cur.el+userEl,-80,85);
+ shadow.material.opacity=sstep(-2,6,el)*(1-.65*E)*(1-Math.abs(a)*.6);
+ ringMat.opacity=cur.ring*.85*sh*sstep(-4,4,el);ring.visible=ringMat.opacity>.01;
+ // camera
+ const aspect=FW/FH;const fit=aspect<1.15?Math.min(2.6,1.15/aspect):1;
+ const dist=cur.dist*fit;const az=(cur.az+userAz)*Math.PI/180,er=el*Math.PI/180;
+ const ty=.42+E*.22+cur.upperLift*.3;
+ camera.position.set(Math.cos(er)*Math.sin(az)*dist,ty+Math.sin(er)*dist,Math.cos(er)*Math.cos(az)*dist);
+ camera.up.set(0,1,0);camera.lookAt(0,ty,0);
+ const py=cur.cy*(FH-barH());camera.aspect=aspect;camera.setViewOffset(FW,FH,FW/2-cur.cx*FW,FH/2-py,FW,FH);
+ renderer.render(scene3,camera);
+ const azd=((Math.round(cur.az+userAz)%360)+360)%360;$('#hud').textContent=`KAMERA ${String(azd).padStart(3,'0')}° · ${Math.round(el)}°`;
+ $('#hud').style.opacity=cur.show>.5?1:0;
+}
+let _barH=66;function barH(){return _barH;}
+
+/* ================= FX per frame ================= */
+function stepFx(sc,lt,dt,time,st){
+ const f=Object.assign({rain:0,sun:0,motes:.35},sc.fx?sc.fx(lt):{});
+ const k=1-Math.exp(-2.2*dt);fxc.rain+=(f.rain-fxc.rain)*k;fxc.sun+=(f.sun-fxc.sun)*k;fxc.motes+=(f.motes-fxc.motes)*k;
+ const g=fctx;g.clearRect(0,0,FW,FH);
+ const css=getComputedStyle(document.documentElement);
+ if(fxc.sun>.01){const gr=g.createRadialGradient(FW*.86,FH*.06,10,FW*.86,FH*.06,Math.max(FW,FH)*.7);gr.addColorStop(0,`rgba(227,165,111,${.2*fxc.sun})`);gr.addColorStop(1,'rgba(227,165,111,0)');g.fillStyle=gr;g.fillRect(0,0,FW,FH);}
+ if(fxc.motes>.01){for(const m of motes){if(!REDUCE){m.x+=m.vx*dt;m.y+=m.vy*dt;if(m.y<-.02){m.y=1.02;m.x=Math.random();}if(m.x<0)m.x+=1;if(m.x>1)m.x-=1;}const a=fxc.motes*(.25+.2*Math.sin(time*.8+m.p));g.fillStyle=`rgba(232,220,200,${a})`;g.beginPath();g.arc(m.x*FW,m.y*FH,m.r,0,7);g.fill();}}
+ if(fxc.rain>.01){const n=Math.floor(drops.length*fxc.rain);g.strokeStyle=`rgba(170,198,232,${.18+.22*fxc.rain})`;g.lineWidth=1;g.beginPath();
+  for(let i=0;i<n;i++){const d=drops[i];if(!REDUCE){d.y+=d.v*dt*1.25;if(d.y>1.05){d.y=-.05;d.x=Math.random();}}const x=d.x*FW,y=d.y*FH;g.moveTo(x,y);g.lineTo(x-d.l*.22,y-d.l);}g.stroke();
+  if(!REDUCE&&Math.random()<fxc.rain*dt*14)ripples.push({x:Math.random()*FW,y:FH*(.86+Math.random()*.1),r:0});
+  for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.r+=dt*26;const a=(1-r.r/30)*.4*fxc.rain;if(a<=0){ripples.splice(i,1);continue;}g.strokeStyle=`rgba(170,198,232,${a})`;g.beginPath();g.ellipse(r.x,r.y,r.r,r.r*.3,0,0,7);g.stroke();}}
+ // tags + leaders
+ const small=FW<640?.55:1;const minX=sc._minX||8,minY=sc._minY||8;
+ const labs=(small<1&&st.labels.length>1)?(st.hl.length?st.hl.filter(h=>st.labels.includes(h)):st.labels.slice(-1)):st.labels;
+ Object.keys(TAG).forEach(key=>{const t=TAG[key];const on=renderer&&labs.includes(key)&&cur.show>.6&&(key!=='orthotic'||cur.ortho>.5)&&P[key]&&P[key].visible;
+  if(on!==t.on){t.on=on;t.el.classList.toggle('on',on);}
+  t.el.classList.toggle('hl',st.hl.includes(key));
+  if(!renderer||!P[key])return;
+  const p=project(P[key],P[key].userData.anchor);if(p[2]>1)return;
+  const o=TOFF[key];let x=p[0]+o[0]*small,y=p[1]+o[1]*small;const left=o[0]<0;
+  let lf=left;if(lf){x-=t.w;if(x<minX){x=p[0]+Math.abs(o[0])*small;lf=false;}}y-=t.h/2;x=clamp(x,minX,Math.max(minX,FW-t.w-8));y=clamp(y,minY,Math.max(minY,FH-barH()-t.h-8));
+  t.el.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+  if(on){const ex=lf?x+t.w:x,ey=y+t.h/2;g.strokeStyle=st.hl.includes(key)?css.getPropertyValue('--gum'):'rgba(232,237,241,.55)';g.lineWidth=1;g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(ex,ey);g.stroke();g.fillStyle=g.strokeStyle;g.beginPath();g.arc(p[0],p[1],3,0,7);g.fill();}
+ });
+ if(sc.fxDraw&&renderer)sc.fxDraw(g,lt);
+}
+function drawWidth(g,a){if(a<=.01)return;const u=.74,y=soleTop(u)+.04;const p1=project(rockG,new THREE.Vector3(ux(u),y,centerZ(u)+halfW(u,1)*1.02)),p2=project(rockG,new THREE.Vector3(ux(u),y,centerZ(u)-halfW(u,-1)*1.02));
+ const dx=p2[0]-p1[0],dy=p2[1]-p1[1],len=Math.hypot(dx,dy)||1,nx=-dy/len*40,ny=dx/len*40;
+ g.globalAlpha=a;g.strokeStyle='#E3A56F';g.fillStyle='#E3A56F';g.lineWidth=1.4;g.setLineDash([4,4]);g.beginPath();g.moveTo(p1[0],p1[1]);g.lineTo(p1[0]+nx,p1[1]+ny);g.moveTo(p2[0],p2[1]);g.lineTo(p2[0]+nx,p2[1]+ny);g.stroke();g.setLineDash([]);
+ g.beginPath();g.moveTo(p1[0]+nx,p1[1]+ny);g.lineTo(p2[0]+nx,p2[1]+ny);g.stroke();
+ [[p1,1],[p2,-1]].forEach(([p,s])=>{const bx=p[0]+nx,by=p[1]+ny;const ux2=dx/len*s,uy2=dy/len*s;g.beginPath();g.moveTo(bx,by);g.lineTo(bx+ux2*9+uy2*4,by+uy2*9-ux2*4);g.lineTo(bx+ux2*9-uy2*4,by+uy2*9+ux2*4);g.closePath();g.fill();});
+ g.font='600 12px "JetBrains Mono", monospace';g.textAlign='center';g.fillStyle='#E8EDF1';g.fillText('en geniş ön ayak noktası',(p1[0]+p2[0])/2+nx*1.5,(p1[1]+p2[1])/2+ny*1.5);g.globalAlpha=1;}
+
+/* ================= controls ================= */
+const segs=$('#segs');
+SC.forEach((s,i)=>{const e=document.createElement('i');e.style.flex=`${s.dur} 1 0`;e.title=`${i+1}. ${s.title}`;e.appendChild(document.createElement('b'));segs.appendChild(e);});
+const segFills=$$('#segs i b');
+const fmt=s=>{s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');};
+const menuList=$('#menuList');
+SC.forEach((s,i)=>{const li=document.createElement('li');li.innerHTML=`<button type="button"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${s.title}</span><span class="t">${fmt(s.start)}</span></button>`;li.firstChild.addEventListener('click',()=>{seek(s.start+.01);toggleMenu(false);if(!playing)setPlaying(true);});menuList.appendChild(li);});
+function setPlaying(p){if(p&&T>=TOTAL-.05)seek(0);playing=p;$('#bPlay').setAttribute('aria-label',p?'Duraklat':'Oynat');$('#icPlay').innerHTML=p?'<rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/>':'<path d="M3 2v12l11-6z"/>';}
+function seek(t){T=clamp(t,0,TOTAL);}
+function toggleMenu(f){const m=$('#menu');const show=f!=null?f:m.hidden;m.hidden=!show;$('#bMenu').setAttribute('aria-expanded',String(show));}
+$('#bPlay').addEventListener('click',()=>setPlaying(!playing));
+$('#bNext').addEventListener('click',()=>{const i=sceneAt(T);if(i<SC.length-1)seek(SC[i+1].start+.01);});
+$('#bPrev').addEventListener('click',prev);
+function prev(){const i=sceneAt(T);if(T-SC[i].start>2.5||i===0)seek(SC[i].start+.01);else seek(SC[i-1].start+.01);}
+$('#bSpeed').addEventListener('click',()=>{speed=SPEEDS[(SPEEDS.indexOf(speed)+1)%SPEEDS.length];$('#bSpeed').textContent=speed+'×';});
+$('#bMenu').addEventListener('click',()=>toggleMenu());
+const track=$('#track');let tdrag=false;
+function trackSeek(e){const r=track.getBoundingClientRect();seek(clamp((e.clientX-r.left)/r.width)*TOTAL);}
+track.addEventListener('pointerdown',e=>{tdrag=true;track.setPointerCapture(e.pointerId);trackSeek(e);});
+track.addEventListener('pointermove',e=>{if(tdrag)trackSeek(e);});
+track.addEventListener('pointerup',()=>{tdrag=false;});
+track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){seek(T+5);e.preventDefault();e.stopPropagation();}if(e.key==='ArrowLeft'){seek(T-5);e.preventDefault();e.stopPropagation();}});
+window.addEventListener('keydown',e=>{
+ if(e.target.closest&&e.target.closest('button'))return;
+ if(e.key===' '||e.code==='Space'){e.preventDefault();setPlaying(!playing);}
+ else if(e.key==='ArrowRight'){$('#bNext').click();}
+ else if(e.key==='ArrowLeft'){prev();}
+ else if(e.key==='Escape'){toggleMenu(false);}
+});
+document.addEventListener('pointerdown',e=>{const m=$('#menu');if(!m.hidden&&!m.contains(e.target)&&!$('#bMenu').contains(e.target))toggleMenu(false);});
+// drag to orbit
+let drag=false,lx=0,ly=0;const glc=$('#gl');
+glc.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;glc.setPointerCapture(e.pointerId);glc.classList.add('drag');});
+glc.addEventListener('pointermove',e=>{if(!drag)return;uAzT-=(e.clientX-lx)*.45;uElT=clamp(uElT+(e.clientY-ly)*.3,-60,60);lx=e.clientX;ly=e.clientY;});
+const endDrag=()=>{drag=false;glc.classList.remove('drag');};
+glc.addEventListener('pointerup',endDrag);glc.addEventListener('pointercancel',endDrag);
+
+/* ================= resize & loop ================= */
+function resize(){FW=window.innerWidth;FH=window.innerHeight;const dpr=Math.min(2,devicePixelRatio||1);fx.width=Math.round(FW*dpr);fx.height=Math.round(FH*dpr);fctx.setTransform(dpr,0,0,dpr,0,0);if(renderer)renderer.setSize(FW,FH,false);_barH=$('#bar').offsetHeight||66;WIDE=WQ.matches;measureTags();if(curScene>=0)bounds(SC[curScene]);}
+window.addEventListener('resize',resize);
+let last=performance.now(),clock=0;
+function frame(now){
+ const dt=Math.min(.1,(now-last)/1000);last=now;clock+=dt;
+ if(playing){T+=dt*speed;if(T>=TOTAL){T=TOTAL;setPlaying(false);}}
+ const i=sceneAt(Math.min(T,TOTAL-.001));if(i!==curScene)activate(i);
+ const s=SC[i];const lt=T-s.start;updateScene(s,lt);
+ const st=Object.assign({},DEF,s.state?s.state(lt):{});
+ step3D(st,dt,clock);stepFx(s,lt,dt,clock,st);
+ // bar
+ SC.forEach((c,k)=>{const p=clamp((T-c.start)/c.dur);const f=segFills[k];const w=(p*100).toFixed(2)+'%';if(f._w!==w){f._w=w;f.style.width=w;}});
+ $('#knob').style.left=(T/TOTAL*100).toFixed(3)+'%';
+ const tt=fmt(T)+' / '+fmt(TOTAL);if($('#time')._t!==tt){$('#time')._t=tt;$('#time').textContent=tt;track.setAttribute('aria-valuenow',Math.round(T));}
+ requestAnimationFrame(frame);
+}
+function start(d){
+ init3D();resize();track.setAttribute('aria-valuemax',Math.round(TOTAL));
+ if(d&&typeof d.T==='number')T=clamp(d.T,0,TOTAL);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{measureTags();});
+ requestAnimationFrame(t=>{last=t;frame(t);});
+}
+try{window.claude?.hot?.snapshot?.(()=>({T}));}catch(e){}
+window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+})();
+</script>
+
+</body>
+</html>
