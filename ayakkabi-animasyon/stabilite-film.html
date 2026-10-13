@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Beş Stabilite Ayakkabısı Filmi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  /* Layout: film sahnesi. Tam ekran 3D sahne, anlatım paneli bir yanda, altta bölümlü zaman şeridi. */
+  --ink:#0C141B; --ink-2:#121D26; --ink-3:#1A2833; --spot:#1B2D3B;
+  --line:#2A3B4A; --line-2:#3B5063;
+  --paper:#E8EDF1; --mute:#97A7B5; --dim:#67798A;
+  --gum:#E3A56F; --sup:#6F9BF0; --sup-soft:rgba(111,155,240,.22);
+  --ok:#7FD3A2; --warn:#F1CF5E; --no:#F07B72;
+  --glass:rgba(16,26,35,.9);
+  --f-disp:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --barh:66px;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:var(--f-body);font-size:16px;line-height:1.5;overflow:hidden;-webkit-font-smoothing:antialiased}
+#app{position:fixed;inset:0;overflow:hidden;background:radial-gradient(ellipse 58% 52% at var(--sx,62%) var(--sy,48%),var(--spot) 0%,var(--ink) 72%)}
+#gl,#fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+#gl{z-index:0;touch-action:none;cursor:grab}
+#gl.drag{cursor:grabbing}
+#fx{z-index:1;pointer-events:none}
+#tags{position:absolute;inset:0;z-index:2;pointer-events:none}
+#note3d{position:absolute;right:16px;top:calc(12px + env(safe-area-inset-top,0px));z-index:4;font:500 .66rem/1.3 var(--f-mono);letter-spacing:.1em;color:var(--dim);pointer-events:none;text-align:right;transition:opacity .5s}
+#scenes{position:absolute;left:0;right:0;top:0;bottom:calc(var(--barh) + env(safe-area-inset-bottom,0px));z-index:3;pointer-events:none}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.scene.active{opacity:1;visibility:visible;transition:opacity .7s ease .12s}
+.scene.notrans,.scene.notrans *{transition:none!important}
+.pe{pointer-events:auto}
+.eyebrow{font:600 .7rem/1.25 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gum);margin:0 0 .8rem}
+.h1{font-family:var(--f-disp);font-stretch:116%;font-weight:820;font-size:clamp(2.1rem,4.3vw,4rem);line-height:.93;letter-spacing:-.015em;margin:0 0 1.1rem;text-wrap:balance}
+.h1 span{display:block}.h1 .acc{color:var(--gum)}
+.h2{font-family:var(--f-disp);font-stretch:115%;font-weight:760;font-size:clamp(1.55rem,3.1vw,2.7rem);line-height:1.03;letter-spacing:-.01em;margin:0 0 .7rem;text-wrap:balance}
+.lede{font-size:clamp(1.02rem,1.3vw,1.24rem);max-width:36rem;margin:0 0 1rem;line-height:1.45}
+p{margin:0 0 .8rem;font-size:clamp(.95rem,1.08vw,1.06rem);max-width:38rem}
+.mute{color:var(--mute)}.mono{font-family:var(--f-mono)}.small{font-size:.86rem}
+.hint{font:400 .74rem/1.5 var(--f-mono);color:var(--dim);margin-top:1.2rem}
+kbd{font:600 .7rem var(--f-mono);border:1px solid var(--line-2);padding:1px 5px;color:var(--mute)}
+.r{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.r.in{opacity:1;transform:none}
+.r.fade{transform:none}
+.chip{display:inline-block;font:600 .64rem/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;white-space:nowrap}
+.chip.cur{color:var(--ok)}.chip.old{color:var(--warn)}
+
+/* layouts (tall first) */
+.lay-split .panel{position:absolute;left:0;right:0;top:44%;bottom:0;padding:16px 16px 20px;overflow:auto;display:flex;flex-direction:column;background:linear-gradient(to bottom,rgba(12,20,27,0),var(--ink) 26px)}
+.pin{margin:auto 0;min-width:0}
+.lay-full .panel{position:absolute;inset:0;overflow:auto;padding:calc(18px + env(safe-area-inset-top,0px)) 16px 24px;background:linear-gradient(var(--ink),rgba(12,20,27,.95))}
+.lay-full .pin{max-width:1140px;margin:0 auto}
+.lay-center .top{position:absolute;left:16px;right:16px;top:calc(18px + env(safe-area-inset-top,0px))}
+.lay-center .cap{position:absolute;left:16px;right:16px;bottom:14px;max-width:760px;margin:0 auto;background:var(--glass);border:1px solid var(--line);padding:14px 18px}
+@media (min-width:860px) and (min-aspect-ratio:21/20){
+  .lay-split .panel{top:0;bottom:0;right:auto;width:min(46vw,600px);padding:clamp(22px,4.5vh,56px) 24px clamp(22px,4.5vh,56px) clamp(24px,5vw,80px);background:none}
+  .lay-full .panel{padding:clamp(26px,5vh,54px) clamp(24px,5vw,80px)}
+  .lay-center .top{left:clamp(24px,5vw,80px);right:auto;max-width:44rem;top:clamp(24px,5vh,52px)}
+  .lay-center .cap{bottom:24px}
+}
+
+/* shoe chapter */
+.shead{border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+.shead .brand{font:600 .7rem var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:2px}
+.shead h2{font-family:var(--f-disp);font-stretch:118%;font-weight:800;font-size:clamp(1.7rem,3.4vw,2.9rem);line-height:1;margin:0 0 8px}
+.shead h2 small{font-size:.42em;font-stretch:100%;color:var(--mute);font-weight:600}
+.shead .meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.86rem}
+.stack{position:relative;min-height:15rem}
+.stack>.r{position:absolute;inset:0}
+.stack>.r.in{position:relative}
+.stack>.r:not(.in){transition:opacity .25s ease,transform .25s ease}
+.stack>.r.in{transition-delay:.28s}
+.k{display:block;font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sup);margin-bottom:4px}
+.distq{border-left:3px solid var(--sup);padding:2px 0 2px 14px;font-size:1.02rem;margin:0 0 10px;max-width:36rem}
+.tourcap b{display:block;font-stretch:110%;font-weight:740;font-size:1.2rem;margin-bottom:2px}
+.tourcap span{color:var(--mute)}
+.vchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.vchip{font:500 .64rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border:1px solid var(--line);color:var(--dim);transition:all .4s}
+.vchip.cur{border-color:var(--gum);color:var(--paper);background:rgba(227,165,111,.12)}
+.techl{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.techl li{display:grid;grid-template-columns:1.8rem minmax(0,1fr);gap:10px;padding:6px 8px;border:1px solid transparent;opacity:.35;transition:opacity .5s,border-color .4s,background .4s}
+.techl li.seen{opacity:.75}
+.techl li.cur{opacity:1;border-color:var(--gum);background:var(--ink-3)}
+.techl .n{width:1.6rem;height:1.6rem;display:grid;place-items:center;font:600 .74rem var(--f-mono);border:1px solid var(--line-2)}
+.techl li.main .n{background:var(--sup);border-color:var(--sup);color:var(--ink)}
+.techl b{font-weight:700;font-size:.95rem}
+.techl p{margin:1px 0 0;font-size:.86rem;color:var(--mute)}
+.mechbox{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:16px;align-items:center}
+.mechbox svg{width:100%;height:auto;display:block}
+.specs{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:7.2rem minmax(0,1fr) 4.4rem;gap:10px;align-items:center;font-size:.86rem}
+.bar .t{height:10px;background:var(--line);position:relative;overflow:hidden}
+.bar .t i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gum);transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+.in .bar .t i,.bar.in .t i{width:var(--w)}
+.bar .v{font:600 .86rem var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+.wchips{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:.86rem}
+.wchip{font:600 .74rem var(--f-mono);padding:3px 8px;border:1px solid var(--line-2);color:var(--dim)}
+.wchip.on{border-color:var(--ok);color:var(--ok)}
+.fit{display:grid;gap:12px}
+@media (min-width:640px){.fit{grid-template-columns:1fr 1fr}}
+.fit h3{font:600 .64rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 6px}
+.fit .p h3{color:var(--ok)}.fit .c h3{color:var(--no)}
+.fit ul{margin:0;padding-left:1.05rem;display:grid;gap:6px;font-size:.9rem}
+
+/* mechanisms */
+.mechs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;margin-top:14px}
+.mech{background:var(--ink-2);border:1px solid var(--line);padding:12px;display:flex;flex-direction:column;gap:6px}
+.mech svg{width:100%;height:auto;display:block}
+.mech .nm{font:600 .72rem var(--f-mono);letter-spacing:.06em;color:var(--sup);text-transform:uppercase}
+.mech .sh{font-weight:700;font-size:.95rem}
+.mech p{font-size:.85rem;color:var(--mute);margin:0}
+.d-foam{fill:var(--ink-3);stroke:var(--paper);stroke-width:1.2}
+.d-rub{fill:#6B5240;stroke:var(--paper);stroke-width:1}
+.d-sup{fill:var(--sup-soft);stroke:var(--sup);stroke-width:1.6}
+.d-supl{fill:none;stroke:var(--sup);stroke-width:3.2;stroke-linecap:round}
+.d-line{fill:none;stroke:var(--mute);stroke-width:1}
+.d-txt{font:600 9.5px var(--f-mono);fill:var(--dim);letter-spacing:.08em}
+.m-foot{fill:var(--ink-2);stroke:var(--paper);stroke-width:1.4}
+.m-ghost{fill:none;stroke:var(--dim);stroke-width:1.2;stroke-dasharray:4 3}
+.m-gr{stroke:var(--line-2);stroke-width:1}
+
+/* cards */
+.needs{display:grid;gap:8px;margin:.6rem 0 1rem}
+.need{display:grid;grid-template-columns:2.2rem 1fr;gap:4px 12px;padding:10px 12px;border:1px solid var(--line);background:var(--ink-2)}
+.need .ic{grid-row:span 2;font:700 1.1rem var(--f-mono);color:var(--gum)}
+.need b{font-weight:700}
+.need span{color:var(--mute);font-size:.9rem}
+.vlist{list-style:none;margin:0;padding:0;display:grid;gap:7px;max-width:34rem}
+.vlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:baseline;font-size:.92rem}
+.vlist li span.d{display:block;color:var(--mute);font-size:.82rem}
+.cmp{display:grid;gap:22px;margin-top:12px}
+@media (min-width:900px){.cmp{grid-template-columns:1fr 1fr}}
+.cmp h3{font:600 .66rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+.cmp .bar{grid-template-columns:7.6rem minmax(0,1fr) 3.6rem}
+.cmp .bar .t i{background:var(--sup)}
+.cmp .bar.best .t i{background:var(--gum)}
+.wtab{width:100%;border-collapse:collapse;font-size:.88rem}
+.wtab th,.wtab td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.wtab th{font:600 .62rem var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.wtab td.c{font:600 .8rem var(--f-mono);text-align:center}
+.yes{color:var(--ok)}.no{color:var(--dim)}.q{color:var(--warn)}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin-top:12px}
+.pick{border:1px solid var(--line);background:var(--ink-2);padding:14px 16px;display:grid;gap:4px}
+.pick .k{color:var(--gum)}
+.pick b{font-size:1.08rem;font-weight:750}
+.pick span{color:var(--mute);font-size:.9rem}
+.pick em{font-style:normal;color:var(--warn);font-size:.86rem}
+.sumnote{margin-top:14px;border:1px solid var(--sup);padding:12px 14px;font-size:.95rem;max-width:60rem}
+.checks{list-style:none;padding:0;margin:.6rem 0;display:grid;gap:8px;max-width:40rem}
+.checks li{display:grid;grid-template-columns:1.8rem 1fr;gap:10px;font-size:.96rem;align-items:start}
+.checks li i{font-style:normal;width:1.6rem;height:1.6rem;display:grid;place-items:center;border:1px solid var(--line-2);font:600 .74rem var(--f-mono)}
+.checks li.in i{border-color:var(--ok);color:var(--ok)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin-top:12px;font-size:.88rem}
+.links a{color:var(--sup);text-underline-offset:3px}
+.links div{border:1px solid var(--line);padding:10px 12px;background:var(--ink-2)}
+.links b{display:block;margin-bottom:4px}
+
+/* tags */
+.tag{position:absolute;left:0;top:0;transform:translate(-999px,-999px);opacity:0;transition:opacity .45s,border-color .3s;background:var(--glass);border:1px solid var(--line-2);padding:5px 9px;max-width:240px;white-space:normal}
+.tag.on{opacity:1}.tag.hl{border-color:var(--gum)}
+.tag b{display:block;font-stretch:90%;font-weight:720;font-size:.84rem}
+.tag span{display:block;font:400 .64rem/1.35 var(--f-mono);color:var(--mute);margin-top:1px}
+.tag.lt b{font-size:.8rem}.tag.lt span{color:var(--gum)}
+@media (max-width:640px){.tag{max-width:150px;padding:4px 7px}.tag b{font-size:.74rem}.tag span{font-size:.58rem}}
+
+/* bar */
+#bar{position:absolute;left:0;right:0;bottom:0;height:calc(var(--barh) + env(safe-area-inset-bottom,0px));padding:0 12px env(safe-area-inset-bottom,0px);display:flex;align-items:center;gap:8px;background:var(--ink-2);border-top:1px solid var(--line);z-index:6}
+.btn{appearance:none;border:1px solid var(--line-2);background:transparent;color:var(--paper);height:38px;min-width:38px;padding:0 10px;display:inline-grid;place-items:center;cursor:pointer;font:600 .76rem var(--f-mono);border-radius:0}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.btn:hover{border-color:var(--gum);color:var(--gum)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--gum);outline-offset:2px}
+.btn.main{background:var(--gum);border-color:var(--gum);color:var(--ink)}
+.btn.main:hover{background:transparent;color:var(--gum)}
+.bmid{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding:0 6px}
+.btitle{display:flex;gap:8px;align-items:baseline;font-size:.82rem;white-space:nowrap;overflow:hidden}
+.btitle .no{font:600 .72rem var(--f-mono);color:var(--gum)}
+.btitle .nm{overflow:hidden;text-overflow:ellipsis;font-weight:600}
+#track{position:relative;height:16px;cursor:pointer;touch-action:none}
+#segs{position:absolute;left:0;right:0;top:5px;height:6px;display:flex;gap:2px}
+#segs i{display:block;height:100%;background:var(--line);position:relative;overflow:hidden}
+#segs i b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gum)}
+#knob{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 0 0 1px var(--gum);pointer-events:none}
+#time{font:500 .72rem var(--f-mono);color:var(--mute);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:640px){#time,#bPrev,#bSpeed,#note3d{display:none}.btitle{font-size:.76rem}}
+#menu{position:absolute;right:12px;bottom:calc(var(--barh) + env(safe-area-inset-bottom,0px) + 8px);z-index:7;width:min(340px,calc(100% - 24px));max-height:min(70vh,560px);overflow:auto;background:var(--ink-2);border:1px solid var(--line-2);padding:12px}
+#menu h3{margin:0 0 8px;font:600 .7rem var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#menu ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+#menu button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:2rem 1fr auto;gap:8px;width:100%;padding:7px 8px;cursor:pointer;font-size:.86rem}
+#menu button:hover,#menu button:focus-visible{background:var(--ink-3)}
+#menu button .n,#menu button .t{font:600 .7rem var(--f-mono);color:var(--dim);padding-top:2px}
+#menu button.cur{background:var(--ink-3)}#menu button.cur .n{color:var(--gum)}
+@media (prefers-reduced-motion:reduce){.r,.bar .t i,.techl li{transition-duration:.01s!important}}
+</style>
+
+<div id="app">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div id="tags" aria-hidden="true"></div>
+  <div id="note3d" aria-hidden="true">TEMSİLİ 3D MODEL<br>YÜKSEKLİK VE DROP MARKA VERİSİYLE</div>
+  <main id="scenes"></main>
+  <nav id="bar" aria-label="Oynatma kontrolleri">
+    <button class="btn main" id="bPlay" aria-label="Duraklat"><svg viewBox="0 0 16 16" id="icPlay"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg></button>
+    <button class="btn" id="bPrev" aria-label="Önceki bölüm"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="2" height="12"/><path d="M14 2v12L5 8z"/></svg></button>
+    <button class="btn" id="bNext" aria-label="Sonraki bölüm"><svg viewBox="0 0 16 16"><rect x="12" y="2" width="2" height="12"/><path d="M2 2v12l9-6z"/></svg></button>
+    <div class="bmid">
+      <div class="btitle"><span class="no" id="chNo">01</span><span class="nm" id="chName">Açılış</span></div>
+      <div id="track" role="slider" aria-label="Zaman çizelgesi" tabindex="0" aria-valuemin="0"><div id="segs"></div><div id="knob"></div></div>
+    </div>
+    <span id="time">00:00 / 00:00</span>
+    <button class="btn" id="bSpeed" aria-label="Oynatma hızı">1×</button>
+    <button class="btn" id="bMenu" aria-label="Bölüm listesi" aria-expanded="false">Bölümler</button>
+  </nav>
+  <div id="menu" hidden><h3>Bölümler</h3><ol id="menuList"></ol></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const sstep=(a,b,v)=>{const t=clamp((v-a)/(b-a));return t*t*(3-2*t);};
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+function kf(t,keys){if(t<=keys[0][0])return keys[0][1];for(let i=0;i<keys.length-1;i++){const a=keys[i],b=keys[i+1];if(t<=b[0])return lerp(a[1],b[1],sstep(a[0],b[0],t));}return keys[keys.length-1][1];}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const WQ=matchMedia('(min-width: 860px) and (min-aspect-ratio: 21/20)');
+let WIDE=WQ.matches;const A=(w,t)=>WIDE?w:t;
+
+/* ================= DATA (doğrulanmış) ================= */
+const SH=[
+{id:'kayano',brand:'ASICS',model:'GEL-KAYANO 32',short:'Kayano 32',sub:'2E / 4E',cur:false,status:'Önceki nesil',statusD:'Yerine 2026 yazında GEL-KAYANO 33 çıktı (ABD: 1 Haziran; tarih bölgeye göre değişiyor); 33’te 4D Guidance yok.',price:'2E indirimde ≈160 € · liste 200 €',
+ kind:'4d',mech:'4D GUIDANCE SYSTEM',mechD:'Ark bölgesindeki köpük modülü (ASICS: “pod”); ayak aşırı yük altında içe çöktükçe direnç gösteriyor. Normal adımda fark edilmiyor.',
+ dist:'Desteği ark bölgesindeki ayrı, yüke tepki veren bir köpük modülüyle veren tek model. Topukta ayrıca PureGEL jel yastığı var.',
+ H:40,F:32,drop:8,weight:298,widths:['D','2E','4E'],wnote:'4E’nin AB stoğu belirsiz',insole:'Çıkarılabilir · OrthoLite X-55',ts:13,wf:1,
+ col:{up:'#7F90A9',dark:'#2E3846',out:'#3B4048',lace:'#E9EDF2'},
+ tour:['Topuk 40 mm, ön ayak 32 mm, drop 8 mm. Ön ayakta erken devreye giren rocker.','4D Guidance modülü bu tarafta, ark altında.','D, 2E ve 4E kalıp. Saya önceki sürümlerden daha dar.','Dış topuk çanağı topuğu arkadan sarıyor.','HYBRID ASICSGRIP: tutuş için ASICSGRIP, dayanıklılık için AHARPLUS kauçuk.'],
+ tech:[['4D GUIDANCE SYSTEM','mech','Ark altındaki köpük modülü; ayak fazla içe çöktüğünde direnç artar.',1],['FF BLAST PLUS','midsole','Ana yastık köpüğü; ön ayağa ≈2 mm ek köpük eklendi.'],['PureGEL','gel','Topuk altındaki jel; ilk temas darbesini yumuşatır.'],['OrthoLite X-55 iç taban','insole','Çıkarılabilir; yerine kişisel tabanlık konabilir.'],['Dış topuk çanağı','counter','Topuğun yana kaçmasını sınırlar.'],['Örme saya','upper','Önceki sürümlerden daha dar ve sıkı kalıp.'],['Ön ayak rocker’ı','rocker','Erken devreye giren rocker ve sert ön ayak.'],['HYBRID ASICSGRIP','outsole','ASICSGRIP tutuş, AHARPLUS dayanıklılık.']],
+ pros:['2E ve 4E kalıp; çıkarılabilir OrthoLite tabanlık.','4D Guidance ve sert topuk çanağı overpronasyon ile dengesiz topuğa yönelik.','Kalın, rocker’lı ön ayak CM1 basıncını dağıtmaya yardımcı olabilir.'],
+ cons:['Saya daha sıkı: ortezle 2E veya 4E denenmeli.','Ortezin medial desteği ile 4D modülü üst üste binebilir.','33’e geçildiği için 2E/4E stoğu azalıyor.'],
+ link:['ASICS ürün sayfası','https://www.asics.com/us/en-us/gel-kayano-32/p/ANA_1011C052-001.html'],video:['ASICS Running: GEL-KAYANO 32','https://www.youtube.com/watch?v=ajkRWUPkv6c']},
+{id:'nb860',brand:'New Balance',model:'Fresh Foam X 860 v14',short:'860 v14',sub:'2E / 4E',cur:false,status:'Önceki nesil',statusD:'Yerine Nisan 2026’da 860 v15 çıktı (daha yüksek ve daha ağır).',price:'≈115–120 € indirimde · v15: 170 €',
+ kind:'plane',mech:'Stability Plane',mechD:'Köpük katmanları arasına gömülü ince sert plaka. Üstündeki köpük ezilse de plaka eğilmeye direniyor.',
+ dist:'Destek ayakkabının içinden geliyor: iki Fresh Foam X katmanı arasında ince, sertleştirilmiş EVA plaka, iç tarafta daha uzun. Alttaki sert köpük içte daha kalın ve topuktan ön ayağa medial kama oluşturuyor.',
+ H:38,F:30,drop:8,weight:298,widths:['D','2E','4E'],wnote:'Eski sezon; NL’de geniş stok sınırlı',insole:'Muhtemelen çıkarılabilir · ince',ts:14,wf:1,
+ col:{up:'#9BA4AA',dark:'#3A4148',out:'#454B52',lace:'#F0F2F4'},
+ tour:['Topuk 38 mm, ön ayak 30 mm, drop 8 mm. Hafif rocker profil.','Stability Plane iç tarafta dış taraftan daha uzun uzanıyor.','D, 2E ve 4E. Taban genişliği ön ayakta 110 mm.','Sert, dolgulu topuk kontrforu; topukta taban 90 mm genişliğinde (Road Trail Run).','Aşınma bölgelerinde hafif, şişirilmiş (blown) kauçuk.'],
+ tech:[['Stability Plane','plate','Köpük katmanları arasındaki ince, sertleştirilmiş EVA plaka; iç tarafta dış taraftan daha uzun.',1],['Fresh Foam X','midUp','Yumuşak üst katman; alt katman daha sert ve içte daha kalın.'],['Rocker profil','rocker','Topukta pah, ön ayakta yukarı kıvrık taban.'],['Körüklü dil','tongue','Dil sayaya dikili; orta ayağı sabit tutar.'],['Topuk kontrforu','counter','Sert ve dolgulu.'],['Engineered mesh','upper','Ön ayakta hafif geniş; burun koruyucusu kısa hissettirebilir.'],['Blown rubber','outsole','Hafif, esnek kauçuk.']],
+ pros:['İçte daha uzun plaka ve içte kalınlaşan sert alt köpük: topuktan ön ayağa medial destek.','D, 2E, 4E; ince tabanlık, perakendecilere göre çıkarılabilir.','İndirimde ≈115–120 €: denemek için düşük risk.'],
+ cons:['İlk başta kısa hissettirir; yarım numara büyük ve geniş kalıp deneyin.','Ortezin medial desteğiyle aşırı düzeltme riski.','Eski sezon: NL’de 2E/4E stoğu sınırlı.'],
+ link:['New Balance NL ürün sayfası','https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html'],video:['Road Trail Run incelemesi (bağımsız)','https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html']},
+{id:'gaviota',brand:'HOKA',model:'Gaviota 6',short:'Gaviota 6',sub:'Wide (2E) / X-Wide (4E)',cur:true,status:'Güncel',statusD:'Ocak 2026’da çıktı.',price:'180 € (HOKA NL)',
+ kind:'hframe',mech:'H-Frame',mechD:'Daha sert köpükten H biçimli çerçeve ayağın iki kenarını sarıyor; ana işi iç tarafta tam boy destek.',
+ dist:'Setin en düzeltici modeli: daha sert köpükten, iki kenarı saran ve iç tarafta tam boy destek veren çerçeve, çok geniş ve yüksek platform. Doctors of Running “neredeyse hareket kontrolü” diyor.',
+ H:39,F:33,drop:6,weight:283,widths:['D','2E','4E'],wnote:'NL: Breed ve X-Breed',insole:'Çıkarılabilir · 4,8 mm',ts:13,wf:1.07,
+ col:{up:'#D8D3C7',dark:'#4B5562',out:'#3E4349',lace:'#4B5562'},
+ tour:['Topuk 39 mm, ön ayak 33 mm, drop 6 mm. Çok geniş ve yüksek platform.','H-Frame çerçevesi iç kenar boyunca uzanıyor.','Regular, Wide (2E) ve X-Wide (4E). Başparmak bölgesi 76,7 mm.','Çerçeve iki kenarda; sert topuk kontrforu (RunRepeat 4/5) topuğu arkadan sarıyor.','Kauçuk pedler; ıslak zemin tutuşu Gaviota 5’ten iyi.'],
+ tech:[['Enhanced H-Frame','mech','H biçimli sert köpük çerçeve: iki kenar ve orta köprü; ana işi iç tarafta tam boy destek.',1],['CMEVA ara taban','midsole','Kalın, maksimum yastık; enerji geri dönüşü düşük.'],['İç ghillie bağcık','laces','Orta ayağı basınç noktası oluşturmadan sarar.'],['Comfort collar','collar','Dolgulu yaka topuğu yuvaya oturtur.'],['Topuk kontrforu','counter','Topuğun yana kaymasını sınırlar.'],['Çıkarılabilir iç taban','insole','4,8 mm; ortezler iyi sığıyor (RunRepeat).'],['Kauçuk dış taban','outsole','Aşınma bölgelerinde kauçuk pedler.']],
+ pros:['Setin en güçlü pronasyon kontrolü (Doctors of Running: “neredeyse hareket kontrolü”).','Wide (2E) ve X-Wide (4E); RunRepeat burnu ortalamadan geniş ölçmüş (76,7 mm).','Çıkarılabilir 4,8 mm tabanlık; sert, kalın ön ayak.'],
+ cons:['Burun sığ: ortezle üstte yer daralabilir.','Orta ayakta kabarık iç taban ortezin arkıyla çakışabilir.','Eski nesil köpük (CMEVA) sert hissettirebilir.'],
+ link:['HOKA NL ürün sayfası','https://www.hoka.com/nl/nl/heren-road/gaviota-6/1171932.html'],video:['Gaviota 6 incelemesi (bağımsız)','https://www.youtube.com/watch?v=JKrmqyLOkrg']},
+{id:'glycerin',brand:'Brooks',model:'Glycerin GTS 23',short:'Glycerin GTS 23',sub:'2E / 4E',cur:true,status:'Güncel',statusD:'Şubat 2026’da çıktı (GTS 22’nin yerine).',price:'180 € · renge göre ≈117–160 €',
+ kind:'rails',mech:'GuideRails',mechD:'Topuğun iki yanındaki raylar normal adımda devreye girmiyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor.',
+ dist:'Ayağı sürekli düzeltmeye çalışmaz; Brooks’a göre ayak normal yolundan saptığında topuk ve kaval kemiği dönüşünü sınırlar.',
+ H:38,F:30,drop:8,weight:306,widths:['D','2E','4E'],wnote:'NL’de geniş stok sınırlı olabilir',insole:'Çıkarılabilir · GTS 23 için ölçüm yok (GTS 22: 4,9 mm)',ts:11,wf:1.02,
+ col:{up:'#3F4C5F',dark:'#232B36',out:'#3B3F44',lace:'#DDE3EA'},
+ tour:['Topuk 38 mm, ön ayak 30 mm, drop 8 mm (GTS 22’de 10 mm idi).','GuideRails topuğun iki yanında yükseliyor.','D, 2E ve 4E. Road Trail Run ön ayak taban genişliğini 115 mm veriyor.','Raylar topuğu iki yandan çevreliyor; normal adımda devreye girmiyor.','Ön ayakta ve topuğun iç tarafında RoadTack kauçuk.'],
+ tech:[['GuideRails','mech','Topuğun iki yanında; yalnız ayak saptığında devreye girer.',1],['DNA TUNED','midsole','Topukta yumuşak, ön ayakta canlı azotlu köpük.'],['Çıkarılabilir iç taban','insole','GTS 23 için ölçüm yok; GTS 22’de 4,9 mm, nötr Glycerin 23’te 4,4 mm.'],['Örgü saya','upper','Doctors of Running burnu daralan ve biraz kısa buluyor.'],['RoadTack kauçuk','outsole','Ön ayakta ve topuğun iç tarafında dayanıklı tutuş.']],
+ pros:['Brooks’a göre GuideRails topuk yalpalamasını ve aşırı kaval kemiği dönüşünü sınırlar.','D, 2E, 4E; ön ayakta +2 mm köpük.','Geniş taban (Road Trail Run: ön ayakta 115 mm).'],
+ cons:['Bir inceleme “ortez dostu değil” diyor: aşırı düzeltme riski.','Burun daralan ve biraz kısa (Doctors of Running): CM1 bölgesinde baskı yapabilir, kendi tabanlığınızla deneyin.','Liste fiyatı 180 €.'],
+ link:['Brooks NL ürün sayfası','https://www.brooksrunning.com/nl_nl/mens/road-running-shoes/glycerin-gts-23/110503.html'],video:['GTS 23 vs 22 (Doctors of Running)','https://www.youtube.com/watch?v=LQ40dYLqgBg']},
+{id:'hurricane',brand:'Saucony',model:'Hurricane 26',short:'Hurricane 26',sub:'Wide (2E)',cur:true,status:'Güncel',statusD:'Temmuz 2026’da çıktı (AB mağazalarında Ağustos 2026).',price:'190 € (Saucony NL)',
+ kind:'hurr',mech:'CenterPath',mechD:'Sert bir parça yok. Geniş taban ve ayağı içine alan yükseltilmiş yan duvarlar topuğu merkezde tutuyor.',
+ dist:'Desteği sert bir parça yerine şekil ve çift yoğunluklu PWRRUN çerçeveyle veriyor: geniş taban, yan duvarlar, asimetrik form. Zıplayan incrediLUX köpükle setin en hafifi.',
+ H:41,F:35,drop:6,weight:262,widths:['D','2E'],wnote:'4E (X-Wide) bulunamadı',insole:'Çıkarılabilir · çoğu ortez sığar',ts:13,wf:1.07,
+ col:{up:'#AFC1B8',dark:'#3E4C46',out:'#3A3F43',lace:'#F2F4F3'},
+ tour:['Topuk 41 mm, ön ayak 35 mm, drop 6 mm. Marka değerine göre setin en yüksek yastığı.','CenterPath: asimetrik form ve ayağı içine alan yükseltilmiş yan duvar.','D ve Wide (2E). 4E bulunamadı.','Geniş taban ve iki yanda yükseltilmiş yan duvar.','XT-900 karbon kauçuk dış taban.'],
+ tech:[['CenterPath','mech','Geniş taban ve yükseltilmiş yan duvarlar; sert parça yok.',1],['incrediLUX','top','Yumuşak, geri sekmeli üst köpük (A-TPU).'],['PWRRUN çerçeve','frame','Yumuşak köpüğü saran çift yoğunluklu taşıyıcı.'],['Çıkarılabilir iç taban','insole','Çoğu kişisel ortez sığar (RunRepeat).'],['Engineered mesh','upper','Burun ortalamadan biraz dar (72,2 mm).'],['Topuk kontrforu','counter','Sertliği konusunda kaynaklar çelişiyor.'],['XT-900 karbon kauçuk','outsole','Dayanıklı dış taban.']],
+ pros:['Setin en hafifi (262 g) ve marka değerine göre en yüksek yastığı (41/35 mm; RunRepeat ölçümü 38,3/32,4 mm).','Resmî Wide (2E); çıkarılabilir iç taban.','Sert parça olmadan; şekil ve çift yoğunluklu çerçeveden gelen destek.'],
+ cons:['4E bulunamadı, yalnızca 2E.','Destek hafif–orta; belirgin overpronasyonda daha zayıf kalabilir.','6 mm drop (Gaviota 6 ile aynı), 8 mm’lik modellere göre baldıra biraz daha fazla yük bindirebilir; ortezin topuk yüksekliği etkin drop’u değiştirir.'],
+ link:['Saucony ürün sayfası','https://www.saucony.com/en/hurricane-26/61249M.html'],video:null}
+];
+const BYID={};SH.forEach(s=>BYID[s.id]=s);
+
+/* ================= mechanism SVG (rear view) ================= */
+function mechSVG(s){
+ const k=s.kind,cx=110,gy=176,mt=132,wb=(s.wf>1.04)?138:126,wt=wb-14;
+ let extra='';
+ if(k==='4d')extra=`<path class="d-sup react" d="M${cx-wt/2+4} ${mt+3} L${cx-8} ${mt+3} L${cx-10} ${gy-9} L${cx-wb/2+6} ${gy-9}Z"/>`;
+ if(k==='plane')extra=`<path class="d-supl" d="M${cx-wb/2+4} ${gy-24} L${cx+wb/2-4} ${gy-24}"/>`;
+ if(k==='hframe')extra=`<path class="d-sup react" d="M${cx-wt/2-2} ${mt-12} L${cx-wt/2+12} ${mt-6} L${cx-wb/2+16} ${gy-8} L${cx-wb/2} ${gy-8}Z"/><path class="d-sup" d="M${cx+wt/2+2} ${mt-12} L${cx+wt/2-12} ${mt-6} L${cx+wb/2-16} ${gy-8} L${cx+wb/2} ${gy-8}Z"/>`;
+ if(k==='rails')extra=`<path class="d-sup react" d="M${cx-wt/2} ${mt} L${cx-wt/2-2} ${mt-20} L${cx-wt/2+9} ${mt-20} L${cx-wt/2+11} ${mt}Z"/><path class="d-sup" d="M${cx+wt/2} ${mt} L${cx+wt/2+2} ${mt-20} L${cx+wt/2-9} ${mt-20} L${cx+wt/2-11} ${mt}Z"/>`;
+ if(k==='hurr')extra=`<path class="d-sup react" d="M${cx-wt/2-3} ${mt-16} L${cx-wt/2+8} ${mt-4} L${cx-wt/2+8} ${mt+4} L${cx-wt/2-1} ${mt+4}Z"/><path class="d-sup" d="M${cx+wt/2+3} ${mt-10} L${cx+wt/2-8} ${mt-2} L${cx+wt/2-8} ${mt+4} L${cx+wt/2+1} ${mt+4}Z"/>`;
+ const foot=`<path class="m-foot" d="M${cx-24} ${mt-44} C${cx-30} ${mt-18} ${cx-24} ${mt} ${cx} ${mt} C${cx+24} ${mt} ${cx+30} ${mt-18} ${cx+24} ${mt-44}"/><path class="d-line" d="M${cx-22} ${mt-44} C${cx-22} ${mt-80} ${cx-26} ${mt-110} ${cx-28} ${mt-128} M${cx+22} ${mt-44} C${cx+22} ${mt-80} ${cx+26} ${mt-110} ${cx+28} ${mt-128}" style="stroke:var(--paper);stroke-width:1.4"/>`;
+ const ghost=`<path class="m-ghost" d="M${cx-24} ${mt-44} C${cx-30} ${mt-18} ${cx-24} ${mt} ${cx} ${mt} C${cx+24} ${mt} ${cx+30} ${mt-18} ${cx+24} ${mt-44} M${cx-22} ${mt-44} L${cx-28} ${mt-128} M${cx+22} ${mt-44} L${cx+28} ${mt-128}"/>`;
+ return `<svg class="msvg" viewBox="0 0 220 196" role="img" aria-label="${esc(s.mech)} arkadan kavramsal çizim">
+  <line class="m-gr" x1="12" x2="208" y1="${gy}" y2="${gy}"/>
+  <text class="d-txt" x="16" y="16">İÇ</text><text class="d-txt" x="204" y="16" text-anchor="end">DIŞ</text>
+  <g class="ghost" style="transform-origin:${cx}px ${mt}px">${ghost}</g>
+  <path class="d-foam" d="M${cx-wt/2} ${mt} L${cx+wt/2} ${mt} L${cx+wb/2} ${gy-6} L${cx-wb/2} ${gy-6}Z"/>
+  <path class="d-rub" d="M${cx-wb/2} ${gy-6} L${cx+wb/2} ${gy-6} L${cx+wb/2-2} ${gy} L${cx-wb/2+2} ${gy}Z"/>
+  ${extra}
+  <g class="heel" style="transform-origin:${cx}px ${mt}px">${foot}</g>
+ </svg>`;
+}
+function poseMechs(root,t){
+ const ph=(t/3.2)%1;const s=Math.pow(Math.sin(ph*Math.PI),2);
+ root.querySelectorAll('.msvg').forEach(svg=>{const g=svg.querySelector('.ghost'),h=svg.querySelector('.heel'),r=svg.querySelector('.react');g.style.transform=`rotate(${-12*s}deg)`;h.style.transform=`rotate(${-12*s*.42}deg)`;if(r)r.style.fillOpacity=String(.25+.75*s);});
+}
+
+/* ================= SCENES ================= */
+const SC=[];const add=o=>SC.push(o);
+const R=(at,html,cls='',out)=>`<div class="r ${cls}" data-at="${at}"${out!=null?` data-out="${out}"`:''}>${html}</div>`;
+const LINE=['kayano','nb860','gaviota','glycerin','hurricane'];
+
+add({id:'acilis',title:'Açılış',dur:24,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Kişisel karşılaştırma · Ekim 2026 · Hollanda</p>
+  <h1 class="h1 r in" data-at="0"><span>Beş stabilite</span><span>ayakkabısı,</span><span class="acc">beş destek fikri</span></h1>
+  ${R(3,'<p class="lede">Hepsi overpronasyona karşı destek veriyor, ama bu desteği farklı bir yapıyla sağlıyor. Her ayakkabıyı farklı açılardan döndürüp parçalarına ayıracağız.</p>')}
+  ${R(9,`<ul class="vlist">${SH.map(s=>`<li><span>${esc(s.brand)} ${esc(s.short)}<span class="d">${esc(s.statusD)}</span></span><span class="chip ${s.cur?'cur':'old'}">${esc(s.status)}</span></li>`).join('')}</ul>`)}
+  ${R(18,'<p class="hint"><kbd>Boşluk</kbd> oynat / duraklat · <kbd>←</kbd> <kbd>→</kbd> bölümler · sahneyi sürükleyerek döndürün</p>')}
+ </div></div>`,
+ state:t=>({lineup:1,az:38+t*4,el:20,dist:A(12.5,10.5),cx:A(.73,.5),cy:A(.52,.22),reveal:t*1.6+.2,ltags:t>2})
+});
+
+const NEEDS=[['1','Geniş ön ayak','Dar burun ön ayağı yanlardan sıkıştırabilir (CM1 ve sinir bölgesi): 2E/4E arıyoruz.'],['2','Stabil topuk','Dengesiz topuk teması ve overpronasyon: sert topuk ve destek sistemi.'],['3','Kişisel tabanlık','İç taban çıkmalı ve ortez için yeterli hacim kalmalı.'],['4','Yumuşak geçiş','Erken topuk kalkışında rocker’lı, sert ön ayak yardımcı olabilir.']];
+add({id:'profil',title:'Neye bakıyoruz?',dur:24,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Ayak profiliniz</p>
+  <h2 class="h2 r in" data-at="0">Dört ihtiyaç, beş ayakkabı</h2>
+  <div class="needs">${NEEDS.map((n,i)=>R(2+i*3.5,`<div class="need"><span class="ic">${n[0]}</span><b>${n[1]}</b><span>${n[2]}</span></div>`)).join('')}</div>
+  ${R(17,'<p class="mute">Her bölümde bu dört ihtiyaca göre artıları ve dikkat edilecek noktaları göreceksiniz. Bu ölçütler tıbbi değerlendirme yerine geçmez.</p>')}
+ </div></div>`,
+ state:t=>({lineup:1,az:60+t*3,el:28,dist:A(14.5,10),cx:A(.73,.5),cy:A(.52,.22),ltags:true})
+});
+
+add({id:'destek',title:'Destek nereden geliyor?',dur:42,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Ayırt edici özellik</p>
+  <h2 class="h2 r in" data-at="0">Destek nereden geliyor?</h2>
+  ${R(1,'<p class="mute">Arkadan bakış, sağ ayak. Topuk içe yattıkça her ayakkabının destek parçası farklı yerde devreye giriyor. Mavi alan destek parçası, kesik çizgi desteksiz hareket. Kavramsal çizim.</p>')}
+  <div class="mechs">${SH.map((s,i)=>R(3+i*6,`<div class="mech">${mechSVG(s)}<span class="nm">${esc(s.mech)}</span><span class="sh">${esc(s.brand)} ${esc(s.short)}</span><p>${esc(s.mechD)}</p></div>`)).join('')}</div>
+  ${R(35,'<p class="mute" style="margin-top:14px">Plaka, modül, çerçeve, ray ya da şekil: sonraki bölümlerde her birini ayakkabının içinde göreceğiz.</p>')}
+ </div></div>`,
+ state:()=>({show:0}),
+ update(t,root){poseMechs(root,t);}
+});
+
+/* per-shoe chapter */
+const VIEWN=['Dış yan','İç yan','Üstten','Arkadan','Alttan'];
+const VAZ=[0,180,0,-90,200],VEL=[6,6,80,12,-58];
+function shoeScene(s,idx){
+ const T0=12,TV=4.4,TE=36,TM=66,TS=80,TF=90,DUR=102;
+ const NT=s.tech.length,TStep=(TM-TE-4)/NT;
+ const tourKeysAz=[[0,32]],tourKeysEl=[[0,18]];
+ VIEWN.forEach((v,i)=>{const t=T0+i*TV;const pa=i?VAZ[i-1]:32,pe=i?VEL[i-1]:18;tourKeysAz.push([t,pa],[t+1.6,VAZ[i]]);tourKeysEl.push([t,pe],[t+1.6,VEL[i]]);});
+ tourKeysAz.push([T0+5*TV,200],[T0+5*TV+2,395]);tourKeysEl.push([T0+5*TV,-58],[T0+5*TV+2,16]);
+ const mechView={'4d':[160,14],plane:[150,20],hframe:[-130,26],rails:[-125,22],hurr:[-140,22]}[s.kind];
+ const maxH=45,maxW=320;
+ const bar=(lab,v,max,unit,at)=>`<div class="bar r fade" data-at="${at}" style="--w:${(v/max*100).toFixed(1)}%"><span>${lab}</span><span class="t"><i></i></span><span class="v">${v} ${unit}</span></div>`;
+ return {id:s.id,title:`${s.brand} ${s.short}`,dur:DUR,lay:'lay-split',shoe:s.id,
+  html:`<div class="panel pe"><div class="pin">
+   <div class="shead r in" data-at="0"><span class="brand">${String(idx+1).padStart(2,'0')} / 05 · ${esc(s.brand)}</span><h2>${esc(s.model)} <small>${esc(s.sub)}</small></h2>
+    <div class="meta"><span class="chip ${s.cur?'cur':'old'}">${esc(s.status)}</span><span class="mute">${esc(s.statusD)}</span><b>${esc(s.price)}</b></div></div>
+   <div class="stack">
+    ${R(.8,`<span class="k">Ayırt edici özellik · ${esc(s.mech)}</span><p class="distq">${esc(s.dist)}</p>`,'fade',T0)}
+    ${R(T0,`<span class="k">Farklı açılardan</span><div class="tourstack">${VIEWN.map((v,i)=>`<div class="tourcap" data-v="${i}"><b>${v}</b><span>${esc(s.tour[i])}</span></div>`).join('')}</div><div class="vchips">${VIEWN.map((v,i)=>`<span class="vchip" data-i="${i}">${v}</span>`).join('')}</div>`,'fade',TE)}
+    ${R(TE,`<span class="k">Katman katman · ${NT} parça</span><ol class="techl">${s.tech.map((t,i)=>`<li data-i="${i}" class="${t[3]?'main':''}"><span class="n">${i+1}</span><div><b>${esc(t[0])}</b><p>${esc(t[2])}</p></div></li>`).join('')}</ol>`,'fade',TM)}
+    ${R(TM,`<span class="k">Destek sistemi · ${esc(s.mech)}</span><div class="mechbox">${mechSVG(s)}<p style="margin:0">${esc(s.mechD)}</p></div>`,'fade',TS)}
+    ${R(TS,`<span class="k">Ölçüler</span><div class="specs">${bar('Topuk',s.H,maxH,'mm',TS+.5)}${bar('Ön ayak',s.F,maxH,'mm',TS+1)}${bar('Drop',s.drop,12,'mm',TS+1.5)}${bar('Ağırlık',s.weight,maxW,'g',TS+2)}
+      <div class="wchips r fade" data-at="${TS+3}"><span class="mute" style="width:7.2rem">Genişlik</span>${['D','2E','4E'].map(w=>`<span class="wchip ${s.widths.includes(w)?'on':''}">${w}</span>`).join('')}<span class="mute small">${esc(s.wnote)}</span></div>
+      <div class="r fade small" data-at="${TS+4}"><span class="mute">İç taban:</span> ${esc(s.insole)}</div></div>`,'fade',TF)}
+    ${R(TF,`<span class="k">Sizin profiliniz için</span><div class="fit"><div class="p"><h3>Artı</h3><ul>${s.pros.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div><div class="c"><h3>Dikkat</h3><ul>${s.cons.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div></div>`,'fade')}
+   </div>
+  </div></div>`,
+  state:t=>{
+   const b={focus:s.id,dist:A(8.6,6.6),cx:A(.72,.5),cy:A(.5,.22),reveal:t*1.4+.1};
+   if(t<T0)return {...b,az:30+t*6,el:18};
+   if(t<TE)return {...b,az:kf(t,tourKeysAz),el:kf(t,tourKeysEl),ring:1};
+   if(t<TM){const k=Math.min(NT-1,Math.floor((t-TE-2)/TStep));const lab=t<TE+2?[]:s.tech.slice(0,k+1).map(x=>x[1]);return {...b,explode:kf(t,[[TE,0],[TE+3,1],[TM-2,1],[TM,.35]]),az:kf(t,[[TE,35],[TM,62]])+6*Math.sin(t*.3),el:kf(t,[[TE,16],[TM,22]]),dist:A(10,8.2),cy:A(.52,.26),labels:lab,hl:t<TE+2?[]:[s.tech[k][1]]};}
+   if(t<TS)return {...b,explode:kf(t,[[TM,.35],[TM+4,.35],[TS-1,0]]),az:mechView[0],el:mechView[1],hl:['mech',s.tech[0][1]],labels:[s.tech[0][1]]};
+   if(t<TF)return {...b,az:0,el:4};
+   return {...b,az:30+(t-TF)*10,el:16};
+  },
+  update(t,root){
+   if(t>=T0&&t<TE){const v=Math.min(4,Math.floor((t-T0)/TV));root.querySelectorAll('.tourcap').forEach((c,i)=>{c.style.display=i===v?'block':'none';});root.querySelectorAll('.vchip').forEach((c,i)=>c.classList.toggle('cur',i===v));}
+   if(t>=TE&&t<TM){const k=t<TE+2?-1:Math.min(NT-1,Math.floor((t-TE-2)/TStep));root.querySelectorAll('.techl li').forEach((li,i)=>{li.classList.toggle('cur',i===k);li.classList.toggle('seen',i<k);});}
+   if(t>=TM&&t<TS)poseMechs(root,t);
+  }};
+}
+SH.forEach((s,i)=>add(shoeScene(s,i)));
+
+/* comparison */
+const cmpBar=(rows,key,max,unit,best,at)=>rows.map((s,i)=>`<div class="bar r fade ${best(s)?'best':''}" data-at="${(at+i*.4).toFixed(1)}" style="--w:${(s[key]/max*100).toFixed(1)}%"><span>${esc(s.short)}</span><span class="t"><i></i></span><span class="v">${s[key]} ${unit}</span></div>`).join('');
+add({id:'karsilastirma',title:'Yan yana ölçüler',dur:60,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Yan yana</p>
+  <h2 class="h2 r in" data-at="0">Ölçüler ve seçenekler</h2>
+  ${R(.8,'<p class="mute small">Yükseklik ve drop markanın verdiği değerler; laboratuvar ölçümleri birkaç milimetre farklı çıkabiliyor. Ağırlık erkek US 9, standart (D) genişlik; geniş kalıplar biraz daha ağır olabilir. Turuncu çubuk o ölçüde öne çıkan model.</p>')}
+  <div class="cmp">
+   <div>${R(2,'<h3>Topuk yüksekliği</h3>','fade')}${cmpBar(SH,'H',45,'mm',s=>s.H===41,2.4)}</div>
+   <div>${R(8,'<h3>Ön ayak yüksekliği</h3>','fade')}${cmpBar(SH,'F',45,'mm',s=>s.F===35,8.4)}</div>
+   <div>${R(15,'<h3>Drop (topuk − ön ayak)</h3>','fade')}${cmpBar(SH,'drop',12,'mm',s=>s.drop===6,15.4)}</div>
+   <div>${R(22,'<h3>Ağırlık</h3>','fade')}${cmpBar(SH,'weight',320,'g',s=>s.weight===262,22.4)}</div>
+  </div>
+  ${R(30,`<div class="cmp"><div><h3>Genişlik ve iç taban</h3><table class="wtab"><thead><tr><th>Model</th><th>D</th><th>2E</th><th>4E</th><th>İç taban</th></tr></thead><tbody>${SH.map(s=>`<tr><td>${esc(s.short)}</td>${['D','2E','4E'].map(w=>`<td class="c ${s.widths.includes(w)?(s.id==='kayano'&&w==='4E'?'q':'yes'):'no'}">${s.widths.includes(w)?(s.id==='kayano'&&w==='4E'?'?':'✓'):'—'}</td>`).join('')}<td class="small">${esc(s.insole.split(' · ')[0])}</td></tr>`).join('')}</tbody></table><p class="mute small" style="margin-top:6px">? = Kayano 32 4E, AB stoğu belirsiz.</p></div>
+   <div><h3>Fiyat (NL/AB)</h3><table class="wtab"><tbody>${SH.map(s=>`<tr><td>${esc(s.short)}</td><td class="small">${esc(s.price)}</td></tr>`).join('')}</tbody></table></div></div>`)}
+ </div></div>`,
+ state:()=>({show:0})
+});
+
+add({id:'yanyana',title:'Beşi bir arada',dur:22,lay:'lay-center',
+ html:`<div class="top"><p class="eyebrow r in" data-at="0">Beşi bir arada</p><h2 class="h2 r in" data-at="0">Aynı amaç, farklı mimari</h2></div>
+  <div class="cap pe">${R(1.5,'<p style="margin:0">Mavi parçalar her ayakkabının destek sistemi: modül, plaka, çerçeve, ray ve yan duvar. Her model desteği farklı bir yapıyla veriyor.</p>','fade')}</div>`,
+ state:t=>({lineup:1,explode:kf(t,[[0,0],[4,.7],[18,.7],[21,0]]),az:kf(t,[[0,30],[22,80]]),el:24,dist:A(12,10.5),cx:.5,cy:A(.46,.42),hl:['mech'],ltags:true})
+});
+
+const PICKS=[['En güçlü pronasyon kontrolü','HOKA Gaviota 6','Tam boy H-Frame ve çok geniş platform.','Burun sığ; ortezle X-Wide deneyin.'],
+ ['Yüke tepki veren ark modülü','ASICS GEL-Kayano 32','4D Guidance ve PureGEL; rocker’lı sert ön ayak.','33’e geçildi; 2E/4E stoğu azalıyor.'],
+ ['Düşük fiyatla deneme','New Balance 860 v14','İçte daha uzun Stability Plane; indirimde ≈115–120 €.','İlk başta kısa hissettirir.'],
+ ['Yalnız sapınca devreye giren raylar','Brooks Glycerin GTS 23','GuideRails yalnız sapınca devreye girer.','“Ortez dostu değil” uyarısı var.'],
+ ['En hafif ve en nötr hisli','Saucony Hurricane 26','262 g, 41/35 mm yastık.','Yalnızca 2E; destek hafif–orta.']];
+add({id:'secim',title:'Sizin için özet',dur:44,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Sizin için özet</p>
+  <h2 class="h2 r in" data-at="0">Hangi ihtiyaçta hangisi öne çıkıyor?</h2>
+  <div class="picks">${PICKS.map((p,i)=>R(2+i*5,`<div class="pick"><span class="k">${p[0]}</span><b>${p[1]}</b><span>${p[2]}</span><em>Dikkat: ${p[3]}</em></div>`)).join('')}</div>
+  ${R(29,'<div class="sumnote">Dört modelde 4E seçeneği var (Kayano 32, 860 v14, Gaviota 6, Glycerin GTS 23; Kayano 32 4E’nin AB stoğu belirsiz). Dördünde iç tabanın çıkarılabildiği doğrulandı; 860 v14 için bu bilgi yalnızca perakendecilerden geliyor. Ortezin kendi desteği ile ayakkabının desteği üst üste binebilir: karar, kendi tabanlığınızla yapılan denemeye ve tabanlığı hazırlayan uzmanın görüşüne kalmalı.</div>')}
+ </div></div>`,
+ state:()=>({show:0})
+});
+
+const CHK=['Orijinal iç tabanı tamamen çıkarın; kişisel tabanlığı onun yerine koyun.','Topuk yukarı çıkmamalı, topukta kayma olmamalı.','En geniş ön ayak noktasında kenar baskısı olmamalı.','Başparmak arkası ve CM1 bölgesinde dikiş, katlanma veya lokal basınç olmamalı.','Denemeyi günün ikinci yarısında yapın; ayak gün sonunda daha geniş olabilir.','İade süresi içinde evde, temiz zeminde 30–45 dakika yürüyün; uyuşma, yanma veya topuk kayması olursa modeli eleyin.'];
+add({id:'deneme',title:'Mağazada deneme',dur:26,lay:'lay-split',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Mağazada</p>
+  <h2 class="h2 r in" data-at="0">Denerken altı kontrol</h2>
+  <ol class="checks">${CHK.map((c,i)=>`<li class="r" data-at="${2+i*3.4}"><i>${i+1}</i><span>${esc(c)}</span></li>`).join('')}</ol>
+ </div></div>`,
+ state:t=>{const order=['insole','counter','toe','toe','upper','counter'];const i=Math.min(5,Math.max(0,Math.floor((t-2)/3.4)));return {focus:'gaviota',az:[30,-120,0,70,35,-100][i],el:[34,16,78,24,16,14][i],dist:A(8.6,6.6),cx:A(.72,.5),cy:A(.5,.22),upperLift:i===0?.8:0,insoleLift:i===0?1:0,hl:[order[i]]};}
+});
+
+add({id:'kapanis',title:'Kaynaklar ve bağlantılar',dur:20,lay:'lay-full',
+ html:`<div class="panel pe"><div class="pin">
+  <p class="eyebrow r in" data-at="0">Son not</p>
+  <h2 class="h2 r in" data-at="0">Ürün sayfaları ve videolar</h2>
+  ${R(1,'<p class="mute">3D modeller temsilidir: topuk ve ön ayak yüksekliği ile drop markanın verdiği değerlere göre ayarlandı, destek parçalarının yeri kaynaklara göre şematik çizildi. Orijinal fotoğraflar için resmî ürün sayfalarına bakın.</p>')}
+  <div class="links">${SH.map((s,i)=>R(2+i*.6,`<div><b>${esc(s.brand)} ${esc(s.short)}</b><a href="${s.link[1]}" target="_blank" rel="noopener">${esc(s.link[0])} ↗</a>${s.video?`<br><a href="${s.video[1]}" target="_blank" rel="noopener">${esc(s.video[0])} ↗</a>`:'<br><span class="mute small">Resmî video bulunamadı</span>'}</div>`)).join('')}</div>
+  ${R(6,'<p class="mute small" style="margin-top:14px">Bilgiler web araması sonuç özetlerinden (marka sayfaları, perakendeciler ve laboratuvar ölçümü yapan inceleme siteleri) derlendi; marka siteleri doğrudan açılamadı. İkinci bir aramayla kontrol edildi, ancak bazı ayrıntılar (ör. 860 v14 iç tabanı, bazı modellerin resmî videoları) doğrulanamadı. Fiyat ve stok değişir. Bu film tıbbi tavsiye değildir.</p>')}
+  ${R(10,'<p class="hint">Bitti. Bölümler menüsünden istediğiniz modele dönebilir ya da ▶ ile baştan izleyebilirsiniz.</p>')}
+ </div></div>`,
+ state:t=>({lineup:1,az:30+t*6,el:22,dist:A(12,11),cx:.5,cy:.5,show:.0})
+});
+
+let acc=0;SC.forEach((s,i)=>{s.i=i;s.start=acc;acc+=s.dur;});const TOTAL=acc;
+
+/* ================= DOM ================= */
+const scenesEl=$('#scenes');
+SC.forEach(s=>{const d=document.createElement('section');d.className='scene '+s.lay;d.setAttribute('aria-label',s.title);d.innerHTML=s.html;scenesEl.appendChild(d);s.root=d;s.items=$$('[data-at]',d).map(el=>({el,at:+el.dataset.at,out:el.dataset.out!=null?+el.dataset.out:Infinity}));});
+
+/* ================= THREE: parametric shoes ================= */
+const L=2.8,X0=-1.4,MM=1/103.6,ux=u=>X0+u*L;
+const WK=[[.10,.33],[.25,.355],[.45,.335],[.62,.45],[.74,.475],[.85,.43]];
+function baseW(u){if(u<=.10){const t=(.10-u)/.10;return .33*Math.sqrt(Math.max(0,1-t*t));}if(u>=.85){const t=(u-.85)/.15;return .43*Math.sqrt(Math.max(0,1-t*t));}for(let i=0;i<WK.length-1;i++){const a=WK[i],b=WK[i+1];if(u<=b[0]){const s=(u-a[0])/(b[0]-a[0]);return a[1]+(b[1]-a[1])*s*s*(3-2*s);}}return .43;}
+function halfW0(u,side){let w=baseW(u);if(side<0)w*=1-.17*Math.exp(-Math.pow((u-.42)/.12,2));else w*=1+.03*Math.exp(-Math.pow((u-.7)/.1,2));return w;}
+const centerZ=u=>-.07*sstep(.6,1,u);
+const UH=[[0,.62],[.08,.66],[.3,.62],[.45,.56],[.6,.46],[.75,.36],[.9,.25],[1,.12]];
+function domeH(u){for(let i=0;i<UH.length-1;i++){const a=UH[i],b=UH[i+1];if(u<=b[0]){const s=(u-a[0])/(b[0]-a[0]);return a[1]+(b[1]-a[1])*s*s*(3-2*s);}}return .12;}
+const alphaO=u=>u<=.40?1.2*Math.sqrt(Math.max(0,1-Math.pow((u-.17)/.23,2))):0;
+function col(h){return new THREE.Color(h).convertSRGBToLinear();}
+function std(hex,o={}){return new THREE.MeshStandardMaterial(Object.assign({color:col(hex),roughness:.75,metalness:0,side:THREE.DoubleSide},o));}
+function canvasTex(w,h,fn){const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+const V=a=>new THREE.Vector3(a[0],a[1],a[2]);
+let SUPMAT=null,TEX={};
+
+function Shoe(c){
+ const Hs=c.H*MM,Fs=c.F*MM,TS=c.ts*MM,OUT=.045,INS=.035;
+ const W=(u,s)=>halfW0(u,s)*c.wf;
+ const rockY=u=>TS*Math.pow(clamp((u-.62)/.38),2)+.05*Math.pow(clamp((.13-u)/.13),2);
+ const stack=u=>u<.18?Hs:u<.62?lerp(Hs,Fs,sstep(.18,.62,u)):Fs*(1-.22*sstep(.86,1,u));
+ const midBot=u=>rockY(u)+OUT,midTop=u=>rockY(u)+stack(u)-INS;
+ const sp=(u,th,k=1,hk=1)=>{const cc=Math.cos(th),s=Math.max(0,Math.sin(th));const side=cc>=0?1:-1;const w=W(u,side)*k;return [ux(u),midTop(u)-.02+domeH(u)*hk*Math.pow(s,.8),centerZ(u)+side*w*Math.pow(Math.abs(cc),.55)];};
+ function outline(k=1,uPad=0,n=110){const us=[];for(let i=0;i<=n;i++){const t=i/n;us.push(uPad+(1-2*uPad)*(1-Math.cos(Math.PI*t))/2);}const pts=[];us.forEach(u=>pts.push([ux(u),-(centerZ(u)+W(u,1)*k)]));for(let i=us.length-1;i>=0;i--){const u=us[i];pts.push([ux(u),-(centerZ(u)-W(u,-1)*k)]);}const out=[];pts.forEach(p=>{const l=out[out.length-1];if(!l||Math.hypot(l.x-p[0],l.y-p[1])>1e-5)out.push(new THREE.Vector2(p[0],p[1]));});if(out.length>2&&out[0].distanceTo(out[out.length-1])<1e-5)out.pop();return out;}
+ function extrude(pts,yAt){const g=new THREE.ExtrudeGeometry(new THREE.Shape(pts),{depth:1,bevelEnabled:false,curveSegments:2});g.rotateX(-Math.PI/2);const p=g.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),f=p.getY(i),z=p.getZ(i);p.setY(i,yAt(clamp((x-X0)/L),f,z));}g.computeVertexNormals();return g;}
+ const layer=(k,uPad,yAt)=>extrude(outline(k,uPad),yAt);
+ function region(u0,u1,fr0,fr1,side,yAt,n=30){const pts=[];for(let i=0;i<=n;i++){const u=u0+(u1-u0)*i/n;pts.push(new THREE.Vector2(ux(u),-(centerZ(u)+side*W(u,side)*fr1)));}for(let i=n;i>=0;i--){const u=u0+(u1-u0)*i/n;pts.push(new THREE.Vector2(ux(u),-(centerZ(u)+side*W(u,side)*fr0)));}return extrude(pts,yAt);}
+ function band(side,u0,u1,yb,yt,k=1.02,n=36){const pos=[],idx=[];for(let i=0;i<=n;i++){const u=u0+(u1-u0)*i/n;const x=ux(u),z=centerZ(u)+side*W(u,side)*k;pos.push(x,yb(u),z,x,yt(u),z);}for(let i=0;i<n;i++){const a=i*2;idx.push(a,a+2,a+1,a+1,a+2,a+3);}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();return g;}
+ function shell(o){const u0=o.u0??0,u1=o.u1??1,nu=o.nu??70,th0=o.th0??0,th1=o.th1??Math.PI,nv=o.nv??36,k=o.k??1,hk=o.hk||(()=>1),keep=o.keep,cos=o.cos!==false;const pos=[],uv=[],idx=[],U=[],T=[];for(let i=0;i<=nu;i++){let t=i/nu;if(cos)t=(1-Math.cos(Math.PI*t))/2;U.push(u0+(u1-u0)*t);}for(let j=0;j<=nv;j++)T.push(th0+(th1-th0)*j/nv);U.forEach(u=>T.forEach((th,j)=>{pos.push(...sp(u,th,k,hk(u)));uv.push(u*6,j/nv*2);}));for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){if(keep&&!keep((U[i]+U[i+1])/2,(T[j]+T[j+1])/2))continue;const a=i*(nv+1)+j,b=a+nv+1;idx.push(a,b,a+1,b,b+1,a+1);}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeVertexNormals();return g;}
+ function pgeo(nu,nv,fn,k=1,hk=1){const pos=[],uv=[],idx=[];for(let i=0;i<=nu;i++)for(let j=0;j<=nv;j++){const q=fn(i/nu,j/nv);pos.push(...sp(q[0],q[1],k,hk));uv.push(q[0]*6,j/nv*2);}for(let i=0;i<nu;i++)for(let j=0;j<nv;j++){const a=i*(nv+1)+j,b=a+nv+1;idx.push(a,b,a+1,b,b+1,a+1);}const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);g.computeVertexNormals();return g;}
+ const tube=(pts,r,mat,closed=false,seg=120)=>new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,closed),seg,r,8,closed),mat);
+ const edge=(u,y,s)=>new THREE.Vector3(ux(u),y,centerZ(u)+s*W(u,s));
+ const po={polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2};
+ const M={
+  upper:std('#ffffff',{map:TEX.mesh,color:col(c.col.up),roughness:.85}),
+  tongue:std(c.col.up,{roughness:.9}),collar:std(c.col.dark,{roughness:.7}),
+  counter:std(c.col.dark,Object.assign({roughness:.55},po)),toe:std(c.col.dark,Object.assign({roughness:.6},po)),
+  lace:std(c.col.lace,{roughness:.6}),eye:std('#1E2A33',{metalness:.6,roughness:.35}),
+  mid:std('#EEF0F2',{roughness:.55}),mid2:std('#D9DEE3',{roughness:.6}),
+  outCap:std('#ffffff',{map:TEX.tread,color:col(c.col.out),roughness:.85}),outSide:std(c.col.out,{roughness:.8}),
+  ins:std('#ffffff',{map:TEX.ins,roughness:.9}),
+  sup:std('#5F8FEE',{roughness:.45,emissive:col('#16306A'),emissiveIntensity:.6}),
+  gel:std('#7FD1E8',{roughness:.2,metalness:.1,transparent:true,opacity:.85,emissive:col('#0E3B48')})
+ };
+ const g=new THREE.Group(),rock=new THREE.Group();g.add(rock);
+ const P={};
+ const part=(key,meshes,ex,anchor,o={})=>{const pg=new THREE.Group();meshes.forEach(m=>pg.add(m));const mats=[];meshes.forEach(m=>(Array.isArray(m.material)?m.material:[m.material]).forEach(mt=>{if(!mats.includes(mt))mats.push(mt);}));pg.userData=Object.assign({key,ex,anchor,mats,delay:0,upper:false},o);P[key]=pg;rock.add(pg);return pg;};
+ // sole
+ part('outsole',[new THREE.Mesh(layer(1,0,(u,f)=>rockY(u)+f*OUT),[M.outCap,M.outSide])],[0,-1.08,0],edge(.57,rockY(.57)+.02,1),{delay:.2});
+ const midMid=u=>(midBot(u)+midTop(u))/2;
+ if(c.kind==='plane'){
+  const split=u=>midBot(u)+(midTop(u)-midBot(u))*.45;
+  part('midLow',[new THREE.Mesh(layer(1,0,(u,f)=>midBot(u)+f*(split(u)-midBot(u))),M.mid2)],[0,-.74,0],edge(.32,(midBot(.32)+split(.32))/2,1),{delay:.6});
+  part('plate',[new THREE.Mesh(region(.02,.97,0,.97,-1,(u,f)=>split(u)-.006+f*.012),M.sup),new THREE.Mesh(region(.02,.6,0,.97,1,(u,f)=>split(u)-.006+f*.012),M.sup)],[0,-.46,0],edge(.42,split(.42),-1),{delay:.7,mech:true});
+  part('midUp',[new THREE.Mesh(layer(1,0,(u,f)=>split(u)+f*(midTop(u)-split(u))),M.mid)],[0,-.2,0],edge(.3,(split(.3)+midTop(.3))/2,1),{delay:.8});
+ } else if(c.kind==='hurr'){
+  const split=u=>midBot(u)+(midTop(u)-midBot(u))*.5;
+  part('frame',[new THREE.Mesh(layer(1,0,(u,f)=>midBot(u)+f*(split(u)-midBot(u))),M.mid2)],[0,-.7,0],edge(.32,(midBot(.32)+split(.32))/2,1),{delay:.6});
+  part('top',[new THREE.Mesh(layer(.995,0,(u,f)=>split(u)+f*(midTop(u)-split(u))),M.mid)],[0,-.32,0],edge(.62,(split(.62)+midTop(.62))/2,1),{delay:.8});
+  part('mech',[new THREE.Mesh(band(-1,.02,.62,u=>midTop(u)-.07,u=>midTop(u)+.05*(1-sstep(.45,.62,u)),1.02),M.sup),new THREE.Mesh(band(1,.02,.5,u=>midTop(u)-.06,u=>midTop(u)+.035*(1-sstep(.35,.5,u)),1.02),M.sup)],[0,-.06,0],edge(.25,midTop(.25)+.01,-1),{delay:1,mech:true});
+ } else {
+  part('midsole',[new THREE.Mesh(layer(1,0,(u,f)=>midBot(u)+f*(midTop(u)-midBot(u))),M.mid)],[0,-.48,0],edge(.3,midMid(.3),1),{delay:.7});
+  if(c.kind==='4d')part('mech',[new THREE.Mesh(region(.26,.62,.05,1.012,-1,(u,f)=>midBot(u)+.03+f*(midTop(u)-midBot(u)-.06)),M.sup)],[0,-.8,-.08],edge(.44,midMid(.44),-1),{delay:.9,mech:true});
+  if(c.kind==='hframe'){const yb=u=>midTop(u)-.075,yt=u=>midTop(u)+.012;part('mech',[new THREE.Mesh(band(1,.04,.86,yb,yt,1.015),M.sup),new THREE.Mesh(band(-1,.04,.86,yb,yt,1.015),M.sup),new THREE.Mesh(region(.38,.47,-1,1,1,(u,f)=>midTop(u)-.03+f*.03),M.sup)],[0,-.16,0],edge(.6,midTop(.6)-.03,1),{delay:.9,mech:true});}
+  if(c.kind==='rails'){const yb=u=>midTop(u)-.06,yt=u=>midTop(u)+.075*(1-sstep(.22,.36,u));part('mech',[new THREE.Mesh(band(1,.0,.36,yb,yt,1.02),M.sup),new THREE.Mesh(band(-1,.0,.36,yb,yt,1.02),M.sup)],[0,-.14,0],edge(.14,midTop(.14)+.03,1),{delay:.9,mech:true});}
+ }
+ if(c.id==='kayano'){const gm=new THREE.Mesh(new THREE.SphereGeometry(1,24,16),M.gel);gm.scale.set(.2,.045,.15);gm.position.set(ux(.13),midTop(.13)-.05,centerZ(.13));part('gel',[gm],[0,-.12,0],new THREE.Vector3(ux(.13),midTop(.13)-.02,0),{delay:1});}
+ part('insole',[new THREE.Mesh(layer(.93,.015,(u,f)=>midTop(u)-.006+f*INS),[M.ins,M.ins])],[0,.34,0],new THREE.Vector3(ux(.3),midTop(.3)+.03,centerZ(.3)),{delay:1.1});
+ // upper
+ const keepU=(u,th)=>!(alphaO(u)>0&&Math.abs(th-Math.PI/2)<alphaO(u));
+ const cpts=[];for(let i=0;i<=40;i++){const u=i/40*.4;cpts.push(V(sp(u,Math.PI/2-alphaO(u))).add(new THREE.Vector3(0,.012,0)));}for(let i=39;i>=1;i--){const u=i/40*.4;cpts.push(V(sp(u,Math.PI/2+alphaO(u))).add(new THREE.Vector3(0,.012,0)));}
+ const gTon=shell({u0:.3,u1:.64,nu:24,nv:10,th0:Math.PI/2-.36,th1:Math.PI/2+.36,cos:false,hk:u=>1.05+(u<.4?(.4-u)*2.2:0)});
+ part('upper',[new THREE.Mesh(shell({nu:84,nv:40,keep:keepU}),M.upper),tube(cpts,.036,M.collar,true,160),new THREE.Mesh(gTon,M.tongue)],[0,1.0,0],V(sp(.62,.75)),{delay:1.5,upper:true});
+ const thTop=u=>Math.min(.8,Math.PI/2-alphaO(u)-.05);
+ part('counter',[new THREE.Mesh(pgeo(36,14,(a,b)=>{const u=a*(.34-.13*b);return [u,b*thTop(u)];},1.03),M.counter),new THREE.Mesh(pgeo(36,14,(a,b)=>{const u=a*(.34-.13*b);return [u,Math.PI-b*thTop(u)];},1.03),M.counter)],[-.5,1.0,0],V(sp(.05,.5,1.03)),{delay:1.9,upper:true});
+ part('toe',[new THREE.Mesh(pgeo(26,44,(a,b)=>{const th=Math.PI*b;const us=.835-.065*(1-Math.sin(th));return [us+(1-us)*a,th];},1.025,1.03),M.toe)],[.5,1.0,0],V(sp(.92,1.15,1.025,1.03)),{delay:2.1,upper:true});
+ const lm=[],E=[];for(let k=0;k<5;k++){const u=.425+k*.057;E.push({L:V(sp(u,Math.PI/2-.4,1,1.04)),M:V(sp(u,Math.PI/2+.4,1,1.04))});}
+ const lace=(a,b)=>{const m=a.clone().add(b).multiplyScalar(.5);m.y+=.035;return new THREE.Mesh(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(a,m,b),12,.017,6,false),M.lace);};
+ for(let k=0;k<4;k++)lm.push(lace(E[k].L,E[k+1].M),lace(E[k].M,E[k+1].L));lm.push(lace(E[4].L,E[4].M));
+ E.forEach(e=>[e.L,e.M].forEach(p=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.024,.008,6,14),M.eye);t.position.copy(p);t.rotation.x=Math.PI/2;lm.push(t);}));
+ const top=V(sp(.43,Math.PI/2,1,1.1));[-1,1].forEach(s=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.085,.016,6,20),M.lace);t.position.copy(top).add(new THREE.Vector3(-.02,.03,s*.1));t.rotation.set(Math.PI/2-.5,0,s*.4);t.scale.set(1.25,.75,1);lm.push(t);});
+ part('laces',lm,[0,1.55,0],V(sp(.52,Math.PI/2,1,1.08)),{delay:2.4,upper:true});
+ // anchors (label key -> part + local point)
+ const AN={outsole:['outsole'],midsole:['midsole'],midLow:['midLow'],midUp:['midUp'],plate:['plate'],frame:['frame'],top:['top'],mech:[c.kind==='plane'?'plate':'mech'],gel:['gel'],insole:['insole'],upper:['upper'],counter:['counter'],toe:['toe'],laces:['laces'],
+  tongue:['upper',V(sp(.34,Math.PI/2,1,1.2))],collar:['upper',V(sp(.12,.7)).add(new THREE.Vector3(0,.02,0))],
+  rocker:[c.kind==='plane'?'midLow':c.kind==='hurr'?'frame':'midsole',new THREE.Vector3(ux(.93),rockY(.93)+.03,centerZ(.93))],
+  crash:['midsole',edge(.06,midBot(.06)+.03,1)]};
+ return {g,rock,P,M,AN,rockY,id:c.id};
+}
+
+let renderer=null,scene3,camera,world,ring,ringMat,shadowTex;const SHOES={};
+const LP={kayano:[-.6,0,-2.3],nb860:[-.3,0,-1.15],gaviota:[0,0,0],glycerin:[.3,0,1.15],hurricane:[.6,0,2.3]};
+function init3D(){
+ const cv=$('#gl');
+ try{if(!window.THREE)throw 0;renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});}catch(e){renderer=null;$('#note3d').textContent='3D sahne bu tarayıcıda açılamadı';return;}
+ renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));renderer.setClearColor(0,0);renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
+ scene3=new THREE.Scene();camera=new THREE.PerspectiveCamera(30,1,.1,140);
+ scene3.add(new THREE.HemisphereLight(0xcfe0ff,0x2a1f18,.6));
+ const key=new THREE.DirectionalLight(0xffffff,1.35);key.position.set(4,6,5);scene3.add(key);
+ const rim=new THREE.DirectionalLight(0x86aaff,.95);rim.position.set(-5,3,-4);scene3.add(rim);
+ const fill=new THREE.DirectionalLight(0xffd2a8,.38);fill.position.set(-3,2,5);scene3.add(fill);
+ TEX.mesh=canvasTex(256,256,(g,w,h)=>{g.fillStyle='#FFFFFF';g.fillRect(0,0,w,h);g.fillStyle='rgba(0,0,0,.16)';for(let y=0;y<h;y+=8)for(let x=(y/8)%2?4:0;x<w;x+=8){g.beginPath();g.arc(x,y,2.2,0,7);g.fill();}});
+ TEX.tread=canvasTex(256,256,(g,w,h)=>{g.fillStyle='#FFFFFF';g.fillRect(0,0,w,h);g.strokeStyle='rgba(0,0,0,.35)';g.lineWidth=5;for(let y=8;y<h+16;y+=21){g.beginPath();for(let x=0;x<=w;x+=4){const yy=y+Math.sin(x/w*Math.PI*4)*6;x?g.lineTo(x,yy):g.moveTo(x,yy);}g.stroke();}});TEX.tread.repeat.set(2.2,2.2);
+ TEX.ins=canvasTex(512,256,(g,w,h)=>{g.fillStyle='#5E7891';g.fillRect(0,0,w,h);g.fillStyle='rgba(20,32,44,.45)';for(let y=6;y<h;y+=12)for(let x=6;x<w;x+=12){g.beginPath();g.arc(x,y,1.6,0,7);g.fill();}});TEX.ins.repeat.set(1/2.8,1/1.1);TEX.ins.offset.set(.5,.5);
+ shadowTex=canvasTex(256,128,(g,w,h)=>{const gr=g.createRadialGradient(w/2,h/2,4,w/2,h/2,w/2);gr.addColorStop(0,'rgba(0,0,0,.62)');gr.addColorStop(.55,'rgba(0,0,0,.25)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);});
+ world=new THREE.Group();scene3.add(world);
+ SH.forEach(c=>{const S=Shoe(c);const holder=new THREE.Group();holder.add(S.g);const sh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:shadowTex,transparent:true,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.scale.set(3.7,1.5,1);sh.position.y=.003;holder.add(sh);S.shadow=sh;S.holder=holder;S.vis=0;S.pos=new THREE.Vector3();world.add(holder);SHOES[c.id]=S;});
+ const rp=[],R0=2.15;for(let i=0;i<128;i++){const a=i/128*Math.PI*2,b=(i+1)/128*Math.PI*2;rp.push(Math.cos(a)*R0,0,Math.sin(a)*R0,Math.cos(b)*R0,0,Math.sin(b)*R0);}for(let d=0;d<360;d+=10){const a=d*Math.PI/180,l=d%90===0?.24:d%30===0?.14:.06;rp.push(Math.cos(a)*R0,0,Math.sin(a)*R0,Math.cos(a)*(R0+l),0,Math.sin(a)*(R0+l));}
+ const rg=new THREE.BufferGeometry();rg.setAttribute('position',new THREE.Float32BufferAttribute(rp,3));ringMat=new THREE.LineBasicMaterial({color:col('#5A7287'),transparent:true,opacity:0});ring=new THREE.LineSegments(rg,ringMat);ring.position.y=.004;scene3.add(ring);
+}
+
+/* ================= tags ================= */
+const tagsEl=$('#tags');const TAG={},LTAG={};
+const TOFF={outsole:[110,58],midsole:[-170,46],midLow:[-170,56],midUp:[-170,36],plate:[150,36],frame:[-170,52],top:[-170,30],mech:[150,50],gel:[-160,-10],insole:[-175,-34],upper:[130,-74],counter:[-150,64],toe:[140,-26],laces:[90,-40],tongue:[-120,-80],collar:[-140,-60],rocker:[120,40],crash:[-150,60]};
+SH.forEach(s=>{s.tech.forEach((t,i)=>{const d=document.createElement('div');d.className='tag';d.innerHTML=`<b>${i+1} · ${esc(t[0])}</b>`;tagsEl.appendChild(d);TAG[s.id+':'+t[1]]={el:d,w:0,h:0,on:false,key:t[1],sid:s.id};});
+ const d=document.createElement('div');d.className='tag lt';d.innerHTML=`<b>${esc(s.brand)} ${esc(s.short)}</b><span>${esc(s.mech)}</span>`;tagsEl.appendChild(d);LTAG[s.id]={el:d,w:0,h:0,on:false};});
+function measureTags(){[...Object.values(TAG),...Object.values(LTAG)].forEach(t=>{t.w=t.el.offsetWidth;t.h=t.el.offsetHeight;});}
+
+/* ================= state & loop ================= */
+const DEF={focus:null,lineup:0,az:35,el:18,dist:8,cx:.5,cy:.5,explode:0,upperLift:0,insoleLift:0,show:1,hl:[],labels:[],reveal:99,ring:0,ltags:false};
+const cur=Object.assign({},DEF);
+let userAz=0,userEl=0,uAzT=0,uElT=0,drag=false;
+let T=0,playing=true,speed=1,curScene=-1;const SPEEDS=[1,1.5,2,.5];
+const fx=$('#fx'),fctx=fx.getContext('2d');let FW=0,FH=0,_barH=66;
+const motes=[];for(let i=0;i<60;i++)motes.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.6,vx:(Math.random()-.5)*.006,vy:-.004-Math.random()*.007,p:Math.random()*6});
+const tmpV=window.THREE?new THREE.Vector3():null;
+function project(obj,v3){tmpV.copy(v3);obj.localToWorld(tmpV);tmpV.project(camera);return [(tmpV.x+1)/2*FW,(1-tmpV.y)/2*FH,tmpV.z];}
+const wrap=d=>((d+540)%360)-180;
+function sceneAt(t){for(let i=SC.length-1;i>=0;i--)if(t>=SC[i].start)return i;return 0;}
+function bounds(s){s._minX=8;s._minY=8;if(!WIDE)return;const pin=s.root.querySelector('.panel .pin');if(s.lay.includes('lay-split')&&pin)s._minX=pin.getBoundingClientRect().right+16;const top=s.root.querySelector('.top');if(s.lay.includes('lay-center')&&top)s._minY=top.getBoundingClientRect().bottom+10;}
+function updateScene(s,lt){for(const it of s.items){const on=lt>=it.at&&lt<it.out;if(it.el._on!==on){it.el._on=on;it.el.classList.toggle('in',on);}}s.update&&s.update.call(s,lt,s.root);}
+function activate(i){if(curScene>=0)SC[curScene].root.classList.remove('active');curScene=i;const s=SC[i];s.root.classList.add('notrans');updateScene(s,T-s.start);void s.root.offsetWidth;s.root.classList.remove('notrans');s.root.classList.add('active');uAzT=0;uElT=0;bounds(s);$('#chNo').textContent=String(i+1).padStart(2,'0')+'/'+SC.length;$('#chName').textContent=s.title;$$('#menuList button').forEach((b,k)=>b.classList.toggle('cur',k===i));}
+
+function step3D(st,dt,time){
+ const k=r=>1-Math.exp(-r*dt);
+ cur.az+=wrap(st.az-cur.az)*k(3.2);['el','dist','cx','cy'].forEach(p=>{cur[p]+=(st[p]-cur[p])*k(3.2);});
+ ['explode','upperLift','insoleLift','ring','lineup','show'].forEach(p=>{cur[p]+=(st[p]-cur[p])*k(3.4);});
+ userAz+=(uAzT-userAz)*k(drag?20:1.2);userEl+=(uElT-userEl)*k(drag?20:1.2);
+ document.documentElement.style.setProperty('--sx',(cur.cx*100).toFixed(1)+'%');document.documentElement.style.setProperty('--sy',(cur.cy*100*(FH-_barH)/FH).toFixed(1)+'%');
+ if(!renderer)return;
+ const E=cur.explode;
+ SH.forEach(c=>{const S=SHOES[c.id];const target=(st.lineup>.5?1:(st.focus===c.id?1:0))*st.show;S.vis+=(target-S.vis)*k(3.4);
+  const lp=LP[c.id];const tp=new THREE.Vector3(lp[0]*cur.lineup,0,lp[2]*cur.lineup);S.pos.lerp(tp,k(3.4));S.holder.position.copy(S.pos);
+  const sc=Math.max(.001,ease(clamp(S.vis)));S.holder.scale.setScalar(sc);S.holder.visible=S.vis>.01;
+  if(!S.holder.visible)return;
+  const isF=st.focus===c.id||st.lineup>.5;const rev=isF?st.reveal:99;
+  Object.values(S.P).forEach(g=>{const d=g.userData;const rv=rev>=50?1:ease(clamp((rev-d.delay)/.7));
+   g.position.set(d.ex[0]*E,d.ex[1]*E,d.ex[2]*E);
+   if(d.upper)g.position.y+=cur.upperLift;
+   if(d.key==='insole'){g.position.y+=cur.insoleLift*.75;g.position.z+=cur.insoleLift*1.3;g.rotation.x=-cur.insoleLift*.3;}
+   g.scale.y=Math.max(.001,rv);g.visible=rv>.002;
+   const hl=st.hl.includes(d.key)||(d.mech&&st.hl.includes('mech'))||(d.key==='toe'&&st.hl.includes('toe'));const pulse=hl?.22+.16*Math.sin(time*5):0;
+   d.mats.forEach(m=>{if(!m.emissive)return;if(m===S.M.sup){m.emissiveIntensity=.6+pulse*3;}else if(m!==S.M.gel)m.emissive.setRGB(.89*pulse,.55*pulse,.3*pulse);});
+  });
+  S.shadow.material.opacity=sstep(-2,6,cur.el+userEl)*(1-.65*E);
+ });
+ const el=clamp(cur.el+userEl,-80,85);
+ ringMat.opacity=cur.ring*.85*sstep(-4,4,el)*(1-cur.lineup);ring.visible=ringMat.opacity>.01;
+ const aspect=FW/FH,fit=aspect<1.15?Math.min(2.6,1.15/aspect):1;const dist=cur.dist*fit;const az=(cur.az+userAz)*Math.PI/180,er=el*Math.PI/180;
+ const ty=.42+E*.2+cur.upperLift*.3;
+ camera.position.set(Math.cos(er)*Math.sin(az)*dist,ty+Math.sin(er)*dist,Math.cos(er)*Math.cos(az)*dist);camera.up.set(0,1,0);camera.lookAt(0,ty,0);
+ camera.aspect=aspect;camera.setViewOffset(FW,FH,FW/2-cur.cx*FW,FH/2-cur.cy*(FH-_barH),FW,FH);
+ renderer.render(scene3,camera);
+ $('#note3d').style.opacity=(st.focus||st.lineup>.5)&&st.show>.5?1:0;
+}
+function stepFx(sc,st,dt,time){
+ const g=fctx;g.clearRect(0,0,FW,FH);
+ for(const m of motes){if(!REDUCE){m.x+=m.vx*dt;m.y+=m.vy*dt;if(m.y<-.02){m.y=1.02;m.x=Math.random();}if(m.x<0)m.x+=1;if(m.x>1)m.x-=1;}g.fillStyle=`rgba(232,220,200,${.18+.14*Math.sin(time*.8+m.p)})`;g.beginPath();g.arc(m.x*FW,m.y*FH,m.r,0,7);g.fill();}
+ if(!renderer)return;
+ const small=FW<640?.55:1,minX=sc._minX||8,minY=sc._minY||8;
+ const labs=(small<1&&st.labels.length>1)?(st.hl.length?st.hl.filter(h=>st.labels.includes(h)):st.labels.slice(-1)):st.labels;
+ const gum=getComputedStyle(document.documentElement).getPropertyValue('--gum');
+ const items=[];
+ const pos=(t,p,o)=>{let x=p[0]+o[0]*small,y=p[1]+o[1]*small;let lf=o[0]<0;if(lf){x-=t.w;if(x<minX){x=p[0]+Math.abs(o[0])*small;lf=false;}}y-=t.h/2;x=clamp(x,minX,Math.max(minX,FW-t.w-8));y=clamp(y,minY,Math.max(minY,FH-_barH-t.h-8));return {x,y,lf};};
+ Object.values(TAG).forEach(t=>{const S=SHOES[t.sid];const on=st.focus===t.sid&&labs.includes(t.key)&&cur.show>.5&&S.vis>.8;if(on!==t.on){t.on=on;t.el.classList.toggle('on',on);}t.el.classList.toggle('hl',st.hl.includes(t.key));
+  const an=S.AN[t.key];if(!an)return;const pg=S.P[an[0]];if(!pg)return;const p=project(pg,an[1]||pg.userData.anchor);if(p[2]>1)return;const q=pos(t,p,TOFF[t.key]||[120,-40]);items.push({t,p,...q,hl:st.hl.includes(t.key),line:on});});
+ Object.keys(LTAG).forEach(id=>{const t=LTAG[id],S=SHOES[id];const on=st.ltags&&cur.lineup>.6&&S.vis>.6;if(on!==t.on){t.on=on;t.el.classList.toggle('on',on);}const p=project(S.P.laces,S.P.laces.userData.anchor);if(p[2]>1)return;let x=clamp(p[0]-t.w/2,minX,FW-t.w-8),y=clamp(p[1]-60*small-t.h,minY,FH-_barH-t.h-8);items.push({t,p,x,y,lf:false,hl:false,line:false,lt:true});});
+ // resolve overlaps among visible tags
+ const vis=items.filter(it=>it.t.on).sort((a,b)=>a.y-b.y);const placed=[];
+ vis.forEach(it=>{let moved=true,guard=0;while(moved&&guard++<12){moved=false;for(const q of placed){const ox=it.x<q.x+q.t.w+4&&q.x<it.x+it.t.w+4;const oy=it.y<q.y+q.t.h+4&&q.y<it.y+it.t.h+4;if(ox&&oy){it.y=q.y+q.t.h+5;moved=true;}}}if(it.y+it.t.h>FH-_barH-6)it.y=Math.max(minY,FH-_barH-6-it.t.h);placed.push(it);});
+ items.forEach(it=>{it.t.el.style.transform=`translate(${it.x.toFixed(1)}px,${it.y.toFixed(1)}px)`;if(it.line){const ex=it.lf?it.x+it.t.w:it.x,ey=it.y+it.t.h/2;g.strokeStyle=it.hl?gum:'rgba(232,237,241,.55)';g.lineWidth=1;g.beginPath();g.moveTo(it.p[0],it.p[1]);g.lineTo(ex,ey);g.stroke();g.fillStyle=g.strokeStyle;g.beginPath();g.arc(it.p[0],it.p[1],3,0,7);g.fill();}});
+}
+
+/* ================= controls ================= */
+const segs=$('#segs');SC.forEach((s,i)=>{const e=document.createElement('i');e.style.flex=`${s.dur} 1 0`;e.title=`${i+1}. ${s.title}`;e.appendChild(document.createElement('b'));segs.appendChild(e);});
+const segFills=$$('#segs i b');
+const fmt=s=>{s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');};
+const menuList=$('#menuList');SC.forEach((s,i)=>{const li=document.createElement('li');li.innerHTML=`<button type="button"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${esc(s.title)}</span><span class="t">${fmt(s.start)}</span></button>`;li.firstChild.addEventListener('click',()=>{seek(s.start+.01);toggleMenu(false);if(!playing)setPlaying(true);});menuList.appendChild(li);});
+function setPlaying(p){if(p&&T>=TOTAL-.05)seek(0);playing=p;$('#bPlay').setAttribute('aria-label',p?'Duraklat':'Oynat');$('#icPlay').innerHTML=p?'<rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/>':'<path d="M3 2v12l11-6z"/>';}
+function seek(t){T=clamp(t,0,TOTAL);}
+function toggleMenu(f){const m=$('#menu');const show=f!=null?f:m.hidden;m.hidden=!show;$('#bMenu').setAttribute('aria-expanded',String(show));}
+function prev(){const i=sceneAt(T);if(T-SC[i].start>2.5||i===0)seek(SC[i].start+.01);else seek(SC[i-1].start+.01);}
+$('#bPlay').addEventListener('click',()=>setPlaying(!playing));
+$('#bNext').addEventListener('click',()=>{const i=sceneAt(T);if(i<SC.length-1)seek(SC[i+1].start+.01);});
+$('#bPrev').addEventListener('click',prev);
+$('#bSpeed').addEventListener('click',()=>{speed=SPEEDS[(SPEEDS.indexOf(speed)+1)%SPEEDS.length];$('#bSpeed').textContent=speed+'×';});
+$('#bMenu').addEventListener('click',()=>toggleMenu());
+const track=$('#track');let tdrag=false;const trackSeek=e=>{const r=track.getBoundingClientRect();seek(clamp((e.clientX-r.left)/r.width)*TOTAL);};
+track.addEventListener('pointerdown',e=>{tdrag=true;track.setPointerCapture(e.pointerId);trackSeek(e);});
+track.addEventListener('pointermove',e=>{if(tdrag)trackSeek(e);});track.addEventListener('pointerup',()=>{tdrag=false;});
+track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){seek(T+5);e.preventDefault();e.stopPropagation();}if(e.key==='ArrowLeft'){seek(T-5);e.preventDefault();e.stopPropagation();}});
+window.addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('button,a'))return;if(e.key===' '||e.code==='Space'){e.preventDefault();setPlaying(!playing);}else if(e.key==='ArrowRight')$('#bNext').click();else if(e.key==='ArrowLeft')prev();else if(e.key==='Escape')toggleMenu(false);});
+document.addEventListener('pointerdown',e=>{const m=$('#menu');if(!m.hidden&&!m.contains(e.target)&&!$('#bMenu').contains(e.target))toggleMenu(false);});
+const glc=$('#gl');let lx=0,ly=0;
+glc.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;glc.setPointerCapture(e.pointerId);glc.classList.add('drag');});
+glc.addEventListener('pointermove',e=>{if(!drag)return;uAzT-=(e.clientX-lx)*.45;uElT=clamp(uElT+(e.clientY-ly)*.3,-60,60);lx=e.clientX;ly=e.clientY;});
+const endDrag=()=>{drag=false;glc.classList.remove('drag');};glc.addEventListener('pointerup',endDrag);glc.addEventListener('pointercancel',endDrag);
+
+function resize(){FW=innerWidth;FH=innerHeight;const dpr=Math.min(2,devicePixelRatio||1);fx.width=Math.round(FW*dpr);fx.height=Math.round(FH*dpr);fctx.setTransform(dpr,0,0,dpr,0,0);if(renderer)renderer.setSize(FW,FH,false);_barH=$('#bar').offsetHeight||66;WIDE=WQ.matches;measureTags();if(curScene>=0)bounds(SC[curScene]);}
+window.addEventListener('resize',resize);
+let last=performance.now(),clock=0;
+function frame(now){
+ const dt=Math.min(.1,(now-last)/1000);last=now;clock+=dt;
+ if(playing){T+=dt*speed;if(T>=TOTAL){T=TOTAL;setPlaying(false);}}
+ const i=sceneAt(Math.min(T,TOTAL-.001));if(i!==curScene)activate(i);
+ const s=SC[i],lt=T-s.start;updateScene(s,lt);
+ const st=Object.assign({},DEF,s.state?s.state(lt):{});
+ step3D(st,dt,clock);stepFx(s,st,dt,clock);
+ SC.forEach((c,k)=>{const p=clamp((T-c.start)/c.dur);const f=segFills[k];const w=(p*100).toFixed(2)+'%';if(f._w!==w){f._w=w;f.style.width=w;}});
+ $('#knob').style.left=(T/TOTAL*100).toFixed(3)+'%';
+ const tt=fmt(T)+' / '+fmt(TOTAL);const te=$('#time');if(te._t!==tt){te._t=tt;te.textContent=tt;track.setAttribute('aria-valuenow',Math.round(T));}
+ requestAnimationFrame(frame);
+}
+function start(d){init3D();resize();track.setAttribute('aria-valuemax',Math.round(TOTAL));if(d&&typeof d.T==='number')T=clamp(d.T,0,TOTAL);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measureTags);requestAnimationFrame(t=>{last=t;frame(t);});}
+try{window.claude?.hot?.snapshot?.(()=>({T}));}catch(e){}
+window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+})();
+</script>
+
+</body>
+</html>

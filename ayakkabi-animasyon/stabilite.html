@@ -230,20 +230,20 @@ const SHOES=[
 {id:'nb860',brand:'New Balance',model:'Fresh Foam X 860 v14',sub:'2E / 4E',
  status:{cur:false,text:'Önceki nesil',detail:'Yerine Nisan 2026’da 860 v15 çıktı.'},
  price:'≈115–120 € indirimde · liste 160 € · v15: 170 €',
- mech:{kind:'plane',name:'Stability Plane',short:'Köpük katmanları arasına gömülü sert plaka',desc:'İnce plaka içte boydan boya, topukta tüm genişlik boyunca uzanıyor. Üstündeki köpük ezilse de plaka eğilmeye direniyor.'},
- dist:'Destek ayakkabının içinden geliyor: iki yoğunluklu Fresh Foam X katmanının arasına gömülü ince, sert bir EVA plaka. İç tarafta boydan boya, topukta tüm genişlik boyunca uzanıyor ve bir medial kama gibi çalışıyor.',
+ mech:{kind:'plane',name:'Stability Plane',short:'Köpük katmanları arasına gömülü sert plaka',desc:'İnce, sertleştirilmiş plaka iç tarafta dış taraftan daha uzun. Üstündeki köpük ezilse de plaka eğilmeye direniyor.'},
+ dist:'Destek ayakkabının içinden geliyor: iki yoğunluklu Fresh Foam X katmanının arasına gömülü ince, sert bir EVA plaka. İç tarafta daha uzun; alttaki sert köpükle birlikte bir medial kama gibi çalışıyor.',
  spec:{heel:38,fore:30,drop:'8 mm',dropM:'ölçülen 9,3 mm',weight:'298 g',widths:'D · 2E · 4E',widthsN:'Eski sezon; NL’de geniş stok sınırlı',insole:'Çıkarılabilir',insoleN:'perakendeci bilgisi; ince',foam:'Fresh Foam X',foamN:'+ Stability Plane (incelemelere göre çift yoğunluk)',upper:'Engineered mesh, körüklü dil',outsole:'Blown rubber'},
  platform:'Taban genişliği: topuk 90 · orta 80 · ön ayak 110 mm (Road Trail Run)',
  ts:13,
  tech:[
-  {n:'Stability Plane',loc:'midsole_medial',main:true,d:'İki köpük katmanı arasındaki ince sert plaka. İç tarafta boydan boya, topukta tüm genişlik boyunca uzanır; içe çökmeyi sınırlar.'},
+  {n:'Stability Plane',loc:'midsole_medial',main:true,d:'İki köpük katmanı arasındaki ince, sertleştirilmiş EVA plaka. İç tarafta dış taraftan daha uzun; içe çökmeyi sınırlar.'},
   {n:'Fresh Foam X',loc:'midsole_full',d:'Ana yastık köpüğü. İncelemelere göre iki yoğunluklu: üst katman yumuşak, alt katman daha sert ve iç tarafta daha kalın.'},
   {n:'Rocker profil',loc:'geometry_rocker',d:'İncelemelere göre topukta pah, ön ayakta yukarı kıvrık taban; ayak öne yuvarlanır, parmak eklemleri daha az bükülür.'},
   {n:'Körüklü dil',loc:'tongue',d:'Dil iki yandan sayaya dikili; kaymaz, orta ayağı sabit tutar.'},
   {n:'Topuk kontrforu',loc:'heel_counter',d:'Sert ve dolgulu; topuğun yere basarken yana oynamasını sınırlar.'},
   {n:'Engineered mesh saya',loc:'upper',d:'Ön ayakta hafif geniş, hacmi normalin biraz üstünde. Burun koruyucusu ilk başta kısa hissettirebilir.'},
   {n:'Blown rubber dış taban',loc:'outsole',d:'Hafif, esnek kauçuk; aşınma bölgelerinde.'}],
- pros:['İç tarafta boydan boya Stability Plane ve içte kalın alt köpük: topuktan ön ayağa medial destek.','Sert topuk kontrforu ve geniş topuk tabanı (90 mm) dengesiz topuk temasını sınırlar.','2E ve 4E seçenekleri; çıkarılabilir ince tabanlık.','Rocker taban, erken topuk kalkışında öne geçişi kolaylaştırır.','Şu an indirimde (≈115–120 €): denemek için düşük risk.'],
+ pros:['İçte daha uzun Stability Plane ve içte kalın alt köpük: topuktan ön ayağa medial destek.','Sert topuk kontrforu ve geniş topuk tabanı (90 mm) dengesiz topuk temasını sınırlar.','2E ve 4E seçenekleri; çıkarılabilir ince tabanlık.','Rocker taban, erken topuk kalkışında öne geçişi kolaylaştırır.','Şu an indirimde (≈115–120 €): denemek için düşük risk.'],
  cons:['Burun koruyucusu yüzünden ilk başta kısa hissettirir; yarım numara büyük ve 2E/4E denemek neredeyse şart.','Ortezin medial desteğiyle birlikte aşırı düzeltme riski.','Ayağı dışa ittiği, dış bilek instabilitesi olanlara uygun olmadığı belirtiliyor.','Sert medial köpük ön ayağa uzanıyor; CM1 altında sertlik hissi yaratabilir.','İnce fabrika tabanının yerine kalın ortez iç hacmi azaltır.'],
  links:[['New Balance NL ürün sayfası (fotoğraf galerisi)','https://nl.newbalance.eu/en/pd/fresh-foam-x-860v14/M860V14-45483.html'],['New Balance UK ürün sayfası','https://www.newbalance.co.uk/pd/fresh-foam-x-860v14/M860V14-50478.html'],['Yeni model 860 v15 (NL)','https://nl.newbalance.eu/nl/pd/fresh-foam-x-860-v15/M860V15_RU-FTW-802888.html']],
  videos:[['Road Trail Run video incelemesi','https://www.roadtrailrun.com/2024/05/new-balance-fresh-foam-x-860-v14-video.html',false],['Trail and Kale incelemesi','https://m.youtube.com/watch?v=_TzZ6GchyDk',false]],
@@ -276,18 +276,17 @@ const SHOES=[
 {id:'glycerin',brand:'Brooks',model:'Glycerin GTS 23',sub:'2E / 4E',
  status:{cur:true,text:'Güncel',detail:'Şubat 2026’da çıktı (GTS 22’nin yerine).'},
  price:'180 € liste · renge göre ≈117–160 €',
- mech:{kind:'rails',name:'GuideRails',short:'Yalnız sapınca devreye giren topuk rayları',desc:'Topuğun iki yanındaki raylar normal adımda karışmıyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor.'},
+ mech:{kind:'rails',name:'GuideRails',short:'Yalnız sapınca devreye giren topuk rayları',desc:'Topuğun iki yanındaki raylar normal adımda devreye girmiyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor.'},
  dist:'GuideRails, topuğun iki yanında iki sert köpük ray. Ayağı sürekli düzeltmeye çalışmaz; ayak normal yolundan saptığında topuk ve kaval kemiği dönüşünü sınırlar. Brooks bunu diz odaklı bir sistem olarak tanımlıyor.',
- spec:{heel:38,fore:30,drop:'8 mm',dropM:'GTS 22’de 10 mm idi',weight:'306 g',widths:'D · 2E · 4E',widthsN:'NL’de geniş stok sınırlı olabilir',insole:'Çıkarılabilir',insoleN:'≈4,4–4,9 mm',foam:'DNA TUNED',foamN:'azotlu, çift hücreli',upper:'Triple jacquard warp knit',outsole:'RoadTack + Segmented Crash Pad'},
+ spec:{heel:38,fore:30,drop:'8 mm',dropM:'GTS 22’de 10 mm idi',weight:'306 g',widths:'D · 2E · 4E',widthsN:'NL’de geniş stok sınırlı olabilir',insole:'Çıkarılabilir',insoleN:'GTS 23 için ölçüm yok (GTS 22: 4,9 mm)',foam:'DNA TUNED',foamN:'azotlu, çift hücreli',upper:'Triple jacquard warp knit',outsole:'RoadTack kauçuk'},
  platform:'Taban genişliği: topuk 90 · orta 88 · ön ayak 115 mm (Road Trail Run)',
  ts:10,
  tech:[
   {n:'GuideRails',loc:'midsole_heel',main:true,d:'Topuğun iki yanında korkuluk gibi çalışır; yalnız ayak saptığında devreye girer, aşırı içe basmayı ve topuk yalpalamasını sınırlar.'},
   {n:'DNA TUNED',loc:'midsole_full',d:'Topukta iri hücreli yumuşak, ön ayakta küçük hücreli canlı köpük. GTS 23’te ön ayağa 2 mm eklendi.'},
-  {n:'Segmented Crash Pad',loc:'midsole_lateral',d:'Topuğun dış kenarında bölmeli yastık; inişten ön ayağa geçişi yumuşatır.'},
   {n:'RoadTack kauçuk',loc:'outsole',d:'Ön ayak ve topuğun iç kenarında dayanıklı tutuş.'},
   {n:'Triple jacquard warp knit',loc:'upper',d:'Yumuşak örgü saya. Burun koruması yüzünden burun hafif sivri ve kısa bulunuyor.'},
-  {n:'Çıkarılabilir iç taban',loc:'insole',d:'Brooks’a göre çıkarılabilir; kalınlık yaklaşık 4,4–4,9 mm.'}],
+  {n:'Çıkarılabilir iç taban',loc:'insole',d:'Brooks’a göre çıkarılabilir; GTS 23 için ölçüm yok (GTS 22’de 4,9 mm).'}],
  pros:['GuideRails topuğun iki yanından yalpalamayı sınırlar; diz ve topuk hattı için doğrudan yanıt.','D, 2E ve 4E seçenekleri.','Ön ayakta ≈30 mm ve +2 mm köpük: CM1 altında koruma.','Geniş taban (ön ayakta 115 mm) genel denge hissi verir.','Dayanıklı RoadTack kauçuk.'],
  cons:['Bir inceleme sitesi “ortez dostu değil” diye işaretlemiş; ortezle aşırı düzeltme riski. Mutlaka kendi tabanlığınızla deneyin.','Burun sivri ve kısa hissettirebilir, başparmak yanında sürtünme bildirildi: CM1 ve sinir için olumsuz.','Ara tabanı sert, raylarını “fazla kontrolcü” bulan yorumcu var.','Dil yanlardan bağlı değil, kayabiliyor.','Liste fiyatı 180 €; NL’de geniş kalıp stoğu sınırlı olabilir.'],
  links:[['Brooks NL ürün sayfası (fotoğraf galerisi)','https://www.brooksrunning.com/nl_nl/mens/road-running-shoes/glycerin-gts-23/110503.html'],['Brooks ABD ürün sayfası','https://www.brooksrunning.com/en_us/mens/shoes/road-running-shoes/glycerin-gts-23/110503.html'],['GuideRails nasıl çalışır (Brooks)','https://www.brooksrunning.com/en_nl/blog/research-innovation/the-science-behind-guiderails-technology.html']],
@@ -414,7 +413,7 @@ function topSVG(s){
  const band=(a,b,fr0,fr1,side)=>{const p=[];const n=24;for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;const w=side<0?itp(M,x):itp(K,x);p.push([X(x),side<0?Ym(w*fr1):Yl(w*fr1)]);}for(let i=n;i>=0;i--){const x=a+(b-a)*i/n;const w=side<0?itp(M,x):itp(K,x);p.push([X(x),side<0?Ym(w*fr0):Yl(w*fr0)]);}return 'M'+p.map(q=>q.join(' ')).join(' L')+'Z';};
  let mech='',lab='',ax=0,ay=0;const k=s.mech.kind;
  if(k==='4d'){mech=`<path class="d-sup" d="${band(72,172,.08,.92,-1)}"/><ellipse class="d-acc" cx="${X(38)}" cy="134" rx="38" ry="26"/>`;lab=`<text class="d-txt2" x="${X(74)}" y="${LY}">4D GUIDANCE (iç taraf)</text><text class="d-txt" x="${X(38)}" y="176" text-anchor="middle">PureGEL</text>`;ax=X(122);ay=Ym(itp(M,122)*.5);}
- if(k==='plane'){mech=`<path class="d-sup" d="${band(12,238,.0,.95,-1)}"/><path class="d-sup" d="${band(10,78,0,.92,1)}"/>`;lab=`<text class="d-txt2" x="${X(40)}" y="${LY}">Stability Plane: içte boydan boya, topukta tam genişlik</text>`;ax=X(150);ay=Ym(itp(M,150)*.5);}
+ if(k==='plane'){mech=`<path class="d-sup" d="${band(12,238,.0,.95,-1)}"/><path class="d-sup" d="${band(10,78,0,.92,1)}"/>`;lab=`<text class="d-txt2" x="${X(40)}" y="${LY}">Stability Plane: iç tarafta daha uzun (şema)</text>`;ax=X(150);ay=Ym(itp(M,150)*.5);}
  if(k==='hframe'){mech=`<path class="d-sup" d="${band(14,246,.74,.97,-1)}"/><path class="d-sup" d="${band(14,246,.74,.97,1)}"/><path class="d-sup" d="M${X(112)} ${Ym(itp(M,112)*.74)} L${X(142)} ${Ym(itp(M,142)*.74)} L${X(142)} ${Yl(itp(K,142)*.74)} L${X(112)} ${Yl(itp(K,112)*.74)}Z"/>`;lab=`<text class="d-txt2" x="${X(40)}" y="${LY}">H-Frame: iki kenar boyunca + orta köprü</text>`;ax=X(200);ay=Ym(itp(M,200)*.86);}
  if(k==='rails'){mech=`<path class="d-sup" d="${band(4,100,.78,1,-1)}"/><path class="d-sup" d="${band(4,100,.78,1,1)}"/>`;lab=`<text class="d-txt2" x="${X(4)}" y="${LY}">GuideRails: topuğun iki yanında</text>`;ax=X(60);ay=Ym(itp(M,60)*.89);}
  if(k==='hurr'){mech=`<path class="d-sup" d="${band(6,175,.74,1,-1)}"/><path class="d-sup" d="${band(6,150,.8,1,1)}"/>`;lab=`<text class="d-txt2" x="${X(10)}" y="${LY}">CenterPath: geniş taban, iki yanda yan duvar (içte daha uzun)</text>`;ax=X(90);ay=Ym(itp(M,90)*.87);}

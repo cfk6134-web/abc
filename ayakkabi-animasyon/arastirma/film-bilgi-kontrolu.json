@@ -1,0 +1,485 @@
+{
+ "summary": "I checked every visible string in /tmp/claude-0/-home-user-abc/935d9d4d-d424-58bc-96d7-c94b2ce306a4/scratchpad/stabilite-film.html against /home/user/abc/ayakkabi-animasyon/arastirma/stabilite-ayakkabilari.json, treating 'ikinci_dogrulama' as the reliable source. That covers the SH data, tour, tech, pros and cons, NEEDS, PICKS, CHK, the scene html, note3d and the closing text. Every exact_text below occurs exactly once in the HTML (checked with a script).\n\nMost of the core numbers match the ground truth: stack heights and drops, weights, width lists, prices, release months for Kayano, 860, Gaviota and GTS 23, the 76.7 mm and 72.2 mm toe boxes, 4.8 mm Gaviota insole, and the Kayano forefoot rocker.\n\nMain problems:\n1. The closing source note says the data came from official brand pages and was \"doğrulandı\". The ground truth says brand sites could not be opened and several items stayed unverifiable.\n2. The 860 v14 Stability Plane is described in six places (plus the 3D model) as \"içte boydan boya, topukta tam genişlik\". The second check says only \"longer on the medial side\" and finds no source for \"across the heel\".\n3. Three claims are stated more firmly than the evidence allows: the 860 v14 removable insole (retailer only), the Glycerin Segmented Crash Pad (weak, single retailer), and the Glycerin insole thickness (taken from other models).\n4. Several superlatives and picks are not supported or contradict each other: \"tek model / gerektiğinde devreye giren\" for Kayano versus GuideRails, Gaviota \"en güçlü topuk\", Hurricane \"en yumuşak\", \"yalnızca şekliyle\", \"en yüksek yastık\", the 6 mm drop warning given to Hurricane only, and \"en uygun fiyat\".\n5. Some sentences read as medical claims (\"diz hattını korur\", \"CM1 ve sinir için olumsuz\").\n6. There are Turkish errors: \"sert hissedebilir\", \"hareket kontrol\", \"bir sonraki bölümlerde\", \"karışmıyor\", \"topuk içinde/dışında\", \"blown rubber kauçuk\", and \"dört soru\" for items that are not questions.",
+ "issues": [
+  {
+   "severity": "high",
+   "where": "Kapanış sahnesi (kapanis), kaynak notu, data-at 6",
+   "exact_text": "Bilgiler resmî marka sayfaları ve laboratuvar ölçümü yapan inceleme sitelerinden web aramasıyla toplandı ve ikinci, bağımsız bir aramayla doğrulandı. Fiyat ve stok değişir. Bu film tıbbi tavsiye değildir.",
+   "problem": "This misstates where the data came from and how certain it is. The brand sites were never opened; the data comes from search summaries. The second check left several items 'unverifiable' or 'corrected', yet the note says everything was verified.",
+   "evidence": "JSON 'not': 'Web araması özetlerinden derlendi; marka siteleri bu ortamdan açılamadı.' ikinci_dogrulama marks the official videos for NB, HOKA, Brooks and Saucony as unverifiable, says the Segmented Crash Pad support is weak, says the 860 insole info comes from a retailer only, and corrects the Hurricane release date.",
+   "fix": "Bilgiler web araması sonuç özetlerinden (marka sayfaları, perakendeciler ve laboratuvar ölçümü yapan inceleme siteleri) derlendi; marka siteleri doğrudan açılamadı. İkinci bir aramayla kontrol edildi, ancak bazı ayrıntılar (ör. 860 v14 iç tabanı, Segmented Crash Pad, resmî videolar) doğrulanamadı. Fiyat ve stok değişir. Bu film tıbbi tavsiye değildir."
+  },
+  {
+   "severity": "high",
+   "where": "NB 860 v14 bölümü, 'Ayırt edici özellik' (dist), 0:00–0:12 of the chapter",
+   "exact_text": "Destek ayakkabının içinden geliyor: iki Fresh Foam X katmanı arasındaki sert plaka, içte boydan boya, topukta tam genişlikte uzanıyor.",
+   "problem": "No source says the plate runs the full length on the medial side or across the full heel width. The verified description is 'longer on the medial side'. The full-length medial wedge is the firmer bottom foam layer, not the plate.",
+   "evidence": "ikinci_dogrulama NB, claim 2: 'No snippet said in so many words that the plane runs across the heel. A more precise wording would be: a thin hardened EVA plate between two Fresh Foam X layers, longer on the medial side.' DOR: 'full-length medial wedge… firmer bottom layer'.",
+   "fix": "Destek ayakkabının içinden geliyor: iki Fresh Foam X katmanı arasında ince, sertleştirilmiş EVA plaka, iç tarafta daha uzun. Alttaki sert köpük içte daha kalın ve topuktan ön ayağa medial kama oluşturuyor."
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14, Katman katman item 1 (tech[0]) and 3D tag",
+   "exact_text": "Köpük katmanları arasındaki ince sert plaka; içte boydan boya, topukta tam genişlik.",
+   "problem": "Same unsupported plate geometry as the dist line.",
+   "evidence": "ikinci_dogrulama NB claim 2 note (see the previous issue).",
+   "fix": "Köpük katmanları arasındaki ince, sertleştirilmiş EVA plaka; iç tarafta dış taraftan daha uzun."
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14, Farklı açılardan → İç yan (tour[1])",
+   "exact_text": "Stability Plane iç tarafta boydan boya uzanıyor.",
+   "problem": "'Boydan boya' (full length) is not verified for the plate.",
+   "evidence": "ikinci_dogrulama NB claim 2: RTR says 'longer on the medial side than the lateral side'.",
+   "fix": "Stability Plane iç tarafta dış taraftan daha uzun uzanıyor."
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14, Farklı açılardan → Arkadan (tour[3])",
+   "exact_text": "Sert, dolgulu topuk kontrforu; topukta plaka tam genişlikte.",
+   "problem": "'Topukta plaka tam genişlikte' has no source.",
+   "evidence": "ikinci_dogrulama NB claim 2: 'No snippet said… across the heel'. The 90 mm heel platform width is confirmed (claim 7).",
+   "fix": "Sert, dolgulu topuk kontrforu; topukta taban 90 mm genişliğinde (Road Trail Run)."
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14, Artı list item 1",
+   "exact_text": "İçte boydan boya plaka: topuktan ön ayağa medial destek.",
+   "problem": "Credits the plate with full length. The verified full-length medial element is the firmer bottom foam wedge.",
+   "evidence": "ikinci_dogrulama NB claim 2; DOR 'full-length medial wedge… firmer bottom layer taller on the medial side'.",
+   "fix": "İçte daha uzun plaka ve içte kalınlaşan sert alt köpük: topuktan ön ayağa medial destek."
+  },
+  {
+   "severity": "medium",
+   "where": "Sizin için özet (secim), NB pick card",
+   "exact_text": "İçte boydan boya Stability Plane; ≈115–120 €.",
+   "problem": "Repeats the unsupported full-length plate claim. The price is the discounted price but is not labelled as such.",
+   "evidence": "ikinci_dogrulama NB claim 2; price_eur: list price 160 €, 114.99–120 € discounted.",
+   "fix": "İçte daha uzun Stability Plane; indirimde ≈115–120 €."
+  },
+  {
+   "severity": "low",
+   "where": "3D model, NB 860 'plate' part (shown during Katman katman and Destek sistemi)",
+   "exact_text": "part('plate',[new THREE.Mesh(layer(.97,.01,(u,f)=>split(u)-.006+f*.012),M.sup)]",
+   "problem": "The 3D plate is drawn as a full-footprint layer, full length on both medial and lateral sides. That contradicts the verified 'longer on the medial side' and even the film's own text. The model is labelled as placed 'kaynaklara göre'.",
+   "evidence": "ikinci_dogrulama NB claim 2 (RTR: plate longer medially than laterally).",
+   "fix": "part('plate',[new THREE.Mesh(region(.02,.97,0,.97,-1,(u,f)=>split(u)-.006+f*.012),M.sup),new THREE.Mesh(region(.02,.6,0,.97,1,(u,f)=>split(u)-.006+f*.012),M.sup)]"
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14 data, insole field (Ölçüler → İç taban, and the comparison table 'İç taban' column)",
+   "exact_text": "insole:'Çıkarılabilir · ince'",
+   "problem": "Removability is stated as fact. The ground truth rests on a retailer listing only, and the original record says 'Yes, most likely'.",
+   "evidence": "ikinci_dogrulama NB claim 6: 'Removable insole: a retailer listing only, with no lab source.' ayakkabilar[0].specs.removable_insole: 'Yes, most likely…'",
+   "fix": "insole:'Muhtemelen çıkarılabilir · ince'"
+  },
+  {
+   "severity": "medium",
+   "where": "NB 860 v14, Artı list item 2",
+   "exact_text": "D, 2E, 4E; çıkarılabilir ince tabanlık.",
+   "problem": "States removability as certain even though it comes from a retailer only.",
+   "evidence": "ikinci_dogrulama NB claim 6.",
+   "fix": "D, 2E, 4E; ince tabanlık, perakendecilere göre çıkarılabilir."
+  },
+  {
+   "severity": "medium",
+   "where": "Sizin için özet, sumnote, data-at 29",
+   "exact_text": "Dört modelde 4E seçeneği var (Kayano 32, 860 v14, Gaviota 6, Glycerin GTS 23) ve beşinin de iç tabanı çıkarılabiliyor.",
+   "problem": "'Beşinin de' overstates the evidence, since the 860 v14 insole is not lab-confirmed. Kayano 32 4E EU stock is uncertain, which the film's own table marks with '?'.",
+   "evidence": "ikinci_dogrulama NB claim 6; Kayano claim 5: 'ASICS Australia marks the 4E as discontinued'; ayakkabilar[1]: 'resmi NL/AB mağazasında 4E bulunduğu doğrulanamadı'.",
+   "fix": "Dört modelde 4E seçeneği var (Kayano 32, 860 v14, Gaviota 6, Glycerin GTS 23; Kayano 32 4E’nin AB stoğu belirsiz). Dördünde iç tabanın çıkarılabildiği doğrulandı; 860 v14 için bu bilgi yalnızca perakendecilerden geliyor."
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23, Katman katman item 3 (tech)",
+   "exact_text": "['Segmented Crash Pad','crash','Topuk dış kenarında bölmeli yastık.'],",
+   "problem": "The reliable check found weak support for this feature: one Galaxus listing, whose copy carries old-model data. It advises softening or dropping the item.",
+   "evidence": "ikinci_dogrulama Brooks claim 6: 'The Segmented Crash Pad support is weak: only a Galaxus listing, which also wrongly says 12 mm drop and DNA LOFT… No Brooks or lab source in results mentions it; consider softening or dropping that item.'",
+   "fix": "Delete the whole element including the trailing comma, so the replacement is an empty string. The 'crash' key has no dedicated 3D part, so 'Katman katman · 5 parça' updates automatically. If the item must stay, use ['Segmented Crash Pad','crash','Topuk dış kenarında bölmeli yastık; yalnızca bir perakendeci listeliyor, doğrulanmadı.'], instead."
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23, Farklı açılardan → Alttan (tour[4])",
+   "exact_text": "RoadTack kauçuk ve topuk dışında Segmented Crash Pad.",
+   "problem": "Repeats the weakly supported Crash Pad. 'Topuk dışında' is ambiguous in Turkish: it can mean 'apart from the heel' or 'on the outer heel'.",
+   "evidence": "ikinci_dogrulama Brooks claim 6. RoadTack placement (forefoot and medial heel) is in ayakkabilar[3].technologies.",
+   "fix": "Ön ayakta ve topuğun iç tarafında RoadTack kauçuk."
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23 data, insole field (Ölçüler → İç taban)",
+   "exact_text": "insole:'Çıkarılabilir · ≈4,4–4,9 mm'",
+   "problem": "The thickness is presented as a GTS 23 measurement. It actually comes from proxies: GTS 22 (4.9 mm) and the neutral Glycerin 23 (4.4 mm). There is no GTS 23 lab test.",
+   "evidence": "ayakkabilar[3].specs.removable_insole and caveats_tr: 'RunRepeat ya da RTINGS'te GTS 23'e özel bir laboratuvar testi bulamadım… GTS 22 ve nötr Glycerin 23 verileri vekil olarak kullanıldı.'",
+   "fix": "insole:'Çıkarılabilir · GTS 23 için ölçüm yok (GTS 22: 4,9 mm)'"
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23, Katman katman → Çıkarılabilir iç taban",
+   "exact_text": "Kalınlık ≈4,4–4,9 mm.",
+   "problem": "Same proxy data presented as this model's own measurement.",
+   "evidence": "ayakkabilar[3].caveats_tr (proxy note).",
+   "fix": "GTS 23 için ölçüm yok; GTS 22’de 4,9 mm, nötr Glycerin 23’te 4,4 mm."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Farklı açılardan → Üstten (tour[2])",
+   "exact_text": "D, 2E ve 4E. Taban genişliği ön ayakta 115 mm.",
+   "problem": "The figure is unattributed and possibly a typo in the source: the same RTR review's text mentions an '88 mm forefoot'.",
+   "evidence": "ikinci_dogrulama Brooks claim 8: 'the 115 mm forefoot may be a measurement or typo issue.'",
+   "fix": "D, 2E ve 4E. Road Trail Run ön ayak taban genişliğini 115 mm veriyor. Also change the Artı item 'Geniş taban (ön ayakta 115 mm).' to 'Geniş taban (Road Trail Run: ön ayakta 115 mm).'"
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23, Dikkat list item 2",
+   "exact_text": "Burun sivri ve kısa: CM1 ve sinir için olumsuz.",
+   "problem": "DOR's word is 'tapered', not 'pointed'. The sentence also turns a review impression into a definite medical judgement.",
+   "evidence": "ikinci_dogrulama Brooks claim 7: 'Their wording is tapered rather than pointed; the forefoot itself is called slightly wide with normal volume.'",
+   "fix": "Burun daralan ve biraz kısa (Doctors of Running): CM1 bölgesinde baskı yapabilir, kendi tabanlığınızla deneyin."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Katman katman → Örgü saya",
+   "exact_text": "Burun hafif sivri ve kısa bulunuyor.",
+   "problem": "Uses 'sivri' where the source says tapered. The passive 'bulunuyor' is vague and has no attribution.",
+   "evidence": "ikinci_dogrulama Brooks claim 7.",
+   "fix": "Doctors of Running burnu daralan ve biraz kısa buluyor."
+  },
+  {
+   "severity": "medium",
+   "where": "Brooks Glycerin GTS 23, 'Ayırt edici özellik' (dist)",
+   "exact_text": "Ayağı sürekli düzeltmeye çalışmaz; ayak normal yolundan saptığında topuk ve diz hattını korur.",
+   "problem": "'Korur' (protects) is a definite health and biomechanics claim. The source is Brooks marketing: the rails limit excess tibia and heel rotation.",
+   "evidence": "ayakkabilar[3].technologies GuideRails official_description: 'aşırı kaval kemiği ve topuk rotasyonunu sınırlayarak…' (Brooks).",
+   "fix": "Ayağı sürekli düzeltmeye çalışmaz; Brooks’a göre ayak normal yolundan saptığında topuk ve kaval kemiği dönüşünü sınırlar."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Artı list item 1",
+   "exact_text": "GuideRails topuk ve diz hattında yalpalamayı sınırlar.",
+   "problem": "A brand claim stated as fact, with knee-related health wording.",
+   "evidence": "ayakkabilar[3].technologies GuideRails (Brooks description).",
+   "fix": "Brooks’a göre GuideRails topuk yalpalamasını ve aşırı kaval kemiği dönüşünü sınırlar."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Destek sistemi text (mechD) and Destek nereden geliyor card",
+   "exact_text": "Topuğun iki yanındaki raylar normal adımda karışmıyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor.",
+   "problem": "Turkish: on its own, 'karışmıyor' reads as 'does not mix'. The intended meaning is 'does not engage/interfere'.",
+   "evidence": "Language.",
+   "fix": "Topuğun iki yanındaki raylar normal adımda devreye girmiyor; topuk fazla yattığında raya dayanıyor ve geri yönleniyor."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Farklı açılardan → Arkadan (tour[3])",
+   "exact_text": "Raylar topuğu iki yandan çevreliyor; normal adımda karışmıyor.",
+   "problem": "Turkish: the same 'karışmıyor' problem.",
+   "evidence": "Language.",
+   "fix": "Raylar topuğu iki yandan çevreliyor; normal adımda devreye girmiyor."
+  },
+  {
+   "severity": "low",
+   "where": "Brooks Glycerin GTS 23, Katman katman → RoadTack kauçuk",
+   "exact_text": "Ön ayak ve topuk içinde dayanıklı tutuş.",
+   "problem": "Turkish: 'topuk içinde' means 'inside the heel'. The source means the medial side of the heel.",
+   "evidence": "ayakkabilar[3].technologies RoadTack: 'Ön ayakta ve topuğun iç tarafında'.",
+   "fix": "Ön ayakta ve topuğun iç tarafında dayanıklı tutuş."
+  },
+  {
+   "severity": "medium",
+   "where": "ASICS Kayano 32, 'Ayırt edici özellik' (dist)",
+   "exact_text": "Desteği gerektiğinde devreye giren bir parçayla veren tek model. Topukta ayrıca PureGEL jel yastığı var.",
+   "problem": "This contradicts the film itself. GuideRails are also described as 'yalnız ayak saptığında devreye girer' and 'Ayağı sürekli düzeltmeye çalışmaz', so 'gerektiğinde devreye giren … tek model' is not distinctive. Per the ground truth, the unique part is a separate load-responsive foam pod combined with PureGEL.",
+   "evidence": "ayakkabilar[1].distinguishing_feature_tr: 'iki şeyi birlikte sunan tek model: 4D GUIDANCE… ve PureGEL'. ayakkabilar[3].distinguishing_feature_tr: GuideRails 'yalnızca ayak normal hareketinden saptığında devreye girip…'",
+   "fix": "Desteği ark bölgesindeki ayrı, yüke tepki veren bir köpük modülüyle veren tek model. Topukta ayrıca PureGEL jel yastığı var."
+  },
+  {
+   "severity": "medium",
+   "where": "Sizin için özet, Kayano pick label",
+   "exact_text": "['Gerektiğinde devreye giren destek','ASICS GEL-Kayano 32'",
+   "problem": "The label contradicts the Brooks pick on the same screen ('GuideRails yalnız sapınca devreye girer'). Both picks describe on-demand support.",
+   "evidence": "PICKS Brooks entry. ayakkabilar[3].distinguishing_feature_tr.",
+   "fix": "['Yüke tepki veren ark modülü','ASICS GEL-Kayano 32'"
+  },
+  {
+   "severity": "low",
+   "where": "ASICS Kayano 32, Katman katman → Ön ayak rocker’ı",
+   "exact_text": "Erken devreye giren rocker ve neredeyse esnemeyen sert ön ayak.",
+   "problem": "'Neredeyse esnemeyen' (almost unbendable) overstates the sources, which say 'stiff' or 'oldukça sert'.",
+   "evidence": "ikinci_dogrulama Kayano claim 6: 'early forefoot rocker on a stiff forefoot'. ayakkabilar[1]: RTINGS 'oldukça sert'.",
+   "fix": "Erken devreye giren rocker ve sert ön ayak."
+  },
+  {
+   "severity": "low",
+   "where": "ASICS Kayano 32, Destek sistemi text (mechD) and Destek nereden geliyor card",
+   "exact_text": "Ark altındaki köpük modülü, topuk içe yattıkça direnç gösteriyor. Normal adımda fark edilmiyor.",
+   "problem": "ASICS describes a 'pod' that responds to excessive load. The 'under the arch' location comes from Kayano 30/31 reviews, not an ASICS spec for the 32. 'Topuk içe yattıkça' also contradicts the film's own tech line, which says 'ayak fazla içe çöktüğünde'.",
+   "evidence": "ikinci_dogrulama Kayano claim 2: 'The medial foam under the arch wording… comes from Kayano 30/31 reviews… not from an ASICS spec for the 32.' ayakkabilar[1] official_description: 'aşırı yük altında… pod'.",
+   "fix": "Ark bölgesindeki köpük modülü (ASICS: “pod”); ayak aşırı yük altında içe çöktükçe direnç gösteriyor. Normal adımda fark edilmiyor."
+  },
+  {
+   "severity": "low",
+   "where": "ASICS Kayano 32, statusD (Açılış list and chapter header)",
+   "exact_text": "Yerine Haziran 2026’da GEL-KAYANO 33 çıktı; 33’te 4D Guidance yok.",
+   "problem": "June 1, 2026 is the US date. The release date varies by region (Australia July 7), and no EU or NL date is confirmed, but the film is NL-focused.",
+   "evidence": "ikinci_dogrulama Kayano claim 1: 'ASICS Australia instead says July 7, so the date varies by region.'",
+   "fix": "Yerine 2026 yazında GEL-KAYANO 33 çıktı (ABD: 1 Haziran; tarih bölgeye göre değişiyor); 33’te 4D Guidance yok."
+  },
+  {
+   "severity": "medium",
+   "where": "HOKA Gaviota 6, Artı list item 1",
+   "exact_text": "Setin en güçlü topuk ve pronasyon kontrolü.",
+   "problem": "'En güçlü topuk kontrolü' is undercut by the ground truth: RTINGS found the heel softer and less stable than the rest of the platform, and a tester found it clunky. The supported claim is overall pronation control, 'borderline motion control'.",
+   "evidence": "ayakkabilar[2].profile_fit_tr.cons: 'RTINGS topuğun platformun geri kalanından daha yumuşak ve daha az stabil olduğunu…'; ikinci_dogrulama Gaviota claim 2: DOR 'borderline motion control', 'main job is medial support'.",
+   "fix": "Setin en güçlü pronasyon kontrolü (Doctors of Running: “neredeyse hareket kontrolü”)."
+  },
+  {
+   "severity": "medium",
+   "where": "Sizin için özet, Gaviota pick label",
+   "exact_text": "['En güçlü topuk kontrolü','HOKA Gaviota 6'",
+   "problem": "Same issue: the ground truth notes a softer, less stable heel.",
+   "evidence": "ayakkabilar[2].profile_fit_tr.cons (RTINGS heel note).",
+   "fix": "['En güçlü pronasyon kontrolü','HOKA Gaviota 6'"
+  },
+  {
+   "severity": "medium",
+   "where": "HOKA Gaviota 6, 'Ayırt edici özellik' (dist)",
+   "exact_text": "Setin en düzeltici modeli: iki kenarı tam boy saran çerçeve ve çok geniş, yüksek platform. Yorumcular “neredeyse hareket kontrol” diyor.",
+   "problem": "(1) The quote comes from one reviewer (Doctors of Running), not 'yorumcular'. (2) Full length on both sides is not verified: DOR says 'full length medial', and HOKA's tech page says 'medial and/or lateral'. (3) Turkish: 'hareket kontrol' needs the compound suffix, 'hareket kontrolü'.",
+   "evidence": "ikinci_dogrulama Gaviota claim 2: 'Doctors of Running calls it strong full length medial stability, borderline motion control… The frame’s main job is medial support.'",
+   "fix": "Setin en düzeltici modeli: daha sert köpükten, iki kenarı saran ve iç tarafta tam boy destek veren çerçeve, çok geniş ve yüksek platform. Doctors of Running “neredeyse hareket kontrolü” diyor."
+  },
+  {
+   "severity": "low",
+   "where": "HOKA Gaviota 6, Katman katman → Enhanced H-Frame",
+   "exact_text": "İki kenarı tam boy saran sert köpük çerçeve ve orta köprü.",
+   "problem": "'Tam boy' on both sides is not verified; only full-length medial is sourced.",
+   "evidence": "ikinci_dogrulama Gaviota claim 2.",
+   "fix": "H biçimli sert köpük çerçeve: iki kenar ve orta köprü; ana işi iç tarafta tam boy destek."
+  },
+  {
+   "severity": "low",
+   "where": "HOKA Gaviota 6, Destek sistemi text (mechD) and Destek nereden geliyor card",
+   "exact_text": "Daha sert köpükten H biçimli çerçeve ayağın iki kenarını tam boy sarıyor; topuk platformun içine oturuyor.",
+   "problem": "Both-side full length is not verified, and 'topuk platformun içine oturuyor' appears nowhere in the ground truth.",
+   "evidence": "ikinci_dogrulama Gaviota claim 2. No 'sits in/cradle' statement in ayakkabilar[2].",
+   "fix": "Daha sert köpükten H biçimli çerçeve ayağın iki kenarını sarıyor; ana işi iç tarafta tam boy destek."
+  },
+  {
+   "severity": "low",
+   "where": "HOKA Gaviota 6, Farklı açılardan → Arkadan (tour[3])",
+   "exact_text": "Çerçeve iki kenarda; topuk platformun içine oturuyor.",
+   "problem": "Unsupported 'topuk platformun içine oturuyor'.",
+   "evidence": "Not in ayakkabilar[2]. The heel counter stiffness 4/5 (RunRepeat) is sourced.",
+   "fix": "Çerçeve iki kenarda; sert topuk kontrforu (RunRepeat 4/5) topuğu arkadan sarıyor."
+  },
+  {
+   "severity": "low",
+   "where": "HOKA Gaviota 6, Dikkat list item 3",
+   "exact_text": "Eski nesil köpük sert hissedebilir.",
+   "problem": "Turkish grammar: an object cannot 'hissetmek'. The correct verb is 'hissettirebilir'.",
+   "evidence": "Language.",
+   "fix": "Eski nesil köpük (CMEVA) sert hissettirebilir."
+  },
+  {
+   "severity": "low",
+   "where": "HOKA Gaviota 6, Artı list item 2",
+   "exact_text": "Wide (2E) ve X-Wide (4E); burun ortalamadan geniş.",
+   "problem": "Toe-box width is disputed: RunRepeat says wide, RTINGS says shallow, and Flawless says slightly tapered. The film states it unattributed.",
+   "evidence": "ayakkabilar[2].caveats_tr: 'Testçiler burun genişliği konusunda çelişiyor…'; ikinci_dogrulama Gaviota claim 7.",
+   "fix": "Wide (2E) ve X-Wide (4E); RunRepeat burnu ortalamadan geniş ölçmüş (76,7 mm)."
+  },
+  {
+   "severity": "medium",
+   "where": "Saucony Hurricane 26, 'Ayırt edici özellik' (dist)",
+   "exact_text": "Desteği yalnızca şekliyle veriyor: geniş taban, yan duvarlar, asimetrik form. Zıplayan incrediLUX köpükle setin en hafifi.",
+   "problem": "'Yalnızca şekliyle' is contradicted. The reliable check says the dual-density PWRRUN frame is part of the support and there is medial reinforcement.",
+   "evidence": "ikinci_dogrulama Hurricane claim 5: 'the dual-density PWRRUN frame is part of the support, and one listing mentions extra foam on the medial side. So there is no hard post, but there is medial reinforcement.'",
+   "fix": "Desteği sert bir parça yerine şekil ve çift yoğunluklu PWRRUN çerçeveyle veriyor: geniş taban, yan duvarlar, asimetrik form. Zıplayan incrediLUX köpükle setin en hafifi."
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, Artı list item 3",
+   "exact_text": "Sert parça olmadan, şekilden gelen destek.",
+   "problem": "Leaves out the dual-density frame, which is part of the support.",
+   "evidence": "ikinci_dogrulama Hurricane claim 5.",
+   "fix": "Sert parça olmadan; şekil ve çift yoğunluklu çerçeveden gelen destek."
+  },
+  {
+   "severity": "medium",
+   "where": "Saucony Hurricane 26, Artı list item 1",
+   "exact_text": "Setin en hafifi (262 g) ve en yüksek yastığı (41/35 mm).",
+   "problem": "'En yüksek yastık' holds only on brand figures. Lab measurements reverse it at the heel: RunRepeat measured Hurricane 38.3 mm and Kayano 32 39.9 mm (RTINGS 41.7 mm).",
+   "evidence": "ikinci_dogrulama Hurricane claim 3 (RunRepeat 38.3/32.4) versus Kayano claim 3 (RunRepeat 39.9/30.6; RTINGS 41.7/32.6).",
+   "fix": "Setin en hafifi (262 g) ve marka değerine göre en yüksek yastığı (41/35 mm; RunRepeat ölçümü 38,3/32,4 mm)."
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, Farklı açılardan → Dış yan (tour[0])",
+   "exact_text": "Topuk 41 mm, ön ayak 35 mm, drop 6 mm. Setin en yüksek yastığı.",
+   "problem": "Same issue: the superlative is valid only on brand data.",
+   "evidence": "ikinci_dogrulama Hurricane claim 3 and Kayano claim 3.",
+   "fix": "Topuk 41 mm, ön ayak 35 mm, drop 6 mm. Marka değerine göre setin en yüksek yastığı."
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, Farklı açılardan → İç yan (tour[1])",
+   "exact_text": "CenterPath yan duvarı iç tarafta daha uzun.",
+   "problem": "No source says the medial sidewall is longer. The ground truth only has 'asymmetric profile' and one listing mentioning extra medial foam.",
+   "evidence": "ikinci_dogrulama Hurricane claim 5; ayakkabilar[4] CenterPath: 'geniş taban, yükseltilmiş yan duvarlar, asimetrik form'.",
+   "fix": "CenterPath: asimetrik form ve ayağı içine alan yükseltilmiş yan duvar."
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, wnote (Ölçüler → Genişlik)",
+   "exact_text": "wnote:'4E (X-Wide) yok'",
+   "problem": "'4E yok' is stated as a proven fact. The ground truth says it is absence of evidence: very likely, but not formally proven.",
+   "evidence": "ikinci_dogrulama Hurricane claim 6: 'That is absence of evidence… so no 4E is very likely but not formally proven.'",
+   "fix": "wnote:'4E (X-Wide) bulunamadı'. Also change tour[2] 'D ve Wide (2E). 4E yok.' to 'D ve Wide (2E). 4E bulunamadı.' and the Dikkat item '4E yok, yalnızca 2E.' to '4E bulunamadı, yalnızca 2E.'"
+  },
+  {
+   "severity": "medium",
+   "where": "Saucony Hurricane 26, Dikkat list item 3",
+   "exact_text": "6 mm drop baldıra biraz daha fazla yük bindirebilir.",
+   "problem": "Inconsistent: Gaviota 6 also has an official 6 mm drop but gets no such warning. The sentence also drops the source's conditional and comparison, so it reads as a general medical claim.",
+   "evidence": "SH gaviota drop:6; ayakkabilar[4].profile_fit_tr.cons: 'Erken topuk kalkışı baldır veya Aşil gerginliğiyle ilişkiliyse, 6 mm drop 8–10 mm drop'lu modellere göre… Ortezin topuk yüksekliği de etkin drop'u değiştirir.'",
+   "fix": "6 mm drop (Gaviota 6 ile aynı), 8 mm’lik modellere göre baldıra biraz daha fazla yük bindirebilir; ortezin topuk yüksekliği etkin drop’u değiştirir."
+  },
+  {
+   "severity": "medium",
+   "where": "Sizin için özet, Hurricane pick label",
+   "exact_text": "['En hafif ve en yumuşak','Saucony Hurricane 26'",
+   "problem": "'En yumuşak' is not supported. The ground truth has no softness comparison across the five; it calls Hurricane the most 'neutral-feeling', with the lightest support.",
+   "evidence": "ayakkabilar[4].distinguishing_feature_tr: 'en “nötr ayakkabı gibi” hissettiren, en canlı ve yumuşak destekli seçenek'. No durometer comparison exists for the set.",
+   "fix": "['En hafif ve en nötr hisli','Saucony Hurricane 26'"
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, Dikkat list item 2",
+   "exact_text": "Destek hafif–orta; belirgin overpronasyonda daha zayıf.",
+   "problem": "Stated as certain although sources conflict: Fleet Feet says it suits mild to severe overpronation.",
+   "evidence": "ayakkabilar[4].caveats_tr: 'Fleet Feet hafiften şiddetliye, Running Northwest hafiften ortaya diyor.'",
+   "fix": "Destek hafif–orta; belirgin overpronasyonda daha zayıf kalabilir."
+  },
+  {
+   "severity": "low",
+   "where": "Saucony Hurricane 26, statusD",
+   "exact_text": "statusD:'Temmuz 2026’da çıktı.'",
+   "problem": "July is the global or US date. EU retailers give 1 August 2026, and the film is NL-focused.",
+   "evidence": "ikinci_dogrulama Hurricane claim 1 (corrected): 'i-Run (FR) and 21run (SE) give 1 August 2026'.",
+   "fix": "statusD:'Temmuz 2026’da çıktı (AB mağazalarında Ağustos 2026).'"
+  },
+  {
+   "severity": "low",
+   "where": "Sizin için özet, NB pick label",
+   "exact_text": "['En uygun fiyatla deneme','New Balance 860 v14'",
+   "problem": "'En uygun' is contradicted by the film's own price table: Glycerin GTS 23 is listed at ≈117–160 € depending on colour, about the same floor as the 860's 115–120 €. The ground truth only says 'olabilir'.",
+   "evidence": "ayakkabilar[3].price_eur: 'The Sports Edit 117 €'; ayakkabilar[0].distinguishing_feature_tr: 'en uygun fiyatlı seçeneği olabilir'.",
+   "fix": "['Düşük fiyatla deneme','New Balance 860 v14'"
+  },
+  {
+   "severity": "medium",
+   "where": "Persistent 3D overlay (#note3d), top right, all scenes",
+   "exact_text": "TEMSİLİ 3D MODEL<br>YÜKSEKLİK VE DROP GERÇEK ÖLÇÜDE",
+   "problem": "'Gerçek ölçüde' implies true measured dimensions. The values are brand-stated, and lab measurements differ by up to about 4 mm (for example Gaviota 39/33 stated against 36.0/28.7 measured).",
+   "evidence": "ikinci_dogrulama Gaviota claim 3, Hurricane claim 3, Kayano claim 3, NB claim 3 (lab versus brand figures).",
+   "fix": "TEMSİLİ 3D MODEL<br>YÜKSEKLİK VE DROP MARKA VERİSİYLE"
+  },
+  {
+   "severity": "low",
+   "where": "Kapanış, first paragraph",
+   "exact_text": "3D modeller temsilidir: topuk ve ön ayak yüksekliği ile drop gerçek değerlere göre ayarlandı, destek parçalarının yeri kaynaklara göre şematik çizildi.",
+   "problem": "'Gerçek değerler' should say brand values, since lab figures differ.",
+   "evidence": "Same as above.",
+   "fix": "3D modeller temsilidir: topuk ve ön ayak yüksekliği ile drop markanın verdiği değerlere göre ayarlandı, destek parçalarının yeri kaynaklara göre şematik çizildi."
+  },
+  {
+   "severity": "low",
+   "where": "Kapanış heading",
+   "exact_text": "Resmî sayfalar ve videolar",
+   "problem": "Only the Kayano video is (partly) confirmed as brand-official. The NB, Gaviota and GTS 23 videos are independent, so the heading implies official videos that do not exist.",
+   "evidence": "ikinci_dogrulama: official videos for NB, HOKA, Brooks and Saucony are all unverifiable; only the ASICS Running channel label is confirmed.",
+   "fix": "Ürün sayfaları ve videolar"
+  },
+  {
+   "severity": "low",
+   "where": "Yan yana ölçüler (karsilastirma), intro note",
+   "exact_text": "Ağırlık erkek US 9.",
+   "problem": "The figures are for standard (D) width. The film is about wide versions, which weigh more (Gaviota 6 2E is about 300 g).",
+   "evidence": "ikinci_dogrulama Gaviota claim 4: 'These are figures for the standard width. The Wide (2E) version weighs more: Shop4Runners lists 300 g for 2E.'",
+   "fix": "Ağırlık erkek US 9, standart (D) genişlik; geniş kalıplar biraz daha ağır olabilir."
+  },
+  {
+   "severity": "low",
+   "where": "NB 860 v14, Farklı açılardan → Dış yan (tour[0])",
+   "exact_text": "Topuk 38 mm, ön ayak 30 mm, drop 8 mm. Rocker profil.",
+   "problem": "Presented without qualification, though the reliable check says the rocker is mild and RTR calls the shoe flexible. This matters because NEEDS item 4 rates rockers.",
+   "evidence": "ikinci_dogrulama NB claim 6: 'Road Trail Run calls the shoe flexible, so rocker-like is a mild description and the rocker is not pronounced.'",
+   "fix": "Topuk 38 mm, ön ayak 30 mm, drop 8 mm. Hafif rocker profil."
+  },
+  {
+   "severity": "low",
+   "where": "Destek nereden geliyor, closing line (data-at 35)",
+   "exact_text": "Plaka, modül, çerçeve, ray ya da şekil: bir sonraki bölümlerde her birini ayakkabının içinde göreceğiz.",
+   "problem": "Turkish: 'bir sonraki' (the next one, singular) clashes with the plural 'bölümlerde'.",
+   "evidence": "Language.",
+   "fix": "Plaka, modül, çerçeve, ray ya da şekil: sonraki bölümlerde her birini ayakkabının içinde göreceğiz."
+  },
+  {
+   "severity": "low",
+   "where": "Neye bakıyoruz? (profil), heading",
+   "exact_text": "Dört soru, beş ayakkabı",
+   "problem": "The four cards are needs or criteria ('Geniş ön ayak' and so on), not questions.",
+   "evidence": "Language/consistency with the NEEDS content.",
+   "fix": "Dört ihtiyaç, beş ayakkabı"
+  },
+  {
+   "severity": "low",
+   "where": "Neye bakıyoruz? (profil), closing line (data-at 17)",
+   "exact_text": "Her bölümde bu dört soruya göre artı ve dikkat edilecek noktaları göreceksiniz.",
+   "problem": "Same 'soru' mismatch, and 'artı' should be plural ('artıları'). This health-profile screen also has no disclaimer; the only one is in small text at the very end.",
+   "evidence": "Language. The profile scene frames medical criteria (CM1, nerve compression, overpronation).",
+   "fix": "Her bölümde bu dört ihtiyaca göre artıları ve dikkat edilecek noktaları göreceksiniz. Bu ölçütler tıbbi değerlendirme yerine geçmez."
+  },
+  {
+   "severity": "low",
+   "where": "Neye bakıyoruz? NEEDS card 1",
+   "exact_text": "Dar burun CM1 basıncını ve sinir sıkışması riskini artırabilir: 2E/4E arıyoruz.",
+   "problem": "An unsourced medical causal claim about nerve-compression risk. No source in the ground truth supports it.",
+   "evidence": "No source in ayakkabilar or ikinci_dogrulama for this causal claim; the records only repeat it as the user's profile context.",
+   "fix": "Dar burun ön ayağı yanlardan sıkıştırabilir (CM1 ve sinir bölgesi): 2E/4E arıyoruz."
+  },
+  {
+   "severity": "low",
+   "where": "Açılış, lede (data-at 3)",
+   "exact_text": "Hepsi overpronasyona karşı destek veriyor, ama desteği farklı yerden alıyor.",
+   "problem": "Awkward Turkish: the shoes do not 'take' support from somewhere; they provide it through different structures.",
+   "evidence": "Language.",
+   "fix": "Hepsi overpronasyona karşı destek veriyor, ama bu desteği farklı bir yapıyla sağlıyor."
+  },
+  {
+   "severity": "low",
+   "where": "NB 860 v14, Farklı açılardan → Alttan (tour[4])",
+   "exact_text": "Aşınma bölgelerinde blown rubber kauçuk.",
+   "problem": "Turkish: 'rubber kauçuk' is redundant because the English term already means kauçuk.",
+   "evidence": "Language.",
+   "fix": "Aşınma bölgelerinde hafif, şişirilmiş (blown) kauçuk."
+  },
+  {
+   "severity": "low",
+   "where": "Beşi bir arada (yanyana), caption",
+   "exact_text": "Hepsi ayakkabının farklı bir bölgesinde.",
+   "problem": "Overstated. The Gaviota frame and Hurricane sidewalls both sit on both sides, and the GuideRails also flank both sides of the heel, so the regions overlap.",
+   "evidence": "ikinci_dogrulama Gaviota claim 2 (both sides), Brooks claim 2 (both sides of heel), Hurricane claim 5 (sidewalls).",
+   "fix": "Her model desteği farklı bir yapıyla veriyor."
+  },
+  {
+   "severity": "low",
+   "where": "Mağazada deneme, check 6",
+   "exact_text": "İade süresinde 30–45 dakika yürüyün; uyuşma, yanma veya topuk kayması olursa modeli eleyin.",
+   "problem": "This sits in a scene titled 'Mağazada' but describes walking during the return period, and is vague about where. Outdoor wear usually voids returns.",
+   "evidence": "Phrasing/consistency.",
+   "fix": "İade süresi içinde evde, temiz zeminde 30–45 dakika yürüyün; uyuşma, yanma veya topuk kayması olursa modeli eleyin."
+  }
+ ]
+}
